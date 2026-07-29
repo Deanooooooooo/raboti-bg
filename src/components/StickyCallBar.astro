@@ -1,0 +1,18 @@
+---
+import { site } from "../data/site";
+---
+<div class="sticky-call-bar" data-sticky-call>
+  <a href={`tel:${site.salesPhoneHref}`} data-track="tel">Обади се за демо <span>{site.salesPhone}</span></a>
+</div>
+<script>
+  const hero = document.querySelector("[data-hero]");
+  const bar = document.querySelector<HTMLElement>("[data-sticky-call]");
+  if (hero && bar && "IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(([entry]) => bar.classList.toggle("is-visible", !entry.isIntersecting), { threshold: 0.05 });
+    observer.observe(hero);
+  }
+  document.querySelectorAll("input, select, textarea").forEach((field) => {
+    field.addEventListener("focus", () => bar?.classList.add("has-keyboard"));
+    field.addEventListener("blur", () => bar?.classList.remove("has-keyboard"));
+  });
+</script>

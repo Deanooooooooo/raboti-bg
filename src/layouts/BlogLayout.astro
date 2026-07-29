@@ -1,0 +1,40 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import { site } from "../data/site";
+import { breadcrumbSchema } from "../data/schema";
+interface Props {
+  title: string;
+  description: string;
+  seoTitle: string;
+  publishedAt: Date;
+  updatedAt?: Date;
+  author: string;
+  slug: string;
+  headings: Array<{ depth: number; slug: string; text: string }>;
+}
+const { title, description, seoTitle, publishedAt, updatedAt, author, slug, headings } = Astro.props;
+const url = `${site.url}/blog/${slug}/`;
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: title,
+  description,
+  datePublished: publishedAt.toISOString(),
+  dateModified: (updatedAt || publishedAt).toISOString(),
+  author: { "@type": "Person", name: author },
+  publisher: { "@id": `${site.url}/#organization` },
+  mainEntityOfPage: url,
+  inLanguage: "bg",
+};
+const fmt = (date: Date) => new Intl.DateTimeFormat("bg-BG",{day:"numeric",month:"long",year:"numeric"}).format(date);
+---
+<BaseLayout title={seoTitle} description={description} canonical={`/blog/${slug}/`} image={`/og/${slug}.svg`} type="article" schema={[articleSchema,breadcrumbSchema([{name:"Работи",url:site.url},{name:"Полезно",url:`${site.url}/blog/`},{name:title,url}])]}>
+  <article class="article">
+    <header class="article-head shell narrow"><p class="eyebrow">практично ръководство</p><h1>{title}</h1><p class="article-lead">{description}</p><div class="article-meta"><span>{author}</span><time datetime={publishedAt.toISOString()}>{fmt(publishedAt)}</time>{updatedAt && <span>Обновено {fmt(updatedAt)}</span>}</div></header>
+    <div class="shell article-grid">
+      {headings.length > 1 && <aside class="toc"><strong>В статията</strong>{headings.filter((h)=>h.depth===2).map((h)=><a href={`#${h.slug}`}>{h.text}</a>)}</aside>}
+      <div class="article-body"><slot /></div>
+    </div>
+    <footer class="shell narrow author-box"><div class="founder-avatar">ДД</div><div><strong>{author}</strong><p>Екипът на Работи изгражда AI служители за конкретни задачи в българския бизнес.</p></div></footer>
+  </article>
+</BaseLayout>

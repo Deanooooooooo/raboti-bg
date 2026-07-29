@@ -1,0 +1,44 @@
+---
+import { site } from "../data/site";
+import { organizationSchema } from "../data/schema";
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  image?: string;
+  type?: "website" | "article";
+  schema?: Record<string, unknown> | Array<Record<string, unknown>>;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  canonical = Astro.url.pathname,
+  image = "/og/home.svg",
+  type = "website",
+  schema = [],
+  noindex = false,
+} = Astro.props;
+const canonicalUrl = new URL(canonical, site.url).toString();
+const imageUrl = new URL(image, site.url).toString();
+const schemas = [organizationSchema, ...(Array.isArray(schema) ? schema : [schema])].filter(Boolean);
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalUrl} />
+<meta property="og:type" content={type} />
+<meta property="og:locale" content="bg_BG" />
+<meta property="og:site_name" content={site.brand} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:image" content={imageUrl} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageUrl} />
+{noindex && <meta name="robots" content="noindex,follow" />}
+<script is:inline type="application/ld+json" set:html={JSON.stringify(schemas)} />

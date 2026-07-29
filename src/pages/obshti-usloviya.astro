@@ -1,0 +1,14 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../data/site";
+---
+<BaseLayout title="Общи условия | Работи" description="Основни условия за използване на raboti.bg и изпращане на запитване за AI служител." canonical="/obshti-usloviya/">
+  <section class="page-hero"><div class="shell narrow"><p class="eyebrow">условия</p><h1>Общи условия за сайта.</h1><p>Последна актуализация: 29 юли 2026 г.</p></div></section>
+  <section class="section"><div class="shell narrow prose legal-copy">
+    <h2>Оператор</h2><p>Сайтът raboti.bg се управлява от {site.legalName}, ЕИК {site.companyId}, адрес {site.legalAddress}.</p>
+    <h2>Информация и оферти</h2><p>Съдържанието описва услугите на Работи. Изпращането на форма не е договор и не създава задължение за плащане. Конкретните задачи, цена за настройка, абонамент и срокове се уговарят писмено.</p>
+    <h2>„Наеми AI служител“</h2><p>Изразът е маркетингово описание на абонаментна технологична услуга. Не възниква трудово правоотношение и AI системата няма правосубектност.</p>
+    <h2>Ограничения</h2><p>AI служителите работят по предварително определени правила. Клиентът запазва отговорността за предоставената информация, достъпите и решенията, които изискват професионална или човешка преценка.</p>
+    <h2>Контакт</h2><p>Въпроси се изпращат на <a href={`mailto:${site.legalEmail}`}>{site.legalEmail}</a> или на телефон <a href={`tel:${site.salesPhoneHref}`}>{site.salesPhone}</a>.</p>
+  </div></section>
+</BaseLayout>

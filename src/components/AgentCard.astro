@@ -1,0 +1,38 @@
+---
+import type { CollectionEntry } from "astro:content";
+import AgentAvatar from "./AgentAvatar.astro";
+
+interface Props {
+  agent: CollectionEntry<"agents">;
+  compact?: boolean;
+}
+const { agent, compact = false } = Astro.props;
+const data = agent.data;
+const href = `/sluzhiteli/${data.slug}/`;
+---
+
+<article
+  class:list={["agent-card", compact && "agent-card--compact", data.status === "soon" && "agent-card--soon"]}
+  style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}
+>
+  <div class="agent-card__top">
+    <AgentAvatar name={data.name} accent={data.accent} accentSoft={data.accentSoft} size={compact ? "small" : "medium"} />
+    <div>
+      <span class="status">{data.status === "live" ? "Свободен" : "Скоро"}</span>
+      <h3>{data.name}</h3>
+      <p class="role">{data.role}</p>
+    </div>
+  </div>
+  {!compact && <p class="agent-card__summary">{data.summary}</p>}
+  <div class="agent-card__footer">
+    <div>
+      <span class="price-label">{data.status === "live" ? "месечна цена" : "позицията"}</span>
+      <strong>{data.priceLabel}</strong>
+    </div>
+    {data.status === "live" ? (
+      <a class="card-link" href={href} aria-label={`Разгледай ${data.name}`}>Разгледай <span>→</span></a>
+    ) : (
+      <a class="card-link" href={`${href}#spisak`}>Извести ме <span>→</span></a>
+    )}
+  </div>
+</article>

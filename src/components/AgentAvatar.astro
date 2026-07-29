@@ -1,0 +1,30 @@
+---
+interface Props {
+  name: string;
+  accent: string;
+  accentSoft: string;
+  size?: "small" | "medium" | "large";
+}
+
+const { name, accent, accentSoft, size = "medium" } = Astro.props;
+const initial = name.slice(0, 1);
+---
+
+<div class:list={["agent-avatar", `agent-avatar--${size}`]} style={`--agent:${accent};--agent-soft:${accentSoft}`} aria-hidden="true">
+  <svg viewBox="0 0 120 120" role="img">
+    <rect width="120" height="120" rx="34" fill="var(--agent-soft)" />
+    <path d="M25 78c13-19 27-29 42-29 14 0 25 7 31 20" fill="none" stroke="var(--agent)" stroke-width="9" stroke-linecap="round"/>
+    <circle cx="46" cy="42" r="13" fill="var(--agent)" opacity=".9"/>
+    <circle cx="79" cy="34" r="8" fill="var(--agent)" opacity=".55"/>
+    <path d="M81 89c7-11 13-16 21-18" fill="none" stroke="var(--agent)" stroke-width="7" stroke-linecap="round" opacity=".55"/>
+    <text x="61" y="78" text-anchor="middle" font-family="Onest, sans-serif" font-size="31" font-weight="800" fill="#fff">{initial}</text>
+  </svg>
+</div>
+
+<style>
+  .agent-avatar{flex:0 0 auto}
+  .agent-avatar svg{display:block;width:100%;height:100%}
+  .agent-avatar--small{width:48px;height:48px}
+  .agent-avatar--medium{width:76px;height:76px}
+  .agent-avatar--large{width:min(190px,36vw);height:min(190px,36vw)}
+</style>

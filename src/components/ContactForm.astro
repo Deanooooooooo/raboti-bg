@@ -1,0 +1,92 @@
+---
+import { site } from "../data/site";
+interface Props {
+  title?: string;
+  selectedAgent?: string;
+  intent?: "hire" | "waitlist";
+}
+const {
+  title = "Кой AI служител ти трябва?",
+  selectedAgent = "",
+  intent = "hire",
+} = Astro.props;
+const waitlist = intent === "waitlist";
+---
+
+<form class:list={["contact-form", waitlist && "contact-form--waitlist"]} data-contact-form data-endpoint={site.formEndpoint} novalidate>
+  <input type="hidden" name="intent" value={intent} />
+  <input type="hidden" name="agent" value={selectedAgent} />
+  <label class="honeypot" aria-hidden="true">Уебсайт<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+  {!waitlist && <h2>{title}</h2>}
+  {waitlist ? (
+    <>
+      <label><span>Имейл за известие</span><input type="email" name="email" autocomplete="email" required placeholder="ime@business.bg" /></label>
+      <button class="button button--dark" type="submit">Извести ме</button>
+    </>
+  ) : (
+    <>
+      <label><span>Име</span><input type="text" name="name" autocomplete="name" required placeholder="Твоето име" /></label>
+      <label><span>Телефон</span><input type="tel" name="phone" autocomplete="tel" inputmode="tel" required placeholder="089 123 4567" /></label>
+      <label>
+        <span>Бизнес</span>
+        <select name="businessType" required>
+          <option value="" disabled selected>Избери най-близкото</option>
+          <option>Салон или студио</option>
+          <option>Клиника или кабинет</option>
+          <option>Автосервиз</option>
+          <option>Хотел или ресторант</option>
+          <option>Офис или професионална услуга</option>
+          <option>Онлайн магазин</option>
+          <option>Друго</option>
+        </select>
+      </label>
+      <label class="consent">
+        <input type="checkbox" name="consent" value="yes" required />
+        <span>Съгласен/на съм Работи да се свърже с мен за тази заявка. Прочетох <a href="/politika-za-poveritelnost/">политиката за поверителност</a>.</span>
+      </label>
+      <button class="button" type="submit">Изпрати заявката</button>
+    </>
+  )}
+  <p class="form-status" aria-live="polite"></p>
+</form>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>("[data-contact-form]").forEach((form) => {
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const status = form.querySelector<HTMLElement>(".form-status");
+      const button = form.querySelector<HTMLButtonElement>("button[type='submit']");
+      const data = new FormData(form);
+      const phone = String(data.get("phone") || "").replace(/\D/g, "");
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        if (status) status.textContent = "Провери задължителните полета.";
+        return;
+      }
+      if (phone && !(/^0\d{9}$/.test(phone) || /^359\d{9}$/.test(phone))) {
+        if (status) status.textContent = "Въведи валиден български телефон.";
+        return;
+      }
+      const payload = Object.fromEntries(data.entries());
+      payload.source = window.location.pathname;
+      if (status) status.textContent = "Изпращаме…";
+      if (button) button.disabled = true;
+      try {
+        const response = await fetch(form.dataset.endpoint || "/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        });
+        if (!response.ok) throw new Error("Request failed");
+        form.reset();
+        if (status) status.textContent = data.get("intent") === "waitlist"
+          ? "Готово. Ще ти пишем, когато позицията отвори."
+          : "Получихме заявката. Ще се обадим до един работен ден.";
+      } catch {
+        if (status) status.textContent = "Не успяхме да изпратим. Обади се на 0899 917 920.";
+      } finally {
+        if (button) button.disabled = false;
+      }
+    });
+  });
+</script>

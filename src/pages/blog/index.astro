@@ -1,0 +1,12 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { site } from "../../data/site";
+import { breadcrumbSchema } from "../../data/schema";
+const posts = (await getCollection("blog")).sort((a,b)=>b.data.publishedAt.valueOf()-a.data.publishedAt.valueOf());
+const fmt=(date:Date)=>new Intl.DateTimeFormat("bg-BG",{day:"numeric",month:"long",year:"numeric"}).format(date);
+---
+<BaseLayout title="Практични ръководства за AI служители | Работи" description="Ясни ръководства за AI рецепционисти, телефонни асистенти, сайтове и автоматизация за българския бизнес." canonical="/blog/" image="/og/blog.svg" schema={breadcrumbSchema([{name:"Работи",url:site.url},{name:"Полезно",url:`${site.url}/blog/`}])}>
+  <section class="page-hero"><div class="shell narrow"><p class="eyebrow">полезно</p><h1>Без мъгла около AI.</h1><p>Конкретни задачи, граници, цени и примери за малкия бизнес.</p></div></section>
+  <section class="section"><div class="shell blog-grid">{posts.map((post)=><article class="post-card"><div><span class="status">{post.data.tags[0]}</span><h2><a href={`/blog/${post.id}/`}>{post.data.title}</a></h2><p>{post.data.description}</p></div><div class="post-meta"><time datetime={post.data.publishedAt.toISOString()}>{fmt(post.data.publishedAt)}</time><a href={`/blog/${post.id}/`}>Прочети →</a></div></article>)}</div></section>
+</BaseLayout>

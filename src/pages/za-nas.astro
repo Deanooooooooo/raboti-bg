@@ -1,0 +1,10 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { site } from "../data/site";
+import { breadcrumbSchema } from "../data/schema";
+---
+<BaseLayout title="Кой стои зад Работи" description="Работи се изгражда от български екип с опит в AI, софтуерна архитектура, интеграции и дигитални продукти." canonical="/za-nas/" image="/og/za-nas.svg" schema={breadcrumbSchema([{name:"Работи",url:site.url},{name:"За нас",url:`${site.url}/za-nas/`}])}>
+  <section class="page-hero"><div class="shell narrow"><p class="eyebrow">хората зад AI служителите</p><h1>Преди да има Работи, започнахме с Вдига.</h1><p>Изградихме AI рецепционист за конкретен проблем: клиентът звъни, но екипът няма свободни ръце. Работи разширява същия принцип към сайта и оперативната работа.</p></div></section>
+  <section class="section"><div class="shell founder-grid">{site.founders.map((founder)=><article class="founder-card"><div class="founder-avatar" aria-hidden="true">{founder.name.split(" ").map((p)=>p[0]).join("")}</div><div><span class="status">Съосновател</span><h2>{founder.name}</h2><p class="role">{founder.role}</p><p>{founder.bio}</p></div></article>)}</div></section>
+  <section class="section section--tint"><div class="shell legal-block"><div><p class="eyebrow">кой носи отговорност</p><h2>Реална компания, договор и човек отсреща.</h2><p>Работи е търговска концепция на {site.legalName}. Компанията издава офертите и фактурите и носи договорната отговорност към клиентите.</p></div><dl><div><dt>Юридическо лице</dt><dd>{site.legalName}</dd></div><div><dt>ЕИК</dt><dd>{site.companyId}</dd></div><div><dt>Управител</dt><dd>{site.manager}</dd></div><div><dt>Адрес</dt><dd>{site.legalAddress}</dd></div></dl></div></section>
+</BaseLayout>

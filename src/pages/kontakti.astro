@@ -1,0 +1,9 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ContactForm from "../components/ContactForm.astro";
+import { site } from "../data/site";
+import { breadcrumbSchema } from "../data/schema";
+---
+<BaseLayout title="Наеми AI служител | Работи" description="Разкажи ни каква работа искаш да поеме AI служител. Три кратки полета и разговор до един работен ден." canonical="/kontakti/" image="/og/kontakti.svg" schema={breadcrumbSchema([{name:"Работи",url:site.url},{name:"Контакти",url:`${site.url}/kontakti/`}])}>
+  <section class="page-hero contact-page"><div class="shell final-grid"><div><p class="eyebrow">наеми AI служител</p><h1>Кое остава несвършено всеки ден?</h1><p>Остави телефон и вида на бизнеса. Ще се обадим до един работен ден, за да преценим коя роля пасва.</p><p class="contact-direct"><span>Или се обади:</span><a href={`tel:${site.salesPhoneHref}`}>{site.salesPhone}</a><small>{site.salesHours}</small></p></div><ContactForm /></div></section>
+</BaseLayout>

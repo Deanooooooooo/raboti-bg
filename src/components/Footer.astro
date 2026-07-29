@@ -1,0 +1,38 @@
+---
+import { site } from "../data/site";
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="shell footer-grid">
+    <div>
+      <a class="brand brand--footer" href="/"><span class="brand-dot"></span><span>Работи</span></a>
+      <p>AI служители, които поемат ясна работа и оставят важните решения на хората.</p>
+    </div>
+    <div>
+      <strong>Разгледай</strong>
+      <a href="/sluzhiteli/">AI служители</a>
+      <a href="/ceni/">Цени</a>
+      <a href="/demo/">Демо</a>
+      <a href="/blog/">Полезно</a>
+    </div>
+    <div>
+      <strong>Компания</strong>
+      <a href="/za-nas/">За нас</a>
+      <a href="/kontakti/">Контакти</a>
+      <a href="/politika-za-poveritelnost/">Поверителност</a>
+      <a href="/obshti-usloviya/">Общи условия</a>
+    </div>
+    <div>
+      <strong>{site.legalName}</strong>
+      <span>ЕИК {site.companyId}</span>
+      <span>{site.location}, България</span>
+      <a href={`tel:${site.salesPhoneHref}`}>{site.salesPhone}</a>
+      <a href={`mailto:${site.legalEmail}`}>{site.legalEmail}</a>
+    </div>
+  </div>
+  <div class="shell footer-bottom">
+    <span>© {year} Работи</span>
+    <span>„Наеми AI служител“ описва абонаментна технологична услуга, а не трудово правоотношение.</span>
+  </div>
+</footer>
