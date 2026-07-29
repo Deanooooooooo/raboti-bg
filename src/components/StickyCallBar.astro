@@ -15,4 +15,13 @@ import { site } from "../data/site";
     field.addEventListener("focus", () => bar?.classList.add("has-keyboard"));
     field.addEventListener("blur", () => bar?.classList.remove("has-keyboard"));
   });
+  const viewport = window.visualViewport;
+  if (viewport && bar) {
+    const syncKeyboardState = () => {
+      const keyboardOpen = window.innerHeight - viewport.height > 140;
+      bar.classList.toggle("has-keyboard", keyboardOpen);
+    };
+    viewport.addEventListener("resize", syncKeyboardState);
+    viewport.addEventListener("scroll", syncKeyboardState);
+  }
 </script>
