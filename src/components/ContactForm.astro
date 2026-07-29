@@ -16,7 +16,7 @@ const waitlist = intent === "waitlist";
 <form class:list={["contact-form", waitlist && "contact-form--waitlist"]} data-contact-form data-endpoint={site.formEndpoint} novalidate>
   <input type="hidden" name="intent" value={intent} />
   <input type="hidden" name="agent" value={selectedAgent} />
-  <label class="honeypot" aria-hidden="true">Уебсайт<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+  <label class="honeypot" aria-hidden="true" hidden>Уебсайт<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
   {!waitlist && <h2>{title}</h2>}
   {waitlist ? (
     <>

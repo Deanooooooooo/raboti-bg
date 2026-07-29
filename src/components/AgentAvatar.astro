@@ -1,23 +1,44 @@
 ---
 interface Props {
   name: string;
+  slug: string;
   accent: string;
   accentSoft: string;
   size?: "small" | "medium" | "large";
 }
 
-const { name, accent, accentSoft, size = "medium" } = Astro.props;
-const initial = name.slice(0, 1);
+const { name, slug, accent, accentSoft, size = "medium" } = Astro.props;
 ---
 
 <div class:list={["agent-avatar", `agent-avatar--${size}`]} style={`--agent:${accent};--agent-soft:${accentSoft}`} aria-hidden="true">
-  <svg viewBox="0 0 120 120" role="img">
+  <svg viewBox="0 0 120 120" role="img" aria-label={name}>
     <rect width="120" height="120" rx="34" fill="var(--agent-soft)" />
-    <path d="M25 78c13-19 27-29 42-29 14 0 25 7 31 20" fill="none" stroke="var(--agent)" stroke-width="9" stroke-linecap="round"/>
-    <circle cx="46" cy="42" r="13" fill="var(--agent)" opacity=".9"/>
-    <circle cx="79" cy="34" r="8" fill="var(--agent)" opacity=".55"/>
-    <path d="M81 89c7-11 13-16 21-18" fill="none" stroke="var(--agent)" stroke-width="7" stroke-linecap="round" opacity=".55"/>
-    <text x="61" y="78" text-anchor="middle" font-family="Onest, sans-serif" font-size="31" font-weight="800" fill="#fff">{initial}</text>
+    {slug === "vdiga" && (
+      <g fill="none" stroke="var(--agent)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M35 28h13l7 20-10 8c7 14 15 22 29 29l8-10 20 7v13c0 6-5 11-11 11-36-2-65-31-67-67 0-6 5-11 11-11Z"/>
+      </g>
+    )}
+    {slug === "pomaga" && (
+      <g fill="none" stroke="var(--agent)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="47" cy="57" r="18"/><circle cx="82" cy="77" r="13"/>
+        <path d="M47 29v10m0 36v10M19 57h10m36 0h10M27 37l8 8m24 24 8 8m0-40-8 8M35 69l-8 8M82 57v7m0 26v7m-20-20h7m26 0h7"/>
+      </g>
+    )}
+    {slug === "pishe" && (
+      <g fill="none" stroke="var(--agent)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m29 88 7-25 40-40 21 21-40 40-28 4Z"/><path d="m36 63 21 21M70 29l21 21M29 88l18-8"/>
+      </g>
+    )}
+    {slug === "smyata" && (
+      <g fill="none" stroke="var(--agent)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="29" y="19" width="62" height="82" rx="11"/><path d="M42 34h36v16H42zM43 66h1m16 0h1m16 0h1M43 84h1m16 0h1m16 0h1"/>
+      </g>
+    )}
+    {slug === "prodava" && (
+      <g fill="none" stroke="var(--agent)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M25 92V70m22 22V55m22 37V39m22 53V24"/><path d="m25 55 22-17 22 4 22-22"/><path d="m79 20h12v12"/>
+      </g>
+    )}
   </svg>
 </div>
 

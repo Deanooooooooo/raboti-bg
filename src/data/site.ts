@@ -17,6 +17,7 @@ export const site = {
   formEndpoint: import.meta.env.PUBLIC_FORM_ENDPOINT || "/api/contact",
   plausibleDomain: import.meta.env.PUBLIC_PLAUSIBLE_DOMAIN || "",
   metaPixelId: import.meta.env.PUBLIC_META_PIXEL_ID || "",
+  showCaseStudy: false,
   socialProfiles: {
     facebook: "https://www.facebook.com/vdigabg",
     linkedin: "https://www.linkedin.com/company/vdiga/",

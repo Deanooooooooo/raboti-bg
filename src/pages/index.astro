@@ -36,10 +36,10 @@ const schemas = [
       <div class="hero-copy">
         <p class="eyebrow">AI служители за българския бизнес</p>
         <h1 class="verb-line" aria-label="Вдига. Помага. Пише. Смята. Работи.">
-          <span style="--delay:0">Вдига.</span>
-          <span style="--delay:1">Помага.</span>
-          <span style="--delay:2">Пише.</span>
-          <span style="--delay:3">Смята.</span>
+          <span style="--delay:0">Вдига. </span>
+          <span style="--delay:1">Помага. </span>
+          <span style="--delay:2">Пише. </span>
+          <span style="--delay:3">Смята. </span>
           <span class="verb-brand" style="--delay:4">Работи.</span>
         </h1>
         <p class="hero-lead">Наеми AI служител, който поема ясна работа и я върши по правилата на твоя бизнес.</p>
@@ -84,9 +84,9 @@ const schemas = [
         <div><p class="eyebrow">как започва</p><h2>От задача до нов колега в три стъпки.</h2></div>
       </div>
       <ol class="steps">
-        <li><span>1</span><div><h3>Избираш роля</h3><p>Казваш кое отнема време, къде се губят заявки и какво не бива да се прави без човек.</p></div></li>
-        <li><span>2</span><div><h3>Настройваме я</h3><p>Даваме на AI служителя информация, достъпи и правила. Тестваме с реални случаи.</p></div></li>
-        <li><span>3</span><div><h3>Започва работа</h3><p>Следиш какво е свършено. Рисковите действия чакат одобрение, вместо да се изпълняват на сляпо.</p></div></li>
+        <li data-step="1"><div><h3>Избираш роля</h3><p>Казваш кое отнема време, къде се губят заявки и какво не бива да се прави без човек.</p></div></li>
+        <li data-step="2"><div><h3>Настройваме я</h3><p>Даваме на AI служителя информация, достъпи и правила. Тестваме с реални случаи.</p></div></li>
+        <li data-step="3"><div><h3>Започва работа</h3><p>Следиш какво е свършено. Рисковите действия чакат одобрение, вместо да се изпълняват на сляпо.</p></div></li>
       </ol>
     </div>
   </section>
@@ -94,7 +94,7 @@ const schemas = [
   <section class="section comparison-section">
     <div class="shell">
       <div class="section-head">
-        <div><p class="eyebrow">човек и AI служител</p><h2>Не е заместител на човешката преценка. Е заместител на рутината.</h2></div>
+        <div><p class="eyebrow">човек и AI служител</p><h2>Човешката преценка остава. Рутината вече има кой да я поеме.</h2></div>
         <p>AI служителят е силен в повтарящата се работа. Хората остават там, където са нужни отговорност, емпатия и решение.</p>
       </div>
       <ComparisonTable />
@@ -102,17 +102,17 @@ const schemas = [
   </section>
 
   <section class="section demo-section">
-    <div class="shell demo-grid">
+    <div class:list={["shell", "demo-grid", !site.showCaseStudy && "demo-grid--single"]}>
       <div>
         <p class="eyebrow">първото интервю е по телефона</p>
         <h2>Чуй как говори Вдига.</h2>
         <p>Отвори демото на Vdiga и чуй примерен разговор. После се обади, за да обсъдим какви въпроси трябва да поема за твоя бизнес.</p>
         <div class="hero-actions">
-          <a class="button button--light" href="https://vdiga.bg/demo/">Чуй примерен разговор</a>
+          <a class="button button--light" href="https://vdiga.bg/demo/" target="_blank" rel="noopener">Чуй примерен разговор</a>
           <a class="text-link text-link--light" href={`tel:${site.salesPhoneHref}`}>{site.salesPhone}</a>
         </div>
       </div>
-      <div class="proof-card">
+      {site.showCaseStudy && <div class="proof-card">
         <span class="status">Място за първия казус</span>
         <h3>Верига студиа в търговски центрове</h3>
         <p>Компонентът е готов за реалните резултати след пилота. Няма да публикуваме измислени числа.</p>
@@ -120,7 +120,7 @@ const schemas = [
           <div><strong>—</strong><span>поети обаждания</span></div>
           <div><strong>—</strong><span>записани часове</span></div>
         </div>
-      </div>
+      </div>}
     </div>
   </section>
 
