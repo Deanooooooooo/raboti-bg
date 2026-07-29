@@ -17,9 +17,11 @@ async function walk(directory) {
     const html = await readFile(path, 'utf8');
     const prepared = html
       .replace('<head>', '<head><meta name="robots" content="noindex,nofollow,noarchive">')
-      .replaceAll('href="/', `href="${base}/`)
-      .replaceAll('src="/', `src="${base}/`)
-      .replaceAll('action="/', `action="${base}/`);
+      // Astro's base handles generated assets, including URLs inside CSS.
+      // These rewrites cover only root-absolute links written directly in templates.
+      .replace(new RegExp(`href="/(?!${base.slice(1)}/)`, 'g'), `href="${base}/`)
+      .replace(new RegExp(`src="/(?!${base.slice(1)}/)`, 'g'), `src="${base}/`)
+      .replace(new RegExp(`action="/(?!${base.slice(1)}/)`, 'g'), `action="${base}/`);
     await writeFile(path, prepared);
   }
 }
