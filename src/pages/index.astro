@@ -35,7 +35,7 @@ const schemas = [
   <section class="hero" data-hero>
     <div class="shell hero-grid">
       <div class="hero-copy">
-        <p class="eyebrow">AI служители за българския бизнес</p>
+        <p class="eyebrow">AI служители под наем</p>
         <h1 class="verb-line" aria-label="Вдига. Помага. Пише. Смята. Работи.">
           <span class="verb-row" aria-hidden="true">
             <span style="--delay:0">Вдига.</span>
@@ -45,10 +45,10 @@ const schemas = [
           </span>
           <span class="verb-row verb-brand" aria-hidden="true"><span style="--delay:4">Работи.</span></span>
         </h1>
-        <p class="hero-lead">Наеми AI служител, който поема ясна работа и я върши по правилата на твоя бизнес.</p>
+        <p class="hero-lead">Вдига телефона, поддържа сайта и поема ръчната работа между системите ти.</p>
         <div class="hero-actions">
-          <a class="button" href={`tel:${site.salesPhoneHref}`} data-track="tel">Обади се за демо</a>
-          <a class="text-link" href="#ekip">Разгледай екипа <span>↓</span></a>
+          <a class="button" href={`tel:${site.salesPhoneHref}`} data-track="tel">Обади се на Вдига</a>
+          <a class="text-link" href="#ekip">Виж свободните служители <span>↓</span></a>
         </div>
       </div>
       <aside class="call-proof" aria-label="Пример как Вдига записва час по телефона">
@@ -75,19 +75,19 @@ const schemas = [
     </div>
   </section>
 
-  <section class="pain-strip" aria-label="Проблеми, които Работи поема">
+  <section class="pain-strip" aria-label="Как започват AI служителите">
     <div class="shell pain-grid">
-      <p><strong>Телефонът звъни,</strong> а всички са заети.</p>
-      <p><strong>Сайтът чака,</strong> защото никой няма време.</p>
-      <p><strong>Една и съща информация</strong> се въвежда на три места.</p>
+      <p><strong>От 97 лв./месец</strong> с ясна месечна цена.</p>
+      <p><strong>До 7 дни</strong> от настройката до първата задача.</p>
+      <p><strong>Човекът решава</strong> кое AI служителят може да прави сам.</p>
     </div>
   </section>
 
   <section class="section" id="ekip">
     <div class="shell">
       <div class="section-head">
-        <div><p class="eyebrow">свободни AI служители</p><h2>Кого искаш да добавиш към екипа?</h2></div>
-        <p>Всеки служител има конкретна роля. Не купуваш „AI решение“, а работа, която вече не остава за после.</p>
+        <div><p class="eyebrow">свободни позиции</p><h2>Кой започва първи?</h2></div>
+        <p>Избираш работа, не софтуер. Ние настройваме служителя за твоя бизнес и тестваме с реални случаи.</p>
       </div>
       <div class="agent-grid">
         {agents.map((agent) => <AgentCard agent={agent} />)}
@@ -98,7 +98,7 @@ const schemas = [
   <section class="section section--tint">
     <div class="shell">
       <div class="section-head">
-        <div><p class="eyebrow">как започва</p><h2>От задача до нов колега в три стъпки.</h2></div>
+        <div><p class="eyebrow">първият работен ден</p><h2>От задача до готов служител.</h2></div>
       </div>
       <ol class="steps">
         <li data-step="1"><div><h3>Избираш роля</h3><p>Казваш кое отнема време, къде се губят заявки и какво не бива да се прави без човек.</p></div></li>
