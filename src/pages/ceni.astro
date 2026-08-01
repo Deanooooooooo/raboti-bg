@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import FAQ from "../components/FAQ.astro";
+import Icon from "../components/Icon.astro";
 import { pricingFaqs, site } from "../data/site";
 import { faqSchema, breadcrumbSchema } from "../data/schema";
 const agents = (await getCollection("agents")).sort((a,b)=>a.data.order-b.data.order);
@@ -19,7 +20,7 @@ const live = agents.filter((agent)=>agent.data.status==="live");
     {live.map((agent) => <article class="price-card" style={`--agent:${agent.data.accent};--agent-soft:${agent.data.accentSoft}`}>
       <span class="status">AI служител</span><h2>{agent.data.name}</h2><p>{agent.data.role}</p>
       <div class="big-price"><strong>{agent.data.price}</strong><span>лв.<br/>на месец</span></div>
-      <ul>{agent.data.features.map((feature)=><li>✓ {feature}</li>)}</ul>
+      <ul>{agent.data.features.map((feature)=><li><Icon name="check" /> {feature}</li>)}</ul>
       <a class="button" href={`/sluzhiteli/${agent.data.slug}/`}>Виж {agent.data.name}</a>
     </article>)}
   </div></section>

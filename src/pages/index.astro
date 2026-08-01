@@ -5,6 +5,7 @@ import AgentCard from "../components/AgentCard.astro";
 import ComparisonTable from "../components/ComparisonTable.astro";
 import FAQ from "../components/FAQ.astro";
 import ContactForm from "../components/ContactForm.astro";
+import Icon from "../components/Icon.astro";
 import { faqSchema, breadcrumbSchema } from "../data/schema";
 import { homeFaqs, site } from "../data/site";
 
@@ -48,15 +49,15 @@ const schemas = [
         <p class="hero-lead">Вдига телефона, поддържа сайта и поема ръчната работа между системите ти.</p>
         <div class="hero-actions">
           <a class="button" href={`tel:${site.salesPhoneHref}`} data-track="tel">Обади се на Вдига</a>
-          <a class="text-link" href="#ekip">Виж свободните служители <span>↓</span></a>
+          <a class="text-link" href="#ekip">Виж свободните служители <Icon name="arrow-down" /></a>
         </div>
       </div>
       <aside class="call-proof" aria-label="Пример как Вдига записва час по телефона">
         <div class="call-proof__top">
-          <div class="call-proof__icon" aria-hidden="true">↗</div>
+          <div class="call-proof__icon"><Icon name="phone" /></div>
           <div>
             <span>Примерен разговор</span>
-            <strong>Пропуснато обаждане → Вдига отговори</strong>
+            <strong>Пропуснато обаждане <Icon name="arrow-right" /> Вдига отговори</strong>
           </div>
           <span class="call-proof__live"><i></i> на линия</span>
         </div>
@@ -66,7 +67,7 @@ const schemas = [
           <p class="bubble bubble--caller"><span>Клиент</span>Нека бъде в 14:30.</p>
           <p class="bubble bubble--vdiga"><span>Вдига</span>Готово. Ще получите потвърждение на телефона.</p>
         </div>
-        <div class="call-proof__confirmed"><span aria-hidden="true">✓</span><strong>Записан час: вторник 14:30</strong></div>
+        <div class="call-proof__confirmed"><span><Icon name="check" /></span><strong>Записан час: вторник 14:30</strong></div>
         <a class="call-proof__footer" href={`tel:${site.salesPhoneHref}`} data-track="tel">
           <span>Изпробвай я сама:</span>
           <strong>{site.salesPhone}</strong>

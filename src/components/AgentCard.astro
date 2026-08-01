@@ -1,5 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
+import Icon from "./Icon.astro";
 
 interface Props {
   agent: CollectionEntry<"agents">;
@@ -29,9 +30,9 @@ const href = `/sluzhiteli/${data.slug}/`;
       <strong>{data.priceLabel}</strong>
     </div>
     {data.status === "live" ? (
-      <a class="card-link" href={href} aria-label={`Наеми ${data.name}`}>Наеми {data.name} <span>→</span></a>
+      <a class="card-link" href={href} aria-label={`Наеми ${data.name}`}>Наеми {data.name} <Icon name="arrow-right" /></a>
     ) : (
-      <a class="card-link" href={`${href}#spisak`}>Извести ме <span>→</span></a>
+      <a class="card-link" href={`${href}#spisak`}>Извести ме <Icon name="arrow-right" /></a>
     )}
   </div>
 </article>

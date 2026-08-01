@@ -1,5 +1,6 @@
 ---
 interface Item { question: string; answer: string }
+import Icon from "./Icon.astro";
 interface Props { items: Item[]; heading?: string }
 const { items, heading } = Astro.props;
 ---
@@ -8,7 +9,7 @@ const { items, heading } = Astro.props;
   {heading && <h2>{heading}</h2>}
   {items.map((item) => (
     <details>
-      <summary>{item.question}<span aria-hidden="true">+</span></summary>
+      <summary>{item.question}<span aria-hidden="true"><Icon name="plus" /></span></summary>
       <p>{item.answer}</p>
     </details>
   ))}
