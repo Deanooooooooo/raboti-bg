@@ -98,13 +98,17 @@ const schemas = [
             <article class:list={["roster-card", `roster-card--${data.slug}`, data.status === "soon" && "roster-card--soon"]} style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
               <div class="roster-card__halo" aria-hidden="true"></div>
               <header>
-                <AgentAvatar name={data.name} slug={data.slug} accent={data.accent} accentSoft={data.accentSoft} size="medium" />
-                {data.status === "soon" && <span class="roster-status"><i></i>В разработка</span>}
+                <div class="roster-card__heading">
+                  <p>{data.role}</p>
+                  <h3>{data.name}</h3>
+                </div>
+                <div class="roster-card__mark">
+                  <AgentAvatar name={data.name} slug={data.slug} accent={data.accent} accentSoft={data.accentSoft} size="medium" />
+                </div>
               </header>
               <div class="roster-card__body">
-                <p>{data.role}</p>
-                <h3>{data.name}</h3>
                 <span>{data.summary}</span>
+                {data.status === "soon" && <span class="roster-status"><i></i>В разработка</span>}
               </div>
               <footer>
                 <div><small>{data.status === "live" ? "Предлага се · месечна цена" : "Статус"}</small><strong>{data.status === "live" ? data.priceLabel : "Предстои"}</strong></div>
