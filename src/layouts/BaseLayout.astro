@@ -16,6 +16,7 @@ interface Props {
   type?: "website" | "article";
   schema?: Record<string, unknown> | Array<Record<string, unknown>>;
   noindex?: boolean;
+  bodyClass?: string;
 }
 const props = Astro.props;
 ---
@@ -32,7 +33,7 @@ const props = Astro.props;
     <SEO {...props} />
     {site.plausibleDomain && <script is:inline defer data-domain={site.plausibleDomain} src="https://plausible.io/js/script.js"></script>}
   </head>
-  <body>
+  <body class={props.bodyClass}>
     <a class="skip-link" href="#main">Към съдържанието</a>
     <Header />
     <main id="main"><slot /></main>

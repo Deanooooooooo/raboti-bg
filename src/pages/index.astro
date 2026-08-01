@@ -1,12 +1,13 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import AgentCard from "../components/AgentCard.astro";
-import ComparisonTable from "../components/ComparisonTable.astro";
-import FAQ from "../components/FAQ.astro";
+import AgentAvatar from "../components/AgentAvatar.astro";
 import ContactForm from "../components/ContactForm.astro";
+import FAQ from "../components/FAQ.astro";
 import Icon from "../components/Icon.astro";
-import { faqSchema, breadcrumbSchema } from "../data/schema";
+import WorkforceConsole from "../components/WorkforceConsole.astro";
+import WorkflowVisual from "../components/WorkflowVisual.astro";
+import { breadcrumbSchema, faqSchema } from "../data/schema";
 import { homeFaqs, site } from "../data/site";
 
 const agents = (await getCollection("agents")).sort((a, b) => a.data.order - b.data.order);
@@ -29,130 +30,138 @@ const schemas = [
 
 <BaseLayout
   title="Работи — наеми AI служител за бизнеса"
-  description="Наеми AI служител, който вдига телефона, поддържа сайта или поема ръчната работа между системите ти. От 97 лв. месечно."
+  description="Наеми AI служител за телефонни разговори, сайт, операции и повтаряща се работа. Избираш роля, правила и човешки контрол."
   canonical="/"
   schema={schemas}
+  bodyClass="home-art"
 >
-  <section class="hero" data-hero>
-    <div class="shell hero-grid">
-      <div class="hero-copy">
-        <p class="eyebrow">AI служители под наем</p>
-        <h1 class="verb-line" aria-label="Вдига. Помага. Пише. Смята. Работи.">
-          <span class="verb-row" aria-hidden="true">
-            <span style="--delay:0">Вдига.</span>
-            <span style="--delay:1">Помага.</span>
-            <span style="--delay:2">Пише.</span>
-            <span style="--delay:3">Смята.</span>
-          </span>
-          <span class="verb-row verb-brand" aria-hidden="true"><span style="--delay:4">Работи.</span></span>
-        </h1>
-        <p class="hero-lead">Вдига телефона, поддържа сайта и поема ръчната работа между системите ти.</p>
-        <div class="hero-actions">
-          <a class="button" href={`tel:${site.salesPhoneHref}`} data-track="tel">Обади се на Вдига</a>
-          <a class="text-link" href="#ekip">Виж свободните служители <Icon name="arrow-down" /></a>
+  <section class="home-hero" data-hero>
+    <div class="home-aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="home-noise" aria-hidden="true"></div>
+    <div class="shell home-hero__grid">
+      <div class="home-hero__copy">
+        <p class="spectrum-label"><span></span> AI екип за реалната работа</p>
+        <h1>Наеми <em>AI служител.</em><br />Освободи човешкия екип.</h1>
+        <p class="home-hero__lead">Работи събира AI служители с конкретни роли, граници и месечна цена. Те поемат телефона, сайта и повтарящата се работа между системите ти.</p>
+        <div class="home-hero__actions">
+          <a class="button button--spectrum" href="#ekip">Разгледай екипа <Icon name="arrow-down" /></a>
+          <a class="home-link" href="#proces">Виж как започват <Icon name="arrow-right" /></a>
+        </div>
+        <div class="home-hero__signals" aria-label="Основни характеристики">
+          <span><i></i> Конкретна роля</span>
+          <span><i></i> Човешки контрол</span>
+          <span><i></i> Дневник на работата</span>
         </div>
       </div>
-      <aside class="call-proof" aria-label="Пример как Вдига записва час по телефона">
-        <div class="call-proof__top">
-          <div class="call-proof__icon"><Icon name="phone" /></div>
-          <div>
-            <span>Примерен разговор</span>
-            <strong>Пропуснато обаждане <Icon name="arrow-right" /> Вдига отговори</strong>
-          </div>
-          <span class="call-proof__live"><i></i> на линия</span>
-        </div>
-        <div class="call-proof__transcript">
-          <p class="bubble bubble--caller"><span>Клиент</span>Здравейте, имате ли свободен час във вторник следобед?</p>
-          <p class="bubble bubble--vdiga"><span>Вдига</span>Да — свободни са 14:30 и 16:00. Кой час е удобен?</p>
-          <p class="bubble bubble--caller"><span>Клиент</span>Нека бъде в 14:30.</p>
-          <p class="bubble bubble--vdiga"><span>Вдига</span>Готово. Ще получите потвърждение на телефона.</p>
-        </div>
-        <div class="call-proof__confirmed"><span><Icon name="check" /></span><strong>Записан час: вторник 14:30</strong></div>
-        <a class="call-proof__footer" href={`tel:${site.salesPhoneHref}`} data-track="tel">
-          <span>Изпробвай я сама:</span>
-          <strong>{site.salesPhone}</strong>
-        </a>
-      </aside>
+      <WorkforceConsole />
     </div>
   </section>
 
-  <section class="pain-strip" aria-label="Как започват AI служителите">
-    <div class="shell pain-grid">
-      <p><strong>От 97 лв./месец</strong> с ясна месечна цена.</p>
-      <p><strong>До 7 дни</strong> от настройката до първата задача.</p>
-      <p><strong>Човекът решава</strong> кое AI служителят може да прави сам.</p>
+  <section class="home-facts" aria-label="Как се наема AI служител">
+    <div class="shell home-facts__grid">
+      <div><span>01</span><strong>Избираш роля</strong><p>Не купуваш общ „AI пакет“, а конкретна работа.</p></div>
+      <div><span>02</span><strong>Задаваш граници</strong><p>Определяш кое прави сам и кое чака човек.</p></div>
+      <div><span>03</span><strong>Виждаш резултата</strong><p>Задачите, решенията и следващите стъпки остават видими.</p></div>
     </div>
   </section>
 
-  <section class="section" id="ekip">
+  <section class="home-section roster-section" id="ekip">
     <div class="shell">
-      <div class="section-head">
-        <div><p class="eyebrow">свободни позиции</p><h2>Кой започва първи?</h2></div>
-        <p>Избираш работа, не софтуер. Ние настройваме служителя за твоя бизнес и тестваме с реални случаи.</p>
+      <div class="home-heading">
+        <div><p class="spectrum-label spectrum-label--dark"><span></span> AI служители</p><h2>Един екип.<br /><em>Различни таланти.</em></h2></div>
+        <p>Всеки служител има собствена роля, работна среда и правила. Добавяш само този, за когото вече имаш истинска работа.</p>
       </div>
-      <div class="agent-grid">
-        {agents.map((agent) => <AgentCard agent={agent} />)}
+
+      <div class="roster-grid">
+        {agents.map((agent) => {
+          const data = agent.data;
+          return (
+            <article class:list={["roster-card", `roster-card--${data.slug}`, data.status === "soon" && "roster-card--soon"]} style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
+              <div class="roster-card__halo" aria-hidden="true"></div>
+              <header>
+                <AgentAvatar name={data.name} slug={data.slug} accent={data.accent} accentSoft={data.accentSoft} size="small" />
+                <span class="roster-status"><i></i>{data.status === "live" ? "може да започне" : "подготвя се"}</span>
+              </header>
+              <div class="roster-card__body">
+                <p>{data.role}</p>
+                <h3>{data.name}</h3>
+                <span>{data.summary}</span>
+              </div>
+              <footer>
+                <div><small>{data.status === "live" ? "Месечна цена" : "Достъп"}</small><strong>{data.priceLabel}</strong></div>
+                <a href={`/sluzhiteli/${data.slug}/`} aria-label={`Виж ${data.name}`}><Icon name="arrow-right" /></a>
+              </footer>
+            </article>
+          );
+        })}
       </div>
     </div>
   </section>
 
-  <section class="section section--tint">
+  <section class="home-section process-section" id="proces">
+    <div class="shell process-layout">
+      <div class="process-copy">
+        <p class="spectrum-label"><span></span> Един процес, видим докрай</p>
+        <h2>Работата се движи.<br /><em>Контролът остава.</em></h2>
+        <p>AI служителят не получава неограничен достъп. Той работи по одобрени правила, пази контекст и спира там, където е нужна човешка преценка.</p>
+        <ul class="process-principles">
+          <li><span>01</span><div><strong>Събитие започва задачата</strong><small>Обаждане, имейл, формуляр или график.</small></div></li>
+          <li><span>02</span><div><strong>Ролята изпълнява разрешеното</strong><small>С конкретна информация, системи и граници.</small></div></li>
+          <li><span>03</span><div><strong>Човекът поема изключението</strong><small>Рискът, неяснотата и необратимите действия чакат.</small></div></li>
+        </ul>
+      </div>
+      <WorkflowVisual />
+    </div>
+  </section>
+
+  <section class="home-section workmap-section" id="karta">
     <div class="shell">
-      <div class="section-head">
-        <div><p class="eyebrow">първият работен ден</p><h2>От задача до готов служител.</h2></div>
+      <div class="home-heading home-heading--center">
+        <div><p class="spectrum-label spectrum-label--dark"><span></span> Карта на работата</p><h2>Не още един чат.<br /><em>Система, която върши.</em></h2></div>
+        <p>Работи свързва входящата работа с подходяща роля, човешко решение и отчетим резултат.</p>
       </div>
-      <ol class="steps">
-        <li data-step="1"><div><h3>Избираш роля</h3><p>Казваш кое отнема време, къде се губят заявки и какво не бива да се прави без човек.</p></div></li>
-        <li data-step="2"><div><h3>Настройваме я</h3><p>Даваме на AI служителя информация, достъпи и правила. Тестваме с реални случаи.</p></div></li>
-        <li data-step="3"><div><h3>Започва работа</h3><p>Следиш какво е свършено. Рисковите действия чакат одобрение, вместо да се изпълняват на сляпо.</p></div></li>
-      </ol>
+      <div class="workmap">
+        <div class="workmap__orbit" aria-hidden="true"></div>
+        <div class="workmap__core"><span>raboti.bg</span><strong>AI екип</strong><small>роли · правила · отчет</small></div>
+        <div class="workmap__node workmap__node--phone"><Icon name="phone" /><div><strong>Телефон</strong><span>разговори и записвания</span></div></div>
+        <div class="workmap__node workmap__node--mail"><Icon name="mail" /><div><strong>Имейл</strong><span>заявки и задачи</span></div></div>
+        <div class="workmap__node workmap__node--web"><Icon name="globe" /><div><strong>Сайт</strong><span>съдържание и форми</span></div></div>
+        <div class="workmap__node workmap__node--systems"><Icon name="database" /><div><strong>Системи</strong><span>CRM, таблици, календар</span></div></div>
+        <div class="workmap__node workmap__node--human"><Icon name="user-check" /><div><strong>Човек</strong><span>решение при риск</span></div></div>
+      </div>
     </div>
   </section>
 
-  <section class="section comparison-section">
-    <div class="shell">
-      <div class="section-head">
-        <div><p class="eyebrow">човек и AI служител</p><h2>Човешката преценка остава. Рутината вече има кой да я поеме.</h2></div>
-        <p>AI служителят е силен в повтарящата се работа. Хората остават там, където са нужни отговорност, емпатия и решение.</p>
+  <section class="home-section boundaries-section" id="kontrol">
+    <div class="shell boundaries-grid">
+      <div class="boundary-intro">
+        <p class="spectrum-label"><span></span> Замислено за реален бизнес</p>
+        <h2>Автоматизация без<br /><em>загуба на контрол.</em></h2>
       </div>
-      <ComparisonTable />
+      <div class="boundary-card boundary-card--cyan"><span>01</span><h3>Започва с ясна длъжност</h3><p>Роля, задачи, цена и очакван резултат преди настройката.</p></div>
+      <div class="boundary-card boundary-card--violet"><span>02</span><h3>Работи само в позволеното</h3><p>Достъпите и действията следват предварително одобрени правила.</p></div>
+      <div class="boundary-card boundary-card--coral"><span>03</span><h3>Ескалира, вместо да измисля</h3><p>Неясният или рисков случай отива при човек с наличния контекст.</p></div>
+      <div class="boundary-card boundary-card--lime"><span>04</span><h3>Оставя следа след всяка задача</h3><p>Виждаш какво е направено и къде е нужна следваща стъпка.</p></div>
     </div>
   </section>
 
-  <section class="section demo-section">
-    <div class:list={["shell", "demo-grid", !site.showCaseStudy && "demo-grid--single"]}>
-      <div>
-        <p class="eyebrow">първото интервю е по телефона</p>
-        <h2>Чуй как говори Вдига.</h2>
-        <p>Отвори демото на Vdiga и чуй примерен разговор. После се обади, за да обсъдим какви въпроси трябва да поема за твоя бизнес.</p>
-        <div class="hero-actions">
-          <a class="button button--light" href="https://vdiga.bg/demo/" target="_blank" rel="noopener">Чуй примерен разговор</a>
-          <a class="text-link text-link--light" href={`tel:${site.salesPhoneHref}`}>{site.salesPhone}</a>
-        </div>
-      </div>
-      {site.showCaseStudy && <div class="proof-card">
-        <span class="status">Място за първия казус</span>
-        <h3>Верига студиа в търговски центрове</h3>
-        <p>Компонентът е готов за реалните резултати след пилота. Няма да публикуваме измислени числа.</p>
-        <div class="metric-grid">
-          <div><strong>—</strong><span>поети обаждания</span></div>
-          <div><strong>—</strong><span>записани часове</span></div>
-        </div>
-      </div>}
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="shell split">
-      <div><p class="eyebrow">чести въпроси</p><h2>Преди да наемеш AI служител.</h2></div>
+  <section class="home-section home-faq-section">
+    <div class="shell home-faq-grid">
+      <div><p class="spectrum-label spectrum-label--dark"><span></span> Преди първия работен ден</p><h2>Въпросите, които имат значение.</h2><p>Не ти трябва технически екип, за да започнеш. Трябва ни конкретна работа, която днес остава несвършена или отнема твърде много време.</p></div>
       <FAQ items={homeFaqs} />
     </div>
   </section>
 
-  <section class="section final-cta">
-    <div class="shell final-grid">
-      <div><p class="eyebrow">кажи ни какво остава несвършено</p><h2>Нека намерим първата работа, която да поеме.</h2><p>Три полета. Без плащане. Ще се обадим до един работен ден.</p></div>
-      <ContactForm />
+  <section class="home-contact" id="naemi">
+    <div class="home-contact__aurora" aria-hidden="true"></div>
+    <div class="shell home-contact__grid">
+      <div>
+        <p class="spectrum-label"><span></span> Добави първата роля</p>
+        <h2>Каква работа чака<br /><em>своя AI служител?</em></h2>
+        <p>Опиши бизнеса и задачата. Ще ти кажем коя роля пасва, какво трябва да се свърже и къде ще остане човешкият контрол.</p>
+        <div class="contact-spectrum" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+      <ContactForm title="Разкажи ни за работата" />
     </div>
   </section>
 </BaseLayout>

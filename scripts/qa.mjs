@@ -26,7 +26,10 @@ for (const file of htmlFiles) {
 
 const homepage = await readFile(join(root.pathname, "index.html"), "utf8");
 if (!homepage.includes("0899 917 920")) failures.push("Homepage: phone is not visible in HTML");
-if (!homepage.includes("Вдига.")) failures.push("Homepage: signature verb line missing");
+if (!homepage.includes("Наеми") || !homepage.includes("AI служител")) failures.push("Homepage: primary workforce headline missing");
+for (const agent of ["Вдига", "Помага", "Пише", "Смята", "Продава"]) {
+  if (!homepage.includes(agent)) failures.push(`Homepage: ${agent} is missing from the roster`);
+}
 
 if (failures.length) {
   console.error(failures.join("\n"));

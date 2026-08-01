@@ -1,0 +1,53 @@
+---
+import Icon from "./Icon.astro";
+---
+
+<aside class="workforce-console" aria-label="Примерна работна среда на AI екип">
+  <div class="console-glow console-glow--one"></div>
+  <div class="console-glow console-glow--two"></div>
+  <header class="console-head">
+    <div>
+      <span class="console-kicker">Работна среда</span>
+      <strong>Екипът е на линия</strong>
+    </div>
+    <span class="console-live"><i></i> пример</span>
+  </header>
+
+  <div class="console-focus">
+    <div class="console-orbit" aria-hidden="true">
+      <span class="orbit-core">Р</span>
+      <i class="orbit-dot orbit-dot--one"></i>
+      <i class="orbit-dot orbit-dot--two"></i>
+      <i class="orbit-dot orbit-dot--three"></i>
+    </div>
+    <div>
+      <span>Работи сега</span>
+      <strong>4 задачи се движат</strong>
+      <small>Демонстрация на процес, не клиентски данни</small>
+    </div>
+  </div>
+
+  <div class="console-stream" aria-label="Примерни текущи задачи">
+    <article style="--stream:#2de2d0;--stream-soft:#133e48">
+      <span class="stream-icon"><Icon name="phone" /></span>
+      <div><strong>Вдига</strong><span>Разговор → записване</span></div>
+      <span class="stream-state">на линия</span>
+    </article>
+    <article style="--stream:#8f7cff;--stream-soft:#29244f">
+      <span class="stream-symbol">П</span>
+      <div><strong>Помага</strong><span>Имейл → задача в CRM</span></div>
+      <span class="stream-state">изпълнява</span>
+    </article>
+    <article style="--stream:#ff8d72;--stream-soft:#4c2931">
+      <span class="stream-symbol">П</span>
+      <div><strong>Пише</strong><span>Промяна → човешко одобрение</span></div>
+      <span class="stream-state stream-state--wait">чака</span>
+    </article>
+  </div>
+
+  <footer class="console-foot">
+    <span><i style="--dot:#2de2d0"></i> комуникация</span>
+    <span><i style="--dot:#8f7cff"></i> операции</span>
+    <span><i style="--dot:#ff8d72"></i> съдържание</span>
+  </footer>
+</aside>

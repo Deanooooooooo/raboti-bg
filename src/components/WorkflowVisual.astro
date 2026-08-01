@@ -1,0 +1,37 @@
+---
+import Icon from "./Icon.astro";
+---
+
+<div class="workflow-visual" aria-label="Примерен процес от входяща задача до завършена работа">
+  <div class="workflow-grid" aria-hidden="true"></div>
+  <svg class="workflow-path" viewBox="0 0 760 350" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <linearGradient id="flow-gradient" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#2de2d0" />
+        <stop offset=".5" stop-color="#8f7cff" />
+        <stop offset="1" stop-color="#ff8d72" />
+      </linearGradient>
+    </defs>
+    <path d="M74 210 C190 210 178 88 310 88 S430 268 556 268 S616 150 700 150" />
+    <path class="workflow-path__active" d="M74 210 C190 210 178 88 310 88 S430 268 556 268 S616 150 700 150" />
+  </svg>
+
+  <div class="flow-node flow-node--input">
+    <span class="flow-node__icon"><Icon name="phone" /></span>
+    <small>Вход</small><strong>Нова задача</strong><span>телефон · имейл · сайт</span>
+  </div>
+  <div class="flow-node flow-node--route">
+    <span class="flow-node__symbol">Р</span>
+    <small>Разпределяне</small><strong>Подходяща роля</strong><span>правила и контекст</span>
+  </div>
+  <div class="flow-node flow-node--guard">
+    <span class="flow-node__symbol">?</span>
+    <small>Контрол</small><strong>Нужно ли е човек?</strong><span>рисковото действие чака</span>
+  </div>
+  <div class="flow-node flow-node--done">
+    <span class="flow-node__icon"><Icon name="check" /></span>
+    <small>Резултат</small><strong>Работата е отчетена</strong><span>дневник и следваща стъпка</span>
+  </div>
+
+  <div class="workflow-note"><span>Примерен работен поток</span><strong>Автоматизация с човешка граница</strong></div>
+</div>
