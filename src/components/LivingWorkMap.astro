@@ -1,12 +1,12 @@
 ---
-import WorkGlyph from "./WorkGlyph.astro";
+import AgentAvatar from "./AgentAvatar.astro";
 
 const roles = [
-  { id: "vdiga", name: "Вдига", glyph: "vdiga", color: "#2de2d0", input: "Клиент звъни, но всички са заети", action: "Разбира причината и намира свободен час", output: "Часът е записан", note: "Разговорът е обобщен за екипа", meta: "разговор → записан час" },
-  { id: "pomaga", name: "Помага", glyph: "pomaga", color: "#8f7cff", input: "Клиентски имейл чака отговор", action: "Създава задача и записва данните в CRM", output: "Задачата е възложена", note: "Екипът вижда имейла и записа в CRM", meta: "имейл → задача в CRM" },
-  { id: "pishe", name: "Пише", glyph: "pishe", color: "#ff8d72", input: "Цената на сайта трябва да се промени", action: "Подготвя новия текст и го дава за преглед", output: "Новата цена е публикувана", note: "Човек одобрява текста преди публикуване", meta: "заявка → обновен сайт" },
-  { id: "smyata", name: "Смята", glyph: "route", color: "#62a8ff", input: "Нови фактури чакат обработка", action: "Извлича номера, дати, доставчици и суми", output: "Данните са записани", note: "Неразчетените редове чакат счетоводител", meta: "фактури → записани данни" },
-  { id: "prodava", name: "Продава", glyph: "result", color: "#c7f36b", input: "Изпратена оферта остава без отговор", action: "Изпраща одобрено напомняне след зададения срок", output: "Клиентът е отговорил", note: "Търговецът вижда разговора и поема клиента", meta: "оферта → отговор" },
+  { id: "vdiga", name: "Вдига", color: "#2de2d0", brand: "#0b7665", soft: "#dff5ee", input: "Клиент звъни, но всички са заети", action: "Разбира причината и намира свободен час", output: "Часът е записан", note: "Разговорът е обобщен за екипа", meta: "разговор → записан час" },
+  { id: "pomaga", name: "Помага", color: "#a999ff", brand: "#6b56c9", soft: "#ece8ff", input: "Клиентски имейл чака отговор", action: "Създава задача и записва данните в CRM", output: "Задачата е възложена", note: "Екипът вижда имейла и записа в CRM", meta: "имейл → задача в CRM" },
+  { id: "pishe", name: "Пише", color: "#ff9b80", brand: "#a84629", soft: "#ffebe3", input: "Цената на сайта трябва да се промени", action: "Подготвя новия текст и го дава за преглед", output: "Новата цена е публикувана", note: "Човек одобрява текста преди публикуване", meta: "заявка → обновен сайт" },
+  { id: "smyata", name: "Смята", color: "#82bdff", brand: "#507aa5", soft: "#e5f0fa", input: "Нови фактури чакат обработка", action: "Извлича номера, дати, доставчици и суми", output: "Данните са записани", note: "Неразчетените редове чакат счетоводител", meta: "фактури → записани данни" },
+  { id: "prodava", name: "Продава", color: "#f2c866", brand: "#b0802f", soft: "#fff2cf", input: "Изпратена оферта остава без отговор", action: "Изпраща одобрено напомняне след зададения срок", output: "Клиентът е отговорил", note: "Търговецът вижда разговора и поема клиента", meta: "оферта → отговор" },
 ] as const;
 ---
 
@@ -35,7 +35,7 @@ const roles = [
           <div class="desk-lamp" aria-hidden="true"><i></i><b></b></div>
           <div class="workstation">
             <div class="workstation__screen">
-              <span class="workstation__role"><i><WorkGlyph name={role.glyph} /></i>{role.name}</span>
+              <span class="workstation__role"><i><AgentAvatar name={role.name} slug={role.id} accent={role.brand} accentSoft={role.soft} size="micro" /></i>{role.name}</span>
               <strong>{role.action}</strong>
               <div class="workstation__progress"><i></i><i></i><i></i></div>
             </div>
@@ -71,7 +71,7 @@ const roles = [
   <div class="workshop__roles" role="group" aria-label="Избери AI служител, за да видиш начина му на работа">
     {roles.map((role, index) => (
       <button type="button" data-role={role.id} aria-pressed={index === 0 ? "true" : "false"} style={`--role:${role.color}`}>
-        <span><WorkGlyph name={role.glyph} /></span><span><strong>{role.name}</strong><small>{role.meta}</small></span>
+        <span><AgentAvatar name={role.name} slug={role.id} accent={role.brand} accentSoft={role.soft} size="micro" /></span><span><strong>{role.name}</strong><small>{role.meta}</small></span>
       </button>
     ))}
   </div>

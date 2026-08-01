@@ -4,48 +4,96 @@ interface Props {
   slug: string;
   accent: string;
   accentSoft: string;
-  size?: "small" | "medium" | "large";
+  size?: "micro" | "small" | "medium" | "large";
 }
 
 const { name, slug, accent, accentSoft, size = "medium" } = Astro.props;
+const vdigaMark = `${import.meta.env.BASE_URL}assets/vdiga-v-mark.png`;
 ---
 
-<div class:list={["agent-avatar", `agent-avatar--${size}`]} style={`--agent:${accent};--agent-soft:${accentSoft}`} aria-hidden="true">
+<div class:list={["agent-avatar", `agent-avatar--${slug}`, `agent-avatar--${size}`]} style={`--agent:${accent};--agent-soft:${accentSoft}`} aria-hidden="true">
   <svg viewBox="0 0 120 120" role="img" aria-label={name}>
-    <rect width="120" height="120" rx="34" fill="var(--agent-soft)" />
+    <defs>
+      <linearGradient id={`face-${slug}`} x1="10" y1="8" x2="108" y2="116" gradientUnits="userSpaceOnUse">
+        <stop stop-color="var(--agent-soft)" />
+        <stop offset="1" stop-color="white" />
+      </linearGradient>
+      <radialGradient id={`light-${slug}`} cx="0" cy="0" r="1" gradientTransform="translate(26 20) rotate(48) scale(96)">
+        <stop stop-color="white" stop-opacity=".9"/><stop offset="1" stop-color="var(--agent)" stop-opacity=".08"/>
+      </radialGradient>
+      <filter id={`glow-${slug}`} x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="4" /></filter>
+    </defs>
+    <rect x="3" y="3" width="114" height="114" rx="32" fill={`url(#face-${slug})`} />
+    <rect x="3.5" y="3.5" width="113" height="113" rx="31.5" fill={`url(#light-${slug})`} stroke="var(--agent)" stroke-opacity=".15" />
+    <path class="identity-orbit" d="M17 71C28 99 71 111 99 87C116 72 111 39 86 22" />
+    <circle class="identity-spark" cx="18" cy="72" r="3" />
+
     {slug === "vdiga" && (
-      <g fill="none" stroke="var(--agent)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M35 28h13l7 20-10 8c7 14 15 22 29 29l8-10 20 7v13c0 6-5 11-11 11-36-2-65-31-67-67 0-6 5-11 11-11Z"/>
+      <g class="identity identity--vdiga">
+        <circle cx="61" cy="59" r="31" fill="var(--agent)" opacity=".08" />
+        <image href={vdigaMark} x="8" y="8" width="104" height="104" />
+        <path d="M40 91c12 7 31 7 43-2" fill="none" stroke="var(--agent)" stroke-width="2" stroke-linecap="round" opacity=".34"/>
       </g>
     )}
+
     {slug === "pomaga" && (
-      <g fill="none" stroke="var(--agent)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="47" cy="57" r="18"/><circle cx="82" cy="77" r="13"/>
-        <path d="M47 29v10m0 36v10M19 57h10m36 0h10M27 37l8 8m24 24 8 8m0-40-8 8M35 69l-8 8M82 57v7m0 26v7m-20-20h7m26 0h7"/>
+      <g class="identity identity--pomaga">
+        <path class="identity-glow" d="M28 43h23l18 34h23" />
+        <rect x="20" y="31" width="36" height="31" rx="11" fill="white" stroke="var(--agent)" stroke-width="3" />
+        <rect x="64" y="61" width="36" height="31" rx="11" fill="var(--agent)" />
+        <path d="M31 47h14m30 30h14" stroke="var(--agent)" stroke-width="4" stroke-linecap="round" />
+        <path d="M52 47c17 0 8 30 25 30" fill="none" stroke="var(--agent)" stroke-width="5" stroke-linecap="round" />
+        <circle cx="60" cy="59" r="6" fill="var(--agent-soft)" stroke="var(--agent)" stroke-width="3" />
       </g>
     )}
+
     {slug === "pishe" && (
-      <g fill="none" stroke="var(--agent)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
-        <path d="m29 88 7-25 40-40 21 21-40 40-28 4Z"/><path d="m36 63 21 21M70 29l21 21M29 88l18-8"/>
+      <g class="identity identity--pishe">
+        <path class="identity-glow" d="M29 84 86 27" />
+        <path d="M27 29h44l20 20v42H27z" fill="white" stroke="var(--agent)" stroke-width="3" stroke-linejoin="round" />
+        <path d="M71 29v20h20" fill="var(--agent-soft)" stroke="var(--agent)" stroke-width="3" stroke-linejoin="round" />
+        <path d="M40 61h34M40 72h25" stroke="var(--agent)" stroke-width="4" stroke-linecap="round" opacity=".62" />
+        <path d="m71 84 18-18 7 7-18 18-10 3z" fill="var(--agent)" stroke="white" stroke-width="2" stroke-linejoin="round" />
+        <circle cx="94" cy="42" r="5" fill="var(--agent)" />
       </g>
     )}
+
     {slug === "smyata" && (
-      <g fill="none" stroke="var(--agent)" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="29" y="19" width="62" height="82" rx="11"/><path d="M42 34h36v16H42zM43 66h1m16 0h1m16 0h1M43 84h1m16 0h1m16 0h1"/>
+      <g class="identity identity--smyata">
+        <path class="identity-glow" d="M27 82h66" />
+        <path d="M24 31h72v58H24z" fill="white" stroke="var(--agent)" stroke-width="3" stroke-linejoin="round" />
+        <path d="M24 49h72M44 31v58M69 31v58" stroke="var(--agent)" stroke-width="2" opacity=".25" />
+        <rect x="30" y="58" width="8" height="23" rx="4" fill="var(--agent)" opacity=".38" />
+        <rect x="53" y="51" width="8" height="30" rx="4" fill="var(--agent)" opacity=".68" />
+        <rect x="77" y="41" width="11" height="40" rx="5.5" fill="var(--agent)" />
+        <path d="m78 61 4 4 8-10" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
       </g>
     )}
+
     {slug === "prodava" && (
-      <g fill="none" stroke="var(--agent)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M25 92V70m22 22V55m22 37V39m22 53V24"/><path d="m25 55 22-17 22 4 22-22"/><path d="m79 20h12v12"/>
+      <g class="identity identity--prodava">
+        <path class="identity-glow" d="M25 62c14-29 55-37 72-7" />
+        <path d="M24 70c0-22 17-39 39-39s39 17 39 39" fill="none" stroke="var(--agent)" stroke-width="4" stroke-linecap="round" opacity=".24" />
+        <path d="M34 70c0-16 13-29 29-29s29 13 29 29" fill="none" stroke="var(--agent)" stroke-width="5" stroke-linecap="round" opacity=".52" />
+        <path d="M45 70c0-10 8-18 18-18s18 8 18 18" fill="none" stroke="var(--agent)" stroke-width="7" stroke-linecap="round" />
+        <circle cx="63" cy="70" r="8" fill="var(--agent)" />
+        <path d="M35 79h56v18H35z" fill="white" stroke="var(--agent)" stroke-width="3" stroke-linejoin="round" />
+        <path d="m52 88 6 5 12-11" fill="none" stroke="var(--agent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+        <circle cx="88" cy="88" r="3" fill="var(--agent)" />
       </g>
     )}
   </svg>
 </div>
 
 <style>
-  .agent-avatar{flex:0 0 auto}
-  .agent-avatar svg{display:block;width:100%;height:100%}
-  .agent-avatar--small{width:48px;height:48px}
-  .agent-avatar--medium{width:76px;height:76px}
-  .agent-avatar--large{width:min(190px,36vw);height:min(190px,36vw)}
+  .agent-avatar{position:relative;flex:0 0 auto;color:var(--agent);filter:drop-shadow(0 14px 24px color-mix(in srgb,var(--agent) 15%,transparent))}
+  .agent-avatar svg{display:block;width:100%;height:100%;overflow:visible}
+  .agent-avatar--micro{width:32px;height:32px}.agent-avatar--small{width:52px;height:52px}.agent-avatar--medium{width:82px;height:82px}.agent-avatar--large{width:min(210px,40vw);height:min(210px,40vw)}
+  .identity-orbit{fill:none;stroke:var(--agent);stroke-width:1.5;stroke-dasharray:2 7;stroke-linecap:round;opacity:.24}.identity-spark{fill:var(--agent)}
+  .identity-glow{fill:none;stroke:var(--agent);stroke-width:13;stroke-linecap:round;opacity:.16;filter:blur(5px)}
+  .agent-avatar--large .identity{transform-origin:60px 60px;transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+  .agent-avatar--large:hover .identity{transform:scale(1.035)}
+  .agent-avatar--large .identity-spark{animation:identity-pulse 3.8s ease-in-out infinite}
+  @keyframes identity-pulse{50%{opacity:.35;transform:scale(.7);transform-origin:18px 72px}}
+  @media(prefers-reduced-motion:reduce){.agent-avatar--large .identity-spark{animation:none}.agent-avatar--large .identity{transition:none}}
 </style>
