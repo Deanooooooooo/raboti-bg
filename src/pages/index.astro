@@ -16,6 +16,24 @@ const schemas = [
   breadcrumbSchema([{ name: "Работи", url: site.url }]),
   {
     "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": `${site.url}/#ai-employees`,
+    name: "AI служители от Работи",
+    serviceType: "Абонаментна услуга за AI служители",
+    description: "AI служители за входящи обаждания, работа по сайта и повтарящи се оперативни задачи с предварително зададени правила и човешки контрол.",
+    provider: { "@id": `${site.url}/#organization` },
+    areaServed: { "@type": "Country", name: "България" },
+    availableChannel: { "@type": "ServiceChannel", serviceUrl: site.url, availableLanguage: "bg" },
+    offers: {
+      "@type": "AggregateOffer",
+      lowPrice: "49",
+      highPrice: "249",
+      priceCurrency: "EUR",
+      offerCount: "3",
+    },
+  },
+  {
+    "@context": "https://schema.org",
     "@type": "ItemList",
     name: "AI служители от Работи",
     itemListElement: agents.map((agent, index) => ({
@@ -42,7 +60,7 @@ const schemas = [
       <div class="home-hero__copy">
         <p class="spectrum-label"><span></span> AI служители за българския бизнес</p>
         <h1>Работата не чака.<br /><em>Вече има кой да я свърши.</em></h1>
-        <p class="home-hero__lead">Пропуснати обаждания, бавни отговори, промени по сайта и ръчно прехвърляне на данни — избери AI служител, който поема конкретната работа, без да губиш контрол.</p>
+        <p class="home-hero__lead">Работи е българска услуга за AI служители с конкретна длъжност, месечна цена и човешки контрол. Те поемат пропуснатите обаждания, промените по сайта и ръчната работа между системите.</p>
         <div class="home-hero__actions">
           <a class="button button--spectrum" href="#ekip">Намери своя AI служител <Icon name="arrow-down" /></a>
           <a class="home-link" href="#proces">Виж как работи <Icon name="arrow-right" /></a>
@@ -89,12 +107,28 @@ const schemas = [
               </div>
               <footer>
                 <div><small>{data.status === "live" ? "Месечна цена" : "Достъп"}</small><strong>{data.priceLabel}</strong></div>
-                <a href={`/sluzhiteli/${data.slug}/`} aria-label={`Виж ${data.name}`}><Icon name="arrow-right" /></a>
+                <a href={`/sluzhiteli/${data.slug}/`} aria-label={`Виж ролята ${data.name}`}><span>Виж ролята</span><Icon name="arrow-right" /></a>
               </footer>
             </article>
           );
         })}
       </div>
+
+      <aside class="fit-check" aria-labelledby="fit-title">
+        <div class="fit-check__intro">
+          <p class="spectrum-label spectrum-label--dark"><span></span> Бърза проверка</p>
+          <h3 id="fit-title">Подходящ ли е AI служител за твоя бизнес?</h3>
+          <p>Най-добрият първи процес е чест, ясен и достатъчно повтаряем, за да опишем правилата му.</p>
+        </div>
+        <div class="fit-check__column fit-check__column--yes">
+          <strong><Icon name="check" /> Да, ако работата…</strong>
+          <ul><li>се повтаря всяка седмица;</li><li>има ясен вход и очакван резултат;</li><li>днес бави екипа или изпуска клиенти.</li></ul>
+        </div>
+        <div class="fit-check__column fit-check__column--no">
+          <strong><span aria-hidden="true">×</span> Не, ако работата…</strong>
+          <ul><li>изисква свободна човешка преценка;</li><li>няма устойчиви правила;</li><li>включва необратими решения без одобрение.</li></ul>
+        </div>
+      </aside>
     </div>
   </section>
 

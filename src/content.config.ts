@@ -16,7 +16,7 @@ const agents = defineCollection({
     status: z.enum(["live", "soon"]),
     price: z.number().nullable(),
     priceLabel: z.string(),
-    currency: z.string().default("BGN"),
+    currency: z.string().default("EUR"),
     startTime: z.string(),
     summary: z.string(),
     description: z.string(),
