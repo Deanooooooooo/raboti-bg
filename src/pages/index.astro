@@ -7,6 +7,7 @@ import FAQ from "../components/FAQ.astro";
 import Icon from "../components/Icon.astro";
 import WorkforceConsole from "../components/WorkforceConsole.astro";
 import WorkflowVisual from "../components/WorkflowVisual.astro";
+import WorkGlyph from "../components/WorkGlyph.astro";
 import { breadcrumbSchema, faqSchema } from "../data/schema";
 import { homeFaqs, site } from "../data/site";
 
@@ -141,7 +142,7 @@ const schemas = [
         <ul class="process-principles">
           <li><span class="principle-mark"><Icon name="arrow-right" /></span><div><strong>Получава задачата веднага</strong><small>От телефон, имейл, формуляр или график.</small></div></li>
           <li><span class="principle-mark"><Icon name="check" /></span><div><strong>Върши позволеното сам</strong><small>По твоите правила, данни и одобрен процес.</small></div></li>
-          <li><span class="principle-mark">?</span><div><strong>Пита, когато решението е твое</strong><small>Неясните и необратими действия не се отгатват.</small></div></li>
+          <li><span class="principle-mark"><WorkGlyph name="guard" /></span><div><strong>Пита, когато решението е твое</strong><small>Неясните и необратими действия не се отгатват.</small></div></li>
         </ul>
       </div>
       <WorkflowVisual />

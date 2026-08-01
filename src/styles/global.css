@@ -583,14 +583,14 @@ p { text-wrap: pretty; }
 .console-orbit::before, .console-orbit::after { position: absolute; border: 1px dashed rgba(255,255,255,.12); border-radius: 50%; content: ""; }
 .console-orbit::before { inset: 12px; }
 .console-orbit::after { inset: 25px; }
-.orbit-core { display: grid; width: 42px; height: 42px; place-items: center; border-radius: 14px; background: linear-gradient(135deg, var(--home-cyan), var(--home-violet)); color: var(--home-night) !important; font-size: var(--text-base) !important; font-weight: var(--fw-bold); box-shadow: 0 10px 28px rgba(45,226,208,.22); }
+.orbit-core { display: grid; width: 46px; height: 46px; padding: 8px; place-items: center; border: 1px solid rgba(255,255,255,.38); border-radius: 15px; background: linear-gradient(135deg, var(--home-cyan), #6cc7ff 52%, var(--home-violet)); color: var(--home-night) !important; box-shadow: 0 10px 28px rgba(45,226,208,.3), inset 0 1px rgba(255,255,255,.6); }
 .orbit-dot { position: absolute; width: 8px; height: 8px; border: 2px solid var(--home-night-2); border-radius: 50%; background: var(--dot); box-shadow: 0 0 12px var(--dot); }
 .orbit-dot--one { --dot: var(--home-cyan); top: 2px; left: 43px; }
 .orbit-dot--two { --dot: var(--home-violet); right: 8px; bottom: 14px; }
 .orbit-dot--three { --dot: var(--home-coral); bottom: 13px; left: 7px; }
 .console-stream { display: grid; gap: 10px; padding: 0 20px 22px; }
 .console-stream article { display: grid; grid-template-columns: 42px minmax(0,1fr) auto; gap: 13px; align-items: center; padding: 13px 14px; border: 1px solid rgba(255,255,255,.08); border-radius: 16px; background: rgba(255,255,255,.045); }
-.stream-icon, .stream-symbol { display: grid; width: 38px; height: 38px; place-items: center; border: 1px solid color-mix(in srgb, var(--stream) 28%, transparent); border-radius: 12px; background: var(--stream-soft); color: var(--stream); font-weight: var(--fw-bold); }
+.stream-icon { position: relative; display: grid; width: 40px; height: 40px; padding: 8px; place-items: center; border: 1px solid color-mix(in srgb, var(--stream) 34%, transparent); border-radius: 13px; background: radial-gradient(circle at 30% 20%, color-mix(in srgb, var(--stream) 24%, transparent), transparent 62%), var(--stream-soft); color: var(--stream); box-shadow: inset 0 1px rgba(255,255,255,.08), 0 8px 22px -14px var(--stream); }
 .console-stream article > div { display: grid; min-width: 0; }
 .console-stream strong { font-size: var(--text-sm); }
 .console-stream article > div span { overflow: hidden; color: rgba(255,255,255,.48); font-size: var(--text-2xs); text-overflow: ellipsis; white-space: nowrap; }
@@ -669,7 +669,7 @@ p { text-wrap: pretty; }
 .process-principles li { display: grid; grid-template-columns: 42px 1fr; gap: var(--space-2); padding: 18px 0; border-top: 1px solid rgba(255,255,255,.1); }
 .process-principles li > span { color: var(--home-cyan); font-size: var(--text-sm); }
 .principle-mark { display: grid; width: 30px; height: 30px; place-items: center; border: 1px solid rgba(45,226,208,.24); border-radius: 10px; background: rgba(45,226,208,.08); font-weight: var(--fw-semibold); }
-.principle-mark .icon { width: 16px; height: 16px; }
+.principle-mark .icon, .principle-mark .work-glyph { width: 16px; height: 16px; }
 .process-principles li > div { display: grid; gap: 3px; }
 .process-principles strong { font-size: var(--text-sm); }
 .process-principles small { color: rgba(255,255,255,.45); font-size: var(--text-xs); }
@@ -681,7 +681,7 @@ p { text-wrap: pretty; }
 .workflow-path .workflow-path__active { stroke: url(#flow-gradient); stroke-width: 3; stroke-dasharray: 7 11; filter: drop-shadow(0 0 7px rgba(45,226,208,.48)); animation: flow-line 12s linear infinite; }
 @keyframes flow-line { to { stroke-dashoffset: -180; } }
 .flow-node { position: absolute; display: grid; min-width: 176px; gap: 2px; padding: 16px; border: 1px solid rgba(255,255,255,.12); border-radius: 18px; background: rgba(15,21,48,.91); box-shadow: 0 18px 40px -25px #000; }
-.flow-node__icon, .flow-node__symbol { display: grid; width: 34px; height: 34px; margin-bottom: 9px; place-items: center; border-radius: 11px; background: var(--node-soft); color: var(--node); font-weight: var(--fw-bold); }
+.flow-node__icon { display: grid; width: 38px; height: 38px; margin-bottom: 10px; padding: 7px; place-items: center; border: 1px solid color-mix(in srgb, var(--node) 28%, transparent); border-radius: 12px; background: radial-gradient(circle at 30% 20%, color-mix(in srgb, var(--node) 18%, transparent), transparent 65%), var(--node-soft); color: var(--node); box-shadow: 0 8px 24px -16px var(--node); }
 .flow-node small { color: var(--node); font-size: var(--text-2xs); }
 .flow-node strong { font-size: var(--text-sm); }
 .flow-node > span:last-child { color: rgba(255,255,255,.42); font-size: var(--text-2xs); }

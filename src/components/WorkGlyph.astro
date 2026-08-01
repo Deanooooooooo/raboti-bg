@@ -1,0 +1,66 @@
+---
+interface Props {
+  name: "core" | "vdiga" | "pomaga" | "pishe" | "route" | "guard" | "result";
+  class?: string;
+}
+
+const { name, class: className } = Astro.props;
+---
+
+<svg class:list={["work-glyph", className]} viewBox="0 0 48 48" fill="none" aria-hidden="true">
+  {name === "core" && (
+    <>
+      <path d="M24 14.5 32.3 19v10L24 33.5 15.7 29V19L24 14.5Z" />
+      <path d="M24 14.5V7m8.3 12 6.4-3.7M32.3 29l6.4 3.7M24 33.5V41M15.7 29l-6.4 3.7M15.7 19l-6.4-3.7" />
+      <circle cx="24" cy="7" r="2.4" /><circle cx="38.7" cy="15.3" r="2.4" /><circle cx="38.7" cy="32.7" r="2.4" /><circle cx="24" cy="41" r="2.4" /><circle cx="9.3" cy="32.7" r="2.4" /><circle cx="9.3" cy="15.3" r="2.4" />
+      <circle class="work-glyph__fill" cx="24" cy="24" r="3.2" />
+    </>
+  )}
+  {name === "vdiga" && (
+    <>
+      <path d="M9 28.5c3.7 0 3.7-9 7.4-9s3.7 14 7.5 14 3.7-20 7.4-20 3.7 15 7.7 15" />
+      <path d="M10 38h28M10 10h28" class="work-glyph__quiet" />
+      <circle class="work-glyph__fill" cx="9" cy="28.5" r="2.4" /><circle class="work-glyph__fill" cx="39" cy="28.5" r="2.4" />
+    </>
+  )}
+  {name === "pomaga" && (
+    <>
+      <rect x="7" y="17" width="12" height="14" rx="4" /><rect x="29" y="8" width="12" height="14" rx="4" /><rect x="29" y="30" width="12" height="10" rx="4" />
+      <path d="M19 24h5c3 0 5-2 5-5v-3M19 24h5c3 0 5 2 5 5v6" />
+      <circle class="work-glyph__fill" cx="13" cy="24" r="2.2" /><circle class="work-glyph__fill" cx="35" cy="15" r="2.2" /><circle class="work-glyph__fill" cx="35" cy="35" r="2.2" />
+    </>
+  )}
+  {name === "pishe" && (
+    <>
+      <path d="m11 34 2.8-10.2L31.5 6.1a3.5 3.5 0 0 1 5 0l5.4 5.4a3.5 3.5 0 0 1 0 5L24.2 34.2 14 37l-3-3Z" />
+      <path d="m29 8.5 10.5 10.4M14 29l5 5M27 40h14" />
+      <circle class="work-glyph__fill" cx="12.5" cy="35.5" r="2" />
+    </>
+  )}
+  {name === "route" && (
+    <>
+      <path d="M8 24h11m0 0c7 0 5-11 12-11h9M19 24c7 0 5 11 12 11h9" />
+      <circle class="work-glyph__fill" cx="8" cy="24" r="3" /><circle cx="40" cy="13" r="3" /><circle cx="40" cy="35" r="3" />
+    </>
+  )}
+  {name === "guard" && (
+    <>
+      <path d="M24 5.5 39 11v11.5c0 9.2-5.7 16.3-15 20-9.3-3.7-15-10.8-15-20V11l15-5.5Z" />
+      <path d="M17 24.5 22 29l9.5-10" />
+      <circle class="work-glyph__fill" cx="38.5" cy="11.5" r="3" />
+    </>
+  )}
+  {name === "result" && (
+    <>
+      <circle cx="24" cy="24" r="16" /><path d="m16 24 5 5 11-12" />
+      <path d="M24 3v5m0 32v5M3 24h5m32 0h5" class="work-glyph__quiet" />
+      <circle class="work-glyph__fill" cx="24" cy="3" r="2" /><circle class="work-glyph__fill" cx="45" cy="24" r="2" />
+    </>
+  )}
+</svg>
+
+<style>
+  .work-glyph{display:block;width:100%;height:100%;overflow:visible;color:inherit;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke}
+  .work-glyph__fill{fill:currentColor;stroke:none}
+  .work-glyph__quiet{opacity:.34}
+</style>

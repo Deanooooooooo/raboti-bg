@@ -1,5 +1,5 @@
 ---
-import Icon from "./Icon.astro";
+import WorkGlyph from "./WorkGlyph.astro";
 ---
 
 <div class="workflow-visual" aria-label="Примерен процес от входяща задача до завършена работа">
@@ -17,19 +17,19 @@ import Icon from "./Icon.astro";
   </svg>
 
   <div class="flow-node flow-node--input">
-    <span class="flow-node__icon"><Icon name="phone" /></span>
+    <span class="flow-node__icon"><WorkGlyph name="vdiga" /></span>
     <small>Вход</small><strong>Нова задача</strong><span>телефон · имейл · сайт</span>
   </div>
   <div class="flow-node flow-node--route">
-    <span class="flow-node__symbol">Р</span>
+    <span class="flow-node__icon"><WorkGlyph name="route" /></span>
     <small>Разпределяне</small><strong>Подходяща роля</strong><span>правила и контекст</span>
   </div>
   <div class="flow-node flow-node--guard">
-    <span class="flow-node__symbol">?</span>
+    <span class="flow-node__icon"><WorkGlyph name="guard" /></span>
     <small>Контрол</small><strong>Нужно ли е човек?</strong><span>рисковото действие чака</span>
   </div>
   <div class="flow-node flow-node--done">
-    <span class="flow-node__icon"><Icon name="check" /></span>
+    <span class="flow-node__icon"><WorkGlyph name="result" /></span>
     <small>Резултат</small><strong>Работата е отчетена</strong><span>дневник и следваща стъпка</span>
   </div>
 

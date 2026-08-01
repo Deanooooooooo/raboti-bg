@@ -1,5 +1,5 @@
 ---
-import Icon from "./Icon.astro";
+import WorkGlyph from "./WorkGlyph.astro";
 ---
 
 <aside class="workforce-console" aria-label="Примерна работна среда на AI екип">
@@ -15,7 +15,7 @@ import Icon from "./Icon.astro";
 
   <div class="console-focus">
     <div class="console-orbit" aria-hidden="true">
-      <span class="orbit-core">Р</span>
+      <span class="orbit-core"><WorkGlyph name="core" /></span>
       <i class="orbit-dot orbit-dot--one"></i>
       <i class="orbit-dot orbit-dot--two"></i>
       <i class="orbit-dot orbit-dot--three"></i>
@@ -29,17 +29,17 @@ import Icon from "./Icon.astro";
 
   <div class="console-stream" aria-label="Примерни текущи задачи">
     <article style="--stream:#2de2d0;--stream-soft:#133e48">
-      <span class="stream-icon"><Icon name="phone" /></span>
+      <span class="stream-icon"><WorkGlyph name="vdiga" /></span>
       <div><strong>Вдига</strong><span>Разговор → записване</span></div>
       <span class="stream-state">на линия</span>
     </article>
     <article style="--stream:#8f7cff;--stream-soft:#29244f">
-      <span class="stream-symbol">П</span>
+      <span class="stream-icon"><WorkGlyph name="pomaga" /></span>
       <div><strong>Помага</strong><span>Имейл → задача в CRM</span></div>
       <span class="stream-state">изпълнява</span>
     </article>
     <article style="--stream:#ff8d72;--stream-soft:#4c2931">
-      <span class="stream-symbol">П</span>
+      <span class="stream-icon"><WorkGlyph name="pishe" /></span>
       <div><strong>Пише</strong><span>Промяна → човешко одобрение</span></div>
       <span class="stream-state stream-state--wait">чака</span>
     </article>
