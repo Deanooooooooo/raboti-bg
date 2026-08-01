@@ -1,0 +1,126 @@
+---
+import WorkGlyph from "./WorkGlyph.astro";
+
+const roles = [
+  { id: "vdiga", name: "Вдига", glyph: "vdiga", color: "#2de2d0", input: "Пропуснато обаждане", output: "Часът е записан", meta: "телефон → календар" },
+  { id: "pomaga", name: "Помага", glyph: "pomaga", color: "#8f7cff", input: "Нов клиентски имейл", output: "CRM е обновен", meta: "имейл → задача" },
+  { id: "pishe", name: "Пише", glyph: "pishe", color: "#ff8d72", input: "Промяна по сайта", output: "Страницата е готова", meta: "заявка → одобрение" },
+  { id: "smyata", name: "Смята", glyph: "route", color: "#62a8ff", input: "Нови документи", output: "Данните са подредени", meta: "документ → запис" },
+  { id: "prodava", name: "Продава", glyph: "result", color: "#c7f36b", input: "Оферта без отговор", output: "Следващата стъпка е ясна", meta: "запитване → действие" },
+] as const;
+---
+
+<div class="living-map" data-living-map data-active="vdiga">
+  <div class="living-map__head">
+    <div><span>Жива карта на работата</span><strong>От проблем до свършен резултат</strong></div>
+    <span class="living-map__live"><i></i> интерактивно</span>
+  </div>
+
+  <div class="living-map__mobile-story" aria-live="polite">
+    {roles.map((role) => <div data-story={role.id}><span>{role.input}</span><i style={`--story:${role.color}`}></i><strong>{role.output}</strong></div>)}
+  </div>
+
+  <div class="living-map__stage">
+    <div class="living-map__glow" aria-hidden="true"></div>
+    <svg class="living-map__art" viewBox="0 0 720 500" role="img" aria-label="Интерактивна карта на задачите, които AI служителите приемат и завършват">
+      <defs>
+        <pattern id="living-grid" width="34" height="34" patternUnits="userSpaceOnUse"><path d="M34 0H0v34" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="1" /></pattern>
+        <radialGradient id="core-light"><stop offset="0" stop-color="#8f7cff" stop-opacity=".36"/><stop offset=".55" stop-color="#2de2d0" stop-opacity=".12"/><stop offset="1" stop-color="#080b1a" stop-opacity="0"/></radialGradient>
+        <linearGradient id="core-face" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#2de2d0"/><stop offset=".5" stop-color="#62a8ff"/><stop offset="1" stop-color="#8f7cff"/></linearGradient>
+      </defs>
+      <rect width="720" height="500" fill="url(#living-grid)" opacity=".55" />
+      <ellipse cx="360" cy="250" rx="190" ry="166" fill="url(#core-light)" />
+      <g class="living-map__contours" fill="none" stroke="rgba(143,124,255,.18)"><ellipse cx="360" cy="250" rx="116" ry="100"/><ellipse cx="360" cy="250" rx="154" ry="134" stroke-dasharray="4 9"/><ellipse cx="360" cy="250" rx="198" ry="174"/></g>
+
+      {roles.map((role, index) => {
+        const y = 78 + index * 86;
+        const nodeX = index % 2 === 0 ? 286 : 434;
+        const nodeY = index === 0 ? 112 : index === 1 ? 160 : index === 2 ? 250 : index === 3 ? 340 : 388;
+        return (
+          <g class:list={["living-route", `living-route--${role.id}`]} data-route={role.id} style={`--route:${role.color}`}>
+            <path class="living-route__base" d={`M72 ${y} C165 ${y} 184 ${nodeY} ${nodeX} ${nodeY} S322 250 360 250 S500 ${nodeY} 548 ${nodeY} S594 ${y} 648 ${y}`} />
+            <path class="living-route__pulse" pathLength="1" d={`M72 ${y} C165 ${y} 184 ${nodeY} ${nodeX} ${nodeY} S322 250 360 250 S500 ${nodeY} 548 ${nodeY} S594 ${y} 648 ${y}`} />
+            <g class="living-route__input" transform={`translate(46 ${y - 24})`}>
+              <rect width="150" height="48" rx="15"/><circle cx="18" cy="24" r="4"/><text x="31" y="21">Входяща работа</text><text class="route-label" x="31" y="36">{role.input}</text>
+            </g>
+            <g class="living-route__output" transform={`translate(524 ${y - 24})`}>
+              <rect width="170" height="48" rx="15"/><circle cx="18" cy="24" r="4"/><text x="31" y="21">Резултат</text><text class="route-label" x="31" y="36">{role.output}</text>
+            </g>
+            <g class="living-route__station" transform={`translate(${nodeX - 29} ${nodeY - 29})`}>
+              <rect width="58" height="58" rx="18" />
+              <g transform="translate(13 13)" color={role.color}><WorkGlyph name={role.glyph} size={32} /></g>
+            </g>
+          </g>
+        );
+      })}
+
+      <g class="living-core" transform="translate(360 250)">
+        <circle r="67" fill="rgba(8,11,26,.88)" stroke="rgba(255,255,255,.13)" />
+        <circle r="52" fill="none" stroke="rgba(45,226,208,.24)" stroke-dasharray="3 7" />
+        <rect x="-25" y="-25" width="50" height="50" rx="16" fill="url(#core-face)" />
+        <g transform="translate(-15 -15)" color="#080b1a"><WorkGlyph name="core" size={30} /></g>
+        <text y="86" text-anchor="middle">raboti.bg · разпределя работата</text>
+      </g>
+
+      <g class="human-gate" transform="translate(465 365)">
+        <path d="M0 0c42-22 71-6 88 26" fill="none" stroke="#ff8d72" stroke-width="2" stroke-dasharray="4 7" />
+        <rect x="72" y="17" width="118" height="46" rx="14" />
+        <g transform="translate(82 27)" color="#ff8d72"><WorkGlyph name="guard" size={26} /></g>
+        <text x="111" y="36">Човешко решение</text><text class="gate-label" x="111" y="51">само когато е нужно</text>
+      </g>
+    </svg>
+  </div>
+
+  <div class="living-map__roles" role="group" aria-label="Избери AI служител, за да проследиш работата му">
+    {roles.map((role, index) => (
+      <button type="button" data-role={role.id} aria-pressed={index === 0 ? "true" : "false"} style={`--role:${role.color}`}>
+        <span><WorkGlyph name={role.glyph} /></span><span><strong>{role.name}</strong><small>{role.meta}</small></span>
+      </button>
+    ))}
+  </div>
+</div>
+
+<style>
+  .living-map{--map-x:0px;--map-y:0px;position:relative;min-width:0;overflow:hidden;border:1px solid rgba(138,152,255,.25);border-radius:30px;background:linear-gradient(150deg,rgba(20,29,64,.96),rgba(8,11,28,.99));box-shadow:0 55px 120px -48px rgba(0,0,0,.9),inset 0 1px rgba(255,255,255,.09)}
+  .living-map::before{position:absolute;inset:-30%;background:radial-gradient(circle at 68% 20%,rgba(143,124,255,.25),transparent 28%),radial-gradient(circle at 25% 80%,rgba(45,226,208,.16),transparent 26%);content:"";pointer-events:none}
+  .living-map__head{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 22px;border-bottom:1px solid rgba(255,255,255,.09)}
+  .living-map__head>div{display:grid;gap:2px}.living-map__head span{color:rgba(255,255,255,.45);font-size:13px}.living-map__head strong{font-size:15px}
+  .living-map__live{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border:1px solid rgba(45,226,208,.22);border-radius:999px;background:rgba(45,226,208,.07);color:#2de2d0!important;white-space:nowrap}
+  .living-map__live i{width:6px;height:6px;border-radius:50%;background:currentColor;box-shadow:0 0 12px currentColor}
+  .living-map__mobile-story{display:none}
+  .living-map__stage{position:relative;z-index:1;overflow:hidden;transform:translate3d(var(--map-x),var(--map-y),0);transition:transform .45s cubic-bezier(.2,.8,.2,1)}
+  .living-map__glow{position:absolute;inset:18% 20%;border-radius:50%;background:rgba(98,168,255,.13);filter:blur(60px)}
+  .living-map__art{display:block;width:100%;height:auto;min-height:390px}
+  .living-map__contours{transform-origin:360px 250px;animation:map-breathe 8s ease-in-out infinite}
+  .living-route{--route:#2de2d0;opacity:.13;transition:opacity .35s ease}.living-route__base,.living-route__pulse{fill:none;stroke:var(--route);stroke-width:2}.living-route__base{opacity:.24}.living-route__pulse{stroke-width:3;stroke-dasharray:.08 .12;stroke-dashoffset:0;filter:drop-shadow(0 0 7px var(--route));animation:route-flow 5s linear infinite}
+  .living-route__input rect,.living-route__output rect{fill:rgba(12,17,39,.94);stroke:color-mix(in srgb,var(--route) 34%,transparent)}.living-route__input circle,.living-route__output circle{fill:var(--route);filter:drop-shadow(0 0 5px var(--route))}.living-route text{fill:color-mix(in srgb,var(--route) 85%,white);font:500 9px/1 Inter,system-ui,sans-serif}.living-route .route-label{fill:#fff;font-size:10px;font-weight:600}.living-route__station rect{fill:color-mix(in srgb,var(--route) 10%,#11172f);stroke:color-mix(in srgb,var(--route) 38%,transparent)}
+  .living-core text{fill:rgba(255,255,255,.5);font:500 10px/1 Inter,system-ui,sans-serif;letter-spacing:.02em}.human-gate rect{fill:rgba(30,20,34,.94);stroke:rgba(255,141,114,.32)}.human-gate .work-glyph{width:26px;height:26px}.human-gate text{fill:#fff;font:600 9px/1 Inter,system-ui,sans-serif}.human-gate .gate-label{fill:rgba(255,255,255,.43);font-size:8px;font-weight:400}
+  .living-map[data-active="vdiga"] .living-route--vdiga,.living-map[data-active="pomaga"] .living-route--pomaga,.living-map[data-active="pishe"] .living-route--pishe,.living-map[data-active="smyata"] .living-route--smyata,.living-map[data-active="prodava"] .living-route--prodava{opacity:1}
+  .living-map__roles{position:relative;z-index:3;display:grid;grid-template-columns:repeat(5,1fr);gap:7px;padding:0 14px 14px}
+  .living-map__roles button{display:grid;min-width:0;gap:8px;justify-items:center;padding:10px 5px;border:1px solid rgba(255,255,255,.08);border-radius:14px;background:rgba(255,255,255,.035);color:rgba(255,255,255,.45);cursor:pointer;transition:border-color .2s,background .2s,color .2s,transform .2s}
+  .living-map__roles button:hover{transform:translateY(-2px);color:#fff}.living-map__roles button[aria-pressed="true"]{border-color:color-mix(in srgb,var(--role) 38%,transparent);background:color-mix(in srgb,var(--role) 10%,rgba(255,255,255,.025));color:var(--role);box-shadow:inset 0 1px rgba(255,255,255,.06)}
+  .living-map__roles button>span:first-child{display:grid;width:28px;height:28px;place-items:center}.living-map__roles button>span:last-child{display:grid;min-width:0;gap:2px}.living-map__roles strong{color:inherit;font-size:12px}.living-map__roles small{overflow:hidden;color:rgba(255,255,255,.34);font-size:9px;text-overflow:ellipsis;white-space:nowrap}
+  @keyframes route-flow{to{stroke-dashoffset:-1}}@keyframes map-breathe{50%{transform:scale(1.035);opacity:.72}}
+  @media(max-width:700px){.living-map__head{padding:16px}.living-map__live{display:none}.living-map__mobile-story{display:block;padding:14px 16px 0}.living-map__mobile-story>div{display:none;grid-template-columns:minmax(0,1fr) 34px minmax(0,1fr);align-items:center;gap:8px;color:rgba(255,255,255,.52);font-size:11px}.living-map__mobile-story strong{color:#fff;font-size:11px;text-align:right}.living-map__mobile-story i{position:relative;height:1px;background:linear-gradient(90deg,transparent,var(--story))}.living-map__mobile-story i::after{position:absolute;top:-2px;right:0;width:5px;height:5px;border-radius:50%;background:var(--story);box-shadow:0 0 8px var(--story);content:""}.living-map[data-active="vdiga"] [data-story="vdiga"],.living-map[data-active="pomaga"] [data-story="pomaga"],.living-map[data-active="pishe"] [data-story="pishe"],.living-map[data-active="smyata"] [data-story="smyata"],.living-map[data-active="prodava"] [data-story="prodava"]{display:grid}.living-map__art{width:124%;max-width:none;min-height:0;transform:translateX(-10%)}.living-map__roles{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 12px 12px}.living-map__roles button{min-width:105px;scroll-snap-align:start}.living-map__roles small{display:none}}
+  @media(prefers-reduced-motion:reduce){.living-map__contours,.living-route__pulse{animation:none}.living-map__stage{transform:none!important;transition:none}}
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-living-map]").forEach((map) => {
+    const buttons = Array.from(map.querySelectorAll<HTMLButtonElement>("[data-role]"));
+    const select = (role: string) => {
+      map.dataset.active = role;
+      buttons.forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.role === role)));
+    };
+    buttons.forEach((button) => button.addEventListener("click", () => select(button.dataset.role || "vdiga")));
+
+    if (matchMedia("(pointer:fine) and (prefers-reduced-motion:no-preference)").matches) {
+      map.addEventListener("pointermove", (event) => {
+        const rect = map.getBoundingClientRect();
+        map.style.setProperty("--map-x", `${((event.clientX - rect.left) / rect.width - .5) * 8}px`);
+        map.style.setProperty("--map-y", `${((event.clientY - rect.top) / rect.height - .5) * 8}px`);
+      });
+      map.addEventListener("pointerleave", () => { map.style.setProperty("--map-x", "0px"); map.style.setProperty("--map-y", "0px"); });
+    }
+  });
+</script>

@@ -5,7 +5,7 @@ import AgentAvatar from "../components/AgentAvatar.astro";
 import ContactForm from "../components/ContactForm.astro";
 import FAQ from "../components/FAQ.astro";
 import Icon from "../components/Icon.astro";
-import WorkforceConsole from "../components/WorkforceConsole.astro";
+import LivingWorkMap from "../components/LivingWorkMap.astro";
 import WorkflowVisual from "../components/WorkflowVisual.astro";
 import WorkGlyph from "../components/WorkGlyph.astro";
 import { breadcrumbSchema, faqSchema } from "../data/schema";
@@ -72,7 +72,7 @@ const schemas = [
           <span><i></i> Човек одобрява рисковото</span>
         </div>
       </div>
-      <WorkforceConsole />
+      <LivingWorkMap />
     </div>
   </section>
 
@@ -146,24 +146,6 @@ const schemas = [
         </ul>
       </div>
       <WorkflowVisual />
-    </div>
-  </section>
-
-  <section class="home-section workmap-section" id="karta">
-    <div class="shell">
-      <div class="home-heading home-heading--center">
-        <div><p class="spectrum-label spectrum-label--dark"><span></span> Работи там, където вече работиш</p><h2>Не още един прозорец.<br /><em>По-малко работа между прозорците.</em></h2></div>
-        <p>AI екипът приема задачи от каналите, които клиентите и хората ти вече използват, и връща резултата в познатия процес.</p>
-      </div>
-      <div class="workmap">
-        <div class="workmap__orbit" aria-hidden="true"></div>
-        <div class="workmap__core"><span>raboti.bg</span><strong>AI екип</strong><small>роли · правила · отчет</small></div>
-        <div class="workmap__node workmap__node--phone"><Icon name="phone" /><div><strong>Телефон</strong><span>разговори и записвания</span></div></div>
-        <div class="workmap__node workmap__node--mail"><Icon name="mail" /><div><strong>Имейл</strong><span>заявки и задачи</span></div></div>
-        <div class="workmap__node workmap__node--web"><Icon name="globe" /><div><strong>Сайт</strong><span>съдържание и форми</span></div></div>
-        <div class="workmap__node workmap__node--systems"><Icon name="database" /><div><strong>Системи</strong><span>CRM, таблици, календар</span></div></div>
-        <div class="workmap__node workmap__node--human"><Icon name="user-check" /><div><strong>Човек</strong><span>решение при риск</span></div></div>
-      </div>
     </div>
   </section>
 
