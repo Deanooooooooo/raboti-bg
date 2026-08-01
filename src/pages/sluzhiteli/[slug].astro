@@ -80,7 +80,7 @@ const schemas = [
   </div></section>
 
   <section class="section"><div class="shell split">
-    <div><p class="eyebrow">ясни граници</p><h2>Какво получаваш.</h2><p>{data.status === "live" ? `${data.name} има месечна цена ${data.priceLabel.toLowerCase()} и работи по предварително одобрени правила.` : `${data.name} още не се предлага. Записването в списъка не е поръчка и не създава задължение.`}</p></div>
+    <div><p class="eyebrow">какво влиза в услугата</p><h2>Какво получаваш.</h2><p>{data.status === "live" ? `${data.name} има месечна цена ${data.priceLabel.toLowerCase()} и изпълнява само предварително одобрените действия.` : `${data.name} още не се предлага. Записването в списъка не е поръчка и не създава задължение.`}</p></div>
     <ul class="feature-list">{data.features.map((feature) => <li>{feature}</li>)}</ul>
   </div></section>
 

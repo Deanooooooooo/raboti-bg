@@ -15,7 +15,7 @@ const live = agents.filter((agent)=>agent.data.status==="live");
   image="/og/ceni.svg"
   schema={[faqSchema(pricingFaqs),breadcrumbSchema([{name:"Работи",url:site.url},{name:"Цени",url:`${site.url}/ceni/`}])]}
 >
-  <section class="page-hero"><div class="shell narrow"><p class="eyebrow">ясна месечна цена</p><h1>Плащаш за роля, не за неясен „AI проект“.</h1><p>Всеки план има конкретна работа и граници. Еднократната настройка се показва преди да започнем.</p></div></section>
+  <section class="page-hero"><div class="shell narrow"><p class="eyebrow">месечна цена по роли</p><h1>Плащаш за конкретни задачи, не за „AI проект“ без обхват.</h1><p>Всеки план описва какво поема служителят и какво остава извън услугата. Цената за настройка се показва преди да започнем.</p></div></section>
   <section class="section"><div class="shell pricing-grid">
     {live.map((agent) => <article class="price-card" style={`--agent:${agent.data.accent};--agent-soft:${agent.data.accentSoft}`}>
       <span class="status">AI служител</span><h2>{agent.data.name}</h2><p>{agent.data.role}</p>

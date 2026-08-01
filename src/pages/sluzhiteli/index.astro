@@ -13,6 +13,6 @@ const agents = (await getCollection("agents")).sort((a, b) => a.data.order - b.d
   image="/og/sluzhiteli.svg"
   schema={breadcrumbSchema([{name:"Работи",url:site.url},{name:"AI служители",url:`${site.url}/sluzhiteli/`}])}
 >
-  <section class="page-hero"><div class="shell narrow"><p class="eyebrow">екипът</p><h1>AI служители с ясна работа.</h1><p>Избери роля, виж какво поема и какви граници има. Ако задачата ти не пасва на никоя позиция, ще ти кажем честно.</p></div></section>
+  <section class="page-hero"><div class="shell narrow"><p class="eyebrow">екипът</p><h1>AI служители за конкретни задачи.</h1><p>Избери роля и виж какво поема, колко струва и кои действия чакат човек. Ако задачата ти не пасва на никоя позиция, ще ти кажем честно.</p></div></section>
   <section class="section"><div class="shell agent-grid">{agents.map((agent) => <AgentCard agent={agent} />)}</div></section>
 </BaseLayout>

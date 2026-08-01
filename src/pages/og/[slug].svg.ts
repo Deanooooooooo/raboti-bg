@@ -3,8 +3,8 @@ import { getCollection } from "astro:content";
 
 const staticCards: Record<string, { title: string; line: string }> = {
   home: { title: "Вдига. Помага. Пише. Работи.", line: "AI служители за българския бизнес" },
-  sluzhiteli: { title: "AI служители с ясна работа.", line: "Виж свободните позиции в Работи" },
-  ceni: { title: "Плащаш за роля.", line: "Ясни месечни цени без мъгла" },
+  sluzhiteli: { title: "AI служители за конкретна работа.", line: "Виж свободните позиции в Работи" },
+  ceni: { title: "Плащаш за роля.", line: "Месечна цена за конкретни задачи" },
   demo: { title: "Чуй как работи.", line: "Демо на AI рецепционист на български" },
   kontakti: { title: "Кое остава несвършено?", line: "Нека го поеме AI служител" },
   "za-nas": { title: "Хората зад Работи.", line: "Реален български екип и компания" },
