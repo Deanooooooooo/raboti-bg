@@ -98,8 +98,8 @@ const schemas = [
             <article class:list={["roster-card", `roster-card--${data.slug}`, data.status === "soon" && "roster-card--soon"]} style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
               <div class="roster-card__halo" aria-hidden="true"></div>
               <header>
-                <AgentAvatar name={data.name} slug={data.slug} accent={data.accent} accentSoft={data.accentSoft} size="small" />
-                <span class="roster-status"><i></i>{data.status === "live" ? "може да започне" : "подготвя се"}</span>
+                <AgentAvatar name={data.name} slug={data.slug} accent={data.accent} accentSoft={data.accentSoft} size="medium" />
+                {data.status === "soon" && <span class="roster-status"><i></i>В разработка</span>}
               </header>
               <div class="roster-card__body">
                 <p>{data.role}</p>
@@ -107,8 +107,8 @@ const schemas = [
                 <span>{data.summary}</span>
               </div>
               <footer>
-                <div><small>{data.status === "live" ? "Месечна цена" : "Достъп"}</small><strong>{data.priceLabel}</strong></div>
-                <a href={`/sluzhiteli/${data.slug}/`} aria-label={`Виж ролята ${data.name}`}><span>Виж ролята</span><Icon name="arrow-right" /></a>
+                <div><small>{data.status === "live" ? "Предлага се · месечна цена" : "Статус"}</small><strong>{data.status === "live" ? data.priceLabel : "Предстои"}</strong></div>
+                <a href={`/sluzhiteli/${data.slug}/`} aria-label={`Виж задачите и цената за ${data.name}`}><span>Виж задачите</span><Icon name="arrow-right" /></a>
               </footer>
             </article>
           );
