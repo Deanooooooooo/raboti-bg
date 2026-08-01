@@ -49,7 +49,7 @@ const schemas = [
 
 <BaseLayout
   title="Работи — AI служители за задачите, които бавят бизнеса"
-  description="AI служители за пропуснати обаждания, бавни отговори, работа по сайта и ръчни задачи. Избираш конкретна роля с ясна цена и човешки контрол."
+  description="AI служители за пропуснати обаждания, промени по сайта и повтарящи се задачи. Виж какво поема всяка роля, колко струва и кога пита човек."
   canonical="/"
   schema={schemas}
   bodyClass="home-art"
@@ -69,7 +69,7 @@ const schemas = [
         <div class="home-hero__signals" aria-label="Основни характеристики">
           <span><i></i> Старт до 5 работни дни</span>
           <span><i></i> Работи на български</span>
-          <span><i></i> Човек одобрява рисковото</span>
+          <span><i></i> Плащане и публикуване чакат одобрение</span>
         </div>
       </div>
       <LivingWorkMap />
@@ -78,9 +78,9 @@ const schemas = [
 
   <section class="home-facts" aria-label="Проблеми, които AI служителите поемат">
     <div class="shell home-facts__grid">
-      <div><span>Докато телефонът звъни</span><strong>Не губиш следващия клиент</strong><p>Обаждането получава отговор, дори когато целият екип е зает.</p></div>
-      <div><span>Докато задачите се трупат</span><strong>Рутината не блокира хората</strong><p>Повтарящата се работа се движи, вместо да чака „като остане време“.</p></div>
-      <div><span>Докато бизнесът расте</span><strong>Контролът остава при теб</strong><p>Виждаш какво е свършено, а рисковите решения чакат човек.</p></div>
+      <div><span>Когато телефонът звъни</span><strong>Клиентът получава отговор</strong><p>Вдига разговаря с него и записва час, докато екипът ти обслужва други хора.</p></div>
+      <div><span>Когато задачите се трупат</span><strong>Хората ти не преписват данни</strong><p>Помага прехвърля информацията между имейла, таблиците и CRM-а.</p></div>
+      <div><span>Преди да бъде направена промяна</span><strong>Ти избираш какво се публикува</strong><p>AI служителят подготвя работата, а плащанията и необратимите действия чакат одобрение.</p></div>
     </div>
   </section>
 
@@ -88,7 +88,7 @@ const schemas = [
     <div class="shell">
       <div class="home-heading">
         <div><p class="spectrum-label spectrum-label--dark"><span></span> Избери по проблема</p><h2>Не купуваш AI.<br /><em>Наемаш свършена работа.</em></h2></div>
-        <p>Започни от задачата, която губи клиенти или време днес. Всеки AI служител има ясна длъжност, цена и граници.</p>
+        <p>Започни от задачата, която губи клиенти или време днес. За всяка роля виждаш какво поема, колко струва и кои действия остават за човек.</p>
       </div>
 
       <div class="roster-grid">
@@ -119,11 +119,11 @@ const schemas = [
         <div class="fit-check__intro">
           <p class="spectrum-label spectrum-label--dark"><span></span> Бърза проверка</p>
           <h3 id="fit-title">Подходящ ли е AI служител за твоя бизнес?</h3>
-          <p>Най-добрият първи процес е чест, ясен и достатъчно повтаряем, за да опишем правилата му.</p>
+          <p>Започни с работа, която се повтаря и може да бъде показана с реални примери.</p>
         </div>
         <div class="fit-check__column fit-check__column--yes">
           <strong><Icon name="check" /> Да, ако работата…</strong>
-          <ul><li>се повтаря всяка седмица;</li><li>има ясен вход и очакван резултат;</li><li>днес бави екипа или изпуска клиенти.</li></ul>
+          <ul><li>се повтаря всяка седмица;</li><li>започва от обаждане, имейл, формуляр или документ;</li><li>днес бави екипа или изпуска клиенти.</li></ul>
         </div>
         <div class="fit-check__column fit-check__column--no">
           <strong><span aria-hidden="true">×</span> Не, ако работата…</strong>
@@ -136,13 +136,13 @@ const schemas = [
   <section class="home-section process-section" id="proces">
     <div class="shell process-layout">
       <div class="process-copy">
-        <p class="spectrum-label"><span></span> От входяща задача до ясен резултат</p>
+        <p class="spectrum-label"><span></span> От входяща задача до записан резултат</p>
         <h2>Даваш работа.<br /><em>Не даваш сляп достъп.</em></h2>
-        <p>Уточняваме какво може да върши сам, каква информация използва и кога трябва да потърси човек. Така печелиш време, без да предаваш важните решения.</p>
+        <p>Показваш ни как вършите задачата днес. Настройваме каква информация използва AI служителят, какво може да направи сам и при кои действия чака твоето одобрение.</p>
         <ul class="process-principles">
           <li><span class="principle-mark"><Icon name="arrow-right" /></span><div><strong>Получава задачата веднага</strong><small>От телефон, имейл, формуляр или график.</small></div></li>
-          <li><span class="principle-mark"><Icon name="check" /></span><div><strong>Върши позволеното сам</strong><small>По твоите правила, данни и одобрен процес.</small></div></li>
-          <li><span class="principle-mark"><WorkGlyph name="guard" /></span><div><strong>Пита, когато решението е твое</strong><small>Неясните и необратими действия не се отгатват.</small></div></li>
+          <li><span class="principle-mark"><Icon name="check" /></span><div><strong>Върши одобрените действия</strong><small>Използва само информацията и системите, които си разрешил.</small></div></li>
+          <li><span class="principle-mark"><WorkGlyph name="guard" /></span><div><strong>Спира преди необратимо действие</strong><small>Плащане, договор или публикуване чакат човек.</small></div></li>
         </ul>
       </div>
       <WorkflowVisual />
@@ -155,16 +155,16 @@ const schemas = [
         <p class="spectrum-label"><span></span> Спокойствие, не черна кутия</p>
         <h2>Знаеш какво върши.<br /><em>И кога спира.</em></h2>
       </div>
-      <div class="boundary-card boundary-card--cyan"><span>Ясна работа</span><h3>Знаеш какво получаваш още преди старта</h3><p>Конкретни задачи, цена, срок за настройка и очакван резултат.</p></div>
-      <div class="boundary-card boundary-card--violet"><span>Ясни права</span><h3>Достъпът стига само докъдето е нужен</h3><p>AI служителят използва единствено одобрените системи и действия.</p></div>
-      <div class="boundary-card boundary-card--coral"><span>Ясна граница</span><h3>При съмнение пита, вместо да измисля</h3><p>Неясният или рисков случай идва при човек заедно с целия контекст.</p></div>
-      <div class="boundary-card boundary-card--lime"><span>Ясен отчет</span><h3>Не се чудиш какво е станало със задачата</h3><p>Виждаш извършеното, резултата и следващото необходимо действие.</p></div>
+      <div class="boundary-card boundary-card--cyan"><span>Преди старта</span><h3>Виждаш задачите, цената и срока за настройка</h3><p>Офертата описва какво поема служителят и какво остава извън услугата.</p></div>
+      <div class="boundary-card boundary-card--violet"><span>Достъп</span><h3>Използва само разрешените системи</h3><p>Получава достъп единствено до програмите и данните, нужни за работата му.</p></div>
+      <div class="boundary-card boundary-card--coral"><span>Одобрение</span><h3>Пита преди плащане, договор или публикуване</h3><p>Получаваш подготвеното действие и решаваш дали да бъде изпълнено.</p></div>
+      <div class="boundary-card boundary-card--lime"><span>История</span><h3>Виждаш какво е направено по всяка задача</h3><p>Записът показва използваната информация, извършеното действие и резултата.</p></div>
     </div>
   </section>
 
   <section class="home-section home-faq-section">
     <div class="shell home-faq-grid">
-      <div><p class="spectrum-label spectrum-label--dark"><span></span> Преди да решиш</p><h2>Ясни отговори, без AI мъгла.</h2><p>Не ти трябва технически екип. Трябва да посочиш работата, която днес остава несвършена, бави хората ти или изпуска клиенти.</p></div>
+      <div><p class="spectrum-label spectrum-label--dark"><span></span> Преди да решиш</p><h2>Какво поема AI служителят и как започва?</h2><p>Не ти трябва технически екип. Покажи ни работата, която остава несвършена, бави хората ти или изпуска клиенти.</p></div>
       <FAQ items={homeFaqs} />
     </div>
   </section>
