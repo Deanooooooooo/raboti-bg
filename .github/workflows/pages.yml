@@ -29,6 +29,7 @@ jobs:
       - name: Check out handover concept
         uses: actions/checkout@v5
         with:
+          ref: identity/cofoundy-v1
           path: concept
       - uses: actions/setup-node@v5
         with:
