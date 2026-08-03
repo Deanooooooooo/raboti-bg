@@ -12,7 +12,7 @@ const schemas=[faqSchema(homeFaqs),breadcrumbSchema([{name:"Работи",url:si
 const verbs: Record<string,string>={vdiga:"чува",pishe:"променя",smyata:"проверява",pomaga:"свързва",prodava:"придвижва"};
 ---
 <BaseLayout title="Работи — AI служители за реалната работа" description="Пет AI служители за обаждания, сайт, сметки, системи и продажби — с ясна цена и човешки контрол." canonical="/" schema={schemas} bodyClass="rw-page">
-  <main>
+  <div class="rw-home">
     <section class="rw-hero">
       <div class="rw-hero__copy">
         <p class="rw-kicker"><span></span> AI служители за българския бизнес</p>
@@ -50,5 +50,5 @@ const verbs: Record<string,string>={vdiga:"чува",pishe:"променя",smya
     <section class="rw-faq"><div><p>04 / ПРЕДИ ДА РЕШИШ</p><h2>Ясни отговори.<br>Без технологичен театър.</h2></div><FAQ items={homeFaqs}/></section>
 
     <section class="rw-contact"><div><p>05 / ЗАПОЧНИ ОТ ЗАДАЧАТА</p><h2>Коя работа ти струва най-много време или клиенти?</h2><span>Опиши я. Ще ти кажем дали може да бъде поета, за колко време и на каква цена.</span></div><ContactForm title="Разкажи ни за работата"/></section>
-  </main>
+  </div>
 </BaseLayout>
