@@ -21,39 +21,19 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Check out current preview
-        uses: actions/checkout@v5
-        with:
-          ref: main
-          path: current
-      - name: Check out handover concept
-        uses: actions/checkout@v5
-        with:
-          path: concept
+      - uses: actions/checkout@v5
       - uses: actions/setup-node@v5
         with:
           node-version: 22
           cache: npm
-          cache-dependency-path: |
-            current/package-lock.json
-            concept/package-lock.json
-      - name: Build current preview at the existing URL
-        working-directory: current
-        run: npm ci && npm run build && node scripts/prepare-github-pages.mjs
+      - run: npm ci
+      - run: npm run build
         env:
           DEPLOY_BASE: /raboti-bg
-      - name: Build handover concept at a separate URL
-        working-directory: concept
-        run: npm ci && npm run build && node scripts/prepare-github-pages.mjs
-        env:
-          DEPLOY_BASE: /raboti-bg/concept-handover
-      - name: Add concept without replacing current preview
-        run: |
-          mkdir -p current/dist/concept-handover
-          cp -R concept/dist/. current/dist/concept-handover/
+      - run: node scripts/prepare-github-pages.mjs
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: current/dist
+          path: dist
       - id: deployment
         uses: actions/deploy-pages@v4
