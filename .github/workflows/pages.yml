@@ -22,18 +22,44 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
+        with:
+          ref: main
+          path: current
+      - uses: actions/checkout@v5
+        if: github.ref != 'refs/heads/main'
+        with:
+          path: candidate
       - uses: actions/setup-node@v5
         with:
           node-version: 22
-          cache: npm
       - run: npm ci
+        working-directory: current
       - run: npm run build
+        working-directory: current
         env:
           DEPLOY_BASE: /raboti-bg
       - run: node scripts/prepare-github-pages.mjs
+        working-directory: current
+        env:
+          DEPLOY_BASE: /raboti-bg
+      - run: npm ci
+        if: github.ref != 'refs/heads/main'
+        working-directory: candidate
+      - run: npm run build
+        if: github.ref != 'refs/heads/main'
+        working-directory: candidate
+        env:
+          DEPLOY_BASE: /raboti-bg/impeccable-homepage
+      - run: node scripts/prepare-github-pages.mjs
+        if: github.ref != 'refs/heads/main'
+        working-directory: candidate
+        env:
+          DEPLOY_BASE: /raboti-bg/impeccable-homepage
+      - run: mkdir -p current/dist/impeccable-homepage && cp -R candidate/dist/. current/dist/impeccable-homepage/
+        if: github.ref != 'refs/heads/main'
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: current/dist
       - id: deployment
         uses: actions/deploy-pages@v4
