@@ -1,0 +1,50 @@
+<div class="work-circuit" aria-label="Пет AI служители приемат и завършват различни видове работа">
+  <svg viewBox="0 0 760 560" role="img" aria-labelledby="circuit-title circuit-desc">
+    <title id="circuit-title">Работната система на Работи</title>
+    <desc id="circuit-desc">Обаждания, имейли, документи и запитвания преминават през пет специализирани AI служители и завършват като записани резултати.</desc>
+    <defs>
+      <linearGradient id="raboti-spectrum" x1="68" y1="0" x2="690" y2="0" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#25d9c7"/><stop offset=".48" stop-color="#62a8ff"/><stop offset="1" stop-color="#9a72ff"/>
+      </linearGradient>
+      <filter id="circuit-glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+    </defs>
+
+    <g class="circuit-rails">
+      <path d="M74 80H182c36 0 36 52 72 52h290c36 0 36-52 72-52h70"/>
+      <path d="M74 180h126c36 0 36 52 72 52h250c36 0 36-52 72-52h92"/>
+      <path d="M74 280h172c36 0 36 0 72 0h368"/>
+      <path d="M74 380h126c36 0 36-52 72-52h250c36 0 36 52 72 52h92"/>
+      <path d="M74 480h108c36 0 36-52 72-52h290c36 0 36 52 72 52h70"/>
+    </g>
+    <g class="circuit-active" filter="url(#circuit-glow)">
+      <path d="M74 80H182c36 0 36 52 72 52h290c36 0 36-52 72-52h70"/>
+      <path d="M74 180h126c36 0 36 52 72 52h250c36 0 36-52 72-52h92"/>
+      <path d="M74 280h172c36 0 36 0 72 0h368"/>
+      <path d="M74 380h126c36 0 36-52 72-52h250c36 0 36 52 72 52h92"/>
+      <path d="M74 480h108c36 0 36-52 72-52h290c36 0 36 52 72 52h70"/>
+    </g>
+
+    <g class="circuit-inputs">
+      <circle cx="74" cy="80" r="8"/><circle cx="74" cy="180" r="8"/><circle cx="74" cy="280" r="8"/><circle cx="74" cy="380" r="8"/><circle cx="74" cy="480" r="8"/>
+    </g>
+    <g class="circuit-gates">
+      <path d="M222 105v54M244 105v54"/><path d="M250 205v54M272 205v54"/><path d="M296 253v54M318 253v54"/><path d="M250 301v54M272 301v54"/><path d="M222 401v54M244 401v54"/>
+    </g>
+    <g class="circuit-workers">
+      <g transform="translate(368 132)"><circle r="35"/><path d="M-17 2c8 0 8-18 16-18S7 19 17 19"/><text y="58">Вдига</text></g>
+      <g transform="translate(420 232)"><circle r="35"/><path d="M-18-12h13v24h-13m23-24h13v24H5M-5 0H5"/><text y="58">Помага</text></g>
+      <g transform="translate(468 280)"><circle r="35"/><path d="m-14 12 5-22 19-8 8 8-9 19-23 3Z"/><text y="58">Пише</text></g>
+      <g transform="translate(420 328)"><circle r="35"/><path d="M-17-15h34v30h-34zM-9-6h18M-9 2h18M-9 10h10"/><text y="58">Смята</text></g>
+      <g transform="translate(368 428)"><circle r="35"/><path d="M-18 12-7 1l9 7 16-21M8-13h10v10"/><text y="58">Продава</text></g>
+    </g>
+    <g class="circuit-results">
+      <path d="m670 72 8 8 15-18"/><path d="m670 172 8 8 15-18"/><path d="m670 272 8 8 15-18"/><path d="m670 372 8 8 15-18"/><path d="m670 472 8 8 15-18"/>
+    </g>
+    <g class="circuit-approval" transform="translate(585 280)">
+      <path d="M0-20 20 0 0 20-20 0Z"/>
+      <path d="m-8 0 6 6L9-7"/>
+      <text y="38">Одобрение</text>
+    </g>
+  </svg>
+  <div class="circuit-caption"><span>Входяща работа</span><span>Правила и човешки контрол</span><span>Завършен резултат</span></div>
+</div>

@@ -5,9 +5,10 @@ import AgentAvatar from "../components/AgentAvatar.astro";
 import ContactForm from "../components/ContactForm.astro";
 import FAQ from "../components/FAQ.astro";
 import Icon from "../components/Icon.astro";
-import LivingWorkMap from "../components/LivingWorkMap.astro";
 import WorkflowVisual from "../components/WorkflowVisual.astro";
 import WorkGlyph from "../components/WorkGlyph.astro";
+import WorkCircuit from "../components/WorkCircuit.astro";
+import "../styles/home-circuit.css";
 import { breadcrumbSchema, faqSchema } from "../data/schema";
 import { homeFaqs, site } from "../data/site";
 
@@ -54,25 +55,22 @@ const schemas = [
   schema={schemas}
   bodyClass="home-art"
 >
-  <section class="home-hero" data-hero>
-    <div class="home-aurora" aria-hidden="true"><i></i><i></i><i></i></div>
-    <div class="home-noise" aria-hidden="true"></div>
-    <div class="shell home-hero__grid">
-      <div class="home-hero__copy">
-        <p class="spectrum-label"><span></span> AI служители за българския бизнес</p>
-        <h1>Работата не чака.<br /><em>Вече има кой да я свърши.</em></h1>
-        <p class="home-hero__lead">Работи е българска услуга за AI служители с конкретна длъжност, месечна цена и човешки контрол. Те поемат пропуснатите обаждания, промените по сайта и ръчната работа между системите.</p>
-        <div class="home-hero__actions">
-          <a class="button button--spectrum" href="#ekip">Намери своя AI служител <Icon name="arrow-down" /></a>
-          <a class="home-link" href="#proces">Виж как работи <Icon name="arrow-right" /></a>
+  <section class="circuit-hero" data-hero>
+    <div class="shell circuit-hero__layout">
+      <div class="circuit-hero__copy">
+        <h1>Дай работа.<span>Получи резултат.</span></h1>
+        <p class="circuit-hero__lead">Работи е екип от AI служители с конкретна длъжност, цена и правила. Всеки поема различен поток от ежедневната работа — от входящия сигнал до записания резултат.</p>
+        <div class="circuit-hero__actions">
+          <a class="button button--spectrum" href="#ekip">Избери AI служител <Icon name="arrow-down" /></a>
+          <a class="circuit-link" href="#proces">Проследи една задача <Icon name="arrow-right" /></a>
         </div>
-        <div class="home-hero__signals" aria-label="Основни характеристики">
+        <div class="circuit-proof" aria-label="Основни характеристики">
           <span><i></i> Старт до 5 работни дни</span>
           <span><i></i> Работи на български</span>
-          <span><i></i> Плащане и публикуване чакат одобрение</span>
+          <span><i></i> Човешко одобрение при важните действия</span>
         </div>
       </div>
-      <LivingWorkMap />
+      <WorkCircuit />
     </div>
   </section>
 
