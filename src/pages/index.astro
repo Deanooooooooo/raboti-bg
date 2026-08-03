@@ -5,11 +5,12 @@ import AgentAvatar from "../components/AgentAvatar.astro";
 import ContactForm from "../components/ContactForm.astro";
 import FAQ from "../components/FAQ.astro";
 import Icon from "../components/Icon.astro";
-import LivingWorkMap from "../components/LivingWorkMap.astro";
+import WorkDesk from "../components/WorkDesk.astro";
 import WorkflowVisual from "../components/WorkflowVisual.astro";
 import WorkGlyph from "../components/WorkGlyph.astro";
 import { breadcrumbSchema, faqSchema } from "../data/schema";
 import { homeFaqs, site } from "../data/site";
+import "../styles/home-redesign.css";
 
 const agents = (await getCollection("agents")).sort((a, b) => a.data.order - b.data.order);
 const schemas = [
@@ -72,7 +73,7 @@ const schemas = [
           <span><i></i> Плащане и публикуване чакат одобрение</span>
         </div>
       </div>
-      <LivingWorkMap />
+      <WorkDesk />
     </div>
   </section>
 
