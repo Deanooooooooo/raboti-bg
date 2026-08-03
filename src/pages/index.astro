@@ -1,188 +1,54 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import AgentAvatar from "../components/AgentAvatar.astro";
 import ContactForm from "../components/ContactForm.astro";
 import FAQ from "../components/FAQ.astro";
-import Icon from "../components/Icon.astro";
-import LivingWorkMap from "../components/LivingWorkMap.astro";
-import WorkflowVisual from "../components/WorkflowVisual.astro";
-import WorkGlyph from "../components/WorkGlyph.astro";
 import { breadcrumbSchema, faqSchema } from "../data/schema";
 import { homeFaqs, site } from "../data/site";
+import "../styles/reference-world.css";
 
-const agents = (await getCollection("agents")).sort((a, b) => a.data.order - b.data.order);
-const schemas = [
-  faqSchema(homeFaqs),
-  breadcrumbSchema([{ name: "Работи", url: site.url }]),
-  {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    "@id": `${site.url}/#ai-employees`,
-    name: "AI служители от Работи",
-    serviceType: "Абонаментна услуга за AI служители",
-    description: "AI служители за входящи обаждания, работа по сайта и повтарящи се оперативни задачи с предварително зададени правила и човешки контрол.",
-    provider: { "@id": `${site.url}/#organization` },
-    areaServed: { "@type": "Country", name: "България" },
-    availableChannel: { "@type": "ServiceChannel", serviceUrl: site.url, availableLanguage: "bg" },
-    offers: {
-      "@type": "AggregateOffer",
-      lowPrice: "49",
-      highPrice: "249",
-      priceCurrency: "EUR",
-      offerCount: "3",
-    },
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "AI служители от Работи",
-    itemListElement: agents.map((agent, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      url: `${site.url}/sluzhiteli/${agent.data.slug}/`,
-      name: agent.data.name,
-    })),
-  },
-];
+const agents = (await getCollection("agents")).sort((a,b)=>a.data.order-b.data.order);
+const schemas=[faqSchema(homeFaqs),breadcrumbSchema([{name:"Работи",url:site.url}])];
+const verbs: Record<string,string>={vdiga:"чува",pishe:"променя",smyata:"проверява",pomaga:"свързва",prodava:"придвижва"};
 ---
-
-<BaseLayout
-  title="Работи — AI служители за задачите, които бавят бизнеса"
-  description="AI служители за пропуснати обаждания, промени по сайта и повтарящи се задачи. Виж какво поема всяка роля, колко струва и кога пита човек."
-  canonical="/"
-  schema={schemas}
-  bodyClass="home-art"
->
-  <section class="home-hero" data-hero>
-    <div class="home-aurora" aria-hidden="true"><i></i><i></i><i></i></div>
-    <div class="home-noise" aria-hidden="true"></div>
-    <div class="shell home-hero__grid">
-      <div class="home-hero__copy">
-        <p class="spectrum-label"><span></span> AI служители за българския бизнес</p>
-        <h1>Работата не чака.<br /><em>Вече има кой да я свърши.</em></h1>
-        <p class="home-hero__lead">Работи е българска услуга за AI служители с конкретна длъжност, месечна цена и човешки контрол. Те поемат пропуснатите обаждания, промените по сайта и ръчната работа между системите.</p>
-        <div class="home-hero__actions">
-          <a class="button button--spectrum" href="#ekip">Намери своя AI служител <Icon name="arrow-down" /></a>
-          <a class="home-link" href="#proces">Виж как работи <Icon name="arrow-right" /></a>
-        </div>
-        <div class="home-hero__signals" aria-label="Основни характеристики">
-          <span><i></i> Старт до 5 работни дни</span>
-          <span><i></i> Работи на български</span>
-          <span><i></i> Плащане и публикуване чакат одобрение</span>
-        </div>
+<BaseLayout title="Работи — AI служители за реалната работа" description="Пет AI служители за обаждания, сайт, сметки, системи и продажби — с ясна цена и човешки контрол." canonical="/" schema={schemas} bodyClass="rw-page">
+  <main>
+    <section class="rw-hero">
+      <div class="rw-hero__copy">
+        <p class="rw-kicker"><span></span> AI служители за българския бизнес</p>
+        <h1>Даваш задача.<br><em>Получаваш свършена работа.</em></h1>
+        <p>Работи е екип от AI служители с конкретни длъжности. Вдигат телефона, поддържат сайта и прехвърлят работата между системите ти — по зададени правила.</p>
+        <div class="rw-actions"><a class="rw-button" href="#ekip">Виж служителите</a><a class="rw-text-link" href="#kak">Как работят →</a></div>
       </div>
-      <LivingWorkMap />
-    </div>
-  </section>
+      <figure class="rw-machine"><img src="/assets/raboti-work-bench.png" alt="Пет свързани работни инструмента — един за всяка AI роля" width="1672" height="941" loading="eager" fetchpriority="high"><figcaption><span>една задача влиза</span><b>пет роли работят</b><span>резултатът излиза</span></figcaption></figure>
+      <div class="rw-proof"><span><b>от 97 лв.</b> на месец</span><span><b>до 5 дни</b> за старт</span><span><b>човекът решава</b> преди рисково действие</span></div>
+    </section>
 
-  <section class="home-facts" aria-label="Проблеми, които AI служителите поемат">
-    <div class="shell home-facts__grid">
-      <div><span>Когато телефонът звъни</span><strong>Клиентът получава отговор</strong><p>Вдига разговаря с него и записва час, докато екипът ти обслужва други хора.</p></div>
-      <div><span>Когато задачите се трупат</span><strong>Хората ти не преписват данни</strong><p>Помага прехвърля информацията между имейла, таблиците и CRM-а.</p></div>
-      <div><span>Преди да бъде направена промяна</span><strong>Ти избираш какво се публикува</strong><p>AI служителят подготвя работата, а плащанията и необратимите действия чакат одобрение.</p></div>
-    </div>
-  </section>
-
-  <section class="home-section roster-section" id="ekip">
-    <div class="shell">
-      <div class="home-heading">
-        <div><p class="spectrum-label spectrum-label--dark"><span></span> Избери по проблема</p><h2>Не купуваш AI.<br /><em>Наемаш свършена работа.</em></h2></div>
-        <p>Започни от задачата, която губи клиенти или време днес. За всяка роля виждаш какво поема, колко струва и кои действия остават за човек.</p>
+    <section class="rw-roster" id="ekip">
+      <header class="rw-section-head"><p>01 / ЕКИПЪТ</p><h2>Пет длъжности.<br>Една работна система.</h2><span>Избери по задачата, която остава несвършена.</span></header>
+      <div class="rw-agent-list">
+        {agents.map((agent,i)=><a class={`rw-agent rw-agent--${agent.data.slug}`} href={`/sluzhiteli/${agent.data.slug}/`}>
+          <span class="rw-agent__no">0{i+1}</span><div><small>{agent.data.role}</small><h3>{agent.data.name}</h3></div><p>{agent.data.summary}</p><strong>{agent.data.status==="live"?agent.data.priceLabel:"Предстои"}</strong><i>{verbs[agent.data.slug]} →</i>
+        </a>)}
       </div>
+    </section>
 
-      <div class="roster-grid">
-        {agents.map((agent) => {
-          const data = agent.data;
-          return (
-            <article class:list={["roster-card", `roster-card--${data.slug}`, data.status === "soon" && "roster-card--soon"]} style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
-              <div class="roster-card__halo" aria-hidden="true"></div>
-              <header>
-                <div class="roster-card__heading">
-                  <p>{data.role}</p>
-                  <h3>{data.name}</h3>
-                </div>
-                <div class="roster-card__mark">
-                  <AgentAvatar name={data.name} slug={data.slug} accent={data.accent} accentSoft={data.accentSoft} size="medium" />
-                </div>
-              </header>
-              <div class="roster-card__body">
-                <span>{data.summary}</span>
-                {data.status === "soon" && <span class="roster-status"><i></i>В разработка</span>}
-              </div>
-              <footer>
-                <div><small>{data.status === "live" ? "Предлага се · месечна цена" : "Статус"}</small><strong>{data.status === "live" ? data.priceLabel : "Предстои"}</strong></div>
-                <a href={`/sluzhiteli/${data.slug}/`} aria-label={`Виж задачите и цената за ${data.name}`}><span>Виж задачите</span><Icon name="arrow-right" /></a>
-              </footer>
-            </article>
-          );
-        })}
+    <section class="rw-flow" id="kak">
+      <header class="rw-section-head rw-section-head--light"><p>02 / ЕДНА РЕАЛНА ЗАДАЧА</p><h2>Не показваме „AI магия“.<br>Показваме работата.</h2></header>
+      <div class="rw-flow__track">
+        <article><span>вход</span><b>14:29</b><h3>Клиент се обажда за свободен час.</h3></article>
+        <article><span>работа</span><b>14:29:08</b><h3>Вдига разбира услугата и проверява графика.</h3></article>
+        <article><span>резултат</span><b>14:30</b><h3>Часът е записан. Клиентът получава потвърждение.</h3></article>
       </div>
+    </section>
 
-      <aside class="fit-check" aria-labelledby="fit-title">
-        <div class="fit-check__intro">
-          <p class="spectrum-label spectrum-label--dark"><span></span> Бърза проверка</p>
-          <h3 id="fit-title">Подходящ ли е AI служител за твоя бизнес?</h3>
-          <p>Започни с работа, която се повтаря и може да бъде показана с реални примери.</p>
-        </div>
-        <div class="fit-check__column fit-check__column--yes">
-          <strong><Icon name="check" /> Да, ако работата…</strong>
-          <ul><li>се повтаря всяка седмица;</li><li>започва от обаждане, имейл, формуляр или документ;</li><li>днес бави екипа или изпуска клиенти.</li></ul>
-        </div>
-        <div class="fit-check__column fit-check__column--no">
-          <strong><span aria-hidden="true">×</span> Не, ако работата…</strong>
-          <ul><li>изисква свободна човешка преценка;</li><li>няма устойчиви правила;</li><li>включва необратими решения без одобрение.</li></ul>
-        </div>
-      </aside>
-    </div>
-  </section>
+    <section class="rw-control">
+      <div><p>03 / КОНТРОЛ</p><h2>Работи самостоятелно.<br><em>Спира, когато трябва.</em></h2></div>
+      <div class="rw-control__rules"><article><b>Сам</b><p>Чете, проверява, подготвя и записва по одобрени правила.</p></article><article><b>Пита</b><p>Преди плащане, договор, публикуване или необратима промяна.</p></article><article><b>Показва</b><p>Какво е получил, какво е направил и какъв е резултатът.</p></article></div>
+    </section>
 
-  <section class="home-section process-section" id="proces">
-    <div class="shell process-layout">
-      <div class="process-copy">
-        <p class="spectrum-label"><span></span> От входяща задача до записан резултат</p>
-        <h2>Даваш работа.<br /><em>Не даваш сляп достъп.</em></h2>
-        <p>Показваш ни как вършите задачата днес. Настройваме каква информация използва AI служителят, какво може да направи сам и при кои действия чака твоето одобрение.</p>
-        <ul class="process-principles">
-          <li><span class="principle-mark"><Icon name="arrow-right" /></span><div><strong>Получава задачата веднага</strong><small>От телефон, имейл, формуляр или график.</small></div></li>
-          <li><span class="principle-mark"><Icon name="check" /></span><div><strong>Върши одобрените действия</strong><small>Използва само информацията и системите, които си разрешил.</small></div></li>
-          <li><span class="principle-mark"><WorkGlyph name="guard" /></span><div><strong>Спира преди необратимо действие</strong><small>Плащане, договор или публикуване чакат човек.</small></div></li>
-        </ul>
-      </div>
-      <WorkflowVisual />
-    </div>
-  </section>
+    <section class="rw-faq"><div><p>04 / ПРЕДИ ДА РЕШИШ</p><h2>Ясни отговори.<br>Без технологичен театър.</h2></div><FAQ items={homeFaqs}/></section>
 
-  <section class="home-section boundaries-section" id="kontrol">
-    <div class="shell boundaries-grid">
-      <div class="boundary-intro">
-        <p class="spectrum-label"><span></span> Спокойствие, не черна кутия</p>
-        <h2>Знаеш какво върши.<br /><em>И кога спира.</em></h2>
-      </div>
-      <div class="boundary-card boundary-card--cyan"><span>Преди старта</span><h3>Виждаш задачите, цената и срока за настройка</h3><p>Офертата описва какво поема служителят и какво остава извън услугата.</p></div>
-      <div class="boundary-card boundary-card--violet"><span>Достъп</span><h3>Използва само разрешените системи</h3><p>Получава достъп единствено до програмите и данните, нужни за работата му.</p></div>
-      <div class="boundary-card boundary-card--coral"><span>Одобрение</span><h3>Пита преди плащане, договор или публикуване</h3><p>Получаваш подготвеното действие и решаваш дали да бъде изпълнено.</p></div>
-      <div class="boundary-card boundary-card--lime"><span>История</span><h3>Виждаш какво е направено по всяка задача</h3><p>Записът показва използваната информация, извършеното действие и резултата.</p></div>
-    </div>
-  </section>
-
-  <section class="home-section home-faq-section">
-    <div class="shell home-faq-grid">
-      <div><p class="spectrum-label spectrum-label--dark"><span></span> Преди да решиш</p><h2>Какво поема AI служителят и как започва?</h2><p>Не ти трябва технически екип. Покажи ни работата, която остава несвършена, бави хората ти или изпуска клиенти.</p></div>
-      <FAQ items={homeFaqs} />
-    </div>
-  </section>
-
-  <section class="home-contact" id="naemi">
-    <div class="home-contact__aurora" aria-hidden="true"></div>
-    <div class="shell home-contact__grid">
-      <div>
-        <p class="spectrum-label"><span></span> Започни от един истински проблем</p>
-        <h2>Коя задача ти струва<br /><em>най-много време или клиенти?</em></h2>
-        <p>Опиши я с няколко думи. Ще ти кажем честно дали някой от AI служителите ни може да я поеме, как се настройва и каква ще е цената.</p>
-        <div class="contact-spectrum" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-      </div>
-      <ContactForm title="Разкажи ни за работата" />
-    </div>
-  </section>
+    <section class="rw-contact"><div><p>05 / ЗАПОЧНИ ОТ ЗАДАЧАТА</p><h2>Коя работа ти струва най-много време или клиенти?</h2><span>Опиши я. Ще ти кажем дали може да бъде поета, за колко време и на каква цена.</span></div><ContactForm title="Разкажи ни за работата"/></section>
+  </main>
 </BaseLayout>
