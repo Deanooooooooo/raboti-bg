@@ -1,0 +1,99 @@
+---
+const moments = [
+  {
+    id: "vdiga",
+    time: "10:18",
+    question: "Кой ще вдигне, докато ръцете ти са заети?",
+    scene: "Клиент звъни за свободен час. Екипът обслужва хора на място.",
+    role: "Вдига",
+    action: "Отговаря с одобрената информация и проверява графика.",
+    result: "Заявката е записана и разговорът е обобщен за екипа.",
+    boundary: "Предава спешните и непредвидените случаи на човек.",
+    color: "#2de2d0",
+  },
+  {
+    id: "pishe",
+    time: "13:40",
+    question: "Кога ще смениш цената, която вече е грешна?",
+    scene: "Новата цена е готова, но промяната по сайта пак остава за после.",
+    role: "Пише",
+    action: "Подготвя точната промяна и показва какво ще се публикува.",
+    result: "Сайтът е актуален, а предишната версия остава в историята.",
+    boundary: "Непознат тип промяна чака твоето одобрение.",
+    color: "#ff9b80",
+  },
+  {
+    id: "pomaga",
+    time: "16:55",
+    question: "Кой ще превърне този имейл в свършена работа?",
+    scene: "Заявката е в пощата. Данните още не са в CRM, а задачата няма собственик.",
+    role: "Помага",
+    action: "Прочита определените имейли, записва данните и създава задача.",
+    result: "Екипът вижда клиента, следващото действие и пълния запис.",
+    boundary: "Плащане и необратима промяна никога не минават без човек.",
+    color: "#a999ff",
+  },
+] as const;
+---
+
+<div class="workday" data-workday>
+  <div class="workday__top">
+    <span>Днес в бизнеса</span>
+    <span class="workday__status"><i></i> 3 задачи чакат</span>
+  </div>
+  <div class="workday__times" role="tablist" aria-label="Избери момент от работния ден">
+    {moments.map((moment, index) => (
+      <button type="button" role="tab" data-moment={moment.id} aria-selected={index === 0 ? "true" : "false"} style={`--moment:${moment.color}`}>
+        <span>{moment.time}</span><strong>{moment.role}</strong>
+      </button>
+    ))}
+  </div>
+  <div class="workday__scenes">
+    {moments.map((moment, index) => (
+      <article class="day-scene" data-day-scene={moment.id} aria-hidden={index === 0 ? "false" : "true"} style={`--moment:${moment.color}`}>
+        <div class="day-scene__question"><span>{moment.time}</span><h2>{moment.question}</h2><p>{moment.scene}</p></div>
+        <div class="day-scene__line" aria-hidden="true"><i></i><i></i><i></i></div>
+        <div class="day-scene__work">
+          <div><small>{moment.role} поема</small><strong>{moment.action}</strong></div>
+          <div><small>Остава следа</small><strong>{moment.result}</strong></div>
+          <div class="day-scene__boundary"><small>Човешката граница</small><strong>{moment.boundary}</strong></div>
+        </div>
+        <a href={`/sluzhiteli/${moment.id}/`}>Виж задачите на {moment.role} <span aria-hidden="true">→</span></a>
+      </article>
+    ))}
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-workday]").forEach((root) => {
+    const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>("[data-moment]"));
+    const scenes = Array.from(root.querySelectorAll<HTMLElement>("[data-day-scene]"));
+    const select = (id: string) => {
+      tabs.forEach((tab) => tab.setAttribute("aria-selected", String(tab.dataset.moment === id)));
+      scenes.forEach((scene) => scene.setAttribute("aria-hidden", String(scene.dataset.dayScene !== id)));
+    };
+    tabs.forEach((tab) => tab.addEventListener("click", () => select(tab.dataset.moment || "vdiga")));
+    root.addEventListener("keydown", (event) => {
+      if (!(event instanceof KeyboardEvent) || !["ArrowLeft", "ArrowRight"].includes(event.key)) return;
+      const current = tabs.findIndex((tab) => tab.getAttribute("aria-selected") === "true");
+      const next = (current + (event.key === "ArrowRight" ? 1 : -1) + tabs.length) % tabs.length;
+      tabs[next].focus(); select(tabs[next].dataset.moment || "vdiga");
+    });
+  });
+</script>
+
+<style>
+  .workday{overflow:hidden;border:1px solid rgba(255,255,255,.13);border-radius:28px;background:#0b1023;box-shadow:0 46px 110px -50px #000}
+  .workday__top{display:flex;align-items:center;justify-content:space-between;padding:18px 20px;border-bottom:1px solid rgba(255,255,255,.09);color:rgba(255,255,255,.52);font-size:12px}
+  .workday__status{display:flex;align-items:center;gap:7px}.workday__status i{width:6px;height:6px;border-radius:50%;background:#ff9b80;box-shadow:0 0 12px #ff9b80}
+  .workday__times{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid rgba(255,255,255,.09)}
+  .workday__times button{display:grid;gap:3px;min-height:68px;padding:13px 16px;border:0;border-right:1px solid rgba(255,255,255,.08);background:transparent;color:rgba(255,255,255,.44);text-align:left;cursor:pointer}
+  .workday__times button:last-child{border-right:0}.workday__times button[aria-selected="true"]{background:color-mix(in srgb,var(--moment) 10%,transparent);color:var(--moment);box-shadow:inset 0 -2px var(--moment)}
+  .workday__times span{font-size:11px}.workday__times strong{font-size:14px}
+  .workday__scenes{position:relative;min-height:480px}.day-scene{position:absolute;inset:0;display:grid;grid-template-rows:auto 34px 1fr auto;padding:30px;opacity:0;pointer-events:none;transform:translateY(10px);transition:opacity .3s ease,transform .35s ease}
+  .day-scene[aria-hidden="false"]{opacity:1;pointer-events:auto;transform:none}.day-scene__question>span{color:var(--moment);font-size:11px;font-weight:700}.day-scene__question h2{max-width:17ch;margin:8px 0 10px;color:#fff;font-size:clamp(1.8rem,3vw,2.6rem);line-height:1.05;letter-spacing:-.035em}.day-scene__question p{max-width:52ch;margin:0;color:rgba(255,255,255,.55);font-size:13px}
+  .day-scene__line{display:flex;align-items:center;gap:0}.day-scene__line::before,.day-scene__line::after{height:1px;flex:1;background:linear-gradient(90deg,var(--moment),rgba(255,255,255,.08));content:""}.day-scene__line::after{background:linear-gradient(90deg,rgba(255,255,255,.08),var(--moment))}.day-scene__line i{width:7px;height:7px;border-radius:50%;background:var(--moment);box-shadow:0 0 12px var(--moment)}
+  .day-scene__work{display:grid;grid-template-columns:1fr 1fr;gap:10px}.day-scene__work>div{display:grid;align-content:start;gap:7px;padding:15px;border:1px solid rgba(255,255,255,.09);border-radius:14px;background:rgba(255,255,255,.035)}.day-scene__work small{color:var(--moment);font-size:10px}.day-scene__work strong{color:#fff;font-size:12px;line-height:1.45}.day-scene__boundary{grid-column:1/-1}.day-scene>a{justify-self:start;margin-top:18px;color:#fff;font-size:13px;font-weight:700;text-decoration:none}.day-scene>a span{color:var(--moment)}
+  @media(max-width:700px){.workday__times button{min-height:62px;padding:10px}.workday__scenes{min-height:580px}.day-scene{padding:22px 16px}.day-scene__work{grid-template-columns:1fr}.day-scene__boundary{grid-column:auto}.day-scene__question h2{font-size:2rem}}
+  @media(prefers-reduced-motion:reduce){.day-scene{transition:none}}
+</style>

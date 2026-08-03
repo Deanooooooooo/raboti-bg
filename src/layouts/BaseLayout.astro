@@ -34,6 +34,14 @@ const props = Astro.props;
     {site.plausibleDomain && <script is:inline defer data-domain={site.plausibleDomain} src="https://plausible.io/js/script.js"></script>}
   </head>
   <body class={props.bodyClass}>
+    {props.bodyClass === "home-art" && <Fragment set:html={`<!--
+THESIS: Three unfinished moments from one working day make the offer concrete; this refuses the category-default card catalogue and abstract AI dashboard.
+OWN-WORLD: Near-black operational surfaces, cyan/violet/coral role signals, crisp white reading fields, and authored work records.
+STORY: Recognize the work that waits, see one available role take it within explicit limits, then submit one real task for evaluation.
+FIRST VIEWPORT: Direct offer and action on the left; an interactive working-day record with three recognizable moments on the right.
+FORM: Three unfinished moments, third grounded structure; seed 3f09ee64.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+-->`} />}
     <a class="skip-link" href="#main">Към съдържанието</a>
     <Header />
     <main id="main"><slot /></main>

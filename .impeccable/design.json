@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-03T00:00:00+03:00",
+  "title": "Design System: Работи",
+  "extensions": {
+    "colorMeta": {
+      "night": { "role": "neutral", "displayName": "Working Night", "canonical": "#070a18", "tonalRamp": ["#050711", "#070a18", "#11162d", "#252b46", "#4a5069", "#777c91", "#abb0bf", "#eef0f5"] },
+      "night-raised": { "role": "neutral", "displayName": "Raised Night", "canonical": "#0d1228", "tonalRamp": ["#060915", "#0d1228", "#181e3c", "#303753", "#555b73", "#808599", "#b2b5c3", "#eff0f4"] },
+      "operational-ink": { "role": "neutral", "displayName": "Record Ink", "canonical": "#111426", "tonalRamp": ["#080912", "#111426", "#22263a", "#3b3f52", "#606477", "#898d9d", "#b9bbc6", "#f0f0f3"] },
+      "warm-field": { "role": "neutral", "displayName": "Warm Workpaper", "canonical": "#f4f1ec", "tonalRamp": ["#26231f", "#49443e", "#716a61", "#999188", "#beb7af", "#d9d3cc", "#ebe6e0", "#f8f6f2"] },
+      "white": { "role": "neutral", "displayName": "Crisp White", "canonical": "#ffffff", "tonalRamp": ["#262626", "#4a4a4a", "#707070", "#969696", "#bdbdbd", "#d9d9d9", "#eeeeee", "#ffffff"] },
+      "cyan-signal": { "role": "primary", "displayName": "Live Cyan", "canonical": "#2de2d0", "tonalRamp": ["#042c29", "#07534e", "#0a7b73", "#10a79c", "#2dcfbe", "#65e4d8", "#a8f2eb", "#e9fcfa"] },
+      "violet-signal": { "role": "secondary", "displayName": "Scoped Violet", "canonical": "#8f7cff", "tonalRamp": ["#1c153d", "#342869", "#4d3c96", "#6752c5", "#8f7cff", "#ad9fff", "#d0c8ff", "#f1efff"] },
+      "coral-signal": { "role": "tertiary", "displayName": "Human Coral", "canonical": "#ff8d72", "tonalRamp": ["#3b1510", "#6a2a20", "#99402f", "#ca5945", "#f47b62", "#ffa48f", "#ffcabe", "#fff0ec"] },
+      "lime-signal": { "role": "tertiary", "displayName": "Guardrail Lime", "canonical": "#c7f36b", "tonalRamp": ["#25320b", "#465e17", "#688b24", "#8dbb34", "#b5e452", "#cef484", "#e3f9b5", "#f6fde8"] },
+      "blue-signal": { "role": "tertiary", "displayName": "Progress Blue", "canonical": "#62a8ff", "tonalRamp": ["#0b2444", "#16447b", "#2366b4", "#3489ed", "#62a8ff", "#8fc1ff", "#bddaff", "#edf6ff"] },
+      "line-light": { "role": "neutral", "displayName": "Night Hairline", "canonical": "rgba(255,255,255,.13)", "tonalRamp": ["rgba(255,255,255,.05)", "rgba(255,255,255,.08)", "rgba(255,255,255,.13)", "rgba(255,255,255,.20)", "rgba(255,255,255,.32)", "rgba(255,255,255,.48)", "rgba(255,255,255,.68)", "rgba(255,255,255,.90)"] },
+      "muted-on-dark": { "role": "neutral", "displayName": "Muted Night Copy", "canonical": "rgba(255,255,255,.55)", "tonalRamp": ["rgba(255,255,255,.12)", "rgba(255,255,255,.22)", "rgba(255,255,255,.34)", "rgba(255,255,255,.46)", "rgba(255,255,255,.55)", "rgba(255,255,255,.68)", "rgba(255,255,255,.80)", "rgba(255,255,255,.94)"] },
+      "muted-on-light": { "role": "neutral", "displayName": "Muted Record Copy", "canonical": "#686773", "tonalRamp": ["#17161b", "#2d2c33", "#45444d", "#5d5c67", "#777681", "#9897a0", "#c1c0c5", "#f1f1f2"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Thesis Display", "purpose": "Singular first-view statements." },
+      "headline": { "displayName": "Section Turn", "purpose": "Major section and closing statements." },
+      "title": { "displayName": "Record Title", "purpose": "Role, result, and proof headings." },
+      "body": { "displayName": "Direct Explanation", "purpose": "Plain-language scope and process copy." },
+      "label": { "displayName": "Operational Label", "purpose": "Time, status, role, price, and boundary metadata." }
+    },
+    "shadows": [
+      { "name": "operational-float", "value": "0 46px 110px -50px #000", "purpose": "Interactive workday panel over the night field." },
+      { "name": "action-glow", "value": "0 20px 50px -22px rgba(45,226,208,.8)", "purpose": "Spectral primary action." },
+      { "name": "record-rest", "value": "0 24px 70px -50px rgba(25,20,50,.5)", "purpose": "White role and work records on warm fields." }
+    ],
+    "motion": [
+      { "name": "state-fast", "value": "180ms ease", "purpose": "Button and focus-adjacent state changes." },
+      { "name": "record-transfer", "value": "opacity 300ms ease, transform 350ms ease", "purpose": "Workday scene selection and ownership transfer." },
+      { "name": "card-lift", "value": "250ms ease", "purpose": "Role-card hover response." }
+    ],
+    "breakpoints": [
+      { "name": "wide-adjust", "value": "1080px" },
+      { "name": "stack", "value": "920px" },
+      { "name": "compact-record", "value": "700px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Spectrum Button",
+      "kind": "button",
+      "refersTo": "button-spectrum",
+      "description": "Primary action on a dark operational stage.",
+      "html": "<button class=\"ds-btn-spectrum\">Покажи ни една задача <span aria-hidden=\"true\">↓</span></button>",
+      "css": ".ds-btn-spectrum{display:inline-flex;min-height:58px;align-items:center;gap:10px;padding:14px 24px;border:0;border-radius:16px;background:linear-gradient(110deg,#2de2d0,#63cff5 48%,#8f7cff);color:#070a18;font:600 15px/1.2 Inter,system-ui,sans-serif;box-shadow:0 20px 50px -22px rgba(45,226,208,.8);cursor:pointer;transition:transform .18s ease,box-shadow .18s ease}.ds-btn-spectrum:hover{transform:translateY(-2px);background:linear-gradient(110deg,#5af0df,#7bdcff 48%,#a596ff);box-shadow:0 24px 60px -22px rgba(98,168,255,.85)}.ds-btn-spectrum:focus-visible{outline:3px solid #2de2d0;outline-offset:3px}.ds-btn-spectrum:active{transform:none}"
+    },
+    {
+      "name": "Operational Text Link",
+      "kind": "button",
+      "description": "Secondary directional action with a signal arrow.",
+      "html": "<a class=\"ds-work-link\" href=\"#\">Виж трите роли <span aria-hidden=\"true\">→</span></a>",
+      "css": ".ds-work-link{display:inline-flex;min-height:52px;align-items:center;gap:10px;color:#fff;font:600 15px/1.2 Inter,system-ui,sans-serif;text-decoration:none}.ds-work-link span{color:#2de2d0;transition:transform .2s ease}.ds-work-link:hover span{transform:translateX(4px)}.ds-work-link:focus-visible{outline:3px solid #2de2d0;outline-offset:3px;border-radius:10px}"
+    },
+    {
+      "name": "Workday Tab",
+      "kind": "chip",
+      "description": "Time and role selector for an unfinished work moment.",
+      "html": "<button class=\"ds-work-tab\" aria-selected=\"true\"><span>10:18</span><strong>Вдига</strong></button>",
+      "css": ".ds-work-tab{display:grid;gap:3px;min-width:145px;min-height:68px;padding:13px 16px;border:0;border-right:1px solid rgba(255,255,255,.08);background:rgba(45,226,208,.10);color:#2de2d0;text-align:left;box-shadow:inset 0 -2px #2de2d0;cursor:pointer}.ds-work-tab span{font:400 11px/1.2 Inter,system-ui,sans-serif}.ds-work-tab strong{font:700 14px/1.2 Inter,system-ui,sans-serif}.ds-work-tab:hover{background:rgba(45,226,208,.16)}.ds-work-tab:focus-visible{outline:3px solid #2de2d0;outline-offset:-3px}"
+    },
+    {
+      "name": "Operational Work Record",
+      "kind": "card",
+      "refersTo": "card-operational",
+      "description": "Compact record that binds role action to an explicit outcome.",
+      "html": "<article class=\"ds-work-record\"><small>Вдига поема</small><strong>Отговаря с одобрената информация и проверява графика.</strong></article>",
+      "css": ".ds-work-record{display:grid;max-width:330px;align-content:start;gap:7px;padding:15px;border:1px solid rgba(255,255,255,.09);border-radius:14px;background:rgba(255,255,255,.035);font-family:Inter,system-ui,sans-serif}.ds-work-record small{color:#2de2d0;font-size:10px}.ds-work-record strong{color:#fff;font-size:12px;line-height:1.45}.ds-work-record:hover{border-color:rgba(45,226,208,.34)}.ds-work-record:focus-within{outline:3px solid #2de2d0;outline-offset:3px}"
+    },
+    {
+      "name": "Role Record",
+      "kind": "card",
+      "refersTo": "card-record",
+      "description": "Available-role record with scope, price, and next action.",
+      "html": "<article class=\"ds-role-card\"><div><small>Телефонен AI служител</small><h3>Вдига</h3></div><p>Поема входящите разговори по ясни правила.</p><footer><span><small>Предлага се · месечна цена</small><strong>от 149 €</strong></span><a href=\"#\">Виж задачите →</a></footer></article>",
+      "css": ".ds-role-card{display:flex;min-height:360px;max-width:360px;flex-direction:column;padding:30px;border:1px solid rgba(20,23,40,.11);border-radius:26px;background:#fff;color:#111426;box-shadow:0 24px 70px -50px rgba(25,20,50,.5);font-family:Inter,system-ui,sans-serif;transition:transform .25s ease,box-shadow .25s ease}.ds-role-card>div small{color:#16bfa7;font-size:13px;font-weight:600}.ds-role-card h3{margin:8px 0 0;font-size:42px;line-height:1;letter-spacing:-.04em}.ds-role-card>p{margin:72px 0 24px;color:#292a36;font-size:20px;font-weight:600;line-height:1.42}.ds-role-card footer{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-top:auto;padding-top:24px;border-top:1px solid rgba(20,23,40,.1)}.ds-role-card footer span{display:grid}.ds-role-card footer small{color:#777681;font-size:11px}.ds-role-card footer strong{font-size:18px}.ds-role-card a{padding:12px 14px;border-radius:14px;background:#111426;color:#fff;font-size:12px;font-weight:600;text-decoration:none}.ds-role-card:hover{transform:translateY(-6px);box-shadow:0 34px 80px -45px rgba(22,191,167,.35)}.ds-role-card a:hover{background:#16bfa7}.ds-role-card a:focus-visible{outline:3px solid #087c67;outline-offset:3px}"
+    },
+    {
+      "name": "Task Field",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "Plain-language field for one real unfinished task.",
+      "html": "<label class=\"ds-task-field\"><span>Коя задача искаш да поеме AI служителят?</span><textarea rows=\"3\" placeholder=\"Например: да вдига, когато екипът е зает\"></textarea></label>",
+      "css": ".ds-task-field{display:grid;gap:8px;color:#111426;font:600 13px/1.3 Inter,system-ui,sans-serif}.ds-task-field textarea{width:100%;min-width:300px;padding:13px 14px;border:1px solid #cfd6d1;border-radius:10px;background:#fff;color:#111426;font:400 16px/1.5 Inter,system-ui,sans-serif;resize:vertical}.ds-task-field textarea::placeholder{color:#777681}.ds-task-field textarea:hover{border-color:#aeb7b0}.ds-task-field textarea:focus-visible{outline:3px solid #087c67;outline-offset:3px;border-color:#087c67}"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Work Ledger After Dark",
+    "overview": "Работи feels like a live operational surface rather than a generic technology landing page. Near-black workspaces make unfinished tasks visible; cyan, violet, and coral signals identify who owns the next action; crisp warm and white fields turn claims into readable scope, price, approval, and work records.\n\nThe visual system is confident but grounded. Expressive aurora light and spectral accents establish energy at decisive moments, while the underlying structure stays legible, explicit, and businesslike. Every flourish should help a visitor recognize unfinished work, see a role take it within limits, or inspect the record it leaves behind.",
+    "keyCharacteristics": [
+      "Near-black operational stages paired with warm, high-clarity evidence fields.",
+      "Cyan, violet, and coral used as functional role and state signals.",
+      "Large, tightly set Inter headlines balanced by compact work-record labels.",
+      "Rounded, bordered surfaces with restrained lift and precise internal structure.",
+      "Movement that explains transfer, progress, selection, or ownership."
+    ],
+    "rules": [
+      { "name": "The Signal Has a Job Rule", "body": "Cyan, violet, coral, blue, and lime must identify an action, role, status, path, or boundary; never scatter them as decoration.", "section": "colors" },
+      { "name": "The Two Working Conditions Rule", "body": "Use near-black for live work in motion and warm/white fields for scope, comparison, price, and durable records.", "section": "colors" },
+      { "name": "The Plain-Spoken Scale Rule", "body": "Create authority with size and compression, not ornamental type or jargon-like uppercase labeling.", "section": "typography" },
+      { "name": "The Offer-and-Operation Rule", "body": "When a first viewport has two columns, the left side explains the offer and the right side demonstrates work moving to a recorded result.", "section": "layout" },
+      { "name": "The Flat Record Rule", "body": "Records stay nearly flat at rest; stronger lift is reserved for the active control or hovered role.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do show work as a sequence from real input to action, recorded result, and human boundary.",
+      "Do pair expressive dark stages with crisp light evidence fields.",
+      "Do keep role color consistent across tab, status, connector, card halo, and action state.",
+      "Do preserve explicit price, permissions, approval, and availability hierarchy in product records.",
+      "Do respect reduced motion and retain visible keyboard focus across interactive surfaces."
+    ],
+    "donts": [
+      "Don't turn the signal palette into a decorative rainbow or use every accent in every section.",
+      "Don't replace operational records with generic glass cards, floating blobs, or abstract AI imagery.",
+      "Don't use warm/white evidence fields without clear borders, headings, and record structure.",
+      "Don't present unavailable roles with the same emphasis or action language as available roles.",
+      "Don't add invented logos, metrics, testimonials, or unlabeled demonstrations as proof."
+    ]
+  }
+}

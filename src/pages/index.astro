@@ -5,13 +5,15 @@ import AgentAvatar from "../components/AgentAvatar.astro";
 import ContactForm from "../components/ContactForm.astro";
 import FAQ from "../components/FAQ.astro";
 import Icon from "../components/Icon.astro";
-import LivingWorkMap from "../components/LivingWorkMap.astro";
+import WorkdayStory from "../components/WorkdayStory.astro";
 import WorkflowVisual from "../components/WorkflowVisual.astro";
 import WorkGlyph from "../components/WorkGlyph.astro";
 import { breadcrumbSchema, faqSchema } from "../data/schema";
 import { homeFaqs, site } from "../data/site";
 
 const agents = (await getCollection("agents")).sort((a, b) => a.data.order - b.data.order);
+const liveAgents = agents.filter((agent) => agent.data.status === "live");
+const futureAgents = agents.filter((agent) => agent.data.status === "soon");
 const schemas = [
   faqSchema(homeFaqs),
   breadcrumbSchema([{ name: "Работи", url: site.url }]),
@@ -59,40 +61,39 @@ const schemas = [
     <div class="home-noise" aria-hidden="true"></div>
     <div class="shell home-hero__grid">
       <div class="home-hero__copy">
-        <p class="spectrum-label"><span></span> AI служители за българския бизнес</p>
-        <h1>Работата не чака.<br /><em>Вече има кой да я свърши.</em></h1>
-        <p class="home-hero__lead">Работи е българска услуга за AI служители с конкретна длъжност, месечна цена и човешки контрол. Те поемат пропуснатите обаждания, промените по сайта и ръчната работа между системите.</p>
+        <h1>Денят свършва.<br /><em>Работата — не.</em></h1>
+        <p class="home-hero__lead">Работи поема три конкретни вида работа: входящи обаждания, промени по сайта и повтарящи се задачи между системите. С ясна месечна цена, правила и човек на важните решения.</p>
         <div class="home-hero__actions">
-          <a class="button button--spectrum" href="#ekip">Намери своя AI служител <Icon name="arrow-down" /></a>
-          <a class="home-link" href="#proces">Виж как работи <Icon name="arrow-right" /></a>
+          <a class="button button--spectrum" href="#naemi">Покажи ни една задача <Icon name="arrow-down" /></a>
+          <a class="home-link" href="#ekip">Виж трите роли <Icon name="arrow-right" /></a>
         </div>
         <div class="home-hero__signals" aria-label="Основни характеристики">
-          <span><i></i> Старт до 5 работни дни</span>
+          <span><i></i> 3 роли, които се предлагат сега</span>
           <span><i></i> Работи на български</span>
           <span><i></i> Плащане и публикуване чакат одобрение</span>
         </div>
       </div>
-      <LivingWorkMap />
+      <WorkdayStory />
     </div>
   </section>
 
   <section class="home-facts" aria-label="Проблеми, които AI служителите поемат">
     <div class="shell home-facts__grid">
-      <div><span>Когато телефонът звъни</span><strong>Клиентът получава отговор</strong><p>Вдига разговаря с него и записва час, докато екипът ти обслужва други хора.</p></div>
-      <div><span>Когато задачите се трупат</span><strong>Хората ти не преписват данни</strong><p>Помага прехвърля информацията между имейла, таблиците и CRM-а.</p></div>
-      <div><span>Преди да бъде направена промяна</span><strong>Ти избираш какво се публикува</strong><p>AI служителят подготвя работата, а плащанията и необратимите действия чакат одобрение.</p></div>
+      <div><span>Не започваш от технология</span><strong>Показваш една истинска задача</strong><p>Разглеждаме как я вършите днес, откъде идва и кога трябва да стигне до човек.</p></div>
+      <div><span>Не купуваш обещание</span><strong>Получаваш описана длъжност</strong><p>Знаеш какво поема ролята, какво не поема, колко струва и колко време отнема настройката.</p></div>
+      <div><span>Не даваш сляп достъп</span><strong>Важните решения остават твои</strong><p>Плащане, договор, публикуване и непредвиден случай чакат предварително уговорена човешка преценка.</p></div>
     </div>
   </section>
 
   <section class="home-section roster-section" id="ekip">
     <div class="shell">
       <div class="home-heading">
-        <div><p class="spectrum-label spectrum-label--dark"><span></span> Избери по проблема</p><h2>Не купуваш AI.<br /><em>Наемаш свършена работа.</em></h2></div>
-        <p>Започни от задачата, която губи клиенти или време днес. За всяка роля виждаш какво поема, колко струва и кои действия остават за човек.</p>
+        <div><h2>Три роли.<br /><em>Три ясни вида работа.</em></h2></div>
+        <p>Избери по онова, което остава несвършено. Всяка роля има собствен обхват, начална цена и граница за човешко решение.</p>
       </div>
 
       <div class="roster-grid">
-        {agents.map((agent) => {
+        {liveAgents.map((agent) => {
           const data = agent.data;
           return (
             <article class:list={["roster-card", `roster-card--${data.slug}`, data.status === "soon" && "roster-card--soon"]} style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
@@ -108,10 +109,9 @@ const schemas = [
               </header>
               <div class="roster-card__body">
                 <span>{data.summary}</span>
-                {data.status === "soon" && <span class="roster-status"><i></i>В разработка</span>}
               </div>
               <footer>
-                <div><small>{data.status === "live" ? "Предлага се · месечна цена" : "Статус"}</small><strong>{data.status === "live" ? data.priceLabel : "Предстои"}</strong></div>
+                <div><small>Предлага се · месечна цена</small><strong>{data.priceLabel}</strong></div>
                 <a href={`/sluzhiteli/${data.slug}/`} aria-label={`Виж задачите и цената за ${data.name}`}><span>Виж задачите</span><Icon name="arrow-right" /></a>
               </footer>
             </article>
@@ -119,9 +119,13 @@ const schemas = [
         })}
       </div>
 
+      <div class="future-roles" aria-label="Роли в разработка">
+        <div><span>В разработка</span><strong>Следващите роли не се продават още.</strong></div>
+        {futureAgents.map((agent) => <a href={`/sluzhiteli/${agent.data.slug}/`}><span>{agent.data.name}</span><small>{agent.data.role} · списък за известие</small></a>)}
+      </div>
+
       <aside class="fit-check" aria-labelledby="fit-title">
         <div class="fit-check__intro">
-          <p class="spectrum-label spectrum-label--dark"><span></span> Бърза проверка</p>
           <h3 id="fit-title">Подходящ ли е AI служител за твоя бизнес?</h3>
           <p>Започни с работа, която се повтаря и може да бъде показана с реални примери.</p>
         </div>
@@ -140,7 +144,6 @@ const schemas = [
   <section class="home-section process-section" id="proces">
     <div class="shell process-layout">
       <div class="process-copy">
-        <p class="spectrum-label"><span></span> От входяща задача до записан резултат</p>
         <h2>Даваш работа.<br /><em>Не даваш сляп достъп.</em></h2>
         <p>Показваш ни как вършите задачата днес. Настройваме каква информация използва AI служителят, какво може да направи сам и при кои действия чака твоето одобрение.</p>
         <ul class="process-principles">
@@ -153,22 +156,21 @@ const schemas = [
     </div>
   </section>
 
-  <section class="home-section boundaries-section" id="kontrol">
-    <div class="shell boundaries-grid">
-      <div class="boundary-intro">
-        <p class="spectrum-label"><span></span> Спокойствие, не черна кутия</p>
-        <h2>Знаеш какво върши.<br /><em>И кога спира.</em></h2>
-      </div>
-      <div class="boundary-card boundary-card--cyan"><span>Преди старта</span><h3>Виждаш задачите, цената и срока за настройка</h3><p>Офертата описва какво поема служителят и какво остава извън услугата.</p></div>
-      <div class="boundary-card boundary-card--violet"><span>Достъп</span><h3>Използва само разрешените системи</h3><p>Получава достъп единствено до програмите и данните, нужни за работата му.</p></div>
-      <div class="boundary-card boundary-card--coral"><span>Одобрение</span><h3>Пита преди плащане, договор или публикуване</h3><p>Получаваш подготвеното действие и решаваш дали да бъде изпълнено.</p></div>
-      <div class="boundary-card boundary-card--lime"><span>История</span><h3>Виждаш какво е направено по всяка задача</h3><p>Записът показва използваната информация, извършеното действие и резултата.</p></div>
+  <section class="home-section proof-section" id="kontrol">
+    <div class="shell proof-grid">
+      <div><h2>Обхватът е написан.<br /><em>Границата също.</em></h2><p>Нямаме измислени лога и проценти, с които да те убеждаваме. Показваме какво реално влиза в предложението.</p></div>
+      <ol>
+        <li><span>01</span><div><strong>Задачи</strong><p>Кои входове приема ролята и какъв резултат трябва да остави.</p></div></li>
+        <li><span>02</span><div><strong>Достъпи</strong><p>Кои системи и данни са нужни — нищо извън описаното.</p></div></li>
+        <li><span>03</span><div><strong>Одобрения</strong><p>Точният момент, в който работата спира и чака човек.</p></div></li>
+        <li><span>04</span><div><strong>Цена и старт</strong><p>Месечната цена, еднократната настройка и реалният срок преди работа.</p></div></li>
+      </ol>
     </div>
   </section>
 
   <section class="home-section home-faq-section">
     <div class="shell home-faq-grid">
-      <div><p class="spectrum-label spectrum-label--dark"><span></span> Преди да решиш</p><h2>Какво поема AI служителят и как започва?</h2><p>Не ти трябва технически екип. Покажи ни работата, която остава несвършена, бави хората ти или изпуска клиенти.</p></div>
+      <div><h2>Какво поема AI служителят и как започва?</h2><p>Не ти трябва технически екип. Покажи ни работата, която остава несвършена, бави хората ти или изпуска клиенти.</p></div>
       <FAQ items={homeFaqs} />
     </div>
   </section>
@@ -177,9 +179,8 @@ const schemas = [
     <div class="home-contact__aurora" aria-hidden="true"></div>
     <div class="shell home-contact__grid">
       <div>
-        <p class="spectrum-label"><span></span> Започни от един истински проблем</p>
-        <h2>Коя задача ти струва<br /><em>най-много време или клиенти?</em></h2>
-        <p>Опиши я с няколко думи. Ще ти кажем честно дали някой от AI служителите ни може да я поеме, как се настройва и каква ще е цената.</p>
+        <h2>Коя задача остана<br /><em>за утре и днес?</em></h2>
+        <p>Опиши само една. До един работен ден ще ти кажем дали Вдига, Пише или Помага може да я поеме — и ако не може, ще го кажем направо.</p>
         <div class="contact-spectrum" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
       </div>
       <ContactForm title="Разкажи ни за работата" />
