@@ -3,8 +3,8 @@
   <img
     class="employee-hero__mark"
     src="/assets/raboti-r-hero-exact.webp"
-    width="659"
-    height="1045"
+    width="1466"
+    height="1466"
     alt=""
     aria-describedby="employee-hero-desc"
     decoding="async"
@@ -16,12 +16,12 @@
 </figure>
 
 <style>
-  .employee-hero { position: relative; display: grid; min-height: 620px; margin: 0; place-items: center; transform: translate(3%,-9%); }
-  .employee-hero__halo { position: absolute; width: 500px; height: 500px; border-radius: 50%; background: radial-gradient(circle,rgba(45,226,208,.19),rgba(102,117,255,.13) 42%,transparent 72%); filter: blur(30px); }
-  .employee-hero__mark { position: relative; z-index: 1; width: auto; max-width: min(100%,590px); height: min(78vh,760px); object-fit: contain; filter: drop-shadow(0 42px 52px rgba(0,0,0,.28)); animation: employee-float 7s ease-in-out infinite; }
+  .employee-hero { position: relative; display: grid; min-height: 620px; margin: 0; place-items: center; align-self: stretch; transform: translate(2%, -7%); }
+  .employee-hero__halo { position: absolute; width: min(42vw, 560px); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle,rgba(45,226,208,.19),rgba(102,117,255,.13) 42%,transparent 72%); filter: blur(30px); }
+  .employee-hero__mark { position: relative; z-index: 1; width: min(50vw, 740px); max-width: none; height: auto; object-fit: contain; filter: drop-shadow(0 42px 52px rgba(0,0,0,.28)); animation: employee-float 7s ease-in-out infinite; }
   .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
   @keyframes employee-float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-10px); } }
-  @media(max-width:960px){.employee-hero{min-height:580px;transform:none}.employee-hero__mark{width:auto;max-width:min(92vw,520px);height:min(72vh,690px)}}
-  @media(max-width:560px){.employee-hero{min-height:500px}.employee-hero__halo{width:360px;height:360px}.employee-hero__mark{width:auto;max-width:92vw;height:520px}}
+  @media(max-width:960px){.employee-hero{min-height:560px;transform:none}.employee-hero__halo{width:min(72vw,500px)}.employee-hero__mark{width:min(78vw,580px)}}
+  @media(max-width:560px){.employee-hero{min-height:430px}.employee-hero__halo{width:min(88vw,390px)}.employee-hero__mark{width:min(96vw,440px)}}
   @media(prefers-reduced-motion:reduce){.employee-hero__mark{animation:none}}
 </style>
