@@ -802,8 +802,8 @@ p { text-wrap: pretty; }
 @media (max-width: 700px) {
   .home-hero { min-height: 0; }
   .home-hero__grid { padding-block: 64px; }
-  .home-hero h1 { min-height: 4em; font-size: clamp(2.75rem, 12.5vw, 4.15rem); line-height: 1; }
-  .home-hero__lead { min-height: 9.5em; font-size: var(--text-base); }
+  .home-hero h1 { min-height: 4em; font-size: clamp(2.65rem, 11vw, 4.15rem); line-height: 1; }
+  .home-hero__lead { width: 100%; max-width: 100%; min-height: 9.5em; overflow-wrap: anywhere; font-size: var(--text-base); }
   .home-hero__actions { align-items: stretch; flex-direction: column; }
   .home-hero__actions > * { width: 100%; justify-content: center; }
   .home-hero__signals { display: grid; gap: 10px; }
