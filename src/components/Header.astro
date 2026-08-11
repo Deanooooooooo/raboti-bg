@@ -5,7 +5,7 @@ import { site } from "../data/site";
 <header class="site-header">
   <div class="shell header-inner">
     <a class="brand" href="/" aria-label="Raboti — начало">
-      <img class="brand-logo" src="/assets/raboti-logo.webp" width="600" height="191" alt="" decoding="async" />
+      <img class="brand-logo" src="/assets/raboti-logo.webp" width="600" height="191" alt="" decoding="sync" fetchpriority="high" />
     </a>
     <nav id="site-nav" class="site-nav" aria-label="Основна навигация">
       {site.nav.map((item) => <a href={item.href}>{item.label}</a>)}
