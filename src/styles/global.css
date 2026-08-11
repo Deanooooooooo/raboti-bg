@@ -544,8 +544,8 @@ p { text-wrap: pretty; }
 .home-art .nav-toggle span:not(.sr-only) { background: var(--home-night); }
 .home-art main { overflow: hidden; }
 
-.home-hero { position: relative; isolation: isolate; min-height: 820px; margin: 12px; overflow: hidden; border-radius: 34px; background: #171938; color: #fff; box-shadow: 0 30px 90px -58px rgba(29,20,73,.72); }
-.home-hero::before { position: absolute; inset: 0; z-index: -3; background: linear-gradient(115deg, rgba(25,29,68,.05), rgba(10,12,34,.54) 46%, rgba(18,20,53,.1)); content: ""; }
+.home-hero { position: relative; isolation: isolate; min-height: 820px; margin: 12px; overflow: hidden; border-radius: 34px; background: #242650; color: #fff; box-shadow: 0 30px 90px -58px rgba(29,20,73,.72); }
+.home-hero::before { position: absolute; inset: 0; z-index: -3; background: linear-gradient(115deg, rgba(38,42,86,.03), rgba(16,18,47,.4) 46%, rgba(30,32,72,.06)); content: ""; }
 .home-aurora { position: absolute; inset: 0; z-index: -2; overflow: hidden; filter: blur(1px); pointer-events: none; }
 .home-aurora i { position: absolute; border-radius: 50%; opacity: .72; filter: blur(100px); }
 .home-aurora i:nth-child(1) { top: -25%; right: 7%; width: 48vw; height: 48vw; background: rgba(67,81,255,.34); }
