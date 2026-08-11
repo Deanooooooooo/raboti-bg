@@ -119,7 +119,7 @@ const schemas = [
           const data = agent.data;
           const profile = agentProfiles[data.slug];
           return (
-            <article class:list={["roster-card", `roster-card--${data.slug}`, data.status === "soon" && "roster-card--soon"]} style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
+            <a class:list={["roster-card", `roster-card--${data.slug}`, data.status === "soon" && "roster-card--soon"]} href={`/sluzhiteli/${data.slug}/`} aria-label={`${profile.name}: как може да помогне`} style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
               <header>
                 <div class="roster-card__heading">
                   <p>{data.role}</p>
@@ -133,10 +133,10 @@ const schemas = [
                 <span>{data.summary}</span>
               </div>
               <footer>
-                <div><small>Предлага се · месечна цена</small><strong>{data.priceLabel}</strong></div>
-                <a href={`/sluzhiteli/${data.slug}/`} aria-label={`Виж задачите и цената за ${data.name}`}><span>Виж задачите</span><Icon name="arrow-right" /></a>
+                <strong>{data.priceLabel}</strong>
+                <span class="roster-card__action"><span>Как мога да помогна</span><Icon name="arrow-right" /></span>
               </footer>
-            </article>
+            </a>
           );
         })}
       </div>
