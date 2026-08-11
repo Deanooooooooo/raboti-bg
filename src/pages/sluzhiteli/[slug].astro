@@ -15,7 +15,7 @@ export async function getStaticPaths() {
 
 const { agent, agents } = Astro.props;
 const data = agent.data;
-const colleagues = agents.filter((item) => item.id !== agent.id && item.data.status === "live").sort((a,b) => a.data.order - b.data.order).slice(0,2);
+const colleagues = agents.filter((item) => item.id !== agent.id && item.data.status === "live").sort((a,b) => a.data.order - b.data.order);
 const pageUrl = `${site.url}/sluzhiteli/${data.slug}/`;
 
 const profiles = {
@@ -24,33 +24,54 @@ const profiles = {
     image: "/assets/employee-vdiga-gloria-v1.webp",
     imageAlt: "Глория — образът на телефонния рецепционист Vdiga",
     hello: "Здравейте, аз съм Глория.",
-    pitch: "Когато телефонът звънне, аз вдигам. Отговарям на обичайните въпроси, записвам часове и не оставям клиента да чака някой да се освободи.",
-    proof: "Няма да импровизирам от ваше име. Преди да започна, ще ми покажете как разговаряте с клиентите си, какво мога да казвам и кога да ви потърся.",
-    fit: "Най-полезна съм, ако губите обаждания, докато работите с клиент, шофирате или вече сте затворили.",
-    question: "Телефонът звъни, а няма кой да вдигне?",
-    answer: "Дайте ми номера и правилата. Аз ще поема разговора, а вие ще получите човека, часа и причината да се обади.",
+    headline: "Телефонът звъни. Аз вдигам.",
+    intro: "Докато сте с клиент, на път или вече сте затворили, аз отговарям, записвам часове и ви оставям най-важното от разговора.",
+    firstQuestion: "Защо да ви наемем?",
+    firstAnswer: "Защото пропуснатото обаждане често е пропуснат клиент. Аз не излизам в почивка и не оставям телефона да звъни, когато при вас стане напечено.",
+    interview: [
+      ["Как ще говорите с клиентите ми?", "Ще ми дадете вашите цени, услуги, работно време и отговори. Ще говоря по тях. Още в началото казвам, че съм AI асистент — никого не заблуждавам, че съм човек."],
+      ["Какво става, ако не знаете отговора?", "Няма да си измисля. Ще взема име, телефон и причината за обаждането, после ще ви изпратя всичко, за да върнете разговора."],
+      ["Можете ли наистина да записвате часове?", "Да, ако свържем календара или системата ви за резервации. Проверявам свободните часове, записвам избрания и потвърждавам на клиента."],
+      ["Как започваме?", "Давате ми най-честите обаждания и правилата за тях. Настройваме номера, правим пробни разговори и ме пускате, когато звуча както трябва."],
+    ],
+    closing: "Ако телефонът ви прекъсва работата или остава без отговор, дайте ми един пробен разговор.",
+    cta: "Чуйте Глория в разговор",
   },
   pishe: {
     person: "Pishe",
     image: "/assets/employee-pishe-v1.webp",
-    imageAlt: "Pishe — уеб служител за поддръжка на фирмен сайт",
+    imageAlt: "Pishe — служител за поддръжка на фирмен сайт",
     hello: "Здравейте, аз съм Pishe.",
-    pitch: "Пазя сайта ви актуален. Сменям цени, услуги, работно време, снимки и текстове, вместо всяка малка промяна да чака свободен програмист.",
-    proof: "Работя само по уговорените промени. Показвам ви какво съм подготвил и не публикувам нещо важно, преди да го одобрите.",
-    fit: "Най-полезен съм, ако сайтът ви изостава от бизнеса и все някой трябва да напомня какво още не е обновено.",
-    question: "Сайтът още показва стара цена или услуга?",
-    answer: "Изпратете ми промяната както бихте я написали на колега. Ще я подготвя, ще я проверя и ще ви я дам за одобрение.",
+    headline: "Сайтът ви не бива да чака.",
+    intro: "Сменям цени, услуги, работно време, снимки и текстове. Малката промяна приключва днес, вместо да чака свободен програмист две седмици.",
+    firstQuestion: "Защо да ви наемем?",
+    firstAnswer: "Защото клиентът вярва на това, което вижда на сайта. Стара цена, несъществуваща услуга или грешно работно време ви излагат точно когато човек решава дали да ви се обади.",
+    interview: [
+      ["Как да ви дам промяна?", "Напишете ми я както бихте я пратили на колега: „Сменете цената на тази услуга“ или „Качете тези три снимки“. Не ви трябва техническо задание."],
+      ["Ще публикувате ли без мен?", "Само ако предварително сте разрешили точно този вид промяна. Нова цена, важна оферта или нещо необичайно първо идва при вас за одобрение."],
+      ["А ако нещо се счупи?", "Преди промяната пазя предишната версия. Проверявам страницата след публикуване и ако има проблем, връщам работещото състояние."],
+      ["Какво не е ваша работа?", "Не се представям за дизайнер или програмист на голям проект. Поемам ежедневната поддръжка и малките подобрения, които иначе все остават за после."],
+    ],
+    closing: "Ако сайтът ви изостава от бизнеса, изпратете ми промяната, която отлагате най-дълго.",
+    cta: "Дайте ми една промяна",
   },
   pomaga: {
     person: "Pomaga",
     image: "/assets/employee-pomaga-v1.webp",
-    imageAlt: "Pomaga — оперативен служител за повтаряща се офис работа",
+    imageAlt: "Pomaga — служител за повтаряща се офис работа",
     hello: "Здравейте, аз съм Pomaga.",
-    pitch: "Поемам досадната работа между имейла, таблиците, CRM-а и програмите ви. Прехвърлям данни, обновявам статуси и подготвям справки.",
-    proof: "Първо ми показвате една задача от начало до край. Повтарям я по същите правила, записвам какво съм направила и ви питам преди плащане или необратима промяна.",
-    fit: "Най-полезна съм, ако човек от екипа губи часове в копиране, проверяване и местене на една и съща информация.",
-    question: "Някой още мести данни на ръка всеки ден?",
-    answer: "Покажете ми веднъж откъде идват и къде трябва да стигнат. После ще върша повторението, без да ви прекъсвам за всяка стъпка.",
+    headline: "Дайте ми работата, която никой не иска да повтаря.",
+    intro: "Чета определени имейли, местя данни в CRM-а, обновявам таблици и подготвям справки. Тихата офис работа се свършва, без да изяжда деня на човек от екипа.",
+    firstQuestion: "Защо да ви наемем?",
+    firstAnswer: "Защото добрите ви хора не трябва да прекарват сутринта в копиране от един екран в друг. Покажете ми повторението веднъж и аз ще го поема всеки следващ път.",
+    interview: [
+      ["Каква работа можете да поемете?", "Работа с ясни стъпки: имейлът пристига, данните се проверяват, записват се на правилното място и някой получава известие или справка."],
+      ["Как ще знаете кое къде отива?", "Вие ми показвате една истинска задача от начало до край. Записваме правилата и изключенията. После следвам тях, вместо да налучквам."],
+      ["Можете ли да правите плащания?", "Не сама. Мога да подготвя данните, но плащане, договор или друга необратима стъпка чака човек да я одобри."],
+      ["Ще трябва ли да сменим програмите си?", "Не, ако сегашните ви системи позволяват надеждна връзка. Първо проверяваме какво вече използвате и чак тогава казваме какво е възможно."],
+    ],
+    closing: "Ако някой мести едни и същи данни всеки ден, покажете ми задачата. Ще ви кажем направо дали мога да я поема.",
+    cta: "Покажете ми повторението",
   },
 } as const;
 
@@ -62,73 +83,55 @@ const schemas = [
     offers: { "@type": "Offer", price: data.price, priceCurrency: data.currency, availability: "https://schema.org/InStock", url: pageUrl } },
 ];
 ---
-<BaseLayout title={data.seoTitle} description={data.seoDescription} canonical={`/sluzhiteli/${data.slug}/`} image={`/og/${data.slug}.svg`} schema={schemas} bodyClass={`agent-profile agent-profile--${data.slug}`}>
-  <section class="interview-hero" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
-    <div class="interview-hero__inner">
-      <div class="interview-hero__copy">
-        <p class="interview-hello">{profile.hello}</p>
-        <h1>{profile.pitch}</h1>
-        <p class="interview-intro">{profile.proof}</p>
-        <div class="interview-actions">
-          <a class="button interview-button" href="#naemi">Поканете ме на разговор</a>
-          {data.demoUrl && <a class="interview-link" href={data.demoUrl}>Чуйте как говоря <Icon name="arrow-right" /></a>}
-        </div>
+<BaseLayout title={data.seoTitle} description={data.seoDescription} canonical={`/sluzhiteli/${data.slug}/`} image={`/og/${data.slug}.svg`} schema={schemas} bodyClass={`candidate-page candidate-page--${data.slug}`}>
+  <section class="candidate-hero" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
+    <div class="candidate-hero__portrait">
+      <img src={profile.image} alt={profile.imageAlt} width="780" height="900" loading="eager" fetchpriority="high" decoding="sync" />
+      <p><strong>{profile.person}</strong><span>{data.role}</span></p>
+    </div>
+    <div class="candidate-hero__pitch">
+      <p class="candidate-hello">{profile.hello}</p>
+      <h1>{profile.headline}</h1>
+      <p class="candidate-opening">{profile.intro}</p>
+      <div class="candidate-hero__action">
+        <a class="button" href={data.demoUrl || "#razgovor"}>{profile.cta}</a>
+        <p><strong>{data.priceLabel}</strong><span>Може да започне {data.startTime}</span></p>
       </div>
-      <figure class="interview-portrait">
-        <img src={profile.image} alt={profile.imageAlt} width="780" height="900" loading="eager" fetchpriority="high" decoding="sync" />
-        <figcaption>
-          <strong>{profile.person}</strong>
-          <span>{data.role}</span>
-          <small>{data.priceLabel} · започва {data.startTime}</small>
-        </figcaption>
-      </figure>
     </div>
   </section>
 
-  <section class="candidate-fit" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
-    <div class="candidate-fit__question">
-      <h2>{profile.question}</h2>
-      <p>{profile.answer}</p>
-    </div>
-    <p class="candidate-fit__note">{profile.fit}</p>
+  <article class="candidate-interview" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
+    <header class="candidate-interview__lead">
+      <p>{profile.firstQuestion}</p>
+      <h2>„{profile.firstAnswer}“</h2>
+    </header>
+    <dl class="candidate-interview__questions">
+      {profile.interview.map(([question, answer]) => <div><dt>{question}</dt><dd>{answer}</dd></div>)}
+    </dl>
+  </article>
+
+  <section class="candidate-scope" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
+    <div class="candidate-scope__heading"><h2>Това мога да сваля от бюрото ви</h2><p>Не всичко. Точно тази работа.</p></div>
+    <ul>{data.duties.map((duty) => <li><Icon name="check" /><span>{duty}</span></li>)}</ul>
   </section>
 
-  <section class="interview-section interview-duties" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
-    <div class="interview-section__heading">
-      <h2>Какво мога да поема още от първия месец</h2>
-      <p>Това са задачите, за които можете да разчитате на мен.</p>
-    </div>
-    <ol class="interview-duty-list">
-      {data.duties.map((duty, index) => <li><span>{String(index + 1).padStart(2, "0")}</span><p>{duty}</p></li>)}
-    </ol>
+  <section class="candidate-details" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
+    <div class="candidate-details__price"><p>Заплата</p><strong>{data.priceLabel}</strong><span>Точната цена зависи от обема работа и нужните връзки.</span></div>
+    <div class="candidate-details__tools"><p>Мога да работя с</p><ul>{data.integrations.map((item) => <li>{item}</li>)}</ul></div>
   </section>
 
-  <section class="interview-section interview-work" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
-    <div class="interview-work__copy">
-      <h2>Как ще работим заедно</h2>
-      <p>В началото ми показвате истинска задача. Уточняваме какво мога да правя сама, кога да питам и как да ви върна резултата.</p>
-      <div class="interview-price"><span>Месечно</span><strong>{data.priceLabel}</strong><small>Точната цена зависи от работата и нужните връзки.</small></div>
-    </div>
-    <div class="interview-boundaries">
-      <h3>От мен можете да очаквате</h3>
-      <ul>{data.features.map((feature) => <li><Icon name="check" /><span>{feature}</span></li>)}</ul>
-      <h3>Мога да работя с</h3>
-      <div class="interview-tools">{data.integrations.map((item) => <span>{item}</span>)}</div>
-    </div>
-  </section>
-
-  <section class="interview-section interview-faq" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
-    <div><h2>Какво бихте ме попитали на интервю?</h2><p>Ето честните отговори на най-важното преди да започнем.</p></div>
+  <section class="candidate-faq" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
+    <div><h2>Още въпроси, преди да ме наемете</h2><p>Кратките отговори са тук. За вашата задача ще говорим конкретно.</p></div>
     <FAQ items={data.faqs} />
   </section>
 
-  <section class="interview-colleagues">
-    <div class="interview-colleagues__head"><h2>Запознайте се и с колегите ми</h2><p>Ако задачата е друга, може би един от тях е точният човек.</p></div>
-    <div class="agent-grid agent-grid--three">{colleagues.map((item) => <AgentCard agent={item} compact />)}</div>
+  <section class="candidate-close" id="razgovor" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
+    <div><h2>{profile.closing}</h2><p>Не подготвяйте задание. Напишете какво остава несвършено.</p></div>
+    <ContactForm selectedAgent={data.slug} intent="hire" />
   </section>
 
-  <section class="interview-hire" id="naemi" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
-    <div class="interview-hire__copy"><h2>Имате ли работа за мен?</h2><p>Опишете една задача както бихте я обяснили на нов служител. Ще ви кажем направо дали мога да я поема.</p></div>
-    <ContactForm selectedAgent={data.slug} intent="hire" />
+  <section class="candidate-team">
+    <div><h2>Може би търсите друг човек</h2><p>Запознайте се с останалите двама.</p></div>
+    <div class="agent-grid">{colleagues.map((item) => <AgentCard agent={item} compact />)}</div>
   </section>
 </BaseLayout>
