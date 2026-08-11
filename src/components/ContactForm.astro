@@ -6,7 +6,7 @@ interface Props {
   intent?: "hire" | "waitlist";
 }
 const {
-  title = "Кой AI служител ти трябва?",
+  title = "Кой AI служител ви трябва?",
   selectedAgent = "",
   intent = "hire",
 } = Astro.props;
@@ -25,12 +25,12 @@ const waitlist = intent === "waitlist";
     </>
   ) : (
     <>
-      <label><span>Име</span><input type="text" name="name" autocomplete="name" required placeholder="Твоето име" /></label>
+      <label><span>Име</span><input type="text" name="name" autocomplete="name" required placeholder="Вашето име" /></label>
       <label><span>Телефон</span><input type="tel" name="phone" autocomplete="tel" inputmode="tel" required placeholder="089 123 4567" /></label>
       <label>
         <span>Бизнес</span>
         <select name="businessType" required>
-          <option value="" disabled selected>Избери най-близкото</option>
+          <option value="" disabled selected>Изберете най-близкото</option>
           <option>Салон или студио</option>
           <option>Клиника или кабинет</option>
           <option>Автосервиз</option>
@@ -41,7 +41,7 @@ const waitlist = intent === "waitlist";
         </select>
       </label>
       <label>
-        <span>Коя задача искаш да поеме AI служителят?</span>
+        <span>Коя задача искате да поеме AI служителят?</span>
         <textarea name="task" rows="3" required placeholder="Например: да вдига, когато екипът е зает"></textarea>
       </label>
       <label class="consent">
@@ -64,7 +64,7 @@ const waitlist = intent === "waitlist";
       const phone = String(data.get("phone") || "").replace(/\D/g, "");
       if (!form.checkValidity()) {
         form.reportValidity();
-        if (status) status.textContent = "Провери задължителните полета.";
+        if (status) status.textContent = "Проверете задължителните полета.";
         return;
       }
       if (phone && !(/^0\d{9}$/.test(phone) || /^359\d{9}$/.test(phone))) {
@@ -84,7 +84,7 @@ const waitlist = intent === "waitlist";
         if (!response.ok) throw new Error("Request failed");
         form.reset();
         if (status) status.textContent = data.get("intent") === "waitlist"
-          ? "Готово. Ще ти пишем, когато позицията отвори."
+          ? "Готово. Ще ви пишем, когато позицията отвори."
           : "Получихме заявката. Ще се обадим до един работен ден.";
       } catch {
         if (status) status.textContent = "Не успяхме да изпратим. Обади се на 0899 917 920.";

@@ -3,7 +3,7 @@ const moments = [
   {
     id: "vdiga",
     time: "10:18",
-    question: "Кой ще вдигне, докато ръцете ти са заети?",
+    question: "Кой ще вдигне, докато ръцете ви са заети?",
     scene: "Клиент звъни за свободен час. Екипът обслужва хора на място.",
     role: "Vdiga",
     action: "Отговаря с одобрената информация и проверява графика.",
@@ -19,7 +19,7 @@ const moments = [
     role: "Pishe",
     action: "Подготвя точната промяна и показва какво ще се публикува.",
     result: "Сайтът е актуален, а предишната версия остава в историята.",
-    boundary: "Непознат тип промяна чака твоето одобрение.",
+    boundary: "Непознат тип промяна чака вашето одобрение.",
     color: "#ff9b80",
   },
   {
@@ -41,7 +41,7 @@ const moments = [
     <span>Днес в бизнеса</span>
     <span class="workday__status"><i></i> 3 задачи чакат</span>
   </div>
-  <div class="workday__times" role="tablist" aria-label="Избери момент от работния ден">
+  <div class="workday__times" role="tablist" aria-label="Изберете момент от работния ден">
     {moments.map((moment, index) => (
       <button type="button" role="tab" data-moment={moment.id} aria-selected={index === 0 ? "true" : "false"} style={`--moment:${moment.color}`}>
         <span>{moment.time}</span><strong>{moment.role}</strong>
@@ -58,7 +58,7 @@ const moments = [
           <div><small>Остава следа</small><strong>{moment.result}</strong></div>
           <div class="day-scene__boundary"><small>Човешката граница</small><strong>{moment.boundary}</strong></div>
         </div>
-        <a href={`/sluzhiteli/${moment.id}/`}>Виж задачите на {moment.role} <span aria-hidden="true">→</span></a>
+        <a href={`/sluzhiteli/${moment.id}/`}>Вижте задачите на {moment.role} <span aria-hidden="true">→</span></a>
       </article>
     ))}
   </div>
