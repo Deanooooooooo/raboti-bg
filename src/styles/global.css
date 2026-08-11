@@ -654,11 +654,10 @@ p { text-wrap: pretty; }
 .roster-card__action { display: inline-flex; width: 100%; min-height: 52px; align-items: center; justify-content: space-between; gap: 8px; padding: 0 20px; border-radius: var(--radius-pill); background: var(--home-ink); color: #fff; font-size: 1rem; font-weight: var(--fw-semibold); white-space: nowrap; transition: background-color 110ms ease-out; }
 .roster-card:hover .roster-card__action { background: var(--agent); }
 
-.process-section { position: relative; isolation: isolate; overflow: hidden; background: var(--home-night); color: #fff; }
-.process-section::before { position: absolute; z-index: -1; inset: -20%; background: radial-gradient(circle at 75% 45%, rgba(96,74,232,.2), transparent 28%), radial-gradient(circle at 35% 80%, rgba(45,226,208,.1), transparent 24%); content: ""; }
-.process-layout { display: grid; grid-template-columns: minmax(320px,.68fr) minmax(520px,1.12fr); gap: clamp(60px, 8vw, 125px); align-items: center; }
+.process-section { position: relative; isolation: isolate; overflow: hidden; margin: 12px; border-radius: 34px; background: radial-gradient(circle at 4% 100%, rgba(45,226,208,.16), transparent 34%), radial-gradient(circle at 94% 4%, rgba(143,124,255,.3), transparent 36%), #242650; color: #fff; }
+.process-layout { display: grid; width: min(1120px, calc(100% - 48px)); grid-template-columns: minmax(520px,1.08fr) minmax(320px,.72fr); gap: clamp(48px, 6vw, 88px); align-items: center; }
 .process-copy h2, .boundary-intro h2, .home-contact__grid > div h2 { color: #fff; }
-.process-copy > p:not(.spectrum-label) { margin: var(--space-4) 0; color: rgba(255,255,255,.62); font-size: var(--text-lg); }
+.process-copy > p:not(.spectrum-label) { margin: var(--space-4) 0; color: rgba(255,255,255,.72); font-size: var(--text-base); line-height: 1.58; }
 .process-principles { display: grid; gap: 0; margin: var(--space-4) 0 0; padding: 0; list-style: none; }
 .process-principles li { display: grid; grid-template-columns: 42px 1fr; gap: var(--space-2); padding: 18px 0; border-top: 1px solid rgba(255,255,255,.1); }
 .process-principles li > span { color: var(--home-cyan); font-size: var(--text-sm); }
@@ -666,26 +665,25 @@ p { text-wrap: pretty; }
 .principle-mark .icon, .principle-mark .work-glyph { width: 16px; height: 16px; }
 .process-principles li > div { display: grid; gap: 3px; }
 .process-principles strong { font-size: var(--text-sm); }
-.process-principles small { color: rgba(255,255,255,.45); font-size: var(--text-xs); }
+.process-principles small { color: rgba(255,255,255,.54); font-size: var(--text-xs); }
+.process-cta { min-height: 54px; margin-top: var(--space-3); padding-inline: 22px; border: 0; background: #fff; color: var(--home-ink); }
+.process-cta:hover { background: var(--home-cyan); color: var(--home-ink); }
 
-.workflow-visual { position: relative; min-height: 590px; overflow: hidden; border: 1px solid rgba(255,255,255,.11); border-radius: 34px; background: linear-gradient(145deg, rgba(18,25,57,.88), rgba(8,11,28,.96)); box-shadow: inset 0 1px rgba(255,255,255,.07), 0 50px 120px -60px #000; }
-.workflow-grid { position: absolute; inset: 0; opacity: .13; background-image: linear-gradient(rgba(255,255,255,.2) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.2) 1px, transparent 1px); background-size: 38px 38px; mask-image: radial-gradient(circle at center, black, transparent 80%); }
-.workflow-path { position: absolute; top: 105px; left: 3%; width: 94%; height: 350px; overflow: visible; }
-.workflow-path path { fill: none; stroke: rgba(255,255,255,.12); stroke-width: 2; vector-effect: non-scaling-stroke; }
-.workflow-path .workflow-path__active { stroke: url(#flow-gradient); stroke-width: 3; stroke-dasharray: 7 11; filter: drop-shadow(0 0 7px rgba(45,226,208,.48)); animation: flow-line 12s linear infinite; }
-@keyframes flow-line { to { stroke-dashoffset: -180; } }
-.flow-node { position: absolute; display: grid; min-width: 176px; gap: 2px; padding: 16px; border: 1px solid rgba(255,255,255,.12); border-radius: 18px; background: rgba(15,21,48,.91); box-shadow: 0 18px 40px -25px #000; }
-.flow-node__icon { display: grid; width: 38px; height: 38px; margin-bottom: 10px; padding: 7px; place-items: center; border: 1px solid color-mix(in srgb, var(--node) 28%, transparent); border-radius: 12px; background: radial-gradient(circle at 30% 20%, color-mix(in srgb, var(--node) 18%, transparent), transparent 65%), var(--node-soft); color: var(--node); box-shadow: 0 8px 24px -16px var(--node); }
-.flow-node small { color: var(--node); font-size: var(--text-2xs); }
-.flow-node strong { font-size: var(--text-sm); }
-.flow-node > span:last-child { color: rgba(255,255,255,.42); font-size: var(--text-2xs); }
-.flow-node--input { --node: var(--home-cyan); --node-soft: rgba(45,226,208,.1); top: 235px; left: 22px; }
-.flow-node--route { --node: var(--home-violet); --node-soft: rgba(143,124,255,.13); top: 56px; left: 35%; }
-.flow-node--guard { --node: var(--home-coral); --node-soft: rgba(255,141,114,.12); right: 23%; bottom: 72px; }
-.flow-node--done { --node: var(--home-lime); --node-soft: rgba(199,243,107,.1); top: 168px; right: 18px; }
-.workflow-note { position: absolute; top: 24px; left: 26px; display: grid; }
-.workflow-note span { color: rgba(255,255,255,.38); font-size: var(--text-2xs); }
-.workflow-note strong { font-size: var(--text-sm); }
+.workflow-visual { overflow: hidden; padding: 8px; border-radius: 30px; background: rgba(255,255,255,.92); color: var(--home-ink); box-shadow: 0 42px 100px -54px rgba(7,10,24,.9); }
+.workflow-head { display: grid; gap: 4px; padding: 22px 22px 18px; }
+.workflow-head span { color: #686773; font-size: var(--text-2xs); }
+.workflow-head strong { font-size: var(--text-xl); }
+.workflow-steps { display: grid; gap: 8px; }
+.workflow-steps article { display: grid; grid-template-columns: 46px minmax(0,1fr) auto; gap: 14px; align-items: center; min-height: 94px; padding: 14px 16px; border-radius: 22px; background: #fff; }
+.workflow-steps article + article { position: relative; }
+.workflow-steps article + article::before { position: absolute; top: -12px; left: 38px; width: 2px; height: 16px; background: linear-gradient(var(--home-blue), var(--step)); content: ""; }
+.workflow-step__icon { display: grid; width: 46px; height: 46px; padding: 10px; place-items: center; border-radius: 15px; background: var(--step-soft); color: var(--step); }
+.workflow-step__icon .work-glyph { width: 24px; height: 24px; }
+.workflow-steps article > div { display: grid; gap: 2px; }
+.workflow-steps small { color: var(--step); font-size: var(--text-2xs); font-weight: var(--fw-semibold); }
+.workflow-steps strong { max-width: 35ch; font-size: var(--text-sm); line-height: 1.35; }
+.workflow-state { padding: 6px 9px; border-radius: var(--radius-pill); background: var(--step-soft); color: color-mix(in srgb, var(--step) 72%, var(--home-ink)); font-size: var(--text-2xs); font-weight: var(--fw-semibold); white-space: nowrap; }
+.workflow-step--approval { box-shadow: inset 0 0 0 1px rgba(255,141,114,.28); }
 
 .workmap-section { background: #fff; }
 .workmap { position: relative; max-width: 980px; min-height: 660px; margin-inline: auto; }
@@ -766,8 +764,8 @@ p { text-wrap: pretty; }
   .home-hero h1 { font-size: clamp(3.25rem, 5.5vw, 4.9rem); }
   .home-hero__signals { flex-wrap: wrap; }
   .process-layout { grid-template-columns: 1fr; }
-  .process-copy { max-width: 760px; }
-  .workflow-visual { min-height: 620px; }
+  .process-copy { max-width: 760px; order: -1; }
+  .workflow-visual { width: min(100%, 760px); }
 }
 
 @media (max-width: 920px) {
@@ -830,11 +828,14 @@ p { text-wrap: pretty; }
   .roster-card__portrait { height: 300px; }
   .roster-card__body { margin-top: 12px; }
   .roster-card__body > span:first-child { font-size: 1.18rem; }
+  .process-section { margin: 8px; border-radius: 26px; }
+  .process-layout { width: calc(100% - 32px); }
   .process-layout { gap: var(--space-5); }
-  .workflow-visual { display: grid; min-height: 0; gap: 12px; padding: 82px 14px 18px; }
-  .workflow-path { display: none; }
-  .flow-node { position: static; min-width: 0; }
-  .workflow-note { top: 22px; left: 20px; }
+  .process-cta { width: 100%; justify-content: center; }
+  .workflow-visual { padding: 6px; border-radius: 24px; }
+  .workflow-head { padding: 18px 16px 14px; }
+  .workflow-steps article { grid-template-columns: 42px minmax(0,1fr) auto; gap: 11px; min-height: 88px; padding: 12px; border-radius: 18px; }
+  .workflow-step__icon { width: 42px; height: 42px; padding: 9px; }
   .workmap { display: grid; min-height: 0; gap: 12px; }
   .workmap::before, .workmap__orbit { display: none; }
   .workmap__core { position: relative; top: auto; left: auto; width: 180px; height: 180px; transform: none; justify-self: center; margin-bottom: var(--space-3); }
@@ -854,5 +855,6 @@ p { text-wrap: pretty; }
   .header-cta__short { display: inline; }
   .home-art .nav-toggle { width: 42px; height: 42px; }
   .roster-card footer { align-items: stretch; }
+  .workflow-state { display: none; }
   .proof-grid { gap: var(--space-5); }
 }
