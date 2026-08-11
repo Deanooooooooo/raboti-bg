@@ -1,5 +1,5 @@
 ---
-name: "Продава"
+name: "Prodava"
 slug: "prodava"
 role: "AI координатор на запитвания"
 status: "soon"

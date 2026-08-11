@@ -1,5 +1,5 @@
 ---
-name: "Помага"
+name: "Pomaga"
 slug: "pomaga"
 role: "AI оперативен асистент"
 status: "live"

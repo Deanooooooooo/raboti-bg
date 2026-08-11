@@ -1,5 +1,5 @@
 ---
-name: "Смята"
+name: "Smyata"
 slug: "smyata"
 role: "AI помощник за счетоводна рутина"
 status: "soon"

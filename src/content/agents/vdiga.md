@@ -1,5 +1,5 @@
 ---
-name: "Вдига"
+name: "Vdiga"
 slug: "vdiga"
 role: "AI рецепционист"
 status: "live"

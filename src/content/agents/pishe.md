@@ -1,5 +1,5 @@
 ---
-name: "Пише"
+name: "Pishe"
 slug: "pishe"
 role: "AI уеб мениджър"
 status: "live"
