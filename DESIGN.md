@@ -65,14 +65,14 @@ components:
     backgroundColor: "linear-gradient(110deg, {colors.cyan-signal}, #63cff5 48%, {colors.violet-signal})"
     textColor: "{colors.night}"
     typography: "{typography.label}"
-    rounded: "{rounded.md}"
+    rounded: "{rounded.pill}"
     padding: "14px 24px"
     height: "58px"
   button-dark:
     backgroundColor: "{colors.operational-ink}"
     textColor: "{colors.white}"
     typography: "{typography.label}"
-    rounded: "{rounded.md}"
+    rounded: "{rounded.pill}"
     padding: "14px 23px"
     height: "52px"
   card-operational:
@@ -193,7 +193,7 @@ Borders remain thin and low contrast: pale gray on light fields and translucent 
 
 ### Buttons
 
-- **Shape:** Firmly rounded rather than pill-shaped (16px), with a 52–58px minimum height.
+- **Shape:** Fully pill-shaped, with a 52–58px minimum height. This is the default for CTA and action controls across the site; segmented navigation tabs may preserve their shared-container geometry.
 - **Primary:** A cyan-to-violet spectral fill on dark stages with dark text and 24px horizontal padding.
 - **Hover / Focus:** Lift by 2px and brighten the spectrum; all keyboard focus uses a visible 3px outline with 3px offset.
 - **Dark:** Record Ink on light cards with white text; hover may adopt the owning role color.
