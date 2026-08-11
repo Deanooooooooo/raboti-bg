@@ -651,16 +651,8 @@ p { text-wrap: pretty; }
 .roster-card__body > span:first-child { display: block; max-width: 31ch; color: #41414c; font-size: clamp(1.12rem,1.4vw,1.3rem); font-weight: var(--fw-regular); line-height: 1.48; letter-spacing: -.008em; }
 .roster-card footer { display: grid; gap: 14px; padding-top: var(--space-3); border-top: 1px solid rgba(20,23,40,.1); }
 .roster-card footer strong { color: var(--home-ink); font-size: var(--text-base); line-height: 1.25; }
-.roster-card__action { display: inline-flex; width: 100%; min-height: 50px; align-items: center; justify-content: space-between; gap: 8px; padding: 0 20px; border-radius: var(--radius-pill); background: var(--home-ink); color: #fff; font-size: var(--text-xs); font-weight: var(--fw-semibold); transition: background-color 110ms ease-out; }
+.roster-card__action { display: inline-flex; width: 100%; min-height: 52px; align-items: center; justify-content: space-between; gap: 8px; padding: 0 20px; border-radius: var(--radius-pill); background: var(--home-ink); color: #fff; font-size: 1rem; font-weight: var(--fw-semibold); white-space: nowrap; transition: background-color 110ms ease-out; }
 .roster-card:hover .roster-card__action { background: var(--agent); }
-.future-roles { position: relative; display: grid; grid-template-columns: 1.25fr repeat(2,1fr); gap: 1px; overflow: hidden; margin-top: 18px; border: 1px solid rgba(20,23,40,.11); border-radius: 20px; background: rgba(20,23,40,.11); }
-.future-roles > * { min-height: 92px; padding: 20px 22px; background: rgba(255,255,255,.72); }
-.future-roles > div, .future-roles > a { display: grid; align-content: center; gap: 3px; }
-.future-roles > div span { color: #777681; font-size: var(--text-2xs); }
-.future-roles > div strong { color: var(--home-ink); font-size: var(--text-sm); }
-.future-roles > a { color: var(--home-ink); text-decoration: none; }
-.future-roles > a span { font-family: var(--display); font-size: var(--text-lg); font-weight: var(--fw-bold); }
-.future-roles > a small { color: #686773; font-size: var(--text-2xs); }
 
 .process-section { position: relative; isolation: isolate; overflow: hidden; background: var(--home-night); color: #fff; }
 .process-section::before { position: absolute; z-index: -1; inset: -20%; background: radial-gradient(circle at 75% 45%, rgba(96,74,232,.2), transparent 28%), radial-gradient(circle at 35% 80%, rgba(45,226,208,.1), transparent 24%); content: ""; }
@@ -862,6 +854,5 @@ p { text-wrap: pretty; }
   .header-cta__short { display: inline; }
   .home-art .nav-toggle { width: 42px; height: 42px; }
   .roster-card footer { align-items: stretch; }
-  .future-roles { grid-template-columns: 1fr; }
   .proof-grid { gap: var(--space-5); }
 }

@@ -15,13 +15,11 @@ const liveAgentOrder = ["vdiga", "pishe", "pomaga"];
 const liveAgents = agents
   .filter((agent) => agent.data.status === "live")
   .sort((a, b) => liveAgentOrder.indexOf(a.data.slug) - liveAgentOrder.indexOf(b.data.slug));
-const futureAgents = agents.filter((agent) => agent.data.status === "soon");
-const agentProfiles: Record<string, { name: string; image: string; imageAlt: string }> = {
-  vdiga: { name: "Vdiga", image: "/assets/employee-vdiga-gloria-v1.webp", imageAlt: "Gloria — образът на AI рецепциониста Vdiga" },
-  pishe: { name: "Pishe", image: "/assets/employee-pishe-v1.webp", imageAlt: "Визуално представяне на AI уеб мениджъра Pishe" },
-  pomaga: { name: "Pomaga", image: "/assets/employee-pomaga-v1.webp", imageAlt: "Визуално представяне на AI оперативния асистент Pomaga" },
+const agentProfiles: Record<string, { name: string; image: string; imageAlt: string; cta: string }> = {
+  vdiga: { name: "Vdiga", image: "/assets/employee-vdiga-gloria-v1.webp", imageAlt: "Gloria — образът на AI рецепциониста Vdiga", cta: "Как мога да съм полезна?" },
+  pishe: { name: "Pishe", image: "/assets/employee-pishe-v1.webp", imageAlt: "Визуално представяне на AI уеб мениджъра Pishe", cta: "Как мога да съм полезен?" },
+  pomaga: { name: "Pomaga", image: "/assets/employee-pomaga-v1.webp", imageAlt: "Визуално представяне на AI оперативния асистент Pomaga", cta: "Как мога да съм полезна?" },
 };
-const futureAgentNames: Record<string, string> = { smyata: "Smyata", prodava: "Prodava" };
 const schemas = [
   faqSchema(homeFaqs),
   breadcrumbSchema([{ name: "Работи", url: site.url }]),
@@ -37,8 +35,8 @@ const schemas = [
     availableChannel: { "@type": "ServiceChannel", serviceUrl: site.url, availableLanguage: "bg" },
     offers: {
       "@type": "AggregateOffer",
-      lowPrice: "49",
-      highPrice: "249",
+      lowPrice: "97",
+      highPrice: "297",
       priceCurrency: "EUR",
       offerCount: "3",
     },
@@ -134,16 +132,11 @@ const schemas = [
               </div>
               <footer>
                 <strong>{data.priceLabel}</strong>
-                <span class="roster-card__action"><span>Как мога да помогна</span><Icon name="arrow-right" /></span>
+                <span class="roster-card__action"><span>{profile.cta}</span><Icon name="arrow-right" /></span>
               </footer>
             </a>
           );
         })}
-      </div>
-
-      <div class="future-roles" aria-label="Роли в разработка">
-        <div><span>В разработка</span><strong>Следващите роли не се продават още.</strong></div>
-        {futureAgents.map((agent) => <a href={`/sluzhiteli/${agent.data.slug}/`}><span>{futureAgentNames[agent.data.slug] ?? agent.data.name}</span><small>{agent.data.role} · списък за известие</small></a>)}
       </div>
 
     </div>
