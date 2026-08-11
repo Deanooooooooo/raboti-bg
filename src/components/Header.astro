@@ -24,8 +24,22 @@ import { site } from "../data/site";
 </header>
 
 <script>
+  const header = document.querySelector<HTMLElement>(".site-header");
+  const hero = document.querySelector<HTMLElement>(".home-hero");
   const toggle = document.querySelector<HTMLButtonElement>(".nav-toggle");
   const nav = document.querySelector<HTMLElement>(".site-nav");
+
+  const updateHeaderSurface = () => {
+    if (!header || !hero) return;
+    const headerEdge = header.getBoundingClientRect().bottom;
+    const heroBounds = hero.getBoundingClientRect();
+    header.classList.toggle("is-over-dark", heroBounds.top < headerEdge && heroBounds.bottom > headerEdge);
+  };
+
+  updateHeaderSurface();
+  window.addEventListener("scroll", updateHeaderSurface, { passive: true });
+  window.addEventListener("resize", updateHeaderSurface, { passive: true });
+
   toggle?.addEventListener("click", () => {
     const open = toggle.getAttribute("aria-expanded") === "true";
     toggle.setAttribute("aria-expanded", String(!open));

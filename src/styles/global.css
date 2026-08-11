@@ -532,7 +532,9 @@ p { text-wrap: pretty; }
 .home-art .site-header { position: fixed; top: 0; right: 0; left: 0; z-index: 50; padding-top: 24px; border: 0; background: transparent; color: var(--home-night); pointer-events: none; }
 .home-art .header-inner { width: min(1180px, calc(100% - 64px)); min-height: 68px; padding: 8px 9px 8px 22px; border: 1px solid rgba(255,255,255,.52); border-radius: var(--radius-pill); background: rgba(255,255,255,.72); box-shadow: 0 2px 6px rgba(10,12,28,.08), 0 14px 36px -14px rgba(10,12,28,.28), inset 0 1px 0 rgba(255,255,255,.82); backdrop-filter: blur(26px) saturate(165%); -webkit-backdrop-filter: blur(26px) saturate(165%); pointer-events: auto; }
 .home-art .site-header .brand { color: var(--home-night); }
-.home-art .site-nav > a:not(.button) { color: rgba(17,20,38,.66); }
+.home-art .brand-logo { transition: filter .22s ease; }
+.home-art .site-header.is-over-dark .brand-logo { filter: brightness(.78) saturate(.88) contrast(1.08); }
+.home-art .site-nav > a:not(.button) { color: rgba(17,20,38,.76); font-size: 1rem; font-weight: var(--fw-semibold); letter-spacing: -.01em; }
 .home-art .site-nav > a:not(.button):hover { color: var(--home-night); }
 .home-art .header-cta { min-height: 50px; padding-inline: 22px; border-color: rgba(7,10,24,.94); border-radius: var(--radius-pill); background: rgba(7,10,24,.94); color: #fff; box-shadow: 0 2px 5px rgba(7,10,24,.18), 0 10px 22px -14px rgba(7,10,24,.72); }
 .home-art .header-cta:hover { border-color: #242a49; background: #242a49; color: #fff; }
