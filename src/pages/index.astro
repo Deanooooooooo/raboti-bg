@@ -110,7 +110,7 @@ const schemas = [
   <section class="home-section roster-section" id="ekip">
     <div class="shell">
       <div class="home-heading">
-        <div><h2>Къде ви трябва<br /><em>още един човек?</em></h2></div>
+        <div><h2>Къде ви трябва<br /><em>още един служител?</em></h2></div>
         <p>Изберете откъде да започнем. Ние ще подготвим служителя за работата така, както тя се върши при вас.</p>
       </div>
 
@@ -146,20 +146,6 @@ const schemas = [
         {futureAgents.map((agent) => <a href={`/sluzhiteli/${agent.data.slug}/`}><span>{futureAgentNames[agent.data.slug] ?? agent.data.name}</span><small>{agent.data.role} · списък за известие</small></a>)}
       </div>
 
-      <aside class="fit-check" aria-labelledby="fit-title">
-        <div class="fit-check__intro">
-          <h3 id="fit-title">Подходящ ли е AI служител за твоя бизнес?</h3>
-          <p>Започни с работа, която се повтаря и може да бъде показана с реални примери.</p>
-        </div>
-        <div class="fit-check__column fit-check__column--yes">
-          <strong><Icon name="check" /> Да, ако работата…</strong>
-          <ul><li>се повтаря всяка седмица;</li><li>започва от обаждане, имейл, формуляр или документ;</li><li>днес бави екипа или изпуска клиенти.</li></ul>
-        </div>
-        <div class="fit-check__column fit-check__column--no">
-          <strong><span aria-hidden="true">×</span> Не, ако работата…</strong>
-          <ul><li>изисква свободна човешка преценка;</li><li>няма устойчиви правила;</li><li>включва необратими решения без одобрение.</li></ul>
-        </div>
-      </aside>
     </div>
   </section>
 
