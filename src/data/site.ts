@@ -39,7 +39,6 @@ export const site = {
     { href: "/ceni/", label: "Цени" },
     { href: "/demo/", label: "Демо" },
     { href: "/blog/", label: "Полезно" },
-    { href: "/za-nas/", label: "За нас" },
   ],
 };
 
