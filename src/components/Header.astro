@@ -25,15 +25,17 @@ import { site } from "../data/site";
 
 <script>
   const header = document.querySelector<HTMLElement>(".site-header");
+  const headerInner = header?.querySelector<HTMLElement>(".header-inner");
   const hero = document.querySelector<HTMLElement>(".home-hero");
   const toggle = document.querySelector<HTMLButtonElement>(".nav-toggle");
   const nav = document.querySelector<HTMLElement>(".site-nav");
 
   const updateHeaderSurface = () => {
     if (!header || !hero) return;
-    const headerEdge = header.getBoundingClientRect().bottom;
+    const headerEdge = headerInner?.getBoundingClientRect().bottom ?? header.getBoundingClientRect().bottom;
     const heroBounds = hero.getBoundingClientRect();
     header.classList.toggle("is-over-dark", heroBounds.top < headerEdge && heroBounds.bottom > headerEdge);
+    header.classList.toggle("is-scrolled", window.scrollY > 8);
   };
 
   updateHeaderSurface();
