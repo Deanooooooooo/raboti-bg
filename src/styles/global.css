@@ -725,14 +725,26 @@ p { text-wrap: pretty; }
 .boundary-card--coral { --accent:var(--home-coral);--glow:var(--home-coral); }
 .boundary-card--lime { --accent:var(--home-lime);--glow:var(--home-lime); }
 
-.proof-section { background: #fff; }
-.proof-grid { display: grid; grid-template-columns: minmax(300px,.78fr) minmax(480px,1fr); gap: clamp(56px,9vw,140px); align-items: start; }
-.proof-grid > div { position: sticky; top: 120px; }
-.proof-grid h2 em { color: #7560ec; font-style: normal; }
-.proof-grid > div > p:last-child { max-width: 58ch; margin-top: var(--space-4); color: #686773; font-size: var(--text-base); }
-.proof-grid ol { margin: 0; padding: 0; border-top: 1px solid #dcd9e0; list-style: none; }
-.proof-grid li { display: grid; grid-template-columns: 64px 1fr; gap: 22px; padding: 28px 0; border-bottom: 1px solid #dcd9e0; }
-.proof-grid li > span { color: #7560ec; font-size: var(--text-xs); font-weight: var(--fw-bold); }
+.proof-section { margin: 12px; border-radius: 34px; background: radial-gradient(circle at 8% 100%, rgba(45,226,208,.13), transparent 34%), #eeecff; }
+.proof-grid { display: grid; width: min(1120px, calc(100% - 48px)); grid-template-columns: minmax(330px,.78fr) minmax(520px,1fr); gap: clamp(48px,7vw,96px); align-items: center; }
+.proof-copy h2 { max-width: 10.5ch; }
+.proof-grid h2 em { color: #5f4fd1; font-style: normal; }
+.proof-copy > p { max-width: 53ch; margin: var(--space-4) 0 0; color: #55535e; font-size: var(--text-base); }
+.proof-cta { margin-top: var(--space-4); border: 0; background: var(--home-ink); color: #fff; }
+.proof-cta:hover { background: #2c2574; color: #fff; }
+.proof-copy > small { display: block; max-width: 48ch; margin-top: 14px; color: #686773; font-size: var(--text-xs); line-height: 1.45; }
+.decision-brief { overflow: hidden; border-radius: 28px; background: #fff; color: var(--home-ink); box-shadow: 0 30px 80px -52px rgba(44,37,116,.55); }
+.decision-brief header { display: grid; gap: 7px; padding: 30px 30px 24px; background: linear-gradient(135deg, rgba(143,124,255,.12), rgba(45,226,208,.07)); }
+.decision-brief header span { color: #5f4fd1; font-size: var(--text-xs); font-weight: var(--fw-semibold); }
+.decision-brief header strong { max-width: 26ch; font-size: var(--text-xl); line-height: 1.25; }
+.decision-brief ul { margin: 0; padding: 0 30px; list-style: none; }
+.decision-brief li { display: grid; grid-template-columns: 34px 1fr; gap: 14px; padding: 19px 0; border-bottom: 1px solid #e6e1ec; }
+.decision-brief li > span { display: grid; width: 30px; height: 30px; place-items: center; border-radius: 50%; background: rgba(45,226,208,.14); color: #087d70; }
+.decision-brief li > span svg { width: 16px; height: 16px; }
+.decision-brief li > div { display: grid; gap: 4px; }
+.decision-brief li strong { font-size: var(--text-sm); }
+.decision-brief li p { margin: 0; color: #686773; font-size: var(--text-xs); line-height: 1.5; }
+.decision-brief footer { padding: 20px 30px 24px; color: #4a4964; font-size: var(--text-sm); font-weight: var(--fw-semibold); }
 .proof-grid li div { display: grid; gap: 7px; }
 .proof-grid li strong { color: var(--home-ink); font-family: var(--display); font-size: var(--text-xl); }
 .proof-grid li p { max-width: 52ch; margin: 0; color: #686773; }
@@ -779,7 +791,6 @@ p { text-wrap: pretty; }
   .home-facts__journey { gap: 16px; }
   .home-fact { min-height: 300px; padding-inline: 24px; }
   .proof-grid { grid-template-columns: 1fr; }
-  .proof-grid > div { position: static; }
   .workforce-console { width: min(100%, 680px); }
   .roster-card { grid-column: span 6; }
   .roster-card:last-of-type { grid-column: 4 / span 6; }
@@ -832,6 +843,15 @@ p { text-wrap: pretty; }
   .roster-card__body { margin-top: 12px; }
   .roster-card__body > span:first-child { font-size: 1.18rem; }
   .process-section { margin: 8px; border-radius: 26px; }
+  .proof-section { margin: 8px; border-radius: 26px; }
+  .proof-grid { width: calc(100% - 32px); }
+  .proof-copy h2 { max-width: 12ch; }
+  .proof-cta { width: 100%; justify-content: center; }
+  .decision-brief { border-radius: 24px; }
+  .decision-brief header { padding: 24px 20px 20px; }
+  .decision-brief ul { padding-inline: 20px; }
+  .decision-brief li { grid-template-columns: 30px 1fr; gap: 12px; padding: 17px 0; }
+  .decision-brief footer { padding: 18px 20px 22px; }
   .process-layout { width: calc(100% - 32px); }
   .process-layout { gap: var(--space-5); }
   .process-cta { width: 100%; justify-content: center; }
