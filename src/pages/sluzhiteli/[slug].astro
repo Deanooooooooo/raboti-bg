@@ -1,8 +1,6 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import AgentCard from "../../components/AgentCard.astro";
-import FAQ from "../../components/FAQ.astro";
 import ContactForm from "../../components/ContactForm.astro";
 import Icon from "../../components/Icon.astro";
 import VdigaPricing from "../../components/VdigaPricing.astro";
@@ -19,6 +17,7 @@ const { agent, agents } = Astro.props;
 const data = agent.data;
 const colleagues = agents.filter((item) => item.id !== agent.id && item.data.status === "live").sort((a,b) => a.data.order - b.data.order);
 const colleagueProfiles: Record<string, { image: string; imageAlt: string; cta: string }> = {
+  vdiga: { image: "/assets/employee-vdiga-gloria-v1.webp", imageAlt: "Глория — образът на телефонния рецепционист Vdiga", cta: "Как мога да съм полезна?" },
   pishe: { image: "/assets/employee-pishe-v1.webp", imageAlt: "Визуално представяне на AI уеб мениджъра Pishe", cta: "Как мога да съм полезен?" },
   pomaga: { image: "/assets/employee-pomaga-v1.webp", imageAlt: "Визуално представяне на AI оперативния асистент Pomaga", cta: "Как мога да съм полезна?" },
 };
@@ -34,6 +33,10 @@ const profiles = {
     intro: "Вдигам телефона, отговарям на обичайните въпроси и записвам часове. За да започна, трябва да ми разкажете как работи бизнесът ви и какво да правя при всеки тип обаждане.",
     firstQuestion: "Защо да назначим вас?",
     firstAnswer: "Защото телефонът звъни точно когато сте с клиент, шофирате или работният ден вече е свършил. Аз мога да поема тези разговори, без да прекъсвам работата ви.",
+    position: "Кандидатствам за рецепционист във вашия бизнес.",
+    facts: ["Вдигам 24/7", "Говоря български", "от €97/месец"],
+    fileNumber: "001",
+    fileRows: [["Работно време", "24/7, включително празници"], ["Болнични", "0 дни"], ["Отпуск", "Не ползвам"], ["Изпитателен срок", "С удоволствие"], ["Език", "Български"]],
     interview: [
       ["Глория, защо да назначим вас, а не човек?", "Не е нужно да е или едното, или другото. Ако имате рецепционист, мога да поема вечерите, почивните дни и часовете, в които телефонът звъни повече. Ако нямате, мога да започна от €97 на месец."],
       ["Клиентите няма ли да се дразнят, че говорят с AI?", "Още в началото казвам, че съм AI асистент. След това питам защо се обаждат и върша това, за което сте ме подготвили. Чуйте примерен разговор и преценете сами."],
@@ -48,6 +51,7 @@ const profiles = {
       ["Хващам случаите, които искат човек.", "Вземам име, телефон и причина за обаждането. После предавам разговора или изпращам информацията на правилния човек."],
       ["Помня какво се случи.", "Всяко обаждане остава записано и обобщено. Виждате кой е звънял, какво е поискал и какво съм направила."],
     ],
+    honesty: ["Не мога да направя кафе на колегите. Не мога да преместя масата в ъгъла.", "Ако клиент попита нещо, което не знам, няма да си измислям. Ще взема името, телефона и въпроса му и ще ви ги изпратя."],
     closing: "Готова съм за интервю. Вие?",
     cta: "Поканете ме на интервю",
   },
@@ -60,6 +64,18 @@ const profiles = {
     intro: "Сменям цени, услуги, работно време, снимки и текстове. Малката промяна приключва днес, вместо да чака свободен програмист две седмици.",
     firstQuestion: "Защо да ви наемем?",
     firstAnswer: "Защото клиентът вярва на това, което вижда на сайта. Стара цена, несъществуваща услуга или грешно работно време ви излагат точно когато човек решава дали да ви се обади.",
+    position: "Кандидатствам за уеб мениджър на вашия сайт.",
+    facts: ["Промени след одобрение", "Проверка след публикуване", "от €197/месец"],
+    fileNumber: "002",
+    fileRows: [["Работно място", "Вашият сайт"], ["Задачи", "Съдържание и малки промени"], ["Публикуване", "По одобрен процес"], ["Контрол", "История и връщане на версия"], ["Старт", "До 7 работни дни"]],
+    capabilities: [
+      ["Сменям това, което вече не е вярно.", "Обновявам цени, услуги, работно време, екип и снимки. Клиентът вижда актуалния ви бизнес, а не версията му отпреди година."],
+      ["Подготвям промяната за одобрение.", "Изпращате ми кратка заявка, както бихте я написали на колега. Подготвям текста и показвам какво точно ще се промени преди публикуване."],
+      ["Публикувам и проверявам след себе си.", "След одобрение качвам промяната и отварям важните страници, връзки и форми. Работата не приключва с натискането на „Публикувай“."],
+      ["Пазя предишната версия.", "Всяка промяна има история. Ако нещо не изглежда или не работи както трябва, връщам последната работеща версия."],
+      ["Следя дребните проблеми, преди да станат големи.", "Проверявам важни страници, форми и счупени връзки по уговорен график. Когато намеря проблем, получавате ясен списък, не технически отчет."],
+    ],
+    honesty: ["Не съм дизайнерско студио и не обещавам голяма разработка като част от месечната поддръжка.", "Ако промяната изисква нов дизайн, сложна функция или решение извън договорения обхват, ще я спра и ще ви кажа какъв специалист е нужен."],
     interview: [
       ["Как да ви дам промяна?", "Напишете ми я както бихте я пратили на колега: „Сменете цената на тази услуга“ или „Качете тези три снимки“. Не ви трябва техническо задание."],
       ["Ще публикувате ли без мен?", "Само ако предварително сте разрешили точно този вид промяна. Нова цена, важна оферта или нещо необичайно първо идва при вас за одобрение."],
@@ -78,6 +94,18 @@ const profiles = {
     intro: "Чета определени имейли, местя данни в CRM-а, обновявам таблици и подготвям справки. Тихата офис работа се свършва, без да изяжда деня на човек от екипа.",
     firstQuestion: "Защо да ви наемем?",
     firstAnswer: "Защото добрите ви хора не трябва да прекарват сутринта в копиране от един екран в друг. Покажете ми повторението веднъж и аз ще го поема всеки следващ път.",
+    position: "Кандидатствам за оперативен асистент във вашия екип.",
+    facts: ["Работя по ясен процес", "Пазя дневник на задачите", "от €297/месец"],
+    fileNumber: "003",
+    fileRows: [["Работно място", "Между системите ви"], ["Задачи", "Повтарящи се и проверими"], ["Режим", "По график или събитие"], ["Рискови действия", "Само след одобрение"], ["Старт", "До 10 работни дни"]],
+    capabilities: [
+      ["Превръщам входящия имейл в свършена задача.", "Разчитам договорените типове съобщения, вземам нужните данни и създавам задача на правилното място. Нищо не остава заровено във входящата поща."],
+      ["Премествам данните, без да ги преписвате.", "Прехвърлям информация между CRM, таблици и вътрешни системи по ясни правила. Проверявам задължителните полета преди запис."],
+      ["Подготвям справките по график.", "Събирам нужните редове и статуси и ги подреждам в разбираемо обобщение. Екипът получава готовата справка, а не още една таблица за обработване."],
+      ["Отделям изключенията от рутината.", "Когато данните липсват или случаят не следва правилата, не налучквам. Спирам задачата и я изпращам на човек с точна причина."],
+      ["Оставям следа след всяка стъпка.", "Записвам какво е получено, какво е променено и кога е приключила задачата. Така работата може да се провери, без някой да разпитва целия екип."],
+    ],
+    honesty: ["Не решавам сама как да работи бизнесът ви. Поемам процес, който първо сме описали и проверили заедно.", "Не извършвам плащане, не подписвам договор и не правя необратима промяна без човек да я одобри. При неясен случай спирам и питам."],
     interview: [
       ["Каква работа можете да поемете?", "Работа с ясни стъпки: имейлът пристига, данните се проверяват, записват се на правилното място и някой получава известие или справка."],
       ["Как ще знаете кое къде отива?", "Вие ми показвате една истинска задача от начало до край. Записваме правилата и изключенията. После следвам тях, вместо да налучквам."],
@@ -100,86 +128,88 @@ const schemas = [
 ];
 ---
 <BaseLayout title={data.seoTitle} description={data.seoDescription} canonical={`/sluzhiteli/${data.slug}/`} image={`/og/${data.slug}.svg`} schema={schemas} bodyClass={`candidate-page candidate-page--${data.slug}`}>
-  {data.slug === "vdiga" ? <>
+  <>
   <section class="gloria-hero" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
     <div class="gloria-hero__inner">
       <div class="gloria-hero__copy">
-        <span class="gloria-role">AI рецепционист</span>
+        <span class="gloria-role">{data.role}</span>
         <h1>{profile.hello}</h1>
-        <p class="gloria-hero__position">Кандидатствам за рецепционист във вашия бизнес.</p>
+        <p class="gloria-hero__position">{profile.position}</p>
         <p class="gloria-hero__intro">{profile.intro}</p>
         <div class="gloria-hero__actions">
-          <a class="button button--spectrum" href={data.demoUrl}><Icon name="phone" /> Поканете ме на интервю</a>
+          <a class="button button--spectrum" href={data.slug === "vdiga" ? data.demoUrl : "#kandidatura"}><Icon name={data.slug === "vdiga" ? "phone" : "arrow-right"} /> {data.slug === "vdiga" ? "Поканете ме на интервю" : profile.cta}</a>
           <a class="gloria-text-link" href="#umenia">Вижте какво мога <span aria-hidden="true">↓</span></a>
         </div>
         <ul class="gloria-facts" aria-label="Основни условия">
-          <li>Вдигам 24/7</li><li>Говоря български</li><li>{data.priceLabel}</li>
+          {profile.facts.map((fact) => <li>{fact}</li>)}
         </ul>
       </div>
       <figure class="gloria-portrait">
         <div class="gloria-portrait__frame"><img src={profile.image} alt={profile.imageAlt} width="780" height="900" loading="eager" fetchpriority="high" decoding="sync" /></div>
-        <figcaption><span class="gloria-live-dot" aria-hidden="true"></span>На линия сега</figcaption>
+        <figcaption><span class="gloria-live-dot" aria-hidden="true"></span>Свободен за работа</figcaption>
       </figure>
     </div>
   </section>
 
-  <section class="gloria-file" aria-labelledby="gloria-file-title">
+  <section class="gloria-file" aria-labelledby="gloria-file-title" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
     <header class="gloria-section-head"><p>Служебно досие</p><h2 id="gloria-file-title">Условията ми за работа.</h2></header>
     <div class="gloria-file__card reveal-group">
       <header>
         <img src={profile.image} alt="" width="112" height="112" loading="lazy" />
-        <div><p>Кандидат № 001</p><h3>Глория</h3><span>AI рецепционист</span></div>
+        <div><p>Кандидат № {profile.fileNumber}</p><h3>{profile.person}</h3><span>{data.role}</span></div>
       </header>
       <dl>
-        <div class="reveal-row"><dt>Работно време</dt><dd>24/7, включително празници</dd></div>
-        <div class="reveal-row"><dt>Болнични</dt><dd>0 дни</dd></div>
-        <div class="reveal-row"><dt>Отпуск</dt><dd>Не ползвам</dd></div>
-        <div class="reveal-row"><dt>Изпитателен срок</dt><dd>С удоволствие</dd></div>
-        <div class="reveal-row"><dt>Език</dt><dd>Български</dd></div>
+        {profile.fileRows.map(([label, value]) => <div class="reveal-row"><dt>{label}</dt><dd>{value}</dd></div>)}
         <div class="gloria-file__price reveal-row"><dt>Заплата</dt><dd>{data.priceLabel}, без осигуровки</dd></div>
       </dl>
     </div>
   </section>
 
-  <section class="gloria-skills" id="umenia" aria-labelledby="gloria-skills-title">
+  <section class="gloria-skills" id="umenia" aria-labelledby="gloria-skills-title" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
     <header class="gloria-section-head"><p>Какво мога</p><h2 id="gloria-skills-title">Работата, за която кандидатствам.</h2></header>
     <div class="gloria-skills__list reveal-group">
-      {profiles.vdiga.capabilities.map(([title, description], index) => <article class="gloria-skill reveal-row">
+      {profile.capabilities.map(([title, description], index) => <article class="gloria-skill reveal-row">
         <span>{String(index + 1).padStart(2,"0")}</span>
         <div><h3>{title}</h3><p>{description}</p></div>
       </article>)}
     </div>
   </section>
 
-  <section class="gloria-honesty" aria-labelledby="gloria-honesty-title">
+  <section class="gloria-honesty" aria-labelledby="gloria-honesty-title" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
     <span aria-hidden="true"></span>
     <p>Да сме честни от началото</p>
     <h2 id="gloria-honesty-title">Какво не мога</h2>
-    <div><p>Не мога да направя кафе на колегите. Не мога да преместя масата в ъгъла.</p><p>И ако клиент попита нещо, което не знам, няма да си измислям. Ще взема името, телефона и въпроса му и ще ви ги изпратя.</p></div>
+    <div>{profile.honesty.map((paragraph) => <p>{paragraph}</p>)}</div>
   </section>
 
-  <section class="gloria-chat" aria-labelledby="gloria-chat-title">
+  <section class="gloria-chat" aria-labelledby="gloria-chat-title" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
     <header class="gloria-section-head"><p>Интервюто</p><h2 id="gloria-chat-title">Въпросите, които вероятно вече си задавате.</h2></header>
     <div class="gloria-chat__thread reveal-group">
       {profile.interview.map(([question, answer], index) => <div class="gloria-chat__exchange reveal-row">
         <p class="gloria-chat__question">— {question}</p>
-        <div class="gloria-chat__answer">{index === 0 && <img src={profile.image} alt="Глория" width="48" height="48" loading="lazy" />}<p>{answer}</p></div>
+        <div class="gloria-chat__answer">{index === 0 && <img src={profile.image} alt={profile.person} width="48" height="48" loading="lazy" />}<p>{answer}</p></div>
       </div>)}
     </div>
   </section>
 
-  <section class="gloria-demo" id="razgovor" aria-labelledby="gloria-demo-title">
+  <section class="gloria-demo" id="razgovor" aria-labelledby="gloria-demo-title" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
     <div>
-      <p>Живо демо</p><h2 id="gloria-demo-title">Интервюирайте ме. Сега.</h2>
-      <a class="gloria-demo__call" href={data.demoUrl}>Започнете интервюто <Icon name="arrow-right" /></a>
-      <span>Ще ви отговоря в браузъра. Питайте ме каквото искате.</span>
+      <p>{data.slug === "vdiga" ? "Живо демо" : "Пробна задача"}</p><h2 id="gloria-demo-title">{data.slug === "vdiga" ? "Интервюирайте ме. Сега." : data.slug === "pishe" ? "Дайте ми една отлагана промяна." : "Покажете ми едно повторение."}</h2>
+      <a class="gloria-demo__call" href={data.slug === "vdiga" ? data.demoUrl : "#kandidatura"}>{data.slug === "vdiga" ? "Започнете интервюто" : data.slug === "pishe" ? "Изпратете промяната" : "Покажете задачата"} <Icon name="arrow-right" /></a>
+      <span>{data.slug === "vdiga" ? "Ще ви отговоря в браузъра. Питайте ме каквото искате." : "Опишете я с две изречения. До един работен ден ще кажем дали е подходяща."}</span>
     </div>
   </section>
 
-  <VdigaPricing />
-  <VdigaLeadForm />
+  {data.slug === "vdiga" ? <><VdigaPricing /><VdigaLeadForm /></> : <section class="candidate-application" id="kandidatura" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
+    <div class="candidate-application__offer">
+      <p>Условия</p><h2>Започвам от {data.priceLabel.replace("от ", "")}.</h2>
+      <dl><div><dt>Месечна цена</dt><dd>{data.priceLabel}</dd></div><div><dt>Старт</dt><dd>{data.startTime}</dd></div><div><dt>Първа стъпка</dt><dd>Една реална задача</dd></div></dl>
+      <p class="candidate-application__note">Точният обхват се определя след като видим задачата, системите и нужните одобрения.</p>
+    </div>
+    <div class="candidate-application__form"><p>Кандидатура</p><ContactForm title={data.slug === "pishe" ? "Коя промяна чака на сайта ви?" : "Коя задача се повтаря всяка седмица?"} selectedAgent={data.slug} intent="hire" /></div>
+  </section>}
 
-  <section class="gloria-team">
+  <section class="gloria-team" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
     <header class="gloria-section-head"><h2>Запознайте се с моите колеги</h2></header>
     <div class="gloria-team__grid">{colleagues.map((item) => {
       const colleague = item.data;
@@ -191,10 +221,10 @@ const schemas = [
         <footer><strong>{colleague.priceLabel}</strong><span class="roster-card__action"><span>{colleagueProfile.cta}</span><Icon name="arrow-right" /></span></footer>
       </a>;
     })}</div>
-    <a class="button button--spectrum" href="/kontakti/?agent=vdiga">Назначете Глория</a>
+    <a class="button button--spectrum" href={data.slug === "vdiga" ? "/kontakti/?agent=vdiga" : "#kandidatura"}>Назначете {profile.person}</a>
   </section>
   <script>
-    const revealItems = document.querySelectorAll<HTMLElement>(".candidate-page--vdiga .reveal-row");
+    const revealItems = document.querySelectorAll<HTMLElement>(".candidate-page .reveal-row");
     if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
@@ -206,76 +236,5 @@ const schemas = [
       revealItems.forEach((item) => observer.observe(item));
     } else revealItems.forEach((item) => item.classList.add("is-visible"));
   </script>
-  </> : <>
-  <section class="candidate-hero" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
-    <div class="candidate-hero__portrait">
-      <img src={profile.image} alt={profile.imageAlt} width="780" height="900" loading="eager" fetchpriority="high" decoding="sync" />
-      <p><strong>{profile.person}</strong><span>{data.role}</span></p>
-    </div>
-    <div class="candidate-hero__pitch">
-      <p class="candidate-hello">{profile.hello}</p>
-      <h1>{profile.headline}</h1>
-      <p class="candidate-opening">{profile.intro}</p>
-      <div class="candidate-hero__action">
-        <a class="button" href={data.demoUrl || "#razgovor"}>{profile.cta}</a>
-        <p><strong>{data.priceLabel}</strong><span>Мога да започна {data.startTime}</span></p>
-      </div>
-    </div>
-    {data.slug === "vdiga" && <aside class="candidate-cv" aria-label="Визитка на Глория">
-      <p>Кандидатура за работа</p>
-      <dl>
-        <div><dt>Позиция</dt><dd>AI рецепционист</dd></div>
-        <div><dt>Работно време</dt><dd>24/7, включително празници</dd></div>
-        <div><dt>Болнични</dt><dd>0 дни</dd></div>
-        <div><dt>Отпуск</dt><dd>Не ползвам</dd></div>
-        <div><dt>Изпитателен срок</dt><dd>С удоволствие</dd></div>
-        <div><dt>Език</dt><dd>Български</dd></div>
-        <div class="candidate-cv__price"><dt>Заплата</dt><dd>{data.priceLabel}, без осигуровки</dd></div>
-      </dl>
-    </aside>}
-  </section>
-
-  <article class="candidate-interview" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
-    <header class="candidate-interview__lead">
-      <p>{profile.firstQuestion}</p>
-      <h2>„{profile.firstAnswer}“</h2>
-    </header>
-    <dl class="candidate-interview__questions">
-      {profile.interview.map(([question, answer]) => <div><dt>{question}</dt><dd>{answer}</dd></div>)}
-    </dl>
-  </article>
-
-  <section class="candidate-scope" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
-    <div class="candidate-scope__heading"><h2>{data.slug === "vdiga" ? "Какво мога" : "Това мога да сваля от бюрото ви"}</h2><p>{data.slug === "vdiga" ? "Работата, за която кандидатствам." : "Не всичко. Точно тази работа."}</p></div>
-    <ul>{data.duties.map((duty) => <li><Icon name="check" /><span>{duty}</span></li>)}</ul>
-  </section>
-
-  {data.slug === "vdiga" && <section class="candidate-honesty" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
-    <p>Да сме честни от началото</p>
-    <div>
-      <h2>Какво не мога</h2>
-      <p>Не мога да направя кафе на колегите. Не мога да преместя масата в ъгъла. И ако клиент попита нещо, което не знам, няма да си измислям. Ще взема името, телефона и въпроса му и ще ви ги изпратя.</p>
-    </div>
-  </section>}
-
-  <section class="candidate-details" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
-    <div class="candidate-details__price"><p>Заплата</p><strong>{data.priceLabel}</strong><span>Точната цена зависи от обема работа и нужните връзки.</span></div>
-    <div class="candidate-details__tools"><p>Мога да работя с</p><ul>{data.integrations.map((item) => <li>{item}</li>)}</ul></div>
-  </section>
-
-  <section class="candidate-faq" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
-    <div><h2>Още въпроси, преди да ме наемете</h2><p>Кратките отговори са тук. За вашата задача ще говорим конкретно.</p></div>
-    <FAQ items={data.faqs} />
-  </section>
-
-  <section class="candidate-close" id="razgovor" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
-    <div><h2>{profile.closing}</h2><p>{data.slug === "vdiga" ? "Чуйте ме в примерен разговор. После ми кажете какво трябва да поема във вашия бизнес." : "Не подготвяйте задание. Напишете какво остава несвършено."}</p>{data.slug === "vdiga" && <a class="button candidate-demo-button" href={data.demoUrl}>Чуйте интервюто с Глория</a>}</div>
-    <ContactForm selectedAgent={data.slug} intent="hire" />
-  </section>
-
-  <section class="candidate-team">
-    <div><h2>{data.slug === "vdiga" ? "Моите колеги" : "Може би търсите друг човек"}</h2><p>{data.slug === "vdiga" ? "Другите хора в AI екипа на Работи." : "Запознайте се с останалите двама."}</p></div>
-    <div class="agent-grid">{colleagues.map((item) => <AgentCard agent={item} compact />)}</div>
-  </section>
-  </>}
+  </>
 </BaseLayout>
