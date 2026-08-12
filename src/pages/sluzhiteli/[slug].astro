@@ -85,6 +85,100 @@ const schemas = [
 ];
 ---
 <BaseLayout title={data.seoTitle} description={data.seoDescription} canonical={`/sluzhiteli/${data.slug}/`} image={`/og/${data.slug}.svg`} schema={schemas} bodyClass={`candidate-page candidate-page--${data.slug}`}>
+  {data.slug === "vdiga" ? <>
+  <section class="gloria-hero" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
+    <div class="gloria-hero__inner">
+      <div class="gloria-hero__copy">
+        <span class="gloria-role">AI рецепционист</span>
+        <h1>{profile.hello}</h1>
+        <p class="gloria-hero__position">Кандидатствам за рецепционист във вашия бизнес.</p>
+        <p class="gloria-hero__intro">{profile.intro}</p>
+        <div class="gloria-hero__actions">
+          <a class="button button--spectrum" href={data.demoUrl}><Icon name="phone" /> Поканете ме на интервю</a>
+          <a class="gloria-text-link" href="#umenia">Вижте какво мога <span aria-hidden="true">↓</span></a>
+        </div>
+        <ul class="gloria-facts" aria-label="Основни условия">
+          <li>Вдигам 24/7</li><li>Говоря български</li><li>{data.priceLabel}</li>
+        </ul>
+      </div>
+      <figure class="gloria-portrait">
+        <div class="gloria-portrait__frame"><img src={profile.image} alt={profile.imageAlt} width="780" height="900" loading="eager" fetchpriority="high" decoding="sync" /></div>
+        <figcaption><span class="gloria-live-dot" aria-hidden="true"></span>На линия сега</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="gloria-file" aria-labelledby="gloria-file-title">
+    <div class="gloria-file__card reveal-group">
+      <header>
+        <img src={profile.image} alt="" width="112" height="112" loading="lazy" />
+        <div><p>Служебно досие</p><h2 id="gloria-file-title">Глория</h2><span>Кандидат № 001 · AI рецепционист</span></div>
+      </header>
+      <dl>
+        <div class="reveal-row"><dt>Работно време</dt><dd>24/7, включително празници</dd></div>
+        <div class="reveal-row"><dt>Болнични</dt><dd>0 дни</dd></div>
+        <div class="reveal-row"><dt>Отпуск</dt><dd>Не ползвам</dd></div>
+        <div class="reveal-row"><dt>Изпитателен срок</dt><dd>С удоволствие</dd></div>
+        <div class="reveal-row"><dt>Език</dt><dd>Български</dd></div>
+        <div class="gloria-file__price reveal-row"><dt>Заплата</dt><dd>{data.priceLabel}, без осигуровки</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="gloria-skills" id="umenia" aria-labelledby="gloria-skills-title">
+    <header><p>Какво мога</p><h2 id="gloria-skills-title">Работата, за която кандидатствам.</h2></header>
+    <div class="gloria-skills__list reveal-group">
+      {data.duties.map((duty, index) => <article class:list={["gloria-skill", index % 2 && "gloria-skill--reverse", "reveal-row"]}>
+        <img src={profile.image} alt="" width="64" height="64" loading="lazy" />
+        <div><span>{String(index + 1).padStart(2,"0")}</span><h3>{duty}</h3></div>
+      </article>)}
+    </div>
+  </section>
+
+  <section class="gloria-honesty" aria-labelledby="gloria-honesty-title">
+    <span aria-hidden="true"></span>
+    <p>Да сме честни от началото</p>
+    <h2 id="gloria-honesty-title">Какво не мога</h2>
+    <div><p>Не мога да направя кафе на колегите. Не мога да преместя масата в ъгъла.</p><p>И ако клиент попита нещо, което не знам, няма да си измислям. Ще взема името, телефона и въпроса му и ще ви ги изпратя.</p></div>
+  </section>
+
+  <section class="gloria-chat" aria-labelledby="gloria-chat-title">
+    <header><p>Интервюто</p><h2 id="gloria-chat-title">Въпросите, които вероятно вече си задавате.</h2></header>
+    <div class="gloria-chat__thread reveal-group">
+      {profile.interview.map(([question, answer], index) => <div class="gloria-chat__exchange reveal-row">
+        <p class="gloria-chat__question">— {question}</p>
+        <div class="gloria-chat__answer">{index === 0 && <img src={profile.image} alt="Глория" width="48" height="48" loading="lazy" />}<p>{answer}</p></div>
+      </div>)}
+    </div>
+  </section>
+
+  <section class="gloria-demo" id="razgovor" aria-labelledby="gloria-demo-title">
+    <div>
+      <p>Живо демо</p><h2 id="gloria-demo-title">Интервюирайте ме. Сега.</h2>
+      <a class="gloria-demo__call" href={data.demoUrl}>Започнете интервюто <Icon name="arrow-right" /></a>
+      <span>Ще ви отговоря в браузъра. Питайте ме каквото искате.</span>
+    </div>
+  </section>
+
+  <section class="gloria-team">
+    <header><p>Моите колеги</p><h2>Работя най-добре в екип.</h2></header>
+    <div class="agent-grid">{colleagues.map((item) => <AgentCard agent={item} compact />)}</div>
+    <a class="button button--spectrum" href="/kontakti/?agent=vdiga">Назначете Глория</a>
+  </section>
+  <script>
+    const revealItems = document.querySelectorAll<HTMLElement>(".candidate-page--vdiga .reveal-row");
+    if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const item = entry.target as HTMLElement;
+        const siblings = Array.from(item.parentElement?.children || []);
+        item.style.setProperty("--reveal-delay", `${Math.max(0, siblings.indexOf(item)) * 70}ms`);
+        item.classList.add("is-visible"); observer.unobserve(item);
+      }), { threshold: .16 });
+      revealItems.forEach((item) => observer.observe(item));
+    } else revealItems.forEach((item) => item.classList.add("is-visible"));
+  </script>
+  </> : <>
   <section class="candidate-hero" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
     <div class="candidate-hero__portrait">
       <img src={profile.image} alt={profile.imageAlt} width="780" height="900" loading="eager" fetchpriority="high" decoding="sync" />
@@ -155,4 +249,5 @@ const schemas = [
     <div><h2>{data.slug === "vdiga" ? "Моите колеги" : "Може би търсите друг човек"}</h2><p>{data.slug === "vdiga" ? "Другите хора в AI екипа на Работи." : "Запознайте се с останалите двама."}</p></div>
     <div class="agent-grid">{colleagues.map((item) => <AgentCard agent={item} compact />)}</div>
   </section>
+  </>}
 </BaseLayout>
