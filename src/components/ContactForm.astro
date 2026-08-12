@@ -4,11 +4,13 @@ interface Props {
   title?: string;
   selectedAgent?: string;
   intent?: "hire" | "waitlist";
+  taskPlaceholder?: string;
 }
 const {
   title = "Кой AI служител ви трябва?",
   selectedAgent = "",
   intent = "hire",
+  taskPlaceholder = "Например: да вдига, когато екипът е зает",
 } = Astro.props;
 const waitlist = intent === "waitlist";
 ---
@@ -42,7 +44,7 @@ const waitlist = intent === "waitlist";
       </label>
       <label>
         <span>Коя задача искате да поеме AI служителят?</span>
-        <textarea name="task" rows="3" required placeholder="Например: да вдига, когато екипът е зает"></textarea>
+        <textarea name="task" rows="3" required placeholder={taskPlaceholder}></textarea>
       </label>
       <label class="consent">
         <input type="checkbox" name="consent" value="yes" required />
