@@ -5,17 +5,19 @@ interface Props {
   selectedAgent?: string;
   intent?: "hire" | "waitlist";
   taskPlaceholder?: string;
+  enquiry?: boolean;
 }
 const {
   title = "Кой AI служител ви трябва?",
   selectedAgent = "",
   intent = "hire",
   taskPlaceholder = "Например: да вдига, когато екипът е зает",
+  enquiry = false,
 } = Astro.props;
 const waitlist = intent === "waitlist";
 ---
 
-<form class:list={["contact-form", waitlist && "contact-form--waitlist"]} data-contact-form data-endpoint={site.formEndpoint} novalidate>
+<form class:list={["contact-form", waitlist && "contact-form--waitlist", enquiry && "contact-form--enquiry"]} data-contact-form data-endpoint={site.formEndpoint} data-adaptive={enquiry ? "true" : undefined} novalidate>
   <input type="hidden" name="intent" value={intent} />
   <input type="hidden" name="agent" value={selectedAgent} />
   <label class="honeypot" aria-hidden="true" hidden>Уебсайт<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
@@ -27,30 +29,49 @@ const waitlist = intent === "waitlist";
     </>
   ) : (
     <>
-      <label><span>Име</span><input type="text" name="name" autocomplete="name" required placeholder="Вашето име" /></label>
-      <label><span>Телефон</span><input type="tel" name="phone" autocomplete="tel" inputmode="tel" required placeholder="089 123 4567" /></label>
-      <label>
-        <span>Бизнес</span>
-        <select name="businessType" required>
-          <option value="" disabled selected>Изберете най-близкото</option>
-          <option>Салон или студио</option>
-          <option>Клиника или кабинет</option>
-          <option>Автосервиз</option>
-          <option>Хотел или ресторант</option>
-          <option>Офис или професионална услуга</option>
-          <option>Онлайн магазин</option>
-          <option>Друго</option>
-        </select>
-      </label>
-      <label>
-        <span>Коя задача искате да поеме AI служителят?</span>
-        <textarea name="task" rows="3" required placeholder={taskPlaceholder}></textarea>
-      </label>
+      {enquiry ? (
+        <>
+          <p class="contact-form__intro">Изберете служител и опишете една реална задача. Ще получите отговор по имейл до един работен ден.</p>
+          <div class="contact-form__row">
+            <label><span>Вашето име</span><input type="text" name="name" autocomplete="name" required placeholder="Име и фамилия" /></label>
+            <label><span>Служебен имейл</span><input type="email" name="email" autocomplete="email" required placeholder="ime@firma.bg" /></label>
+          </div>
+          <label><span>Фирма или сайт</span><input type="text" name="businessName" autocomplete="organization" required placeholder="Име на фирмата или адрес на сайта" /></label>
+          <label>
+            <span>Кой AI служител разглеждате?</span>
+            <select name="agentChoice" required data-agent-choice>
+              <option value="" disabled selected>Изберете служител</option>
+              <option value="vdiga">Vdiga — приема обаждания</option>
+              <option value="pishe">Pishe — поема сайта</option>
+              <option value="pomaga">Pomaga — движи задачи между системите</option>
+              <option value="unsure">Не съм сигурен/на</option>
+            </select>
+          </label>
+          <label>
+            <span data-task-label>Каква работа искате да поеме?</span>
+            <textarea name="task" rows="4" required data-task-input placeholder="Опишете какво се случва сега и какво трябва да бъде свършено."></textarea>
+            <small data-task-hint>Не подготвяйте задание. Един конкретен пример е достатъчен.</small>
+          </label>
+        </>
+      ) : (
+        <>
+          <label><span>Име</span><input type="text" name="name" autocomplete="name" required placeholder="Вашето име" /></label>
+          <label><span>Телефон</span><input type="tel" name="phone" autocomplete="tel" inputmode="tel" required placeholder="089 123 4567" /></label>
+          <label>
+            <span>Бизнес</span>
+            <select name="businessType" required>
+              <option value="" disabled selected>Изберете най-близкото</option>
+              <option>Салон или студио</option><option>Клиника или кабинет</option><option>Автосервиз</option><option>Хотел или ресторант</option><option>Офис или професионална услуга</option><option>Онлайн магазин</option><option>Друго</option>
+            </select>
+          </label>
+          <label><span>Коя задача искате да поеме AI служителят?</span><textarea name="task" rows="3" required placeholder={taskPlaceholder}></textarea></label>
+        </>
+      )}
       <label class="consent">
         <input type="checkbox" name="consent" value="yes" required />
         <span>Съгласен/на съм Работи да се свърже с мен за тази заявка. Прочетох <a href="/politika-za-poveritelnost/">политиката за поверителност</a>.</span>
       </label>
-      <button class="button" type="submit">Изпрати заявката</button>
+      <button class="button" type="submit">{enquiry ? "Изпратете запитването" : "Изпрати заявката"}</button>
     </>
   )}
   <p class="form-status" aria-live="polite"></p>
@@ -58,6 +79,23 @@ const waitlist = intent === "waitlist";
 
 <script>
   document.querySelectorAll<HTMLFormElement>("[data-contact-form]").forEach((form) => {
+    const choice = form.querySelector<HTMLSelectElement>("[data-agent-choice]");
+    const taskLabel = form.querySelector<HTMLElement>("[data-task-label]");
+    const taskInput = form.querySelector<HTMLTextAreaElement>("[data-task-input]");
+    const taskHint = form.querySelector<HTMLElement>("[data-task-hint]");
+    const copy = {
+      vdiga: ["Какво се случва с пропуснатите обаждания?", "Например: Когато сме с клиент, никой не вдига и губим записвания.", "Кажете кога звънят хората, какво питат и какво трябва да направи Vdiga."],
+      pishe: ["Какво трябва да се направи по сайта?", "Например: Имаме нови цени и услуги, но на сайта още стои старото.", "Добавете адреса на сайта и една промяна, страница или цел, от която да започнем."],
+      pomaga: ["Коя повтаряща се задача искате да спрете да вършите на ръка?", "Например: Преписваме всяка заявка от имейла в CRM и после правим задача.", "Опишете откъде идва задачата, в кои системи минава и къде е нужно ваше одобрение."],
+      unsure: ["Коя работа остава несвършена или ви бави?", "Опишете един реален случай от последната седмица.", "Ще преценим кой служител е подходящ — или ще ви кажем честно, ако задачата не е за нас."],
+    } as const;
+    choice?.addEventListener("change", () => {
+      const selected = copy[choice.value as keyof typeof copy];
+      if (!selected) return;
+      if (taskLabel) taskLabel.textContent = selected[0];
+      if (taskInput) taskInput.placeholder = selected[1];
+      if (taskHint) taskHint.textContent = selected[2];
+    });
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
       const status = form.querySelector<HTMLElement>(".form-status");
@@ -87,9 +125,11 @@ const waitlist = intent === "waitlist";
         form.reset();
         if (status) status.textContent = data.get("intent") === "waitlist"
           ? "Готово. Ще ви пишем, когато позицията отвори."
-          : "Получихме заявката. Ще се обадим до един работен ден.";
+          : form.dataset.adaptive === "true"
+            ? "Запитването е изпратено. Ще получите отговор по имейл до един работен ден."
+            : "Получихме заявката. Ще се свържем до един работен ден.";
       } catch {
-        if (status) status.textContent = "Не успяхме да изпратим. Обади се на 0899 917 920.";
+        if (status) status.textContent = "Запитването не беше изпратено. Опитайте отново или ни пишете на gunter@vdiga.bg.";
       } finally {
         if (button) button.disabled = false;
       }

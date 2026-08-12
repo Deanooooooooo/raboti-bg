@@ -68,7 +68,7 @@ const schemas = [
         <h1><em>Наемете AI служители</em><br />за българския бизнес.</h1>
         <p class="home-hero__lead">Работата не чака. Работи поема обаждания, промени по сайта и повтарящи се задачи между системите. Всеки AI служител има ясна роля, месечна цена и човек, който одобрява важните решения.</p>
         <div class="home-hero__actions">
-          <a class="button button--spectrum" href="#naemi">Намери своя AI служител <Icon name="arrow-down" /></a>
+          <a class="button button--spectrum" href="#naemi">Изпратете запитване <Icon name="arrow-down" /></a>
           <a class="home-link" href="#ekip">Вижте AI служителите <Icon name="arrow-right" /></a>
         </div>
         <div class="home-hero__signals" aria-label="Основни характеристики">
@@ -152,7 +152,7 @@ const schemas = [
           <li><span class="principle-mark"><Icon name="check" /></span><div><strong>Прави точно договореното</strong><small>Само с информацията и системите, които сте разрешили.</small></div></li>
           <li><span class="principle-mark"><WorkGlyph name="guard" /></span><div><strong>Пита преди риск</strong><small>Парите, договорите и окончателните решения остават при вас.</small></div></li>
         </ul>
-        <a class="button process-cta" href="/kontakti/">Покажете ни една задача <Icon name="arrow-right" /></a>
+        <a class="button process-cta" href="#naemi">Изпратете една задача <Icon name="arrow-right" /></a>
       </div>
       <WorkflowVisual />
     </div>
@@ -163,7 +163,7 @@ const schemas = [
       <div class="proof-copy">
         <h2>Кое не смогвате <em>да свършите?</em></h2>
         <p>Разкажете ни как го правите сега. До един работен ден ще ви кажем дали някой от служителите ни може да го поеме и колко ще струва.</p>
-        <a class="button proof-cta" href="/kontakti/">Разкажете ни какво остава <Icon name="arrow-right" /></a>
+        <a class="button proof-cta" href="#naemi">Изпратете запитване <Icon name="arrow-right" /></a>
         <small>Не подготвяйте задание. Напишете го както бихте го обяснили на нов колега.</small>
       </div>
       <div class="decision-brief" aria-label="Какво ще ви кажем за задачата">
@@ -192,11 +192,11 @@ const schemas = [
     <div class="home-contact__aurora" aria-hidden="true"></div>
     <div class="shell home-contact__grid">
       <div>
-        <h2>Коя задача остана<br /><em>за утре и днес?</em></h2>
-        <p>Опишете само една. До един работен ден ще ви кажем дали Vdiga, Pishe или Pomaga може да я поеме — и ако не може, ще го кажем направо.</p>
+        <h2>Покажете ни<br /><em>една реална задача.</em></h2>
+        <p>Изберете служител и опишете какво се случва сега. До един работен ден ще получите по имейл ясен отговор: може ли да го поеме, как ще започнем и какво ще струва.</p>
         <div class="contact-spectrum" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
       </div>
-      <ContactForm title="Разкажете ни за работата" />
+      <ContactForm title="Изпратете запитване" enquiry={true} />
     </div>
   </section>
 </BaseLayout>
