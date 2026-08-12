@@ -35,6 +35,13 @@ const profiles = {
       ["Колко време ви трябва, за да започнете?", "Давате ми услугите, цените, работното време и правилата за записване. Настройваме номера, правим пробни разговори и до пет работни дни мога да съм на телефона."],
       ["Какво става с обажданията, докато спите?", "Аз не спя. Това беше лесен въпрос."],
     ],
+    capabilities: [
+      ["Вдигам, преди клиентът да затвори.", "Поемам телефона, когато сте с клиент, шофирате или работният ден вече е приключил. Така обаждането не остава без отговор."],
+      ["Записвам часове директно в календара ви.", "Проверявам свободните часове и записвам клиента в свързан календар или система за резервации. Вие получавате известие за новия час."],
+      ["Отговарям на обичайните въпроси.", "Работно време, цени, адрес и подготовка за посещение — използвам само информацията, която сте одобрили предварително."],
+      ["Хващам случаите, които искат човек.", "Вземам име, телефон и причина за обаждането. После предавам разговора или изпращам информацията на правилния човек."],
+      ["Помня какво се случи.", "Всяко обаждане остава записано и обобщено. Виждате кой е звънял, какво е поискал и какво съм направила."],
+    ],
     closing: "Готова съм за интервю. Вие?",
     cta: "Поканете ме на интервю",
   },
@@ -109,10 +116,11 @@ const schemas = [
   </section>
 
   <section class="gloria-file" aria-labelledby="gloria-file-title">
+    <header class="gloria-section-head"><p>Служебно досие</p><h2 id="gloria-file-title">Условията ми за работа.</h2></header>
     <div class="gloria-file__card reveal-group">
       <header>
         <img src={profile.image} alt="" width="112" height="112" loading="lazy" />
-        <div><p>Служебно досие</p><h2 id="gloria-file-title">Глория</h2><span>Кандидат № 001 · AI рецепционист</span></div>
+        <div><p>Кандидат № 001</p><h3>Глория</h3><span>AI рецепционист</span></div>
       </header>
       <dl>
         <div class="reveal-row"><dt>Работно време</dt><dd>24/7, включително празници</dd></div>
@@ -126,11 +134,11 @@ const schemas = [
   </section>
 
   <section class="gloria-skills" id="umenia" aria-labelledby="gloria-skills-title">
-    <header><p>Какво мога</p><h2 id="gloria-skills-title">Работата, за която кандидатствам.</h2></header>
+    <header class="gloria-section-head"><p>Какво мога</p><h2 id="gloria-skills-title">Работата, за която кандидатствам.</h2></header>
     <div class="gloria-skills__list reveal-group">
-      {data.duties.map((duty, index) => <article class:list={["gloria-skill", index % 2 && "gloria-skill--reverse", "reveal-row"]}>
-        <img src={profile.image} alt="" width="64" height="64" loading="lazy" />
-        <div><span>{String(index + 1).padStart(2,"0")}</span><h3>{duty}</h3></div>
+      {profiles.vdiga.capabilities.map(([title, description], index) => <article class="gloria-skill reveal-row">
+        <span>{String(index + 1).padStart(2,"0")}</span>
+        <div><h3>{title}</h3><p>{description}</p></div>
       </article>)}
     </div>
   </section>
@@ -143,7 +151,7 @@ const schemas = [
   </section>
 
   <section class="gloria-chat" aria-labelledby="gloria-chat-title">
-    <header><p>Интервюто</p><h2 id="gloria-chat-title">Въпросите, които вероятно вече си задавате.</h2></header>
+    <header class="gloria-section-head"><p>Интервюто</p><h2 id="gloria-chat-title">Въпросите, които вероятно вече си задавате.</h2></header>
     <div class="gloria-chat__thread reveal-group">
       {profile.interview.map(([question, answer], index) => <div class="gloria-chat__exchange reveal-row">
         <p class="gloria-chat__question">— {question}</p>
@@ -161,7 +169,7 @@ const schemas = [
   </section>
 
   <section class="gloria-team">
-    <header><p>Моите колеги</p><h2>Работя най-добре в екип.</h2></header>
+    <header class="gloria-section-head"><p>Моите колеги</p><h2>Работя най-добре в екип.</h2></header>
     <div class="agent-grid">{colleagues.map((item) => <AgentCard agent={item} compact />)}</div>
     <a class="button button--spectrum" href="/kontakti/?agent=vdiga">Назначете Глория</a>
   </section>
