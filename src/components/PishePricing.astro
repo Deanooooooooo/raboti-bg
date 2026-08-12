@@ -1,0 +1,71 @@
+---
+import Icon from "./Icon.astro";
+
+const plans = [
+  {
+    name: "Актуализации",
+    price: "197 €",
+    scope: "Сайтът не остава със старата информация",
+    note: "За фирми, които вече имат сайт, но цените, услугите и офертите все чакат някой да ги качи.",
+    features: [
+      "Промени по цени, услуги, работно време и контакти",
+      "Качване и сваляне на продукти, снимки и оферти",
+      "Проверка на редактираните страници, бутони и форми",
+      "Одобрение преди важни промени",
+    ],
+    cta: "Покажете какво трябва да се смени",
+  },
+  {
+    name: "Съдържание и SEO",
+    price: "297 €",
+    scope: "Нова или основно пренаписана страница всяка седмица",
+    note: "За фирми, чиито важни услуги липсват от сайта, текстовете са общи или конкурентите отговарят по-добре на търсенията на клиентите.",
+    features: [
+      "Всичко от план „Актуализации“",
+      "Страница за услуга, продукт, град, казус или клиентски въпрос всяка седмица",
+      "Проучване за SEO/GEO и сравнение с конкретни конкуренти",
+      "Заглавия, вътрешни връзки, FAQ и структурирано съдържание",
+      "Преглед на Search Console и подобрение на страници без запитвания",
+    ],
+    cta: "Покажете коя услуга искате да продавате повече",
+    featured: true,
+  },
+  {
+    name: "Каталог и съдържание",
+    price: "597 €",
+    scope: "За сайт, в който всяка седмица има много работа",
+    note: "За магазини и фирми с много продукти, услуги, обекти или кампании, които се променят по-бързо, отколкото екипът успява да ги поддържа.",
+    features: [
+      "Всичко от план „Съдържание и SEO“",
+      "Пакетно обновяване на продукти, категории, цени и наличности",
+      "Повече страници за услуги, продуктови групи, градове и обекти",
+      "Предварително уговорен календар и приоритет за спешни цени и оферти",
+      "Месечен преглед на свършеното и следващите задачи",
+    ],
+    cta: "Покажете каталога и обема работа",
+  },
+];
+---
+
+<section class="gloria-pricing pishe-pricing" id="planove" aria-labelledby="pishe-pricing-title">
+  <header class="gloria-section-head">
+    <p>Планове за работа</p>
+    <h2 id="pishe-pricing-title">Колко работа искате Pishe да поеме?</h2>
+  </header>
+  <p class="gloria-pricing__lead">Изберете според това какво реално се трупа по сайта — текущи промени, ново съдържание всяка седмица или постоянна работа по голям каталог.</p>
+  <div class="gloria-pricing__grid">
+    {plans.map((plan) => <article class:list={["gloria-plan", plan.featured && "gloria-plan--featured"]}>
+      <header><h3>{plan.name}</h3>{plan.featured && <span>най-избиран</span>}</header>
+      <p class="gloria-plan__note">{plan.note}</p>
+      <div class="gloria-plan__volume"><strong>{plan.scope}</strong><span>Какво поема Pishe</span></div>
+      <div class="gloria-plan__price"><strong>{plan.price}</strong><span>/месец</span></div>
+      <p class="gloria-plan__terms">Без ДДС. Точният обхват се записва преди старта.</p>
+      <ul>{plan.features.map((feature) => <li><Icon name="check" />{feature}</li>)}</ul>
+      <a class:list={["button", plan.featured ? "button--spectrum" : "button--dark"]} href="#zayavka" data-pishe-plan={plan.name}>{plan.cta}<Icon name="arrow-right" /></a>
+    </article>)}
+  </div>
+  <aside class="pishe-pricing__website">
+    <div><h3>Още нямате сайт?</h3><p>Pishe може да помогне да го изградим — от страниците и текстовете до пускането. Това е отделен начален проект, защото цената зависи от обхвата и функциите.</p></div>
+    <a class="button button--dark" href="#zayavka" data-pishe-plan="Нов сайт">Разкажете какъв сайт ви трябва<Icon name="arrow-right" /></a>
+  </aside>
+</section>

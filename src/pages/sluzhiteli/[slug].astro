@@ -5,6 +5,8 @@ import ContactForm from "../../components/ContactForm.astro";
 import Icon from "../../components/Icon.astro";
 import VdigaPricing from "../../components/VdigaPricing.astro";
 import VdigaLeadForm from "../../components/VdigaLeadForm.astro";
+import PishePricing from "../../components/PishePricing.astro";
+import PisheLeadForm from "../../components/PisheLeadForm.astro";
 import { site } from "../../data/site";
 import { faqSchema, breadcrumbSchema } from "../../data/schema";
 
@@ -216,7 +218,7 @@ const schemas = [
     </div>
   </section>
 
-  {data.slug === "vdiga" ? <><VdigaPricing /><VdigaLeadForm /></> : <section class="candidate-application" id="kandidatura" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
+  {data.slug === "vdiga" ? <><VdigaPricing /><VdigaLeadForm /></> : data.slug === "pishe" ? <><PishePricing /><PisheLeadForm /></> : <section class="candidate-application" id="kandidatura" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
     <div class="candidate-application__offer">
       <p>Условия</p><h2>{data.slug === "pishe" ? `Pishe започва от ${data.priceLabel.replace("от ", "")}.` : `Започвам от ${data.priceLabel.replace("от ", "")}.`}</h2>
       <dl><div><dt>Месечна цена</dt><dd>{data.priceLabel}</dd></div><div><dt>Старт</dt><dd>{data.startTime}</dd></div><div><dt>Първа стъпка</dt><dd>Една реална задача</dd></div></dl>

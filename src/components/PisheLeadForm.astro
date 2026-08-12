@@ -1,0 +1,67 @@
+---
+import { site } from "../data/site";
+---
+
+<section class="gloria-lead pishe-lead" id="zayavka" aria-labelledby="pishe-lead-title">
+  <div class="gloria-lead__copy">
+    <p>Покажете реалната работа</p>
+    <h2 id="pishe-lead-title">Нека видим какво трябва да поеме Pishe.</h2>
+    <p>Пратете сайта и опишете какво все остава за после. Ще прегледаме задачите и ще ви кажем кой план ги покрива. Ако още нямате сайт, започваме от това какво продавате и какво трябва да направи клиентът.</p>
+    <ol>
+      <li><span>01</span><div><strong>Разглеждаме сайта и задачите</strong><small>Цени, услуги, каталог, съдържание, SEO/GEO или нов сайт.</small></div></li>
+      <li><span>02</span><div><strong>Записваме точния обхват</strong><small>Какво поема Pishe всяка седмица и кое остава отделен проект.</small></div></li>
+      <li><span>03</span><div><strong>Вие решавате</strong><small>Няма плащане или абонамент преди да одобрите предложението.</small></div></li>
+    </ol>
+  </div>
+  <form class="gloria-lead__form" data-pishe-lead-form data-endpoint={site.formEndpoint} data-sales-phone={site.salesPhone} novalidate>
+    <input type="hidden" name="intent" value="hire" />
+    <input type="hidden" name="agent" value="pishe" />
+    <input type="hidden" name="selectedPlan" value="" data-selected-plan />
+    <label class="honeypot" aria-hidden="true" hidden>Уебсайт<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+    <header><span data-form-title>Заявете преглед</span><small>Отнема около минута</small></header>
+    <div class="gloria-lead__grid">
+      <label><span>Вашето име</span><input type="text" name="name" autocomplete="name" placeholder="Име и фамилия" required /></label>
+      <label><span>Име на бизнеса</span><input type="text" name="businessName" autocomplete="organization" placeholder="Например Studio Forma" required /></label>
+      <label><span>Телефон</span><input type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="+359 88 123 4567" required /></label>
+      <label><span>Имейл</span><input type="email" name="email" autocomplete="email" placeholder="name@business.bg" required /></label>
+      <label class="gloria-lead__wide"><span>Адрес на сайта <small>ако имате</small></span><input type="url" name="currentWebsite" inputmode="url" placeholder="https://vashiyat-site.bg" /></label>
+      <label class="gloria-lead__wide"><span>Какво трябва да поеме Pishe?</span><select name="primaryNeed" required><option value="" selected disabled>Изберете най-близкото</option><option>Текущи промени по сайта</option><option>Съдържание и SEO/GEO всяка седмица</option><option>Каталог, продукти и цени</option><option>Изграждане на нов сайт</option><option>Не съм сигурен — искам преглед</option></select></label>
+      <label class="gloria-lead__wide"><span>Какво все остава за после?</span><textarea name="task" rows="4" required placeholder="Например: цените са стари, липсват три услуги и няма кой да качва новите продукти всяка седмица"></textarea></label>
+    </div>
+    <label class="gloria-lead__consent"><input type="checkbox" name="consent" value="yes" required /><span>Съгласен/на съм Работи да се свърже с мен за заявката. Прочетох <a href="/politika-za-poveritelnost/">политиката за поверителност</a>.</span></label>
+    <button class="button button--spectrum" type="submit">Изпратете за преглед</button>
+    <p class="gloria-lead__note">Първо уточняваме работата и цената. Няма автоматично плащане.</p>
+    <p class="form-status" aria-live="polite"></p>
+  </form>
+</section>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>("[data-pishe-lead-form]");
+  const selectedPlan = form?.querySelector<HTMLInputElement>("[data-selected-plan]");
+  const formTitle = form?.querySelector<HTMLElement>("[data-form-title]");
+  document.querySelectorAll<HTMLAnchorElement>("[data-pishe-plan]").forEach((link) => link.addEventListener("click", () => {
+    const plan = link.dataset.pishePlan || "";
+    if (selectedPlan) selectedPlan.value = plan;
+    if (formTitle) formTitle.textContent = plan === "Нов сайт" ? "Разкажете ни за новия сайт" : `План „${plan}“`;
+  }));
+  form?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const status = form.querySelector<HTMLElement>(".form-status");
+    const button = form.querySelector<HTMLButtonElement>("button[type='submit']");
+    const data = new FormData(form);
+    const phone = String(data.get("phone") || "").replace(/\D/g, "");
+    if (!form.checkValidity()) { form.reportValidity(); if (status) status.textContent = "Проверете задължителните полета."; return; }
+    if (!(/^0\d{9}$/.test(phone) || /^359\d{9}$/.test(phone))) { if (status) status.textContent = "Въведете валиден български телефон."; return; }
+    const payload = Object.fromEntries(data.entries());
+    payload.source = window.location.pathname;
+    if (status) status.textContent = "Изпращаме…";
+    if (button) button.disabled = true;
+    try {
+      const response = await fetch(form.dataset.endpoint || "/api/contact", { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(payload) });
+      if (!response.ok) throw new Error("Request failed");
+      form.reset();
+      if (status) status.textContent = "Получихме заявката. Ще се свържем с вас до един работен ден.";
+    } catch { if (status) status.textContent = `Не успяхме да изпратим. Обадете се на ${form.dataset.salesPhone || "0899 917 920"}.`; }
+    finally { if (button) button.disabled = false; }
+  });
+</script>
