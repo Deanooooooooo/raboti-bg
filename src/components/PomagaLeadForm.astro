@@ -1,0 +1,28 @@
+---
+import { site } from "../data/site";
+---
+<section class="gloria-lead pomaga-lead" id="zayavka" aria-labelledby="pomaga-lead-title">
+  <div class="gloria-lead__copy"><p>Покажете една истинска задача</p><h2 id="pomaga-lead-title">Нека проследим работата от входа до готовия резултат.</h2>
+    <p>Не е нужно да описвате целия бизнес. Дайте ни един реален пример: откъде идва заявката, къде я преписвате, кой я поема и при кое действие трябва да се намеси човек.</p>
+    <ol><li><span>01</span><div><strong>Минаваме по стъпките</strong><small>Гледаме входа, програмите, нужните данни и крайния резултат.</small></div></li><li><span>02</span><div><strong>Отделяме правилата от изключенията</strong><small>Pomaga поема повторението; необичайните и рисковите случаи остават при човек.</small></div></li><li><span>03</span><div><strong>Получавате точен обхват</strong><small>Знаете какво се настройва, колко струва и как се проверява преди старт.</small></div></li></ol>
+  </div>
+  <form class="gloria-lead__form" data-pomaga-lead-form data-endpoint={site.formEndpoint} data-sales-phone={site.salesPhone} novalidate>
+    <input type="hidden" name="intent" value="hire" /><input type="hidden" name="agent" value="pomaga" /><input type="hidden" name="selectedPlan" value="" data-selected-plan />
+    <label class="honeypot" aria-hidden="true" hidden>Уебсайт<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+    <header><span data-form-title>Заявете преглед на задачата</span><small>Отнема около минута</small></header>
+    <div class="gloria-lead__grid">
+      <label><span>Вашето име</span><input type="text" name="name" autocomplete="name" placeholder="Име и фамилия" required /></label><label><span>Име на бизнеса</span><input type="text" name="businessName" autocomplete="organization" placeholder="Например Studio Forma" required /></label>
+      <label><span>Телефон</span><input type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="+359 88 123 4567" required /></label><label><span>Имейл</span><input type="email" name="email" autocomplete="email" placeholder="name@business.bg" required /></label>
+      <label class="gloria-lead__wide"><span>Откъде започва задачата?</span><select name="taskSource" required><option value="" selected disabled>Изберете най-близкото</option><option>Имейл или формуляр</option><option>CRM или ERP</option><option>Таблица или документ</option><option>По график</option><option>Друго</option></select></label>
+      <label class="gloria-lead__wide"><span>Как я вършите сега?</span><textarea name="task" rows="4" required placeholder="Например: заявката идва по имейл, преписваме клиента в CRM, създаваме задача и пишем на търговеца"></textarea></label>
+      <label class="gloria-lead__wide"><span>Къде трябва задължително да се намеси човек?</span><textarea name="approvalBoundary" rows="3" placeholder="Например: преди изпращане на оферта, промяна на сума или плащане"></textarea></label>
+    </div>
+    <label class="gloria-lead__consent"><input type="checkbox" name="consent" value="yes" required /><span>Съгласен/на съм Работи да се свърже с мен за заявката. Прочетох <a href="/politika-za-poveritelnost/">политиката за поверителност</a>.</span></label>
+    <button class="button button--spectrum" type="submit">Изпратете задачата за преглед</button><p class="gloria-lead__note">Няма автоматично плащане. Първо уточняваме работата, достъпите и цената.</p><p class="form-status" aria-live="polite"></p>
+  </form>
+</section>
+<script>
+  const form=document.querySelector<HTMLFormElement>("[data-pomaga-lead-form]"); const selectedPlan=form?.querySelector<HTMLInputElement>("[data-selected-plan]"); const formTitle=form?.querySelector<HTMLElement>("[data-form-title]");
+  document.querySelectorAll<HTMLAnchorElement>("[data-pomaga-plan]").forEach((link)=>link.addEventListener("click",()=>{const plan=link.dataset.pomagaPlan||"";if(selectedPlan)selectedPlan.value=plan;if(formTitle)formTitle.textContent=`План „${plan}“`;}));
+  form?.addEventListener("submit",async(event)=>{event.preventDefault();const status=form.querySelector<HTMLElement>(".form-status");const button=form.querySelector<HTMLButtonElement>("button[type='submit']");const data=new FormData(form);const phone=String(data.get("phone")||"").replace(/\D/g,"");if(!form.checkValidity()){form.reportValidity();if(status)status.textContent="Проверете задължителните полета.";return;}if(!(/^0\d{9}$/.test(phone)||/^359\d{9}$/.test(phone))){if(status)status.textContent="Въведете валиден български телефон.";return;}const payload=Object.fromEntries(data.entries());payload.source=window.location.pathname;if(status)status.textContent="Изпращаме…";if(button)button.disabled=true;try{const response=await fetch(form.dataset.endpoint||"/api/contact",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(payload)});if(!response.ok)throw new Error("Request failed");form.reset();if(status)status.textContent="Получихме задачата. Ще се свържем с вас до един работен ден.";}catch{if(status)status.textContent=`Не успяхме да изпратим. Обадете се на ${form.dataset.salesPhone||"0899 917 920"}.`;}finally{if(button)button.disabled=false;}});
+</script>

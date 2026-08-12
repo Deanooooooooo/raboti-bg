@@ -7,21 +7,26 @@ import { pricingFaqs, site } from "../data/site";
 import { faqSchema, breadcrumbSchema } from "../data/schema";
 const agents = (await getCollection("agents")).sort((a,b)=>a.data.order-b.data.order);
 const live = agents.filter((agent)=>agent.data.status==="live");
+const planSummary: Record<string, string[]> = {
+  vdiga: ["Старт — 97 €", "Бизнес — 297 €", "500+ минути — индивидуална оферта"],
+  pishe: ["Актуализации — 197 €", "Съдържание и SEO — 297 €", "Каталог и съдържание — 597 €"],
+  pomaga: ["Една задача — 297 €", "Работен поток — 597 €", "Операции — индивидуална оферта"],
+};
 ---
 <BaseLayout
   title="Цени на AI служителите | Работи"
-  description="Вдига от €97, Pishe от €197 и Помага от €297 месечно. Виж какво включва всяка AI роля."
+  description="Vdiga от €97, Pishe от €197 и Pomaga от €297 месечно. Вижте плановете и какво поема всяка AI роля."
   canonical="/ceni/"
   image="/og/ceni.svg"
   schema={[faqSchema(pricingFaqs),breadcrumbSchema([{name:"Работи",url:site.url},{name:"Цени",url:`${site.url}/ceni/`}])]}
 >
-  <section class="page-hero"><div class="shell narrow"><p class="eyebrow">месечна цена по роли</p><h1>Плащаш за конкретни задачи, не за „AI проект“ без обхват.</h1><p>Всеки план описва какво поема служителят и какво остава извън услугата. Цената за настройка се показва преди да започнем.</p></div></section>
+  <section class="page-hero"><div class="shell narrow"><p class="eyebrow">месечна цена по роли</p><h1>Избирате работа, която AI служителят да поеме.</h1><p>Виждате месечната цена, границите и кога задачата остава при човек. Настройката се изчислява отделно и се показва преди да започнем.</p></div></section>
   <section class="section"><div class="shell pricing-grid">
     {live.map((agent) => <article class="price-card" style={`--agent:${agent.data.accent};--agent-soft:${agent.data.accentSoft}`}>
       <span class="status">AI служител</span><h2>{agent.data.name}</h2><p>{agent.data.role}</p>
       <div class="big-price"><strong>€{agent.data.price}</strong><span>на<br/>месец</span></div>
-      <ul>{agent.data.features.map((feature)=><li><Icon name="check" /> {feature}</li>)}</ul>
-      <a class="button" href={`/sluzhiteli/${agent.data.slug}/`}>Виж {agent.data.name}</a>
+      <ul>{planSummary[agent.data.slug].map((plan)=><li><Icon name="check" /> {plan}</li>)}</ul>
+      <a class="button" href={`/sluzhiteli/${agent.data.slug}/#planove`}>Вижте плановете на {agent.data.name}</a>
     </article>)}
   </div></section>
   <section class="section section--tint"><div class="shell split"><div><p class="eyebrow">за цените</p><h2>Без скрита работа между редовете.</h2></div><FAQ items={pricingFaqs}/></div></section>

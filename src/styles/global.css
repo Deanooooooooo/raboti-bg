@@ -719,6 +719,17 @@ body:not(.home-art) main { padding-top: 104px; }
 .pishe-lead .gloria-lead__grid input:focus,.pishe-lead .gloria-lead__grid select:focus,.pishe-lead .gloria-lead__grid textarea:focus { border-color:#a84629; outline-color:rgba(168,70,41,.2); }
 .pishe-lead .gloria-lead__consent input { accent-color:#a84629; }
 .pishe-lead .gloria-lead__consent a,.pishe-lead .form-status { color:#7c2d19; }
+.pomaga-pricing,.pomaga-lead { --pomaga:#6b56c9; --pomaga-soft:#ece8ff; }
+.pomaga-pricing .gloria-plan--featured { border-color:var(--pomaga); box-shadow:0 28px 70px -44px rgba(107,86,201,.72); }
+.pomaga-pricing .gloria-plan header span { background:var(--pomaga-soft); color:#4936a5; }
+.pomaga-pricing .gloria-plan li svg { color:var(--pomaga); }
+.pomaga-pricing .button--spectrum,.pomaga-lead .button--spectrum { background:var(--pomaga); color:#fff; box-shadow:0 20px 50px -22px rgba(107,86,201,.72); }
+.pomaga-lead .gloria-lead__copy > p:first-child,.pomaga-lead .gloria-lead__copy li > span { color:#b8aaff; }
+.pomaga-lead .gloria-lead__form { box-shadow:0 36px 90px -58px rgba(107,86,201,.78); }
+.pomaga-lead .gloria-lead__grid input:focus,.pomaga-lead .gloria-lead__grid select:focus,.pomaga-lead .gloria-lead__grid textarea:focus { border-color:var(--pomaga); outline-color:rgba(107,86,201,.2); }
+.pomaga-lead .gloria-lead__consent input { accent-color:var(--pomaga); }
+.pomaga-lead .gloria-lead__consent a,.pomaga-lead .form-status { color:#4936a5; }
+.pomaga-pricing .button,.pomaga-lead .button { white-space:normal; text-align:center; }
 
 /* Employee profiles: center the editorial column while keeping its copy left-aligned. */
 .candidate-page .gloria-file .gloria-section-head,

@@ -19,7 +19,8 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   if (String(body.website || "").trim()) return json({ ok: true });
   const intent = String(body.intent || "");
   if (!["hire", "waitlist"].includes(intent)) return json({ error: "Invalid intent" }, 400);
-  if (intent === "hire" && (!String(body.name || "").trim() || !String(body.phone || "").trim() || !String(body.businessType || "").trim() || body.consent !== "yes")) {
+  const business = String(body.businessType || body.businessName || "").trim();
+  if (intent === "hire" && (!String(body.name || "").trim() || !String(body.phone || "").trim() || !business || body.consent !== "yes")) {
     return json({ error: "Missing required fields" }, 400);
   }
   if (intent === "waitlist" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(body.email || ""))) return json({ error: "Invalid email" }, 400);

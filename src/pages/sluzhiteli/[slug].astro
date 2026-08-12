@@ -1,12 +1,13 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import ContactForm from "../../components/ContactForm.astro";
 import Icon from "../../components/Icon.astro";
 import VdigaPricing from "../../components/VdigaPricing.astro";
 import VdigaLeadForm from "../../components/VdigaLeadForm.astro";
 import PishePricing from "../../components/PishePricing.astro";
 import PisheLeadForm from "../../components/PisheLeadForm.astro";
+import PomagaPricing from "../../components/PomagaPricing.astro";
+import PomagaLeadForm from "../../components/PomagaLeadForm.astro";
 import { site } from "../../data/site";
 import { faqSchema, breadcrumbSchema } from "../../data/schema";
 
@@ -137,12 +138,14 @@ const profiles = {
 
 const profile = profiles[data.slug as keyof typeof profiles];
 const schemas = [
-  faqSchema(data.faqs),
+  faqSchema(profile.interview.map(([question, answer]) => ({ question, answer }))),
   breadcrumbSchema([{name:"Работи",url:site.url},{name:"AI служители",url:`${site.url}/sluzhiteli/`},{name:data.name,url:pageUrl}]),
   { "@context": "https://schema.org", "@type": "Product", name: `${data.name} — ${data.role}`, description: data.description, brand: { "@type": "Brand", name: site.brand }, url: pageUrl,
     offers: data.slug === "vdiga"
       ? { "@type": "AggregateOffer", lowPrice: "97", highPrice: "297", priceCurrency: "EUR", offerCount: "3", availability: "https://schema.org/InStock", url: `${pageUrl}#planove` }
-      : { "@type": "Offer", price: data.price, priceCurrency: data.currency, availability: "https://schema.org/InStock", url: pageUrl } },
+      : data.slug === "pishe"
+        ? { "@type": "AggregateOffer", lowPrice: "197", highPrice: "597", priceCurrency: "EUR", offerCount: "3", availability: "https://schema.org/InStock", url: `${pageUrl}#planove` }
+        : { "@type": "AggregateOffer", lowPrice: "297", highPrice: "597", priceCurrency: "EUR", offerCount: "3", availability: "https://schema.org/InStock", url: `${pageUrl}#planove` } },
 ];
 ---
 <BaseLayout title={data.seoTitle} description={data.seoDescription} canonical={`/sluzhiteli/${data.slug}/`} image={`/og/${data.slug}.svg`} schema={schemas} bodyClass={`candidate-page candidate-page--${data.slug}`}>
@@ -155,7 +158,7 @@ const schemas = [
         <p class="gloria-hero__position">{profile.position}</p>
         <p class="gloria-hero__intro">{profile.intro}</p>
         <div class="gloria-hero__actions">
-          <a class="button button--spectrum" href={data.slug === "vdiga" ? data.demoUrl : "#kandidatura"}><Icon name={data.slug === "vdiga" ? "phone" : "arrow-right"} /> {data.slug === "vdiga" ? "Поканете ме на интервю" : profile.cta}</a>
+          <a class="button button--spectrum" href={data.slug === "vdiga" ? data.demoUrl : "#zayavka"}><Icon name={data.slug === "vdiga" ? "phone" : "arrow-right"} /> {data.slug === "vdiga" ? "Поканете ме на интервю" : profile.cta}</a>
           <a class="gloria-text-link" href="#umenia">Вижте какво мога <span aria-hidden="true">↓</span></a>
         </div>
         <ul class="gloria-facts" aria-label="Основни условия">
@@ -213,33 +216,25 @@ const schemas = [
   <section class="gloria-demo" id="razgovor" aria-labelledby="gloria-demo-title" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
     <div>
       <p>{data.slug === "vdiga" ? "Живо демо" : "Пробна задача"}</p><h2 id="gloria-demo-title">{data.slug === "vdiga" ? "Интервюирайте ме. Сега." : profile.closing}</h2>
-      <a class="gloria-demo__call" href={data.slug === "vdiga" ? data.demoUrl : "#kandidatura"}>{data.slug === "vdiga" ? "Започнете интервюто" : profile.cta} <Icon name="arrow-right" /></a>
-      <span>{data.slug === "vdiga" ? "Ще ви отговоря в браузъра. Питайте ме каквото искате." : data.slug === "pishe" ? "Пратете сайта си — или опишете бизнеса, ако още нямате сайт. До един работен ден ще кажем откъде има смисъл да започнем." : "Опишете откъде идва задачата и къде трябва да стигне. До един работен ден ще кажем дали Помага може да я поеме."}</span>
+      <a class="gloria-demo__call" href={data.slug === "vdiga" ? data.demoUrl : "#zayavka"}>{data.slug === "vdiga" ? "Започнете интервюто" : profile.cta} <Icon name="arrow-right" /></a>
+      <span>{data.slug === "vdiga" ? "Ще ви отговоря в браузъра. Питайте ме каквото искате." : data.slug === "pishe" ? "Пратете сайта си — или опишете бизнеса, ако още нямате сайт. До един работен ден ще кажем откъде има смисъл да започнем." : "Опишете откъде идва задачата и къде трябва да стигне. До един работен ден ще кажем дали Pomaga може да я поеме."}</span>
     </div>
   </section>
 
-  {data.slug === "vdiga" ? <><VdigaPricing /><VdigaLeadForm /></> : data.slug === "pishe" ? <><PishePricing /><PisheLeadForm /></> : <section class="candidate-application" id="kandidatura" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
-    <div class="candidate-application__offer">
-      <p>Условия</p><h2>{data.slug === "pishe" ? `Pishe започва от ${data.priceLabel.replace("от ", "")}.` : `Започвам от ${data.priceLabel.replace("от ", "")}.`}</h2>
-      <dl><div><dt>Месечна цена</dt><dd>{data.priceLabel}</dd></div><div><dt>Старт</dt><dd>{data.startTime}</dd></div><div><dt>Първа стъпка</dt><dd>Една реална задача</dd></div></dl>
-      <p class="candidate-application__note">{data.slug === "pishe" ? "Първо преглеждаме сайта, каталога и работата, която искате Pishe да поеме. После получавате точен месечен обхват. Изграждането на нов сайт се оферира отделно." : "Точният обхват се определя, след като видим задачата, системите и нужните одобрения."}</p>
-    </div>
-    <div class="candidate-application__form"><p>{data.slug === "pishe" ? "Първа стъпка" : "Покажете ни бизнеса"}</p><ContactForm title={data.slug === "pishe" ? "Пратете сайта си. Ако още нямате, опишете какво продавате." : "Коя задача губи времето на екипа ви?"} taskPlaceholder={data.slug === "pishe" ? "Например: имаме сайт, но услугите са описани общо, цените са стари и не излизаме при търсене по градове" : "Например: заявките от имейла се преписват в CRM и после в обща таблица"} selectedAgent={data.slug} intent="hire" /></div>
-  </section>}
-
+  {data.slug === "vdiga" ? <><VdigaPricing /><VdigaLeadForm /></> : data.slug === "pishe" ? <><PishePricing /><PisheLeadForm /></> : <><PomagaPricing /><PomagaLeadForm /></>}
   <section class="gloria-team" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
     <header class="gloria-section-head"><h2>Запознайте се с моите колеги</h2></header>
     <div class="gloria-team__grid">{colleagues.map((item) => {
       const colleague = item.data;
       const colleagueProfile = colleagueProfiles[colleague.slug];
-      return <a class:list={["roster-card", `roster-card--${colleague.slug}`]} href={`/sluzhiteli/${colleague.slug}/`} aria-label={`${colleague.name}: как може да помогне`} style={`--agent:${colleague.accent};--agent-soft:${colleague.accentSoft}`}>
+      return <a class:list={["roster-card", `roster-card--${colleague.slug}`]} href={`/sluzhiteli/${colleague.slug}/`} aria-label={`${colleague.name}, ${colleague.role}: ${colleagueProfile.cta}`} style={`--agent:${colleague.accent};--agent-soft:${colleague.accentSoft}`}>
         <header><div class="roster-card__heading"><p>{colleague.role}</p><h3>{colleague.name}</h3></div></header>
         <div class="roster-card__portrait"><img src={colleagueProfile.image} width="720" height="960" alt={colleagueProfile.imageAlt} loading="lazy" decoding="async" /></div>
         <div class="roster-card__body"><span>{colleague.summary}</span></div>
         <footer><strong>{colleague.priceLabel}</strong><span class="roster-card__action"><span>{colleagueProfile.cta}</span><Icon name="arrow-right" /></span></footer>
       </a>;
     })}</div>
-    <a class="button button--spectrum" href={data.slug === "vdiga" ? "/kontakti/?agent=vdiga" : "#kandidatura"}>Назначете {profile.person}</a>
+    <a class="button button--spectrum" href={data.slug === "vdiga" ? "/kontakti/?agent=vdiga" : "#zayavka"}>Назначете {profile.person}</a>
   </section>
   <script>
     const revealItems = document.querySelectorAll<HTMLElement>(".candidate-page .reveal-row");
