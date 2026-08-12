@@ -466,6 +466,14 @@ p { text-wrap: pretty; }
 .candidate-hero__action > p { margin:0; display:grid; gap:2px; }
 .candidate-hero__action strong { font-size:1.06rem; }
 .candidate-hero__action span { color:var(--ink-soft); font-size:.8rem; }
+.candidate-hero__portrait { grid-row:1 / span 2; }
+.candidate-cv { z-index:2; width:100%; align-self:end; padding:22px 24px; border-radius:20px; background:rgba(255,255,255,.94); box-shadow:0 24px 70px -38px rgba(8,40,34,.55); backdrop-filter:blur(12px); }
+.candidate-cv > p { margin:0 0 14px; color:var(--agent); font-size:.78rem; font-weight:700; }
+.candidate-cv dl { margin:0; }
+.candidate-cv dl div { display:grid; grid-template-columns:.8fr 1.2fr; gap:14px; padding:8px 0; border-top:1px solid color-mix(in srgb,var(--agent) 18%,#ddd); }
+.candidate-cv dt { color:var(--ink-soft); font-size:.76rem; }
+.candidate-cv dd { margin:0; font-size:.78rem; font-weight:650; text-align:right; }
+.candidate-cv__price dd { color:var(--agent); }
 
 .candidate-interview,.candidate-scope,.candidate-details,.candidate-faq,.candidate-close,.candidate-team { width:min(1120px,calc(100% - 40px)); margin-inline:auto; }
 .candidate-interview { padding:clamp(110px,13vw,180px) 0; }
@@ -484,6 +492,10 @@ p { text-wrap: pretty; }
 .candidate-scope li { display:grid; grid-template-columns:24px 1fr; gap:14px; padding:18px 0; border-bottom:1px solid rgba(255,255,255,.28); line-height:1.45; }
 .candidate-scope li:first-child { border-top:1px solid rgba(255,255,255,.28); }
 .candidate-scope svg { width:20px; }
+.candidate-honesty { width:min(1120px,calc(100% - 40px)); margin:28px auto 0; padding:clamp(50px,7vw,82px); border:1px solid color-mix(in srgb,var(--agent) 26%,#ddd); border-radius:28px; display:grid; grid-template-columns:.55fr 1.45fr; gap:clamp(48px,9vw,120px); background:var(--agent-soft); }
+.candidate-honesty > p { margin:8px 0 0; color:var(--agent); font-weight:650; }
+.candidate-honesty h2 { margin:0 0 24px; font-size:clamp(2.4rem,4vw,4.1rem); line-height:1.02; letter-spacing:-.037em; }
+.candidate-honesty div p { max-width:57ch; margin:0; color:var(--ink-soft); font-size:1.08rem; line-height:1.68; }
 
 .candidate-details { padding:clamp(82px,10vw,130px) 0; display:grid; grid-template-columns:.72fr 1.28fr; gap:clamp(64px,11vw,150px); }
 .candidate-details p { margin:0 0 16px; color:var(--agent); font-weight:650; }
@@ -497,6 +509,7 @@ p { text-wrap: pretty; }
 .candidate-faq > div > p,.candidate-team > div:first-child p { max-width:38ch; margin:24px 0 0; color:var(--ink-soft); line-height:1.58; }
 .candidate-close { padding:clamp(50px,7vw,82px); border-radius:28px; display:grid; grid-template-columns:minmax(0,.83fr) minmax(340px,1.17fr); gap:clamp(54px,9vw,116px); align-items:start; background:var(--agent-soft); }
 .candidate-close > div > p { max-width:40ch; margin:24px 0 0; color:var(--ink-soft); line-height:1.58; }
+.candidate-demo-button { margin-top:28px; background:var(--agent); color:#fff; }
 .candidate-team { padding:clamp(100px,12vw,160px) 0 90px; }
 .candidate-team > div:first-child { display:flex; justify-content:space-between; gap:40px; align-items:end; margin-bottom:42px; }
 .candidate-team > div:first-child p { margin:0; }
@@ -506,21 +519,27 @@ p { text-wrap: pretty; }
   .candidate-hero { grid-template-columns:1fr; }
   .candidate-hero__pitch { order:-1; }
   .candidate-hero__portrait { min-height:650px; }
-  .candidate-interview__lead,.candidate-scope,.candidate-details,.candidate-faq,.candidate-close { grid-template-columns:1fr; }
+  .candidate-interview__lead,.candidate-scope,.candidate-honesty,.candidate-details,.candidate-faq,.candidate-close { grid-template-columns:1fr; }
+  .candidate-hero__portrait { grid-row:auto; }
+  .candidate-cv { width:100%; grid-column:1/-1; }
 }
 @media(max-width:640px){
   .candidate-hero { min-height:auto; margin:8px; padding:100px 16px 16px; border-radius:26px; gap:34px; }
   .candidate-hero h1 { max-width:none; font-size:clamp(3rem,14.2vw,4rem); }
+  .candidate-page main { overflow-x:clip; }
+  .candidate-hero__pitch { min-width:0; }
+  .candidate-hero h1 { font-size:clamp(2.75rem,12vw,3.2rem); overflow-wrap:anywhere; }
+  .candidate-opening { max-width:100%; overflow-wrap:anywhere; }
   .candidate-opening { margin-top:24px; }
   .candidate-hero__action { display:grid; gap:18px; }
   .candidate-hero__action .button { width:100%; }
   .candidate-hero__portrait { min-height:480px; border-radius:24px 24px 80px 24px; }
-  .candidate-interview,.candidate-scope,.candidate-details,.candidate-faq,.candidate-close,.candidate-team { width:calc(100% - 16px); }
+  .candidate-interview,.candidate-scope,.candidate-honesty,.candidate-details,.candidate-faq,.candidate-close,.candidate-team { width:calc(100% - 16px); }
   .candidate-interview { padding:86px 8px; }
   .candidate-interview__lead { grid-template-columns:1fr; gap:32px; padding-bottom:72px; }
   .candidate-interview__lead h2 { font-size:2.55rem; }
   .candidate-interview__questions > div { grid-template-columns:1fr; gap:14px; padding:30px 0; }
-  .candidate-scope,.candidate-close { padding:34px 22px; border-radius:24px; }
+  .candidate-scope,.candidate-honesty,.candidate-close { padding:34px 22px; border-radius:24px; }
   .candidate-scope h2,.candidate-faq h2,.candidate-close h2,.candidate-team h2 { font-size:2.65rem; }
   .candidate-details { padding:82px 8px; gap:58px; }
   .candidate-details__tools ul { columns:1; }
