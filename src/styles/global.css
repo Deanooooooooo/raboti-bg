@@ -720,6 +720,15 @@ body:not(.home-art) main { padding-top: 104px; }
 .pishe-lead .gloria-lead__consent input { accent-color:#a84629; }
 .pishe-lead .gloria-lead__consent a,.pishe-lead .form-status { color:#7c2d19; }
 
+/* Pishe profile: keep the editorial column centered while its copy stays left-aligned. */
+.candidate-page--pishe .gloria-file .gloria-section-head,
+.candidate-page--pishe .gloria-skills .gloria-section-head,
+.candidate-page--pishe .gloria-skills__list,
+.candidate-page--pishe .gloria-chat .gloria-section-head,
+.candidate-page--pishe .gloria-chat__thread { margin-inline:auto; }
+.candidate-page--pishe .gloria-honesty { width:min(680px,calc(100% - 40px)); }
+.candidate-page--pishe .gloria-demo > div { width:min(680px,100%); }
+
 .gloria-team__grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
 .gloria-team__grid .roster-card { --home-ink:#111426; min-height:620px; grid-column:auto; border-color:rgba(255,255,255,.16); background:#fff; color:#111426; }
 .gloria-team__grid .roster-card__heading h3,.gloria-team__grid .roster-card footer strong { color:#111426; }
