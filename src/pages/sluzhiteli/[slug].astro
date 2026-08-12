@@ -5,6 +5,8 @@ import AgentCard from "../../components/AgentCard.astro";
 import FAQ from "../../components/FAQ.astro";
 import ContactForm from "../../components/ContactForm.astro";
 import Icon from "../../components/Icon.astro";
+import VdigaPricing from "../../components/VdigaPricing.astro";
+import VdigaLeadForm from "../../components/VdigaLeadForm.astro";
 import { site } from "../../data/site";
 import { faqSchema, breadcrumbSchema } from "../../data/schema";
 
@@ -16,6 +18,10 @@ export async function getStaticPaths() {
 const { agent, agents } = Astro.props;
 const data = agent.data;
 const colleagues = agents.filter((item) => item.id !== agent.id && item.data.status === "live").sort((a,b) => a.data.order - b.data.order);
+const colleagueProfiles: Record<string, { image: string; imageAlt: string; cta: string }> = {
+  pishe: { image: "/assets/employee-pishe-v1.webp", imageAlt: "Визуално представяне на AI уеб мениджъра Pishe", cta: "Как мога да съм полезен?" },
+  pomaga: { image: "/assets/employee-pomaga-v1.webp", imageAlt: "Визуално представяне на AI оперативния асистент Pomaga", cta: "Как мога да съм полезна?" },
+};
 const pageUrl = `${site.url}/sluzhiteli/${data.slug}/`;
 
 const profiles = {
@@ -88,7 +94,9 @@ const schemas = [
   faqSchema(data.faqs),
   breadcrumbSchema([{name:"Работи",url:site.url},{name:"AI служители",url:`${site.url}/sluzhiteli/`},{name:data.name,url:pageUrl}]),
   { "@context": "https://schema.org", "@type": "Product", name: `${data.name} — ${data.role}`, description: data.description, brand: { "@type": "Brand", name: site.brand }, url: pageUrl,
-    offers: { "@type": "Offer", price: data.price, priceCurrency: data.currency, availability: "https://schema.org/InStock", url: pageUrl } },
+    offers: data.slug === "vdiga"
+      ? { "@type": "AggregateOffer", lowPrice: "97", highPrice: "297", priceCurrency: "EUR", offerCount: "3", availability: "https://schema.org/InStock", url: `${pageUrl}#planove` }
+      : { "@type": "Offer", price: data.price, priceCurrency: data.currency, availability: "https://schema.org/InStock", url: pageUrl } },
 ];
 ---
 <BaseLayout title={data.seoTitle} description={data.seoDescription} canonical={`/sluzhiteli/${data.slug}/`} image={`/og/${data.slug}.svg`} schema={schemas} bodyClass={`candidate-page candidate-page--${data.slug}`}>
@@ -168,9 +176,21 @@ const schemas = [
     </div>
   </section>
 
+  <VdigaPricing />
+  <VdigaLeadForm />
+
   <section class="gloria-team">
-    <header class="gloria-section-head"><p>Моите колеги</p><h2>Работя най-добре в екип.</h2></header>
-    <div class="agent-grid">{colleagues.map((item) => <AgentCard agent={item} compact />)}</div>
+    <header class="gloria-section-head"><h2>Запознайте се с моите колеги</h2></header>
+    <div class="gloria-team__grid">{colleagues.map((item) => {
+      const colleague = item.data;
+      const colleagueProfile = colleagueProfiles[colleague.slug];
+      return <a class:list={["roster-card", `roster-card--${colleague.slug}`]} href={`/sluzhiteli/${colleague.slug}/`} aria-label={`${colleague.name}: как може да помогне`} style={`--agent:${colleague.accent};--agent-soft:${colleague.accentSoft}`}>
+        <header><div class="roster-card__heading"><p>{colleague.role}</p><h3>{colleague.name}</h3></div></header>
+        <div class="roster-card__portrait"><img src={colleagueProfile.image} width="720" height="960" alt={colleagueProfile.imageAlt} loading="lazy" decoding="async" /></div>
+        <div class="roster-card__body"><span>{colleague.summary}</span></div>
+        <footer><strong>{colleague.priceLabel}</strong><span class="roster-card__action"><span>{colleagueProfile.cta}</span><Icon name="arrow-right" /></span></footer>
+      </a>;
+    })}</div>
     <a class="button button--spectrum" href="/kontakti/?agent=vdiga">Назначете Глория</a>
   </section>
   <script>

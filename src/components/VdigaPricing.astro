@@ -1,0 +1,50 @@
+---
+import Icon from "./Icon.astro";
+
+const plans = [
+  {
+    name: "Старт",
+    minutes: "120 минути",
+    price: "97 €",
+    note: "За пропуснатите входящи обаждания и по-малък месечен обем.",
+    features: ["120 минути входящи разговори", "До 3 телефонни линии", "Получавате кой се е обадил и какво иска"],
+    cta: "Избирам Старт",
+  },
+  {
+    name: "Бизнес",
+    minutes: "500 минути",
+    price: "297 €",
+    note: "За бизнеси с входящи обаждания всеки ден.",
+    features: ["500 минути входящи разговори", "До 3 телефонни линии", "27% по-ниска цена на минута спрямо Старт"],
+    cta: "Избирам Бизнес",
+    featured: true,
+  },
+  {
+    name: "500+ минути",
+    minutes: "Над 500 минути",
+    price: "Индивидуална оферта",
+    note: "За голям обем, няколко обекта или повече телефонни линии.",
+    features: ["Минути според реалния ви обем", "Достъпни 3+ телефонни линии", "Една настройка за няколко обекта"],
+    cta: "Получавам оферта",
+  },
+];
+---
+
+<section class="gloria-pricing" id="planove" aria-labelledby="gloria-pricing-title">
+  <header class="gloria-section-head">
+    <p>Условия за назначаване</p>
+    <h2 id="gloria-pricing-title">Изберете колко разговора да поема.</h2>
+  </header>
+  <p class="gloria-pricing__lead">Планът зависи от минутите входящи разговори. Ако не знаете колко са, ще ги изчислим с вас.</p>
+  <div class="gloria-pricing__grid">
+    {plans.map((plan) => <article class:list={["gloria-plan", plan.featured && "gloria-plan--featured"]}>
+      <header><h3>{plan.name}</h3>{plan.featured && <span>най-избиран</span>}</header>
+      <p class="gloria-plan__note">{plan.note}</p>
+      <div class="gloria-plan__volume"><strong>{plan.minutes}</strong><span>входящи разговори месечно</span></div>
+      <div class="gloria-plan__price"><strong>{plan.price}</strong>{plan.price !== "Индивидуална оферта" && <span>/месец</span>}</div>
+      <p class="gloria-plan__terms">Без ДДС. Без дългосрочен договор.</p>
+      <ul>{plan.features.map((feature) => <li><Icon name="check" />{feature}</li>)}</ul>
+      <a class:list={["button", plan.featured ? "button--spectrum" : "button--dark"]} href="#zayavka" data-vdiga-plan={plan.name}>{plan.cta}<Icon name="arrow-right" /></a>
+    </article>)}
+  </div>
+</section>
