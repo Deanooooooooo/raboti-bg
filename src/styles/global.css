@@ -148,6 +148,16 @@ p { text-wrap: pretty; }
 .nav-toggle { display: none; width: 44px; height: 44px; border: 0; border-radius: var(--radius-pill); background: #fff; }
 .nav-toggle span:not(.sr-only) { display: block; width: 21px; height: 2px; margin: 5px auto; background: var(--ink); }
 
+/* Shared floating navigation — the homepage header is the site header. */
+.site-header { position: fixed; top: 0; right: 0; left: 0; z-index: 50; padding-top: 12px; border: 0; background: transparent; color: #070a18; pointer-events: none; }
+.header-inner { width: min(1180px,calc(100% - 64px)); min-height: 60px; padding: 8px 8px 8px 18px; border: 0; border-radius: 30px; background: linear-gradient(180deg,rgba(255,255,255,.72) 10%,rgba(255,255,255,.92) 100%); box-shadow: 0 12px 24px -12px rgba(7,10,24,.18),0 2px 4px -1px rgba(7,10,24,.08),inset 0 0 0 1px rgba(255,255,255,.68); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); pointer-events: auto; transform: translateY(20px); transition: background .18s ease-out,transform .16s ease-out,box-shadow .18s ease-out; }
+.site-header.is-scrolled .header-inner { transform: none; background: linear-gradient(180deg,rgba(255,255,255,.88),rgba(248,249,252,.96)); box-shadow: 0 14px 34px -16px rgba(7,10,24,.28),inset 0 0 0 1px rgba(255,255,255,.8); }
+.site-nav > a:not(.button) { color: rgba(17,20,38,.82); font-size: 1rem; font-weight: var(--fw-semibold); letter-spacing: -.012em; }
+.site-nav > a:not(.button):hover { color: #070a18; }
+.header-cta { min-height: 44px; padding: 10px 20px; border-color: #070a18; background: #070a18; color: #fff; font-size: 1rem; box-shadow: 0 2px 4px -1px rgba(7,10,24,.22); }
+.header-cta:hover { border-color: #242a49; background: #242a49; color: #fff; }
+body:not(.home-art) main { padding-top: 104px; }
+
 /* Buttons */
 .button {
   display: inline-flex;
@@ -558,7 +568,7 @@ p { text-wrap: pretty; }
 .gloria-hero__inner { width: min(1180px,100%); margin: auto; display: grid; grid-template-columns: minmax(0,1.1fr) minmax(360px,.9fr); gap: clamp(54px,8vw,104px); align-items: center; }
 .gloria-hero__copy { position: relative; z-index: 2; }
 .gloria-role { display: inline-flex; width: fit-content; margin-bottom: 24px; padding: 9px 14px; border: 1px solid rgba(7,10,24,.12); border-radius: 999px; background: rgba(255,255,255,.62); color: var(--agent); font-size: .8125rem; font-weight: 700; }
-.gloria-hero h1 { max-width: 10ch; margin: 0; font-size: clamp(3.4rem,6.5vw,6.4rem); line-height: .94; letter-spacing: -.052em; text-wrap: balance; }
+.gloria-hero h1 { max-width: 11ch; margin: 0; font-size: clamp(3.25rem,5.2vw,5rem); line-height: .98; letter-spacing: -.045em; text-wrap: balance; }
 .gloria-hero__position { max-width: 28ch; margin: 22px 0 0; color: var(--agent); font-size: clamp(1.3rem,2vw,1.75rem); font-weight: 700; line-height: 1.2; letter-spacing: -.025em; }
 .gloria-hero__intro { max-width: 58ch; margin: 24px 0 0; color: #465851; font-size: 1.08rem; line-height: 1.65; }
 .gloria-hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 22px; margin-top: 34px; }
@@ -582,29 +592,29 @@ p { text-wrap: pretty; }
 .gloria-file__card { width: min(820px,100%); margin: auto; border: 1px solid rgba(17,20,38,.11); border-radius: 28px; overflow: hidden; background: rgba(255,255,255,.92); box-shadow: 0 30px 80px -56px rgba(25,20,50,.55); }
 .gloria-file__card header { display: flex; gap: 22px; align-items: center; padding: 30px; border-bottom: 1px solid rgba(17,20,38,.1); }
 .gloria-file__card header img { width: 82px; height: 82px; border-radius: 16px; object-fit: cover; object-position: center 24%; background: var(--agent-soft); }
-.gloria-file__card header p,.gloria-skills header p,.gloria-chat header p,.gloria-team header p { margin: 0 0 7px; color: var(--agent); font-size: .8125rem; font-weight: 700; }
+.gloria-file__card header p,.gloria-skills header p,.gloria-chat header p,.gloria-team header p { margin: 0 0 7px; color: var(--agent); font-size: .9375rem; font-weight: 700; }
 .gloria-file__card h2 { margin: 0; font-size: 2rem; letter-spacing: -.035em; }
 .gloria-file__card header span { display: block; margin-top: 5px; color: #686773; font-size: .8rem; }
 .gloria-file dl { margin: 0; }
 .gloria-file dl > div { display: grid; grid-template-columns: .8fr 1.2fr; gap: 28px; padding: 18px 30px; border-bottom: 1px solid rgba(17,20,38,.09); }
-.gloria-file dt { color: #686773; }
-.gloria-file dd { margin: 0; font-weight: 700; text-align: right; }
+.gloria-file dt { color: #686773; font-size: 1rem; }
+.gloria-file dd { margin: 0; font-size: 1rem; font-weight: 700; text-align: right; }
 .gloria-file dl .gloria-file__price { padding-block: 23px; border: 0; background: var(--agent-soft); color: var(--agent); }
 
 .gloria-skills { padding: 0 0 clamp(120px,14vw,180px); }
 .gloria-skills header,.gloria-chat header { display: grid; grid-template-columns: .42fr 1.58fr; gap: clamp(44px,8vw,100px); align-items: start; margin-bottom: clamp(68px,9vw,110px); }
-.gloria-skills h2,.gloria-chat h2,.gloria-team h2 { max-width: 17ch; margin: 0; color: #111426; font-size: clamp(2.65rem,5vw,5rem); line-height: 1.01; letter-spacing: -.045em; }
+.gloria-skills h2,.gloria-chat h2,.gloria-team h2 { max-width: 18ch; margin: 0; color: #111426; font-size: clamp(2.5rem,4vw,4rem); line-height: 1.03; letter-spacing: -.04em; }
 .gloria-skills__list { display: grid; gap: 14px; }
 .gloria-skill { width: min(760px,82%); display: grid; grid-template-columns: 64px 1fr; gap: 20px; align-items: start; padding: 26px 30px; border: 1px solid rgba(17,20,38,.09); border-radius: 24px; background: rgba(255,255,255,.72); }
 .gloria-skill--reverse { margin-left: auto; }
 .gloria-skill img { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; object-position: center 22%; background: var(--agent-soft); }
-.gloria-skill span { color: var(--agent); font-size: .75rem; font-weight: 700; }
-.gloria-skill h3 { max-width: 31ch; margin: 8px 0 0; color: #111426; font-size: clamp(1.22rem,2vw,1.55rem); line-height: 1.28; letter-spacing: -.025em; }
+.gloria-skill span { color: var(--agent); font-size: .875rem; font-weight: 700; }
+.gloria-skill h3 { max-width: 31ch; margin: 8px 0 0; color: #111426; font-size: clamp(1.25rem,1.7vw,1.5rem); line-height: 1.32; letter-spacing: -.02em; }
 
 .gloria-honesty { width: min(640px,calc(100% - 40px)); margin: 0 auto; padding: clamp(100px,13vw,170px) 0; color: #111426; }
 .gloria-honesty > span { display: block; width: 54px; height: 2px; margin-bottom: 28px; background: var(--agent); }
-.gloria-honesty > p { margin: 0 0 10px; color: var(--agent); font-size: .8125rem; font-weight: 700; }
-.gloria-honesty h2 { margin: 0 0 30px; font-size: clamp(2.6rem,5vw,4.5rem); line-height: 1; letter-spacing: -.045em; }
+.gloria-honesty > p { margin: 0 0 10px; color: var(--agent); font-size: .9375rem; font-weight: 700; }
+.gloria-honesty h2 { margin: 0 0 30px; font-size: clamp(2.5rem,4vw,4rem); line-height: 1.03; letter-spacing: -.04em; }
 .gloria-honesty div { display: grid; gap: 20px; }
 .gloria-honesty div p { margin: 0; color: #555463; font-size: 1.16rem; line-height: 1.78; }
 
@@ -618,9 +628,9 @@ p { text-wrap: pretty; }
 
 .gloria-demo { padding: clamp(100px,12vw,155px) 20px; background: #070a18; color: #fff; }
 .gloria-demo > div { width: min(1120px,100%); margin: auto; }
-.gloria-demo p { margin: 0 0 16px; color: #2de2d0; font-size: .8125rem; font-weight: 700; }
-.gloria-demo h2 { max-width: 12ch; margin: 0; color: #fff; font-size: clamp(3.2rem,7vw,7rem); line-height: .95; letter-spacing: -.05em; }
-.gloria-demo__call { display: flex; width: fit-content; gap: 18px; align-items: center; margin-top: 54px; color: #2de2d0; font-size: clamp(2rem,5vw,5.2rem); font-weight: 700; line-height: 1; letter-spacing: -.04em; text-decoration: none; }
+.gloria-demo p { margin: 0 0 16px; color: #2de2d0; font-size: .9375rem; font-weight: 700; }
+.gloria-demo h2 { max-width: 16ch; margin: 0; color: #fff; font-size: clamp(2.75rem,4.8vw,4.75rem); line-height: 1; letter-spacing: -.045em; }
+.gloria-demo__call { display: flex; width: fit-content; gap: 18px; align-items: center; margin-top: 46px; color: #2de2d0; font-size: clamp(1.75rem,3.3vw,3.25rem); font-weight: 700; line-height: 1.05; letter-spacing: -.035em; text-decoration: none; }
 .gloria-demo__call svg { width: .75em; transition: transform .2s ease; }
 .gloria-demo__call:hover svg { transform: translateX(6px) rotate(-2deg); }
 .gloria-demo > div > span { display: block; margin-top: 22px; color: rgba(255,255,255,.6); }
@@ -629,6 +639,10 @@ p { text-wrap: pretty; }
 .gloria-team h2 { color: #fff; }
 .gloria-team .agent-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
 .gloria-team > .button { margin-top: 34px; }
+.gloria-team .agent-card { min-height: 240px; }
+.gloria-team .agent-card .status,.gloria-team .price-label { font-size: .875rem; }
+.gloria-team .agent-card h3 { font-size: 1.75rem; }
+.gloria-team .agent-card .role,.gloria-team .agent-card__footer strong,.gloria-team .card-link { font-size: 1rem; }
 
 .candidate-page--vdiga .reveal-row { opacity: 0; transform: translateY(14px); transition: opacity .5s ease var(--reveal-delay,0ms),transform .5s ease var(--reveal-delay,0ms); }
 .candidate-page--vdiga .reveal-row.is-visible { opacity: 1; transform: none; }
@@ -654,7 +668,7 @@ p { text-wrap: pretty; }
   .gloria-portrait__frame { min-height: 0; height: 430px; border-radius: 22px; }
   .gloria-portrait img { width: 100%; left: 0; height: calc(100% + 30px); border-radius: 0 0 22px 22px; }
   .gloria-portrait figcaption { right: 12px; bottom: 12px; }
-  .gloria-hero h1 { max-width: 11ch; font-size: clamp(2.8rem,13vw,3.25rem); line-height: .98; }
+  .gloria-hero h1 { max-width: 11ch; font-size: clamp(2.65rem,12vw,3rem); line-height: 1; }
   .gloria-hero__position { font-size: 1.25rem; }
   .gloria-hero__actions { display: grid; gap: 12px; }
   .gloria-hero__actions .button { width: 100%; }
@@ -668,7 +682,7 @@ p { text-wrap: pretty; }
   .gloria-file dd { text-align: left; }
   .gloria-skills { padding-bottom: 100px; }
   .gloria-skills header,.gloria-chat header { padding-inline: 8px; margin-bottom: 54px; }
-  .gloria-skills h2,.gloria-chat h2,.gloria-team h2 { font-size: 2.55rem; }
+  .gloria-skills h2,.gloria-chat h2,.gloria-team h2 { font-size: 2.35rem; }
   .gloria-skill,.gloria-skill--reverse { width: 100%; margin: 0; grid-template-columns: 48px 1fr; padding: 22px 18px; border-radius: 20px; }
   .gloria-skill img { width: 48px; height: 48px; }
   .gloria-honesty { width: calc(100% - 48px); }
@@ -678,8 +692,8 @@ p { text-wrap: pretty; }
   .gloria-chat__answer img { display: none; }
   .gloria-chat__answer p { padding: 17px 19px; }
   .gloria-demo { padding-inline: 24px; }
-  .gloria-demo h2 { font-size: 3.6rem; }
-  .gloria-demo__call { margin-top: 42px; font-size: 2.4rem; }
+  .gloria-demo h2 { font-size: 2.8rem; }
+  .gloria-demo__call { margin-top: 38px; font-size: 2rem; }
   .gloria-team { padding-bottom: 60px; }
   .gloria-team header { display: grid; gap: 10px; }
   .gloria-team .agent-grid { grid-template-columns: 1fr; }
@@ -765,6 +779,8 @@ p { text-wrap: pretty; }
 .sticky-call-bar span { color: var(--green-bright); }
 
 @media (max-width: 920px) {
+  .site-header { padding-top: 8px; }
+  .header-inner { width: calc(100% - 32px); min-height: 56px; padding: 6px 7px 6px 16px; transform: translateY(8px); }
   .site-nav { position: absolute; top: 68px; right: 20px; left: 20px; display: none; padding: 20px; border: 1px solid var(--line); border-radius: var(--radius-md); background: #fff; box-shadow: var(--shadow); }
   .site-nav.is-open { display: grid; }
   .site-nav a { min-height: 40px; display: flex; align-items: center; }
@@ -792,6 +808,7 @@ p { text-wrap: pretty; }
   h2 { font-size: var(--text-3xl); }
   .section { padding: var(--space-6) 0; }
   .header-inner { min-height: 66px; }
+  .header-cta { display: none; }
   .header-cta__full { display: none; }
   .header-cta__short { display: inline; }
   .hero { padding: 14px 0 64px; }
@@ -839,6 +856,16 @@ p { text-wrap: pretty; }
   .sticky-call-bar { display: block; }
   .article-head { padding-top: 70px; }
   .author-box { align-items: flex-start; }
+}
+
+@media (max-width: 430px) {
+  .header-inner { width: calc(100% - 20px); min-height: 56px; gap: 6px; padding: 6px 6px 6px 12px; }
+  .brand-logo { height: 27px; }
+  .header-actions { min-width: 0; gap: 2px; }
+  .header-cta { display: none; }
+  .nav-toggle { width: 38px; height: 38px; flex: 0 0 38px; }
+  .site-nav { right: 10px; left: 10px; }
+  body:not(.home-art) main { padding-top: 86px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
