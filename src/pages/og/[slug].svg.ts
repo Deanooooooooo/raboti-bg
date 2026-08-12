@@ -2,7 +2,7 @@ import type { APIRoute, GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
 
 const staticCards: Record<string, { title: string; line: string }> = {
-  home: { title: "Вдига. Помага. Пише. Работи.", line: "AI служители за българския бизнес" },
+  home: { title: "Вдига. Помага. Pishe. Работи.", line: "AI служители за българския бизнес" },
   sluzhiteli: { title: "AI служители за конкретна работа.", line: "Виж свободните позиции в Работи" },
   ceni: { title: "Плащаш за роля.", line: "Месечна цена за конкретни задачи" },
   demo: { title: "Чуй как работи.", line: "Демо на AI рецепционист на български" },
