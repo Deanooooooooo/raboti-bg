@@ -203,9 +203,9 @@ const schemas = [
   <section class="gloria-chat" aria-labelledby="gloria-chat-title" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
     <header class="gloria-section-head"><p>Интервюто</p><h2 id="gloria-chat-title">{profile.interviewHeadline}</h2></header>
     <div class="gloria-chat__thread reveal-group">
-      {profile.interview.map(([question, answer], index) => <div class="gloria-chat__exchange reveal-row">
+      {profile.interview.map(([question, answer]) => <div class="gloria-chat__exchange reveal-row">
         <p class="gloria-chat__question">— {question}</p>
-        <div class="gloria-chat__answer">{index === 0 && <img src={profile.image} alt={profile.person} width="48" height="48" loading="lazy" />}<p>{answer}</p></div>
+        <div class="gloria-chat__answer"><img src={profile.image} alt="" width="48" height="48" loading="lazy" /><p>{answer}</p></div>
       </div>)}
     </div>
   </section>

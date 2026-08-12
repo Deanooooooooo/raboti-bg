@@ -720,14 +720,14 @@ body:not(.home-art) main { padding-top: 104px; }
 .pishe-lead .gloria-lead__consent input { accent-color:#a84629; }
 .pishe-lead .gloria-lead__consent a,.pishe-lead .form-status { color:#7c2d19; }
 
-/* Pishe profile: keep the editorial column centered while its copy stays left-aligned. */
-.candidate-page--pishe .gloria-file .gloria-section-head,
-.candidate-page--pishe .gloria-skills .gloria-section-head,
-.candidate-page--pishe .gloria-skills__list,
-.candidate-page--pishe .gloria-chat .gloria-section-head,
-.candidate-page--pishe .gloria-chat__thread { margin-inline:auto; }
-.candidate-page--pishe .gloria-honesty { width:min(680px,calc(100% - 40px)); }
-.candidate-page--pishe .gloria-demo > div { width:min(680px,100%); }
+/* Employee profiles: center the editorial column while keeping its copy left-aligned. */
+.candidate-page .gloria-file .gloria-section-head,
+.candidate-page .gloria-skills .gloria-section-head,
+.candidate-page .gloria-skills__list,
+.candidate-page .gloria-chat .gloria-section-head,
+.candidate-page .gloria-chat__thread { margin-inline:auto; }
+.candidate-page .gloria-honesty { width:min(680px,calc(100% - 40px)); }
+.candidate-page .gloria-demo > div { width:min(680px,100%); }
 
 .gloria-team__grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:18px; }
 .gloria-team__grid .roster-card { --home-ink:#111426; min-height:620px; grid-column:auto; border-color:rgba(255,255,255,.16); background:#fff; color:#111426; }
@@ -794,8 +794,8 @@ body:not(.home-art) main { padding-top: 104px; }
   .gloria-chat__thread { padding-inline:8px; }
   .gloria-chat__exchange { margin-bottom:40px; }
   .gloria-chat__question { max-width:calc(100% - 24px); padding:18px 20px; }
-  .gloria-chat__answer { max-width:calc(100% - 24px); }
-  .gloria-chat__answer img { display: none; }
+  .gloria-chat__answer { max-width:100%; gap:9px; align-items:flex-end; }
+  .gloria-chat__answer img { display:block; width:36px; height:36px; }
   .gloria-chat__answer p { padding:18px 20px; }
   .gloria-demo { min-height:0; padding:80px 24px; }
   .gloria-team .agent-grid { grid-template-columns: 1fr; }
