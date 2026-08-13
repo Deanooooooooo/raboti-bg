@@ -29,7 +29,6 @@ const agents = defineCollection({
     seoTitle: z.string(),
     seoDescription: z.string(),
     externalUrl: z.url().optional(),
-    demoUrl: z.string().optional(),
     order: z.number(),
   }),
 });

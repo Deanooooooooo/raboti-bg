@@ -645,6 +645,8 @@ body:not(.home-art) main { padding-top: 104px; }
 .gloria-demo__call svg { width:20px; transition:transform .2s ease; }
 .gloria-demo__call:hover svg { transform: translateX(6px) rotate(-2deg); }
 .gloria-demo > div > span { display:block; margin-top:15px; color:rgba(255,255,255,.68); font-size:var(--g-meta); line-height:1.5; }
+.gloria-demo > div > .gloria-demo__intro { max-width: 62ch; margin-top: 20px; font-size: var(--g-body); }
+.gloria-demo__audio { display: block; width: min(100%, 680px); margin-top: 32px; color-scheme: dark; }
 .gloria-team { background:#070a18; color:#fff; box-shadow:0 0 0 100vmax #070a18; clip-path:inset(0 -100vmax); }
 .gloria-team h2 { color:#fff; }
 .gloria-team .agent-grid { grid-template-columns: repeat(2,minmax(0,1fr)); }

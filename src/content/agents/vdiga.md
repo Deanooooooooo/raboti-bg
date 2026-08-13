@@ -40,7 +40,6 @@ faqs:
 seoTitle: "Vdiga — AI рецепционист от €97 | Работи"
 seoDescription: "AI рецепционист на български: работи 24/7, отговаря и записва часове. Вижте Vdiga от Работи, от €97 месечно."
 externalUrl: "https://vdiga.bg/"
-demoUrl: "https://vdiga.bg/demo/"
 order: 1
 ---
 

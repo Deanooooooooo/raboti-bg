@@ -37,7 +37,6 @@ export const site = {
   nav: [
     { href: "/sluzhiteli/", label: "Служители" },
     { href: "/ceni/", label: "Цени" },
-    { href: "/demo/", label: "Демо" },
     { href: "/blog/", label: "Полезно" },
   ],
 };

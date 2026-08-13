@@ -158,7 +158,7 @@ const schemas = [
         <p class="gloria-hero__position">{profile.position}</p>
         <p class="gloria-hero__intro">{profile.intro}</p>
         <div class="gloria-hero__actions">
-          <a class="button button--spectrum" href={data.slug === "vdiga" ? data.demoUrl : "#zayavka"}><Icon name={data.slug === "vdiga" ? "phone" : "arrow-right"} /> {data.slug === "vdiga" ? "Поканете ме на интервю" : profile.cta}</a>
+          <a class="button button--spectrum" href={data.slug === "vdiga" ? "#razgovor" : "#zayavka"}><Icon name={data.slug === "vdiga" ? "phone" : "arrow-right"} /> {data.slug === "vdiga" ? "Чуйте примерен разговор" : profile.cta}</a>
           <a class="gloria-text-link" href="#umenia">Вижте какво мога <span aria-hidden="true">↓</span></a>
         </div>
         <ul class="gloria-facts" aria-label="Основни условия">
@@ -215,9 +215,20 @@ const schemas = [
 
   <section class="gloria-demo" id="razgovor" aria-labelledby="gloria-demo-title" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
     <div>
-      <p>{data.slug === "vdiga" ? "Живо демо" : "Пробна задача"}</p><h2 id="gloria-demo-title">{data.slug === "vdiga" ? "Интервюирайте ме. Сега." : profile.closing}</h2>
-      <a class="gloria-demo__call" href={data.slug === "vdiga" ? data.demoUrl : "#zayavka"}>{data.slug === "vdiga" ? "Започнете интервюто" : profile.cta} <Icon name="arrow-right" /></a>
-      <span>{data.slug === "vdiga" ? "Ще ви отговоря в браузъра. Питайте ме каквото искате." : data.slug === "pishe" ? "Пратете сайта си — или опишете бизнеса, ако още нямате сайт. До един работен ден ще кажем откъде има смисъл да започнем." : "Опишете откъде идва задачата и къде трябва да стигне. До един работен ден ще кажем дали Pomaga може да я поеме."}</span>
+      <p>{data.slug === "vdiga" ? "Примерен разговор" : "Пробна задача"}</p><h2 id="gloria-demo-title">{data.slug === "vdiga" ? "Чуйте как Vdiga приема обаждане." : profile.closing}</h2>
+      {data.slug === "vdiga" ? (
+        <>
+          <span class="gloria-demo__intro">Записът показва как AI асистентът се представя, задава уточняващи въпроси и стига до записан час. Това е примерен разговор, а не обаждане на живо.</span>
+          <audio class="gloria-demo__audio" controls preload="metadata" src="/assets/vdiga-mdsolution-demo-v35.mp3">
+            Вашият браузър не може да пусне аудиозаписа.
+          </audio>
+        </>
+      ) : (
+        <>
+          <a class="gloria-demo__call" href="#zayavka">{profile.cta} <Icon name="arrow-right" /></a>
+          <span>{data.slug === "pishe" ? "Пратете сайта си — или опишете бизнеса, ако още нямате сайт. До един работен ден ще кажем откъде има смисъл да започнем." : "Опишете откъде идва задачата и къде трябва да стигне. До един работен ден ще кажем дали Pomaga може да я поеме."}</span>
+        </>
+      )}
     </div>
   </section>
 

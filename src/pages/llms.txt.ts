@@ -17,7 +17,6 @@ ${live.map((agent)=>`- [${agent.data.name}](${site.url}/sluzhiteli/${agent.data.
 
 - [Всички AI служители](${site.url}/sluzhiteli/)
 - [Цени](${site.url}/ceni/)
-- [Демо](${site.url}/demo/)
 - [За нас](${site.url}/za-nas/)
 - [Контакти](${site.url}/kontakti/)
 
