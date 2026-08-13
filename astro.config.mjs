@@ -6,7 +6,7 @@ export default defineConfig({
   base: process.env.DEPLOY_BASE ?? "/",
   output: "static",
   trailingSlash: "always",
-  integrations: [sitemap()],
+  integrations: [sitemap({ filter: (page) => !page.endsWith("/demo/") })],
   build: {
     inlineStylesheets: "auto",
   },
