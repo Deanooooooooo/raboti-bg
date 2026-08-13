@@ -148,7 +148,7 @@ p { text-wrap: pretty; }
 .nav-toggle { display: none; width: 44px; height: 44px; border: 0; border-radius: var(--radius-pill); background: #fff; }
 .nav-toggle span:not(.sr-only) { display: block; width: 21px; height: 2px; margin: 5px auto; background: var(--ink); }
 
-/* Shared floating navigation — the homepage header is the site header. */
+/* Shared floating navigation; the homepage header is the site header. */
 .site-header { position: fixed; top: 0; right: 0; left: 0; z-index: 50; padding-top: 12px; border: 0; background: transparent; color: #070a18; pointer-events: none; }
 .header-inner { width: min(1180px,calc(100% - 64px)); min-height: 60px; padding: 8px 8px 8px 18px; border: 0; border-radius: 30px; background: linear-gradient(180deg,rgba(255,255,255,.4) 10%,rgba(255,255,255,.8) 100%); box-shadow: 0 12px 12px 2px rgba(0,0,0,.1),0 2px 4px -1px rgba(0,0,0,.06),inset 0 0 0 1px rgba(255,255,255,.58); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); pointer-events: auto; transform: translateY(20px); transition: background .18s ease-out,transform .16s ease-out; }
 .site-header.is-scrolled .header-inner { transform: none; }
@@ -466,7 +466,7 @@ body:not(.home-art) main { padding-top: 104px; }
   .interview-colleagues .agent-grid { grid-template-columns: 1fr; }
   .interview-hire { margin-bottom: 48px; }
 }
-/* Candidate pages — editorial job interview */
+/* Candidate pages: editorial job interview */
 .candidate-page main { padding-top: 28px; background: #f2f5f3; }
 .candidate-hero { width:min(1180px,calc(100% - 40px)); min-height:720px; margin:0 auto; padding:32px; border:1px solid rgba(20,23,40,.1); border-radius:24px; display:grid; grid-template-columns:minmax(340px,.78fr) minmax(0,1.22fr); grid-template-rows:auto 1fr; column-gap:clamp(48px,6vw,88px); row-gap:28px; align-items:start; background:#fff; overflow:hidden; box-shadow:0 28px 80px -58px rgba(20,40,34,.42); }
 .candidate-hero__portrait { position:relative; min-height:656px; grid-row:1 / span 2; align-self:stretch; margin:0; border-radius:16px; overflow:hidden; background:color-mix(in srgb,var(--agent) 16%,#fff); }
@@ -571,7 +571,7 @@ body:not(.home-art) main { padding-top: 104px; }
   .candidate-team .agent-grid { grid-template-columns:1fr; }
 }
 
-/* Gloria — one candidate, unfolded from the Vdiga roster card */
+/* Gloria: one candidate, unfolded from the Vdiga roster card */
 .candidate-page main { --g-display:64px; --g-h2:40px; --g-h3:21px; --g-body:17px; --g-meta:14px; --g-eyebrow:13px; padding: 0; overflow: clip; background: linear-gradient(180deg,#e8f8f2 0,#f4f0fa 44%,#f7eef4 100%); }
 .candidate-page--pishe main { background:linear-gradient(180deg,#fff0eb 0,#f8eff5 44%,#f7eef4 100%); }
 .candidate-page--pomaga main { background:linear-gradient(180deg,#f0edff 0,#f4f0fa 44%,#f7eef4 100%); }

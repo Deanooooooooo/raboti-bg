@@ -16,7 +16,7 @@ const liveAgents = agents
   .filter((agent) => agent.data.status === "live")
   .sort((a, b) => liveAgentOrder.indexOf(a.data.slug) - liveAgentOrder.indexOf(b.data.slug));
 const agentProfiles: Record<string, { name: string; image: string; imageAlt: string; cta: string }> = {
-  vdiga: { name: "Vdiga", image: "/assets/employee-vdiga-gloria-v1.webp", imageAlt: "Gloria — образът на AI рецепциониста Vdiga", cta: "Как мога да съм полезна?" },
+  vdiga: { name: "Vdiga", image: "/assets/employee-vdiga-gloria-v1.webp", imageAlt: "Gloria, образът на AI рецепциониста Vdiga", cta: "Как мога да съм полезна?" },
   pishe: { name: "Pishe", image: "/assets/employee-pishe-v1.webp", imageAlt: "Визуално представяне на AI уеб мениджъра Pishe", cta: "Как мога да съм полезен?" },
   pomaga: { name: "Pomaga", image: "/assets/employee-pomaga-v1.webp", imageAlt: "Визуално представяне на AI оперативния асистент Pomaga", cta: "Как мога да съм полезна?" },
 };
@@ -56,7 +56,7 @@ const schemas = [
 ---
 
 <BaseLayout
-  title="Работи — AI служители за задачите, които бавят бизнеса"
+  title="Работи | AI служители за задачите, които бавят бизнеса"
   description="AI служители за пропуснати обаждания, промени по сайта и повтарящи се задачи. Вижте какво поема всяка роля, колко струва и кога пита човек."
   canonical="/"
   schema={schemas}
@@ -171,7 +171,7 @@ const schemas = [
           <strong>Ще ви кажем направо:</strong>
         </header>
         <ul>
-          <li><span><Icon name="check" /></span><div><strong>Кой може да я поеме</strong><p>Vdiga, Pishe, Pomaga — или никой от тях.</p></div></li>
+          <li><span><Icon name="check" /></span><div><strong>Кой може да я поеме</strong><p>Ще ви кажем дали задачата е за Vdiga, Pishe или Pomaga. Ако не е подходяща за нито един от тях, ще го кажем направо.</p></div></li>
           <li><span><Icon name="check" /></span><div><strong>Какво ще върши</strong><p>Откъде поема задачата, докъде я довежда и какво остава за вас.</p></div></li>
           <li><span><Icon name="check" /></span><div><strong>Какво ще ни трябва от вас</strong><p>Информация, достъпи и кога служителят трябва да изчака вашето решение.</p></div></li>
           <li><span><Icon name="check" /></span><div><strong>Колко струва и кога тръгва</strong><p>Месечната цена, настройката и кога може да започне работа.</p></div></li>
