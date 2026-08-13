@@ -52,20 +52,20 @@ const plans = [
     <p>Планове за работа</p>
     <h2 id="pishe-pricing-title">Колко работа искате Pishe да поеме?</h2>
   </header>
-  <p class="gloria-pricing__lead">Изберете според това какво реално се трупа по сайта — текущи промени, ново съдържание всяка седмица или постоянна работа по голям каталог.</p>
+  <p class="gloria-pricing__lead">Изберете според работата по сайта: текущи промени, нова страница всяка седмица или редовно обновяване на голям каталог.</p>
   <div class="gloria-pricing__grid">
     {plans.map((plan) => <article class:list={["gloria-plan", plan.featured && "gloria-plan--featured"]}>
       <header><h3>{plan.name}</h3>{plan.featured && <span>най-избиран</span>}</header>
       <p class="gloria-plan__note">{plan.note}</p>
       <div class="gloria-plan__volume"><strong>{plan.scope}</strong><span>Какво поема Pishe</span></div>
       <div class="gloria-plan__price"><strong>{plan.price}</strong><span>/месец</span></div>
-      <p class="gloria-plan__terms">Без ДДС. Точният обхват се записва преди старта.</p>
+      <p class="gloria-plan__terms">Без ДДС. Преди да започнем, записваме кои задачи и колко промени поема Pishe.</p>
       <ul>{plan.features.map((feature) => <li><Icon name="check" />{feature}</li>)}</ul>
       <a class:list={["button", plan.featured ? "button--spectrum" : "button--dark"]} href="#zayavka" data-pishe-plan={plan.name}>{plan.cta}<Icon name="arrow-right" /></a>
     </article>)}
   </div>
   <aside class="pishe-pricing__website">
-    <div><h3>Още нямате сайт?</h3><p>Pishe може да помогне да го изградим — от страниците и текстовете до пускането. Това е отделен начален проект, защото цената зависи от обхвата и функциите.</p></div>
+    <div><h3>Още нямате сайт?</h3><p>Pishe може да подготви страниците, текстовете и сайта за пускане. Изграждането се плаща отделно; цената зависи от броя страници и от това какво трябва да може сайтът.</p></div>
     <a class="button button--dark" href="#zayavka" data-pishe-plan="Нов сайт">Разкажете какъв сайт ви трябва<Icon name="arrow-right" /></a>
   </aside>
 </section>
