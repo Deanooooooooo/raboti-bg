@@ -8,7 +8,8 @@ import { breadcrumbSchema } from "../../data/schema";
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf(),
 );
-const [featuredPost, ...otherPosts] = posts;
+const featuredPost = posts.find((post) => post.id === "kakvo-e-ai-sluzhitel") || posts[0];
+const otherPosts = posts.filter((post) => post.id !== featuredPost?.id);
 const fmt = (date: Date) =>
   new Intl.DateTimeFormat("bg-BG", {
     day: "numeric",
@@ -19,7 +20,7 @@ const fmt = (date: Date) =>
 
 <BaseLayout
   title="Блог | Работи"
-  description="Статии за пропуснатите обаждания и работата, която AI телефонен асистент може да поеме."
+  description="Статии за AI служители: коя работа могат да поемат, как се настройват, как се определя цената и кога трябва да се намеси човек."
   canonical="/blog/"
   image="/og/blog.svg"
   schema={breadcrumbSchema([
@@ -31,11 +32,12 @@ const fmt = (date: Date) =>
   <header class="blog-hero">
     <div class="shell">
       <p class="blog-hero__eyebrow">Блог</p>
-      <h1>Какво може да поеме един AI телефонен асистент?</h1>
+      <h1>Блог за AI служители и работата, която могат да поемат.</h1>
       <p class="blog-hero__intro">
-        Разглеждаме обажданията, които прекъсват работата в салони,
-        кабинети и сервизи — какво може да запише Vdiga и кога разговорът
-        трябва да продължи с човек.
+        Как да изберете първата задача, как се определят цената и достъпът
+        и кога работата трябва да се върне при човек. За телефонните
+        рецепционисти и обажданията ще ви насочваме към подробните материали
+        на vdiga.bg, вместо да ги повтаряме тук.
       </p>
     </div>
   </header>
@@ -51,7 +53,7 @@ const fmt = (date: Date) =>
             </time>
           </div>
           <div class="featured__copy">
-            <p>Избрана статия</p>
+            <p>Започнете оттук</p>
             <h2 id="featured-title">
               <a href={`/blog/${featuredPost.id}/`}>{featuredPost.data.title}</a>
             </h2>
@@ -70,7 +72,7 @@ const fmt = (date: Date) =>
       <div class="shell">
         <div class="all-posts__heading">
           <h2 id="all-posts-title">Още от блога</h2>
-          <p>{posts.length} публикувани статии</p>
+          <p>{posts.length} статии</p>
         </div>
         <div class="all-posts__grid">
           {otherPosts.map((post) => (
@@ -93,14 +95,14 @@ const fmt = (date: Date) =>
     </section>
   )}
 
-  <aside class="blog-close">
-    <div class="shell blog-close__inner">
+  <aside class="specialist-link">
+    <div class="shell specialist-link__inner">
       <div>
-        <p>Искате да чуете как звучи?</p>
-        <h2>Чуйте запис на разговор с Vdiga.</h2>
+        <p>Търсите информация за AI рецепционист?</p>
+        <h2>Обажданията, записването на часове и примерите по отрасли са на vdiga.bg.</h2>
       </div>
-      <a href="/sluzhiteli/vdiga/#razgovor">
-        Чуйте разговора <Icon name="arrow-right" />
+      <a href="https://vdiga.bg/">
+        Разгледайте Vdiga <Icon name="arrow-right" />
       </a>
     </div>
   </aside>
@@ -135,13 +137,13 @@ const fmt = (date: Date) =>
   .post-card > p { max-width: 48ch; margin: 0 0 32px; color: #686773; line-height: 1.65; }
   .article-link { display: inline-flex; width: fit-content; align-items: center; gap: 9px; margin-top: auto; color: inherit; font-weight: 750; text-decoration: none; }
   .article-link:hover { text-decoration: underline; text-underline-offset: 5px; }
-  .article-link :global(svg), .blog-close a :global(svg) { width: 17px; }
+  .article-link :global(svg), .specialist-link a :global(svg) { width: 17px; }
 
-  .blog-close { padding: clamp(64px, 8vw, 110px) 0; background: #ff8d72; }
-  .blog-close__inner { display: flex; align-items: end; justify-content: space-between; gap: 48px; }
-  .blog-close p { margin: 0 0 12px; font-weight: 750; }
-  .blog-close h2 { max-width: 16ch; margin: 0; color: #111426; font-size: clamp(2.2rem, 4vw, 4.3rem); line-height: 1.03; letter-spacing: -.04em; }
-  .blog-close a { display: inline-flex; flex: none; align-items: center; gap: 9px; padding: 15px 20px; border-radius: 8px; background: #111426; color: #fff; font-weight: 750; text-decoration: none; }
+  .specialist-link { padding: clamp(64px, 8vw, 110px) 0; background: #2de2d0; }
+  .specialist-link__inner { display: flex; align-items: end; justify-content: space-between; gap: 48px; }
+  .specialist-link p { margin: 0 0 12px; font-weight: 750; }
+  .specialist-link h2 { max-width: 20ch; margin: 0; color: #111426; font-size: clamp(2.2rem, 4vw, 4.3rem); line-height: 1.03; letter-spacing: -.04em; }
+  .specialist-link a { display: inline-flex; flex: none; align-items: center; gap: 9px; padding: 15px 20px; border-radius: 8px; background: #111426; color: #fff; font-weight: 750; text-decoration: none; }
 
   @media (max-width: 760px) {
     .featured__article { min-height: 0; grid-template-columns: 1fr; }
@@ -151,7 +153,7 @@ const fmt = (date: Date) =>
     .post-card, .post-card:first-child, .post-card + .post-card { min-height: 0; padding: 38px 0; border-left: 0; }
     .post-card + .post-card { border-top: 1px solid rgba(17,20,38,.16); }
     .post-card h3 { margin-top: 38px; }
-    .blog-close__inner { align-items: flex-start; flex-direction: column; }
+    .specialist-link__inner { align-items: flex-start; flex-direction: column; }
   }
   @media (max-width: 600px) {
     :global(.blog-index-page main .shell) { width: calc(100% - 32px); }
