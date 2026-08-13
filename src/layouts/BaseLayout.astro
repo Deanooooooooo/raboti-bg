@@ -18,6 +18,10 @@ interface Props {
   schema?: Record<string, unknown> | Array<Record<string, unknown>>;
   noindex?: boolean;
   bodyClass?: string;
+  imageAlt?: string;
+  publishedAt?: Date;
+  updatedAt?: Date;
+  author?: string;
 }
 const props = Astro.props;
 ---

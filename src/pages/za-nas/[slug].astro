@@ -1,0 +1,76 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Icon from "../../components/Icon.astro";
+import { authors, type Author, authorPath } from "../../data/authors";
+import { site } from "../../data/site";
+import { breadcrumbSchema } from "../../data/schema";
+
+export async function getStaticPaths() {
+  return authors.map((author) => ({ params: { slug: author.slug }, props: { author } }));
+}
+
+interface Props { author: Author }
+const { author } = Astro.props;
+const posts = (await getCollection("blog"))
+  .filter((post) => post.data.author === author.name)
+  .sort((a,b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf());
+const path = authorPath(author);
+const url = `${site.url}${path}`;
+const fmt = (date: Date) => new Intl.DateTimeFormat("bg-BG", { day: "numeric", month: "long", year: "numeric" }).format(date);
+const profileSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  mainEntity: {
+    "@type": "Person",
+    "@id": `${url}#person`,
+    name: author.name,
+    url,
+    image: `${site.url}${author.image}`,
+    jobTitle: author.shortRole,
+    worksFor: { "@id": `${site.url}/#organization` },
+    knowsAbout: author.expertise,
+  },
+};
+---
+
+<BaseLayout
+  title={`${author.name} — автор и съосновател на Работи`}
+  description={`${author.name} е ${author.shortRole.toLowerCase()} в Работи. Опит, области на работа и публикации за AI служители.`}
+  canonical={path}
+  image={author.image}
+  imageAlt={`${author.name}, съосновател на Работи`}
+  schema={[profileSchema, breadcrumbSchema([{name:"Работи",url:site.url},{name:"За нас",url:`${site.url}/za-nas/`},{name:author.name,url}])]}
+  bodyClass="author-page"
+>
+  <header class="author-hero">
+    <div class="shell author-hero__grid">
+      <img src={author.image} width="720" height="720" alt={`${author.name}, съосновател на Работи`} />
+      <div>
+        <a href="/za-nas/">Екипът на Работи</a>
+        <h1>{author.name}</h1>
+        <p class="author-hero__role">{author.shortRole}</p>
+        <p>{author.bio}</p>
+        <p>{author.longBio}</p>
+      </div>
+    </div>
+  </header>
+  <section class="author-details">
+    <div class="shell author-details__grid">
+      <div><h2>По какво работи</h2><p>Тези области описват пряката роля на {author.name.split(" ")[0]} в създаването, проверката и внедряването на услугите на Работи.</p></div>
+      <ul>{author.expertise.map((item)=><li>{item}</li>)}</ul>
+    </div>
+  </section>
+  <section class="author-posts">
+    <div class="shell">
+      <div class="author-posts__head"><h2>Публикации</h2><a href="/blog/">Всички статии</a></div>
+      <div class="author-posts__list">
+        {posts.map((post)=><article><time datetime={post.data.publishedAt.toISOString()}>{fmt(post.data.publishedAt)}</time><h3><a href={`/blog/${post.id}/`}>{post.data.title}</a></h3><p>{post.data.description}</p><a href={`/blog/${post.id}/`}>Прочетете статията <Icon name="arrow-right" /></a></article>)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  :global(.author-page){background:#f4f1ec;color:#111426}.author-hero{padding:clamp(112px,13vw,180px) 0 clamp(74px,9vw,120px);background:#10142c;color:#fff}.author-hero__grid{display:grid;grid-template-columns:minmax(280px,.58fr) 1fr;gap:clamp(48px,8vw,112px);align-items:center}.author-hero img{display:block;width:100%;aspect-ratio:1;border-radius:16px;object-fit:cover;object-position:center top}.author-hero a{color:#2de2d0;font-size:.8rem;font-weight:750}.author-hero h1{margin:24px 0 10px;color:#fff;font-size:clamp(3rem,6vw,6rem);line-height:1;letter-spacing:-.04em}.author-hero__role{margin:0 0 28px!important;color:#2de2d0!important;font-weight:750}.author-hero p{max-width:67ch;color:rgba(255,255,255,.7);line-height:1.7}.author-details{padding:clamp(74px,9vw,124px) 0;background:#fff}.author-details__grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(50px,9vw,130px)}.author-details h2,.author-posts h2{margin:0;color:#111426;font-size:clamp(2.4rem,4.5vw,4.6rem);line-height:1.03;letter-spacing:-.04em}.author-details p{max-width:48ch;color:#686773;line-height:1.65}.author-details ul{display:grid;margin:0;padding:0;list-style:none;border-top:1px solid rgba(17,20,38,.15)}.author-details li{padding:17px 0;border-bottom:1px solid rgba(17,20,38,.15);font-weight:700}.author-posts{padding:clamp(80px,10vw,140px) 0}.author-posts__head{display:flex;align-items:end;justify-content:space-between;gap:30px;padding-bottom:25px;border-bottom:1px solid rgba(17,20,38,.15)}.author-posts__head>a{color:#111426;font-weight:750}.author-posts__list{display:grid;grid-template-columns:repeat(2,1fr)}.author-posts article{display:flex;min-height:360px;flex-direction:column;padding:42px 0}.author-posts article:nth-child(even){padding-left:40px;border-left:1px solid rgba(17,20,38,.15)}.author-posts article:nth-child(odd){padding-right:40px}.author-posts time{color:#686773;font-size:.78rem}.author-posts h3{max-width:19ch;margin:42px 0 18px;font-size:clamp(1.7rem,3vw,2.7rem);line-height:1.08;letter-spacing:-.03em}.author-posts h3 a{color:inherit;text-decoration:none}.author-posts article p{max-width:48ch;margin:0 0 28px;color:#686773;line-height:1.62}.author-posts article>a{display:inline-flex;align-items:center;gap:8px;margin-top:auto;color:#111426;font-weight:750;text-decoration:none}.author-posts article>a :global(svg){width:17px}@media(max-width:760px){.author-hero__grid,.author-details__grid,.author-posts__list{grid-template-columns:1fr}.author-hero img{max-width:420px}.author-posts article,.author-posts article:nth-child(odd),.author-posts article:nth-child(even){min-height:0;padding:36px 0;border-left:0}.author-posts article+article{border-top:1px solid rgba(17,20,38,.15)}}@media(max-width:600px){:global(.author-page main .shell){width:calc(100% - 32px)}.author-hero{padding-top:96px}.author-hero h1{font-size:clamp(2.7rem,12vw,3.7rem)}.author-posts__head{align-items:flex-start;flex-direction:column}}
+</style>

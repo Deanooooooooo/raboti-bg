@@ -44,6 +44,9 @@ const blog = defineCollection({
     relatedAgent: z.string(),
     tags: z.array(z.string()).default([]),
     seoTitle: z.string(),
+    image: z.string().optional(),
+    imageAlt: z.string().optional(),
+    faqs: z.array(z.object({ question: z.string(), answer: z.string() })).optional(),
   }),
 });
 

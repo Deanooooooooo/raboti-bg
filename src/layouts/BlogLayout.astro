@@ -4,6 +4,7 @@ import BaseLayout from "./BaseLayout.astro";
 import Icon from "../components/Icon.astro";
 import { site } from "../data/site";
 import { breadcrumbSchema } from "../data/schema";
+import { authorPath, getAuthor } from "../data/authors";
 
 interface Props {
   title: string;
@@ -14,29 +15,18 @@ interface Props {
   author: string;
   slug: string;
   headings: Array<{ depth: number; slug: string; text: string }>;
+  image?: string;
+  imageAlt?: string;
+  faqs?: Array<{ question: string; answer: string }>;
 }
 
-const { title, description, seoTitle, publishedAt, updatedAt, author, slug, headings } = Astro.props;
+const { title, description, seoTitle, publishedAt, updatedAt, author, slug, headings, image, imageAlt, faqs = [] } = Astro.props;
 const url = `${site.url}/blog/${slug}/`;
 const sectionHeadings = headings.filter((heading) => heading.depth === 2);
 
-const authors = {
-  "Деан Дечев": {
-    image: "/assets/founders/dean-dechev-v2.webp",
-    role: "Съосновател · Продукт и развитие на бизнеса",
-    bio: "Деан има близо 8 години опит в развитието на онлайн бизнеси и дигитални продукти. В Работи проучва къде фирмите губят време и клиенти, описва как трябва да протича работата и превръща това в задачи за Vdiga, Pishe и Pomaga.",
-    anchor: "dean-dechev",
-  },
-  "Мариян Дечев": {
-    image: "/assets/founders/mariyan-dechev-v2.webp",
-    role: "Съосновател · Софтуерна архитектура и AI",
-    bio: "Мариян е софтуерен архитект и AI инженер с над 10 години опит в софтуерни продукти, облачна инфраструктура, API интеграции и бизнес автоматизация. В Работи отговаря за архитектурата, връзките с другите системи, сигурността и работата им при ежедневна употреба.",
-    anchor: "mariyan-dechev",
-  },
-} as const;
-
-const authorProfile = authors[author as keyof typeof authors] || authors["Деан Дечев"];
-const authorUrl = `${site.url}/za-nas/#${authorProfile.anchor}`;
+const authorProfile = getAuthor(author)!;
+const authorRelativeUrl = authorPath(authorProfile);
+const authorUrl = `${site.url}${authorRelativeUrl}`;
 const relatedPosts = (await getCollection("blog"))
   .filter((post) => post.id !== slug)
   .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf())
@@ -44,7 +34,7 @@ const relatedPosts = (await getCollection("blog"))
 
 const articleSchema = {
   "@context": "https://schema.org",
-  "@type": "Article",
+  "@type": "BlogPosting",
   headline: title,
   description,
   datePublished: publishedAt.toISOString(),
@@ -58,7 +48,20 @@ const articleSchema = {
   publisher: { "@id": `${site.url}/#organization` },
   mainEntityOfPage: url,
   inLanguage: "bg",
+  articleSection: "AI служители",
+  about: { "@type": "Thing", name: "AI служител" },
+  ...(image ? { image: `${site.url}${image}` } : {}),
 };
+
+const faqPageSchema = faqs.length > 0 ? {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: { "@type": "Answer", text: item.answer },
+  })),
+} : null;
 
 const fmt = (date: Date) =>
   new Intl.DateTimeFormat("bg-BG", { day: "numeric", month: "long", year: "numeric" }).format(date);
@@ -68,11 +71,16 @@ const fmt = (date: Date) =>
   title={seoTitle}
   description={description}
   canonical={`/blog/${slug}/`}
-  image={`/og/${slug}.svg`}
+  image={image || `/og/${slug}.svg`}
+  imageAlt={imageAlt}
   type="article"
+  publishedAt={publishedAt}
+  updatedAt={updatedAt}
+  author={author}
   bodyClass="article-page"
   schema={[
     articleSchema,
+    ...(faqPageSchema ? [faqPageSchema] : []),
     breadcrumbSchema([
       { name: "Работи", url: site.url },
       { name: "Блог", url: `${site.url}/blog/` },
@@ -87,7 +95,7 @@ const fmt = (date: Date) =>
         <h1>{title}</h1>
         <p class="article-lead">{description}</p>
         <div class="article-byline" aria-label="Автор и дата на статията">
-          <a href={`/za-nas/#${authorProfile.anchor}`} aria-label={`За ${author}`}>
+          <a href={authorRelativeUrl} aria-label={`За ${author}`}>
             <img src={authorProfile.image} width="720" height="720" alt={author} />
           </a>
           <div>
@@ -115,14 +123,14 @@ const fmt = (date: Date) =>
     </div>
 
     <footer class="shell article-footer">
-      <section class="author-box" id={`author-${authorProfile.anchor}`} aria-labelledby="author-name">
+      <section class="author-box" aria-labelledby="author-name">
         <img src={authorProfile.image} width="720" height="720" loading="lazy" alt={author} />
         <div>
           <p>Автор</p>
           <h2 id="author-name">{author}</h2>
           <strong>{authorProfile.role}</strong>
           <p>{authorProfile.bio}</p>
-          <a href={`/za-nas/#${authorProfile.anchor}`}>Вижте екипа зад Работи <Icon name="arrow-right" /></a>
+          <a href={authorRelativeUrl}>Профил и публикации <Icon name="arrow-right" /></a>
         </div>
       </section>
 
@@ -181,6 +189,14 @@ const fmt = (date: Date) =>
   .article-body :global(p), .article-body :global(li) { max-width: 69ch; }
   .article-body :global(ul), .article-body :global(ol) { display: grid; gap: 10px; padding-left: 1.35em; }
   .article-body :global(a) { color: #4f3fc4; font-weight: 650; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+  .article-body :global(figure.article-visual) { max-width: 920px; margin: clamp(48px, 7vw, 80px) 0; }
+  .article-body :global(figure.article-visual--wide) { width: min(920px, calc(100vw - 40px)); margin-left: min(0px, calc((720px - min(920px, 100vw - 40px)) / 2)); }
+  .article-body :global(figure.article-visual img) { display: block; width: 100%; height: auto; border-radius: 16px; background: #10142c; }
+  .article-body :global(figure.article-visual figcaption) { max-width: 72ch; margin-top: 14px; color: #686773; font-size: .8rem; line-height: 1.55; }
+  .article-body :global(table) { width: 100%; margin: 42px 0 54px; border-collapse: collapse; background: #fff; font-size: .9rem; line-height: 1.55; }
+  .article-body :global(th), .article-body :global(td) { padding: 16px 14px; border: 1px solid rgba(17,20,38,.13); text-align: left; vertical-align: top; }
+  .article-body :global(th) { background: #10142c; color: #fff; font-weight: 750; }
+  .article-body :global(td:first-child) { color: #111426; font-weight: 750; }
 
   .article-footer { max-width: 1080px; }
   .author-box { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: clamp(32px, 6vw, 76px); align-items: center; margin-top: clamp(80px, 10vw, 140px); padding: clamp(28px, 5vw, 58px); border-radius: 16px; background: #10142c; color: #fff; }
@@ -224,5 +240,8 @@ const fmt = (date: Date) =>
     .related__grid { grid-template-columns: 1fr; }
     .related article, .related article:first-child, .related article + article { min-height: 0; padding: 36px 0; border-left: 0; }
     .related article + article { border-top: 1px solid rgba(17,20,38,.16); }
+    .article-body { overflow-wrap: anywhere; }
+    .article-body :global(figure.article-visual), .article-body :global(figure.article-visual--wide) { width: 100%; margin: 44px 0; }
+    .article-body :global(table) { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
   }
 </style>
