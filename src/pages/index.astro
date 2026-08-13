@@ -45,7 +45,7 @@ const schemas = [
     "@context": "https://schema.org",
     "@type": "ItemList",
     name: "AI служители от Работи",
-    itemListElement: agents.map((agent, index) => ({
+    itemListElement: liveAgents.map((agent, index) => ({
       "@type": "ListItem",
       position: index + 1,
       url: `${site.url}/sluzhiteli/${agent.data.slug}/`,

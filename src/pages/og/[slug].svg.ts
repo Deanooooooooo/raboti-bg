@@ -17,7 +17,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const posts = await getCollection("blog");
   return [
     ...Object.entries(staticCards).map(([slug, card]) => ({ params: { slug }, props: card })),
-    ...agents.map((agent) => ({ params: { slug: agent.data.slug }, props: { title: `${agent.data.name}. ${agent.data.role}.`, line: agent.data.priceLabel } })),
+    ...agents.filter((agent) => agent.data.status === "live").map((agent) => ({ params: { slug: agent.data.slug }, props: { title: `${agent.data.name}. ${agent.data.role}.`, line: agent.data.priceLabel } })),
     ...posts.map((post) => ({ params: { slug: post.id }, props: { title: post.data.title, line: "Практично ръководство от Работи" } })),
   ];
 };

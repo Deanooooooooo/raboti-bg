@@ -27,7 +27,7 @@ for (const file of htmlFiles) {
 const homepage = await readFile(join(root.pathname, "index.html"), "utf8");
 if (!homepage.includes("0899 917 920")) failures.push("Homepage: phone is not visible in HTML");
 if (!homepage.includes("Наеми") || !homepage.includes("AI служител")) failures.push("Homepage: primary workforce headline missing");
-for (const agent of ["Vdiga", "Pomaga", "Pishe", "Smyata", "Prodava"]) {
+for (const agent of ["Vdiga", "Pomaga", "Pishe"]) {
   if (!homepage.includes(agent)) failures.push(`Homepage: ${agent} is missing from the roster`);
 }
 
