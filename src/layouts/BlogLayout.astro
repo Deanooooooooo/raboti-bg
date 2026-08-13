@@ -1,7 +1,10 @@
 ---
+import { getCollection } from "astro:content";
 import BaseLayout from "./BaseLayout.astro";
+import Icon from "../components/Icon.astro";
 import { site } from "../data/site";
 import { breadcrumbSchema } from "../data/schema";
+
 interface Props {
   title: string;
   description: string;
@@ -12,8 +15,33 @@ interface Props {
   slug: string;
   headings: Array<{ depth: number; slug: string; text: string }>;
 }
+
 const { title, description, seoTitle, publishedAt, updatedAt, author, slug, headings } = Astro.props;
 const url = `${site.url}/blog/${slug}/`;
+const sectionHeadings = headings.filter((heading) => heading.depth === 2);
+
+const authors = {
+  "Деан Дечев": {
+    image: "/assets/founders/dean-dechev-v2.webp",
+    role: "Съосновател · Продукт и развитие на бизнеса",
+    bio: "Деан има близо 8 години опит в развитието на онлайн бизнеси и дигитални продукти. В Работи проучва къде фирмите губят време и клиенти, описва как трябва да протича работата и превръща това в задачи за Vdiga, Pishe и Pomaga.",
+    anchor: "dean-dechev",
+  },
+  "Мариян Дечев": {
+    image: "/assets/founders/mariyan-dechev-v2.webp",
+    role: "Съосновател · Софтуерна архитектура и AI",
+    bio: "Мариян е софтуерен архитект и AI инженер с над 10 години опит в софтуерни продукти, облачна инфраструктура, API интеграции и бизнес автоматизация. В Работи отговаря за архитектурата, връзките с другите системи, сигурността и работата им при ежедневна употреба.",
+    anchor: "mariyan-dechev",
+  },
+} as const;
+
+const authorProfile = authors[author as keyof typeof authors] || authors["Деан Дечев"];
+const authorUrl = `${site.url}/za-nas/#${authorProfile.anchor}`;
+const relatedPosts = (await getCollection("blog"))
+  .filter((post) => post.id !== slug)
+  .sort((a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf())
+  .slice(0, 2);
+
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "Article",
@@ -21,20 +49,180 @@ const articleSchema = {
   description,
   datePublished: publishedAt.toISOString(),
   dateModified: (updatedAt || publishedAt).toISOString(),
-  author: { "@type": "Person", name: author },
+  author: {
+    "@type": "Person",
+    name: author,
+    url: authorUrl,
+    image: `${site.url}${authorProfile.image}`,
+  },
   publisher: { "@id": `${site.url}/#organization` },
   mainEntityOfPage: url,
   inLanguage: "bg",
 };
-const fmt = (date: Date) => new Intl.DateTimeFormat("bg-BG",{day:"numeric",month:"long",year:"numeric"}).format(date);
+
+const fmt = (date: Date) =>
+  new Intl.DateTimeFormat("bg-BG", { day: "numeric", month: "long", year: "numeric" }).format(date);
 ---
-<BaseLayout title={seoTitle} description={description} canonical={`/blog/${slug}/`} image={`/og/${slug}.svg`} type="article" schema={[articleSchema,breadcrumbSchema([{name:"Работи",url:site.url},{name:"Полезно",url:`${site.url}/blog/`},{name:title,url}])]}>
+
+<BaseLayout
+  title={seoTitle}
+  description={description}
+  canonical={`/blog/${slug}/`}
+  image={`/og/${slug}.svg`}
+  type="article"
+  bodyClass="article-page"
+  schema={[
+    articleSchema,
+    breadcrumbSchema([
+      { name: "Работи", url: site.url },
+      { name: "Блог", url: `${site.url}/blog/` },
+      { name: title, url },
+    ]),
+  ]}
+>
   <article class="article">
-    <header class="article-head shell narrow"><p class="eyebrow">практично ръководство</p><h1>{title}</h1><p class="article-lead">{description}</p><div class="article-meta"><span>{author}</span><time datetime={publishedAt.toISOString()}>{fmt(publishedAt)}</time>{updatedAt && <span>Обновено {fmt(updatedAt)}</span>}</div></header>
+    <header class="article-head">
+      <div class="shell article-head__inner">
+        <a class="article-back" href="/blog/"><Icon name="arrow-left" /> Към блога</a>
+        <h1>{title}</h1>
+        <p class="article-lead">{description}</p>
+        <div class="article-byline" aria-label="Автор и дата на статията">
+          <a href={`/za-nas/#${authorProfile.anchor}`} aria-label={`За ${author}`}>
+            <img src={authorProfile.image} width="720" height="720" alt={author} />
+          </a>
+          <div>
+            <strong>{author}</strong>
+            <span>{authorProfile.role}</span>
+          </div>
+          <div class="article-dates">
+            <time datetime={publishedAt.toISOString()}>{fmt(publishedAt)}</time>
+            {updatedAt && <span>Обновено {fmt(updatedAt)}</span>}
+          </div>
+        </div>
+      </div>
+    </header>
+
     <div class="shell article-grid">
-      {headings.length > 1 && <aside class="toc"><strong>В статията</strong>{headings.filter((h)=>h.depth===2).map((h)=><a href={`#${h.slug}`}>{h.text}</a>)}</aside>}
+      {sectionHeadings.length > 1 && (
+        <nav class="toc" aria-label="Съдържание на статията">
+          <strong>В статията</strong>
+          <ol>
+            {sectionHeadings.map((heading) => <li><a href={`#${heading.slug}`}>{heading.text}</a></li>)}
+          </ol>
+        </nav>
+      )}
       <div class="article-body"><slot /></div>
     </div>
-    <footer class="shell narrow author-box"><div class="founder-avatar">ДД</div><div><strong>{author}</strong><p>Екипът на Работи изгражда AI служители за конкретни задачи в българския бизнес.</p></div></footer>
+
+    <footer class="shell article-footer">
+      <section class="author-box" id={`author-${authorProfile.anchor}`} aria-labelledby="author-name">
+        <img src={authorProfile.image} width="720" height="720" loading="lazy" alt={author} />
+        <div>
+          <p>Автор</p>
+          <h2 id="author-name">{author}</h2>
+          <strong>{authorProfile.role}</strong>
+          <p>{authorProfile.bio}</p>
+          <a href={`/za-nas/#${authorProfile.anchor}`}>Вижте екипа зад Работи <Icon name="arrow-right" /></a>
+        </div>
+      </section>
+
+      {relatedPosts.length > 0 && (
+        <section class="related" aria-labelledby="related-title">
+          <div class="related__head">
+            <h2 id="related-title">Продължете с още една тема</h2>
+            <a href="/blog/">Всички статии</a>
+          </div>
+          <div class="related__grid">
+            {relatedPosts.map((post) => (
+              <article>
+                <div><span>{post.data.tags[0]}</span><time datetime={post.data.publishedAt.toISOString()}>{fmt(post.data.publishedAt)}</time></div>
+                <h3><a href={`/blog/${post.id}/`}>{post.data.title}</a></h3>
+                <p>{post.data.description}</p>
+                <a href={`/blog/${post.id}/`}>Прочетете статията <Icon name="arrow-right" /></a>
+              </article>
+            ))}
+          </div>
+        </section>
+      )}
+    </footer>
   </article>
 </BaseLayout>
+
+<style>
+  :global(.article-page) { background: #f4f1ec; color: #111426; }
+  .article { padding-bottom: clamp(90px, 11vw, 150px); }
+  .article-head { padding: clamp(112px, 13vw, 184px) 0 clamp(70px, 8vw, 110px); background: radial-gradient(circle at 84% 15%, rgba(143,124,255,.18), transparent 30%), #10142c; color: #fff; }
+  .article-head__inner { max-width: 980px; }
+  .article-back { display: inline-flex; align-items: center; gap: 9px; margin-bottom: clamp(46px, 6vw, 74px); color: rgba(255,255,255,.7); font-size: .86rem; font-weight: 700; text-decoration: none; }
+  .article-back:hover { color: #fff; }
+  .article-back :global(svg) { width: 17px; }
+  .article-head h1 { max-width: 16ch; margin: 0; color: #fff; font-size: clamp(3rem, 6vw, 6rem); line-height: 1; letter-spacing: -.04em; text-wrap: balance; }
+  .article-lead { max-width: 67ch; margin: 30px 0 42px; color: rgba(255,255,255,.74); font-size: clamp(1.08rem, 1.6vw, 1.25rem); line-height: 1.65; }
+  .article-byline { display: grid; grid-template-columns: 58px minmax(0, 1fr) auto; gap: 17px; align-items: center; padding-top: 28px; border-top: 1px solid rgba(255,255,255,.15); }
+  .article-byline img { display: block; width: 58px; height: 58px; border-radius: 50%; object-fit: cover; object-position: center top; }
+  .article-byline strong, .article-byline span { display: block; }
+  .article-byline strong { color: #fff; }
+  .article-byline span, .article-dates { margin-top: 4px; color: rgba(255,255,255,.58); font-size: .78rem; line-height: 1.45; }
+  .article-dates { display: flex; align-items: flex-end; flex-direction: column; gap: 3px; margin: 0; }
+
+  .article-grid { display: grid; max-width: 1080px; grid-template-columns: 230px minmax(0, 720px); gap: clamp(48px, 8vw, 112px); align-items: start; padding-top: clamp(72px, 9vw, 124px); }
+  .toc { position: sticky; top: 106px; padding-top: 6px; }
+  .toc > strong { display: block; padding-bottom: 16px; border-bottom: 1px solid rgba(17,20,38,.15); font-size: .8rem; }
+  .toc ol { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; counter-reset: toc; }
+  .toc li { counter-increment: toc; }
+  .toc a { display: grid; grid-template-columns: 24px 1fr; gap: 8px; padding: 14px 0; border-bottom: 1px solid rgba(17,20,38,.1); color: #686773; font-size: .82rem; line-height: 1.45; text-decoration: none; }
+  .toc a::before { content: counter(toc, decimal-leading-zero); color: #8f7cff; font-size: .7rem; font-weight: 800; }
+  .toc a:hover { color: #111426; }
+
+  .article-body { color: #34343f; font-size: clamp(1.04rem, 1.3vw, 1.14rem); line-height: 1.78; }
+  .article-body :global(> p:first-child) { color: #111426; font-size: clamp(1.25rem, 2vw, 1.55rem); line-height: 1.55; }
+  .article-body :global(h2) { margin: 2.25em 0 .65em; color: #111426; font-size: clamp(2rem, 3.4vw, 3.15rem); line-height: 1.08; letter-spacing: -.035em; scroll-margin-top: 110px; text-wrap: balance; }
+  .article-body :global(h3) { margin: 1.8em 0 .55em; color: #111426; font-size: 1.45rem; line-height: 1.2; }
+  .article-body :global(p), .article-body :global(li) { max-width: 69ch; }
+  .article-body :global(ul), .article-body :global(ol) { display: grid; gap: 10px; padding-left: 1.35em; }
+  .article-body :global(a) { color: #4f3fc4; font-weight: 650; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+
+  .article-footer { max-width: 1080px; }
+  .author-box { display: grid; grid-template-columns: 220px minmax(0, 1fr); gap: clamp(32px, 6vw, 76px); align-items: center; margin-top: clamp(80px, 10vw, 140px); padding: clamp(28px, 5vw, 58px); border-radius: 16px; background: #10142c; color: #fff; }
+  .author-box > img { display: block; width: 100%; aspect-ratio: 1; border-radius: 12px; object-fit: cover; object-position: center top; }
+  .author-box div > p:first-child { margin: 0 0 9px; color: #2de2d0; font-size: .77rem; font-weight: 800; }
+  .author-box h2 { margin: 0; color: #fff; font-size: clamp(2rem, 3vw, 3.1rem); letter-spacing: -.035em; }
+  .author-box strong { display: block; margin-top: 6px; color: rgba(255,255,255,.62); font-size: .82rem; }
+  .author-box div > p:not(:first-child) { max-width: 65ch; margin: 24px 0; color: rgba(255,255,255,.72); line-height: 1.7; }
+  .author-box a, .related article > a { display: inline-flex; align-items: center; gap: 8px; color: inherit; font-weight: 750; text-decoration: none; }
+  .author-box a :global(svg), .related article > a :global(svg) { width: 17px; }
+
+  .related { margin-top: clamp(80px, 10vw, 130px); }
+  .related__head { display: flex; align-items: end; justify-content: space-between; gap: 30px; padding-bottom: 24px; border-bottom: 1px solid rgba(17,20,38,.16); }
+  .related__head h2 { max-width: 14ch; margin: 0; color: #111426; font-size: clamp(2.15rem, 4vw, 4rem); line-height: 1.03; letter-spacing: -.04em; }
+  .related__head a { color: #111426; font-weight: 750; }
+  .related__grid { display: grid; grid-template-columns: repeat(2, 1fr); }
+  .related article { display: flex; min-height: 390px; flex-direction: column; padding: 42px 0; }
+  .related article + article { padding-left: clamp(30px, 4vw, 50px); border-left: 1px solid rgba(17,20,38,.16); }
+  .related article:first-child { padding-right: clamp(30px, 4vw, 50px); }
+  .related article > div { display: flex; justify-content: space-between; gap: 20px; color: #686773; font-size: .76rem; }
+  .related h3 { max-width: 19ch; margin: 48px 0 18px; color: #111426; font-size: clamp(1.7rem, 3vw, 2.7rem); line-height: 1.08; letter-spacing: -.03em; }
+  .related h3 a { color: inherit; text-decoration: none; }
+  .related article > p { max-width: 48ch; margin: 0 0 28px; color: #686773; line-height: 1.62; }
+  .related article > a { margin-top: auto; color: #111426; }
+
+  @media (max-width: 820px) {
+    .article-grid { grid-template-columns: 1fr; }
+    .toc { position: static; padding: 22px; border: 1px solid rgba(17,20,38,.12); border-radius: 12px; background: #fff; }
+    .author-box { grid-template-columns: 150px 1fr; }
+  }
+  @media (max-width: 620px) {
+    :global(.article-page main .shell) { width: calc(100% - 32px); }
+    .article-head { padding-top: 96px; }
+    .article-head h1 { max-width: 100%; font-size: clamp(2.55rem, 12vw, 3.55rem); text-wrap: pretty; }
+    .article-byline { grid-template-columns: 52px 1fr; }
+    .article-byline img { width: 52px; height: 52px; }
+    .article-dates { grid-column: 1 / -1; align-items: flex-start; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.1); }
+    .author-box { grid-template-columns: 1fr; }
+    .author-box > img { width: 150px; }
+    .related__head { align-items: flex-start; flex-direction: column; }
+    .related__grid { grid-template-columns: 1fr; }
+    .related article, .related article:first-child, .related article + article { min-height: 0; padding: 36px 0; border-left: 0; }
+    .related article + article { border-top: 1px solid rgba(17,20,38,.16); }
+  }
+</style>

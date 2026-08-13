@@ -89,7 +89,7 @@ const founders = [
       </div>
       <div class="about-team__grid">
         {founders.map((founder, index) => (
-          <article class:list={["about-founder", index === 1 && "about-founder--violet"]}>
+          <article id={index === 0 ? "dean-dechev" : "mariyan-dechev"} class:list={["about-founder", index === 1 && "about-founder--violet"]}>
             <img class="about-founder__photo" src={founder.image} width="720" height="720" loading="lazy" alt={`${founder.name}, съосновател на Работи`} />
             <div>
               <h3>{founder.name}</h3>
