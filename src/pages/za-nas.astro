@@ -1,10 +1,147 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import Icon from "../components/Icon.astro";
 import { site } from "../data/site";
 import { breadcrumbSchema } from "../data/schema";
+
+const responsibilities = [
+  {
+    title: "Показвате ни работата",
+    text: "Минаваме през обаждането, промяната по сайта или задачата между програмите така, както я вършите днес.",
+  },
+  {
+    title: "Уговаряме какво може да прави сам",
+    text: "Записваме каква информация използва, до какво има достъп и в кои случаи трябва да спре и да попита човек.",
+  },
+  {
+    title: "Проверяваме го преди да започне",
+    text: "Тестваме обичайните случаи и нещата, които могат да се объркат. Започваме работа, след като знаете как ще действа.",
+  },
+];
 ---
-<BaseLayout title="Кой стои зад Работи" description="Работи се изгражда от български екип с опит в AI, софтуерна архитектура, интеграции и дигитални продукти." canonical="/za-nas/" image="/og/za-nas.svg" schema={breadcrumbSchema([{name:"Работи",url:site.url},{name:"За нас",url:`${site.url}/za-nas/`}])}>
-  <section class="page-hero"><div class="shell narrow"><p class="eyebrow">хората зад AI служителите</p><h1>Преди да има Работи, започнахме с Vdiga.</h1><p>Изградихме AI рецепционист за конкретен проблем: клиентът звъни, но екипът няма свободни ръце. Работи разширява същия принцип към сайта и оперативната работа.</p></div></section>
-  <section class="section"><div class="shell founder-grid">{site.founders.map((founder)=><article class="founder-card"><div class="founder-avatar" aria-hidden="true">{founder.name.split(" ").map((p)=>p[0]).join("")}</div><div><span class="status">Съосновател</span><h2>{founder.name}</h2><p class="role">{founder.role}</p><p>{founder.bio}</p></div></article>)}</div></section>
-  <section class="section section--tint"><div class="shell legal-block"><div><p class="eyebrow">кой носи отговорност</p><h2>Реална компания, договор и човек отсреща.</h2><p>Работи е търговска концепция на {site.legalName}. Компанията издава офертите и фактурите и носи договорната отговорност към клиентите.</p></div><dl><div><dt>Юридическо лице</dt><dd>{site.legalName}</dd></div><div><dt>ЕИК</dt><dd>{site.companyId}</dd></div><div><dt>Управител</dt><dd>{site.manager}</dd></div><div><dt>Адрес</dt><dd>{site.legalAddress}</dd></div></dl></div></section>
+<BaseLayout title="Кой стои зад Работи" description="Запознайте се с екипа зад Vdiga, Pishe и Pomaga и вижте как настройваме всеки AI служител за работата на клиента." canonical="/za-nas/" image="/og/za-nas.svg" schema={breadcrumbSchema([{name:"Работи",url:site.url},{name:"За нас",url:`${site.url}/za-nas/`}])} bodyClass="about-page">
+  <section class="about-hero">
+    <div class="shell about-hero__grid">
+      <div>
+        <h1>Създаваме служители за работата, която все остава за после.</h1>
+        <p>Започнахме с Vdiga, защото много фирми изпускат обаждания, когато хората им са заети. После приложихме същия подход към промените по сайта и прехвърлянето на данни между програми.</p>
+        <a class="button button--spectrum" href="/sluzhiteli/">Вижте тримата служители <Icon name="arrow-right" /></a>
+      </div>
+      <div class="about-hero__ledger" aria-label="Какво поемат служителите на Работи">
+        <div><span>Телефонът звъни</span><strong>Vdiga отговаря</strong><i class="signal signal--vdiga"></i></div>
+        <div><span>Сайтът чака промяна</span><strong>Pishe я подготвя</strong><i class="signal signal--pishe"></i></div>
+        <div><span>Данните са в имейла</span><strong>Pomaga ги прехвърля</strong><i class="signal signal--pomaga"></i></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-story">
+    <div class="shell about-story__grid">
+      <h2>Не започваме от AI. Започваме от начина, по който работите сега.</h2>
+      <div>
+        <p>Една и съща задача може да изглежда различно във всяка фирма. Затова не ви даваме готов инструмент и не ви оставяме сами да го нагласяте.</p>
+        <p>Първо виждаме откъде идва информацията, кой я проверява и как разбирате, че работата е свършена. После настройваме служителя за тези стъпки. Ако някое решение трябва да остане при човек, то не се автоматизира.</p>
+      </div>
+    </div>
+    <div class="shell about-process">
+      {responsibilities.map((item) => (
+        <article>
+          <h3>{item.title}</h3>
+          <p>{item.text}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="about-team">
+    <div class="shell">
+      <div class="about-team__head">
+        <h2>Хората зад Работи</h2>
+        <p>Ние изграждаме служителите, свързваме ги с програмите на клиента и оставаме насреща след пускането им.</p>
+      </div>
+      <div class="about-team__grid">
+        {site.founders.map((founder, index) => (
+          <article class:list={["about-founder", index === 1 && "about-founder--violet"]}>
+            <div class="about-founder__mark" aria-hidden="true">{founder.name.split(" ").map((part) => part[0]).join("")}</div>
+            <div>
+              <h3>{founder.name}</h3>
+              <p class="about-founder__role">{founder.role}</p>
+              <p>{founder.bio}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="about-company">
+    <div class="shell about-company__grid">
+      <div>
+        <h2>Знаете с кого сключвате договор.</h2>
+        <p>Работи е проект на {site.legalName}. Дружеството изпраща офертата, сключва договора и издава фактурите за настройката и месечния абонамент.</p>
+        <a href="/kontakti/">Свържете се с нас <Icon name="arrow-right" /></a>
+      </div>
+      <dl>
+        <div><dt>Дружество</dt><dd>{site.legalName}</dd></div>
+        <div><dt>ЕИК</dt><dd>{site.companyId}</dd></div>
+        <div><dt>Управител</dt><dd>{site.manager}</dd></div>
+        <div><dt>Адрес</dt><dd>{site.legalAddress}</dd></div>
+      </dl>
+    </div>
+  </section>
 </BaseLayout>
+
+<style>
+  :global(.about-page){background:#f4f1ec;color:#111426}
+  .about-hero{position:relative;overflow:hidden;padding:clamp(88px,10vw,148px) 0 clamp(76px,9vw,126px);background:radial-gradient(circle at 88% 8%,rgba(143,124,255,.2),transparent 31%),radial-gradient(circle at 10% 92%,rgba(45,226,208,.12),transparent 33%),#10142c;color:#fff}
+  .about-hero__grid{display:grid;grid-template-columns:minmax(0,1.14fr) minmax(330px,.7fr);gap:clamp(52px,9vw,128px);align-items:end}
+  .about-hero h1{max-width:12ch;margin:0;color:#fff;font-size:clamp(3.2rem,5.8vw,5.9rem);line-height:1;letter-spacing:-.04em;text-wrap:balance}
+  .about-hero p{max-width:60ch;margin:30px 0 32px;color:rgba(255,255,255,.76);font-size:clamp(1.08rem,1.45vw,1.28rem);line-height:1.58}
+  .about-hero a{display:inline-flex;gap:10px;align-items:center;text-decoration:none}
+  .about-hero a :global(svg){width:18px}
+  .about-hero__ledger{display:grid;border-top:1px solid rgba(255,255,255,.22);border-bottom:1px solid rgba(255,255,255,.22)}
+  .about-hero__ledger>div{position:relative;display:grid;gap:7px;padding:20px 36px 20px 0;border-top:1px solid rgba(255,255,255,.1)}
+  .about-hero__ledger>div:first-child{border-top:0}
+  .about-hero__ledger span{color:rgba(255,255,255,.58);font-size:.82rem}
+  .about-hero__ledger strong{color:#fff;font-size:1.08rem}
+  .signal{position:absolute;top:50%;right:3px;width:9px;height:9px;border-radius:50%;transform:translateY(-50%)}
+  .signal--vdiga{background:#2de2d0;box-shadow:0 0 18px rgba(45,226,208,.62)}
+  .signal--pishe{background:#ff8d72;box-shadow:0 0 18px rgba(255,141,114,.58)}
+  .signal--pomaga{background:#8f7cff;box-shadow:0 0 18px rgba(143,124,255,.62)}
+  .about-story{padding:clamp(80px,10vw,144px) 0;background:#fff}
+  .about-story__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,.75fr);gap:clamp(48px,9vw,130px);align-items:start}
+  .about-story h2,.about-team h2,.about-company h2{margin:0;color:#111426;font-size:clamp(2.7rem,4.8vw,4.8rem);line-height:1.02;letter-spacing:-.04em;text-wrap:balance}
+  .about-story__grid>div p{max-width:58ch;margin:0;color:#62616c;font-size:1.08rem;line-height:1.67}
+  .about-story__grid>div p+p{margin-top:20px}
+  .about-process{display:grid;grid-template-columns:repeat(3,1fr);margin-top:clamp(64px,8vw,112px);border-top:1px solid rgba(17,20,38,.14);border-bottom:1px solid rgba(17,20,38,.14)}
+  .about-process article{padding:32px 32px 34px 0}
+  .about-process article+article{padding-left:32px;border-left:1px solid rgba(17,20,38,.14)}
+  .about-process h3{max-width:16ch;margin:0;color:#111426;font-size:1.3rem;line-height:1.22}
+  .about-process p{max-width:38ch;margin:16px 0 0;color:#686773;font-size:.95rem;line-height:1.58}
+  .about-team{padding:clamp(80px,10vw,140px) 0;background:#f4f1ec}
+  .about-team__head{display:grid;grid-template-columns:1fr minmax(300px,.64fr);gap:48px;align-items:end;margin-bottom:clamp(48px,6vw,78px)}
+  .about-team__head>p{max-width:48ch;margin:0;color:#686773;font-size:1.05rem;line-height:1.6}
+  .about-team__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
+  .about-founder{display:grid;grid-template-columns:92px 1fr;gap:28px;padding:clamp(28px,3vw,42px);border-radius:16px;background:#fff;box-shadow:0 26px 70px -56px rgba(25,20,50,.52)}
+  .about-founder__mark{display:grid;width:76px;height:76px;place-items:center;border-radius:50%;background:rgba(45,226,208,.15);color:#0c7f72;font-size:1.1rem;font-weight:750}
+  .about-founder--violet .about-founder__mark{background:rgba(143,124,255,.14);color:#604dd0}
+  .about-founder h3{margin:2px 0 7px;color:#111426;font-size:clamp(1.55rem,2vw,2rem);line-height:1.12}
+  .about-founder__role{margin:0 0 18px!important;color:#0c7f72!important;font-size:.88rem!important;font-weight:700}
+  .about-founder--violet .about-founder__role{color:#604dd0!important}
+  .about-founder p:last-child{max-width:48ch;margin:0;color:#686773;font-size:.96rem;line-height:1.58}
+  .about-company{margin:0 12px 12px;padding:clamp(76px,9vw,124px) 0;border-radius:16px;background:radial-gradient(circle at 82% 10%,rgba(45,226,208,.12),transparent 30%),#202652;color:#fff}
+  .about-company__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(360px,.76fr);gap:clamp(54px,10vw,140px);align-items:start}
+  .about-company h2{max-width:12ch;color:#fff}
+  .about-company p{max-width:57ch;margin:26px 0 30px;color:rgba(255,255,255,.74);font-size:1.05rem;line-height:1.62}
+  .about-company a{display:inline-flex;align-items:center;gap:9px;color:#fff;font-weight:700;text-decoration:none}
+  .about-company a:hover{text-decoration:underline;text-underline-offset:5px}
+  .about-company a:focus-visible{outline:3px solid #2de2d0;outline-offset:6px}
+  .about-company a :global(svg){width:18px;color:#2de2d0}
+  .about-company dl{margin:0;border-top:1px solid rgba(255,255,255,.22)}
+  .about-company dl div{display:grid;grid-template-columns:.7fr 1.3fr;gap:24px;padding:18px 0;border-bottom:1px solid rgba(255,255,255,.14)}
+  .about-company dt{color:rgba(255,255,255,.54);font-size:.78rem}
+  .about-company dd{margin:0;color:#fff;font-size:.92rem;font-weight:600;line-height:1.45}
+  @media(max-width:900px){.about-hero__grid,.about-story__grid,.about-team__head,.about-company__grid{grid-template-columns:1fr}.about-hero__ledger{max-width:620px}.about-process{grid-template-columns:1fr}.about-process article{padding:26px 0}.about-process article+article{padding-left:0;border-top:1px solid rgba(17,20,38,.14);border-left:0}.about-process h3{max-width:none}.about-company h2{max-width:14ch}}
+  @media(max-width:680px){.about-hero{padding-top:72px}.about-hero h1{font-size:clamp(2.75rem,12.5vw,4rem)}.about-team__grid{grid-template-columns:1fr}.about-founder{grid-template-columns:1fr;gap:20px}.about-company{margin:0 8px 8px;padding-inline:8px}.about-company dl div{grid-template-columns:1fr;gap:5px}}
+  @media(prefers-reduced-motion:reduce){.about-hero a{transition:none}}
+</style>
