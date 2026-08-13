@@ -17,9 +17,9 @@ const moments = [
     question: "Кога ще смениш цената, която вече е грешна?",
     scene: "Новата цена е готова, но промяната по сайта пак остава за после.",
     role: "Pishe",
-    action: "Подготвя точната промяна и показва какво ще се публикува.",
+    action: "Сменя цената на страницата и показва новата версия преди публикуване.",
     result: "Сайтът е актуален, а предишната версия остава в историята.",
-    boundary: "Непознат тип промяна чака вашето одобрение.",
+    boundary: "Ако промяната е различна от обичайните, Pishe ви показва какво трябва да се направи и изчаква.",
     color: "#ff9b80",
   },
   {
@@ -29,7 +29,7 @@ const moments = [
     scene: "Заявката е в пощата. Данните още не са в CRM, а задачата няма собственик.",
     role: "Pomaga",
     action: "Прочита определените имейли, записва данните и създава задача.",
-    result: "Екипът вижда клиента, следващото действие и пълния запис.",
+    result: "Екипът вижда данните за клиента и кой трябва да продължи работата.",
     boundary: "Плащане и необратима промяна никога не минават без човек.",
     color: "#a999ff",
   },
@@ -54,9 +54,9 @@ const moments = [
         <div class="day-scene__question"><span>{moment.time}</span><h2>{moment.question}</h2><p>{moment.scene}</p></div>
         <div class="day-scene__line" aria-hidden="true"><i></i><i></i><i></i></div>
         <div class="day-scene__work">
-          <div><small>{moment.role} поема</small><strong>{moment.action}</strong></div>
-          <div><small>Остава следа</small><strong>{moment.result}</strong></div>
-          <div class="day-scene__boundary"><small>Човешката граница</small><strong>{moment.boundary}</strong></div>
+          <div><small>Какво прави {moment.role}</small><strong>{moment.action}</strong></div>
+          <div><small>Какво вижда екипът след това</small><strong>{moment.result}</strong></div>
+          <div class="day-scene__boundary"><small>Кога се включва човек</small><strong>{moment.boundary}</strong></div>
         </div>
         <a href={`/sluzhiteli/${moment.id}/`}>Вижте задачите на {moment.role} <span aria-hidden="true">→</span></a>
       </article>
