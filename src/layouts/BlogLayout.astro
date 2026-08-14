@@ -9,6 +9,7 @@ import { authorPath, getAuthor } from "../data/authors";
 interface Props {
   title: string;
   description: string;
+  directAnswer?: string;
   seoTitle: string;
   publishedAt: Date;
   updatedAt?: Date;
@@ -18,9 +19,10 @@ interface Props {
   image?: string;
   imageAlt?: string;
   faqs?: Array<{ question: string; answer: string }>;
+  sources?: Array<{ name: string; url: string }>;
 }
 
-const { title, description, seoTitle, publishedAt, updatedAt, author, slug, headings, image, imageAlt, faqs = [] } = Astro.props;
+const { title, description, directAnswer, seoTitle, publishedAt, updatedAt, author, slug, headings, image, imageAlt, faqs = [], sources = [] } = Astro.props;
 const url = `${site.url}/blog/${slug}/`;
 const sectionHeadings = headings.filter((heading) => heading.depth === 2);
 
@@ -41,6 +43,7 @@ const articleSchema = {
   dateModified: (updatedAt || publishedAt).toISOString(),
   author: {
     "@type": "Person",
+    "@id": `${authorUrl}#person`,
     name: author,
     url: authorUrl,
     image: `${site.url}${authorProfile.image}`,
@@ -49,7 +52,13 @@ const articleSchema = {
   mainEntityOfPage: url,
   inLanguage: "bg",
   articleSection: "AI служители",
-  about: { "@type": "Thing", name: "AI служител" },
+  about: [
+    { "@type": "DefinedTerm", name: "AI служител", description: directAnswer || description },
+    { "@type": "Thing", name: "Бизнес автоматизация" },
+    { "@type": "Thing", name: "Човешки надзор при AI" },
+  ],
+  ...(directAnswer ? { abstract: directAnswer } : {}),
+  ...(sources.length > 0 ? { citation: sources.map((source) => ({ "@type": "CreativeWork", name: source.name, url: source.url })) } : {}),
   ...(image ? { image: `${site.url}${image}` } : {}),
 };
 
@@ -93,7 +102,7 @@ const fmt = (date: Date) =>
       <div class="shell article-head__inner">
         <a class="article-back" href="/blog/"><Icon name="arrow-left" /> Към блога</a>
         <h1>{title}</h1>
-        <p class="article-lead">{description}</p>
+        <p class="article-lead">{directAnswer || description}</p>
         <div class="article-byline" aria-label="Автор и дата на статията">
           <a href={authorRelativeUrl} aria-label={`За ${author}`}>
             <img src={authorProfile.image} width="720" height="720" alt={author} />

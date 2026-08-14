@@ -38,6 +38,7 @@ const blog = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
+    directAnswer: z.string().optional(),
     publishedAt: z.coerce.date(),
     updatedAt: z.coerce.date().optional(),
     author: z.string(),
@@ -47,6 +48,7 @@ const blog = defineCollection({
     image: z.string().optional(),
     imageAlt: z.string().optional(),
     faqs: z.array(z.object({ question: z.string(), answer: z.string() })).optional(),
+    sources: z.array(z.object({ name: z.string(), url: z.url() })).optional(),
   }),
 });
 
