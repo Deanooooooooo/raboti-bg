@@ -20,9 +20,10 @@ interface Props {
   imageAlt?: string;
   faqs?: Array<{ question: string; answer: string }>;
   sources?: Array<{ name: string; url: string }>;
+  tags?: string[];
 }
 
-const { title, description, directAnswer, seoTitle, publishedAt, updatedAt, author, slug, headings, image, imageAlt, faqs = [], sources = [] } = Astro.props;
+const { title, description, directAnswer, seoTitle, publishedAt, updatedAt, author, slug, headings, image, imageAlt, faqs = [], sources = [], tags = [] } = Astro.props;
 const url = `${site.url}/blog/${slug}/`;
 const sectionHeadings = headings.filter((heading) => heading.depth === 2);
 
@@ -54,9 +55,9 @@ const articleSchema = {
   articleSection: "AI служители",
   about: [
     { "@type": "DefinedTerm", name: "AI служител", description: directAnswer || description },
-    { "@type": "Thing", name: "Бизнес автоматизация" },
-    { "@type": "Thing", name: "Човешки надзор при AI" },
+    ...tags.map((tag) => ({ "@type": "Thing", name: tag })),
   ],
+  keywords: tags,
   ...(directAnswer ? { abstract: directAnswer } : {}),
   ...(sources.length > 0 ? { citation: sources.map((source) => ({ "@type": "CreativeWork", name: source.name, url: source.url })) } : {}),
   ...(image ? { image: `${site.url}${image}` } : {}),
