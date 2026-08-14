@@ -23,27 +23,27 @@ const founders = [
     name: "Деан Дечев",
     image: "/assets/founders/dean-dechev-v2.webp",
     role: "Продукт и развитие на бизнеса",
-    bio: "Деан има близо 8 години опит в развитието на онлайн бизнеси и дигитални продукти. В Работи проучва къде фирмите губят време и клиенти, описва как трябва да протича работата и превръща това в задачи за Vdiga, Pishe и Pomaga.",
+    bio: "Деан има близо 8 години опит в развитието на онлайн бизнеси и дигитални продукти. В Raboti проучва къде фирмите губят време и клиенти, описва как трябва да протича работата и превръща това в задачи за Vdiga, Pishe и Pomaga.",
     details: ["продуктово проучване", "разговори с клиенти", "съдържание и позициониране", "внедряване при клиента"],
   },
   {
     name: "Мариян Дечев",
     image: "/assets/founders/mariyan-dechev-v2.webp",
     role: "Софтуерна архитектура и AI",
-    bio: "Мариян е софтуерен архитект и AI инженер с над 10 години опит в софтуерни продукти, облачна инфраструктура, API интеграции и бизнес автоматизация. В Работи отговаря за архитектурата, връзките с другите системи, сигурността и работата им при ежедневна употреба.",
+    bio: "Мариян е софтуерен архитект и AI инженер с над 10 години опит в софтуерни продукти, облачна инфраструктура, API интеграции и бизнес автоматизация. В Raboti отговаря за архитектурата, връзките с другите системи, сигурността и работата им при ежедневна употреба.",
     details: ["AI системи", "софтуерна архитектура", "облачна инфраструктура", "API интеграции"],
   },
 ];
 ---
-<BaseLayout title="Кой стои зад Работи" description="Запознайте се с екипа зад Vdiga, Pishe и Pomaga и вижте как настройваме всеки AI служител за работата на клиента." canonical="/za-nas/" image="/og/za-nas.svg" schema={breadcrumbSchema([{name:"Работи",url:site.url},{name:"За нас",url:`${site.url}/za-nas/`}])} bodyClass="about-page">
+<BaseLayout title="Кой стои зад Raboti" description="Запознайте се с екипа зад Vdiga, Pishe и Pomaga и вижте как настройваме всеки AI служител за работата на клиента." canonical="/za-nas/" image="/og/za-nas.svg" schema={breadcrumbSchema([{name:"Raboti",url:site.url},{name:"За нас",url:`${site.url}/za-nas/`}])} bodyClass="about-page">
   <section class="about-hero">
     <div class="shell about-hero__grid">
       <div>
-        <h1>Работи започна от един телефон, на който никой не успяваше да вдигне.</h1>
+        <h1>Raboti започна от един телефон, на който никой не успяваше да вдигне.</h1>
         <p>Така създадохме Vdiga. После видяхме същия проблем и на други места: цената на сайта чака с дни, а данните от един имейл се преписват в три програми. Затова направихме Pishe и Pomaga. Всеки от тримата има своя работа и месечна цена. Когато е нужна преценка, задачата се връща при човек.</p>
         <a class="button button--spectrum" href="/sluzhiteli/">Запознайте се с Vdiga, Pishe и Pomaga <Icon name="arrow-right" /></a>
       </div>
-      <div class="about-hero__ledger" aria-label="Какво поемат служителите на Работи">
+      <div class="about-hero__ledger" aria-label="Какво поемат служителите на Raboti">
         <div><span>Телефонът звъни</span><strong>Vdiga отговаря</strong><i class="signal signal--vdiga"></i></div>
         <div><span>Сайтът чака промяна</span><strong>Pishe я подготвя</strong><i class="signal signal--pishe"></i></div>
         <div><span>Данните са в имейла</span><strong>Pomaga ги прехвърля</strong><i class="signal signal--pomaga"></i></div>
@@ -57,7 +57,7 @@ const founders = [
       <div>
         <h2>Vdiga ни показа, че на бизнеса не му трябва още един AI инструмент.</h2>
         <p>Трябва му някой, който да свърши определена работа. Да отговори на клиента. Да запише часа. Да изпрати името и телефона на екипа. И да спре, когато въпросът трябва да се реши от човек.</p>
-        <p>Оттам дойде Работи. Не като каталог с чатботове, а като място за AI служители с различни професии. Vdiga поема входящите обаждания. Pishe работи по сайта. Pomaga прехвърля информацията между програмите, които фирмата вече използва.</p>
+        <p>Оттам дойде Raboti. Не като каталог с чатботове, а като място за AI служители с различни професии. Vdiga поема входящите обаждания. Pishe работи по сайта. Pomaga прехвърля информацията между програмите, които фирмата вече използва.</p>
         <a href="/sluzhiteli/vdiga/#razgovor">Чуйте как Vdiga разговаря <Icon name="arrow-right" /></a>
       </div>
     </div>
@@ -84,13 +84,13 @@ const founders = [
   <section class="about-team">
     <div class="shell">
       <div class="about-team__head">
-        <h2>Хората зад Работи</h2>
+        <h2>Хората зад Raboti</h2>
         <p>Двамата съоснователи водят продукта и техническата работа. Те преглеждат резултатите и отговарят за решенията, които не могат да бъдат оставени на AI.</p>
       </div>
       <div class="about-team__grid">
         {founders.map((founder, index) => (
           <article id={index === 0 ? "dean-dechev" : "mariyan-dechev"} class:list={["about-founder", index === 1 && "about-founder--violet"]}>
-            <img class="about-founder__photo" src={founder.image} width="720" height="720" loading="lazy" alt={`${founder.name}, съосновател на Работи`} />
+            <img class="about-founder__photo" src={founder.image} width="720" height="720" loading="lazy" alt={`${founder.name}, съосновател на Raboti`} />
             <div>
               <h3>{founder.name}</h3>
               <p class="about-founder__role">{founder.role}</p>
@@ -120,7 +120,7 @@ const founders = [
     <div class="shell about-company__grid">
       <div>
         <h2>Зад офертата и договора стои българско дружество.</h2>
-        <p>Работи е проект на {site.legalName}. От това дружество получавате офертата и фактурите. С него сключвате договора за настройката и месечния абонамент.</p>
+        <p>Raboti е проект на {site.legalName}. От това дружество получавате офертата и фактурите. С него сключвате договора за настройката и месечния абонамент.</p>
         <a href="/kontakti/">Свържете се с нас <Icon name="arrow-right" /></a>
       </div>
       <dl>

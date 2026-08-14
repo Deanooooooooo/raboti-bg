@@ -35,19 +35,19 @@ const profileSchema = {
 ---
 
 <BaseLayout
-  title={`${author.name} | Автор и съосновател на Работи`}
-  description={`${author.name} е ${author.shortRole.toLowerCase()} в Работи. Опит, области на работа и публикации за AI служители.`}
+  title={`${author.name} | Автор и съосновател на Raboti`}
+  description={`${author.name} е ${author.shortRole.toLowerCase()} в Raboti. Опит, области на работа и публикации за AI служители.`}
   canonical={path}
   image={author.image}
-  imageAlt={`${author.name}, съосновател на Работи`}
-  schema={[profileSchema, breadcrumbSchema([{name:"Работи",url:site.url},{name:"За нас",url:`${site.url}/za-nas/`},{name:author.name,url}])]}
+  imageAlt={`${author.name}, съосновател на Raboti`}
+  schema={[profileSchema, breadcrumbSchema([{name:"Raboti",url:site.url},{name:"За нас",url:`${site.url}/za-nas/`},{name:author.name,url}])]}
   bodyClass="author-page"
 >
   <header class="author-hero">
     <div class="shell author-hero__grid">
-      <img src={author.image} width="720" height="720" alt={`${author.name}, съосновател на Работи`} />
+      <img src={author.image} width="720" height="720" alt={`${author.name}, съосновател на Raboti`} />
       <div>
-        <a href="/za-nas/">Екипът на Работи</a>
+        <a href="/za-nas/">Екипът на Raboti</a>
         <h1>{author.name}</h1>
         <p class="author-hero__role">{author.shortRole}</p>
         <p>{author.bio}</p>
@@ -57,7 +57,7 @@ const profileSchema = {
   </header>
   <section class="author-details">
     <div class="shell author-details__grid">
-      <div><h2>По какво работи</h2><p>Тези области описват пряката роля на {author.name.split(" ")[0]} в създаването, проверката и внедряването на услугите на Работи.</p></div>
+      <div><h2>По какво работи</h2><p>Тези области описват пряката роля на {author.name.split(" ")[0]} в създаването, проверката и внедряването на услугите на Raboti.</p></div>
       <ul>{author.expertise.map((item)=><li>{item}</li>)}</ul>
     </div>
   </section>

@@ -15,11 +15,11 @@ const profiles: Record<string, { image: string; alt: string; problem: string; ac
   pomaga: { image: "/assets/employee-pomaga-v1.webp", alt: "Pomaga, AI оперативен асистент за повтаряща се работа", problem: "Информацията се преписва между имейл, CRM и таблици.", action: "Поема повтарящия се процес", examples: ["Прехвърля данни между системи", "Създава задачи и справки", "Спира за одобрение преди риск"] },
 };
 const schemas = [
-  breadcrumbSchema([{ name: "Работи", url: site.url }, { name: "AI служители", url: `${site.url}/sluzhiteli/` }]),
-  { "@context": "https://schema.org", "@type": "ItemList", name: "AI служители от Работи", numberOfItems: agents.length, itemListElement: agents.map((agent, index) => ({ "@type": "ListItem", position: index + 1, url: `${site.url}/sluzhiteli/${agent.data.slug}/`, name: agent.data.name })) },
+  breadcrumbSchema([{ name: "Raboti", url: site.url }, { name: "AI служители", url: `${site.url}/sluzhiteli/` }]),
+  { "@context": "https://schema.org", "@type": "ItemList", name: "AI служители от Raboti", numberOfItems: agents.length, itemListElement: agents.map((agent, index) => ({ "@type": "ListItem", position: index + 1, url: `${site.url}/sluzhiteli/${agent.data.slug}/`, name: agent.data.name })) },
 ];
 ---
-<BaseLayout title="Изберете AI служител | Работи" description="Vdiga поема телефона, Pishe се грижи за сайта, а Pomaga върши повтарящата се работа между системите. Сравнете задачите, границите и началните цени." canonical="/sluzhiteli/" image="/og/sluzhiteli.svg" schema={schemas} bodyClass="team-page">
+<BaseLayout title="Изберете AI служител | Raboti" description="Vdiga поема телефона, Pishe се грижи за сайта, а Pomaga върши повтарящата се работа между системите. Сравнете задачите, границите и началните цени." canonical="/sluzhiteli/" image="/og/sluzhiteli.svg" schema={schemas} bodyClass="team-page">
   <section class="team-hero">
     <div class="shell team-hero__grid">
       <div><h1>Коя работа остава несвършена?</h1><p>Изберете какво ви бави най-често. Vdiga поема телефона, Pishe работи по сайта, а Pomaga свързва повтарящите се стъпки между програмите ви.</p></div>

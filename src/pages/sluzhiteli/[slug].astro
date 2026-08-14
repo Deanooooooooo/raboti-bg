@@ -139,7 +139,7 @@ const profiles = {
 const profile = profiles[data.slug as keyof typeof profiles];
 const schemas = [
   faqSchema(profile.interview.map(([question, answer]) => ({ question, answer }))),
-  breadcrumbSchema([{name:"Работи",url:site.url},{name:"AI служители",url:`${site.url}/sluzhiteli/`},{name:data.name,url:pageUrl}]),
+  breadcrumbSchema([{name:"Raboti",url:site.url},{name:"AI служители",url:`${site.url}/sluzhiteli/`},{name:data.name,url:pageUrl}]),
   { "@context": "https://schema.org", "@type": "Product", name: `${data.name}: ${data.role}`, description: data.description, brand: { "@type": "Brand", name: site.brand }, url: pageUrl,
     offers: data.slug === "vdiga"
       ? { "@type": "AggregateOffer", lowPrice: "97", highPrice: "297", priceCurrency: "EUR", offerCount: "3", availability: "https://schema.org/InStock", url: `${pageUrl}#planove` }

@@ -6,9 +6,9 @@ export const GET: APIRoute = async () => {
   const agents = (await getCollection("agents")).sort((a,b)=>a.data.order-b.data.order);
   const live = agents.filter((agent) => agent.data.status === "live");
   const posts = (await getCollection("blog")).sort((a,b)=>b.data.publishedAt.valueOf()-a.data.publishedAt.valueOf());
-  const body = `# Работи
+  const body = `# Raboti
 
-Работи е услуга на ${site.legalName}, София, за AI служители под наем за българския бизнес.
+Raboti е услуга на ${site.legalName}, София, за AI служители под наем за българския бизнес.
 
 ## AI служители, които се предлагат
 

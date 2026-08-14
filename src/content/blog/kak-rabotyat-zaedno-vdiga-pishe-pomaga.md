@@ -5,7 +5,7 @@ publishedAt: 2026-08-13
 author: "Мариян Дечев"
 relatedAgent: "all"
 tags: ["Vdiga", "Pishe", "Pomaga"]
-seoTitle: "Как Vdiga, Pishe и Pomaga работят заедно | Работи"
+seoTitle: "Как Vdiga, Pishe и Pomaga работят заедно | Raboti"
 ---
 
 Тримата AI служители не вършат една и съща работа. Vdiga разговаря по телефона. Pishe работи по сайта. Pomaga прехвърля информация и създава задачи в програмите, които фирмата използва.

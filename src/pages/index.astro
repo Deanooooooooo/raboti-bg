@@ -22,12 +22,12 @@ const agentProfiles: Record<string, { name: string; image: string; imageAlt: str
 };
 const schemas = [
   faqSchema(homeFaqs),
-  breadcrumbSchema([{ name: "Работи", url: site.url }]),
+  breadcrumbSchema([{ name: "Raboti", url: site.url }]),
   {
     "@context": "https://schema.org",
     "@type": "Service",
     "@id": `${site.url}/#ai-employees`,
-    name: "AI служители от Работи",
+    name: "AI служители от Raboti",
     serviceType: "Абонаментна услуга за AI служители",
     description: "AI служители за входящи обаждания, работа по сайта и повтарящи се оперативни задачи с предварително зададени правила и човешки контрол.",
     provider: { "@id": `${site.url}/#organization` },
@@ -44,7 +44,7 @@ const schemas = [
   {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "AI служители от Работи",
+    name: "AI служители от Raboti",
     itemListElement: liveAgents.map((agent, index) => ({
       "@type": "ListItem",
       position: index + 1,
@@ -56,7 +56,7 @@ const schemas = [
 ---
 
 <BaseLayout
-  title="Работи | AI служители за задачите, които бавят бизнеса"
+  title="Raboti | AI служители за задачите, които бавят бизнеса"
   description="AI служители за пропуснати обаждания, промени по сайта и повтарящи се задачи. Вижте какво поема всяка роля, колко струва и кога пита човек."
   canonical="/"
   schema={schemas}
