@@ -19,7 +19,7 @@ const schemas = [
   { "@context": "https://schema.org", "@type": "ItemList", name: "AI служители от Raboti", numberOfItems: agents.length, itemListElement: agents.map((agent, index) => ({ "@type": "ListItem", position: index + 1, url: `${site.url}/sluzhiteli/${agent.data.slug}/`, name: agent.data.name })) },
 ];
 ---
-<BaseLayout title="Изберете AI служител | Raboti" description="Vdiga поема телефона, Pishe се грижи за сайта, а Pomaga върши повтарящата се работа между системите. Сравнете задачите, границите и началните цени." canonical="/sluzhiteli/" image="/og/sluzhiteli.svg" schema={schemas} bodyClass="team-page">
+<BaseLayout title="Изберете AI служител | Raboti" description="Vdiga поема телефона, Pishe се грижи за сайта, а Pomaga върши повтарящата се работа между системите. Сравнете задачите, границите и началните цени." canonical="/sluzhiteli/" image="/og/sluzhiteli.svg" schema={schemas} bodyClass="team-page" darkOpener={true}>
   <section class="team-hero">
     <div class="shell team-hero__grid">
       <div><h1>Коя работа остава несвършена?</h1><p>Изберете какво ви бави най-често. Vdiga поема телефона, Pishe работи по сайта, а Pomaga свързва повтарящите се стъпки между програмите ви.</p></div>

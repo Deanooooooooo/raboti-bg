@@ -42,6 +42,7 @@ const profileSchema = {
   imageAlt={`${author.name}, съосновател на Raboti`}
   schema={[profileSchema, breadcrumbSchema([{name:"Raboti",url:site.url},{name:"За нас",url:`${site.url}/za-nas/`},{name:author.name,url}])]}
   bodyClass="author-page"
+  darkOpener={true}
 >
   <header class="author-hero">
     <div class="shell author-hero__grid">

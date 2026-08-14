@@ -3,7 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { site } from "../data/site";
 import { breadcrumbSchema } from "../data/schema";
 ---
-<BaseLayout title="Общи условия | Raboti" description="Условия за месечния абонамент за Vdiga, Pishe или Pomaga: настройка, плащане, промени и прекратяване." canonical="/obshti-usloviya/" schema={breadcrumbSchema([{name:"Raboti",url:site.url},{name:"Общи условия",url:`${site.url}/obshti-usloviya/`}])} bodyClass="terms-page">
+<BaseLayout title="Общи условия | Raboti" description="Условия за месечния абонамент за Vdiga, Pishe или Pomaga: настройка, плащане, промени и прекратяване." canonical="/obshti-usloviya/" schema={breadcrumbSchema([{name:"Raboti",url:site.url},{name:"Общи условия",url:`${site.url}/obshti-usloviya/`}])} bodyClass="terms-page" darkOpener={true}>
   <section class="terms-hero">
     <div class="shell terms-hero__grid">
       <div><h1>Общи условия</h1><p>Тези условия се отнасят за raboti.bg и за месечните абонаменти за Vdiga, Pishe и Pomaga. В офертата за вашата фирма пише какви задачи поема служителят, колко струват настройката и абонаментът и кога може да започне.</p></div>

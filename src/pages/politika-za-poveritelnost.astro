@@ -3,7 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { site } from "../data/site";
 import { breadcrumbSchema } from "../data/schema";
 ---
-<BaseLayout title="Политика за поверителност | Raboti" description="Как „Бласт Офф“ ЕООД обработва данните при посещение на raboti.bg, изпращане на запитване и разговор с екипа." canonical="/politika-za-poveritelnost/" schema={breadcrumbSchema([{name:"Raboti",url:site.url},{name:"Политика за поверителност",url:`${site.url}/politika-za-poveritelnost/`}])} bodyClass="privacy-page">
+<BaseLayout title="Политика за поверителност | Raboti" description="Как „Бласт Офф“ ЕООД обработва данните при посещение на raboti.bg, изпращане на запитване и разговор с екипа." canonical="/politika-za-poveritelnost/" schema={breadcrumbSchema([{name:"Raboti",url:site.url},{name:"Политика за поверителност",url:`${site.url}/politika-za-poveritelnost/`}])} bodyClass="privacy-page" darkOpener={true}>
   <section class="privacy-hero">
     <div class="shell privacy-hero__grid">
       <div><h1>Какво се случва с данните, които ни изпращате.</h1><p>Тук описваме какво получаваме през raboti.bg, защо ни е нужно, на кого може да бъде предадено и как да поискате достъп или изтриване.</p></div>

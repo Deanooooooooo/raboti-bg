@@ -22,6 +22,7 @@ interface Props {
   publishedAt?: Date;
   updatedAt?: Date;
   author?: string;
+  darkOpener?: boolean;
 }
 const props = Astro.props;
 ---
@@ -39,7 +40,7 @@ const props = Astro.props;
     <SEO {...props} />
     {site.plausibleDomain && <script is:inline defer data-domain={site.plausibleDomain} src="https://plausible.io/js/script.js"></script>}
   </head>
-  <body class={props.bodyClass}>
+  <body class:list={[props.bodyClass, { "has-dark-opener": props.darkOpener }]}>
     {props.bodyClass === "home-art" && <Fragment set:html={`<!--
 THESIS: Three unfinished moments from one working day make the offer concrete; this refuses the category-default card catalogue and abstract AI dashboard.
 OWN-WORLD: Near-black operational surfaces, cyan/violet/coral role signals, crisp white reading fields, and authored work records.

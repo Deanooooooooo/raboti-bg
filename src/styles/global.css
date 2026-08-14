@@ -160,6 +160,7 @@ p { text-wrap: pretty; }
 .header-cta { min-height: 44px; padding: 10px 20px; border-color: #070a18; background: #070a18; color: #fff; font-size: 1rem; box-shadow: 0 2px 4px -1px rgba(7,10,24,.22); }
 .header-cta:hover { border-color: #242a49; background: #242a49; color: #fff; }
 body:not(.home-art) main { padding-top: 104px; }
+body.has-dark-opener:not(.home-art) main { padding-top: 0; }
 
 /* Buttons */
 .button {
