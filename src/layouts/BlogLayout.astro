@@ -11,8 +11,9 @@ interface Props {
   author: string;
   slug: string;
   headings: Array<{ depth: number; slug: string; text: string }>;
+  faqs?: Array<{ question: string; answer: string }>;
 }
-const { title, description, seoTitle, publishedAt, updatedAt, author, slug, headings } = Astro.props;
+const { title, description, seoTitle, publishedAt, updatedAt, author, slug, headings, faqs = [] } = Astro.props;
 const url = `${site.url}/blog/${slug}/`;
 const articleSchema = {
   "@context": "https://schema.org",
@@ -26,9 +27,23 @@ const articleSchema = {
   mainEntityOfPage: url,
   inLanguage: "bg",
 };
+const faqSchema = faqs.length ? {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map((faq) => ({
+    "@type": "Question",
+    name: faq.question,
+    acceptedAnswer: { "@type": "Answer", text: faq.answer },
+  })),
+} : null;
+const schemas: Record<string, unknown>[] = [
+  articleSchema,
+  breadcrumbSchema([{name:"Работи",url:site.url},{name:"Полезно",url:`${site.url}/blog/`},{name:title,url}]),
+  ...(faqSchema ? [faqSchema] : []),
+];
 const fmt = (date: Date) => new Intl.DateTimeFormat("bg-BG",{day:"numeric",month:"long",year:"numeric"}).format(date);
 ---
-<BaseLayout title={seoTitle} description={description} canonical={`/blog/${slug}/`} image={`/og/${slug}.svg`} type="article" schema={[articleSchema,breadcrumbSchema([{name:"Работи",url:site.url},{name:"Полезно",url:`${site.url}/blog/`},{name:title,url}])]}>
+<BaseLayout title={seoTitle} description={description} canonical={`/blog/${slug}/`} image={`/og/${slug}.svg`} type="article" schema={schemas}>
   <article class="article">
     <header class="article-head shell narrow"><p class="eyebrow">практично ръководство</p><h1>{title}</h1><p class="article-lead">{description}</p><div class="article-meta"><span>{author}</span><time datetime={publishedAt.toISOString()}>{fmt(publishedAt)}</time>{updatedAt && <span>Обновено {fmt(updatedAt)}</span>}</div></header>
     <div class="shell article-grid">
