@@ -29,9 +29,9 @@ const integrations = [
 ];
 
 const agents = [
-  { name: "Vdiga", role: "Приема обаждания и записва часове", image: "/assets/employee-vdiga-gloria-v1.webp", color: "#F26F61", soft: "#F6A298", top: 19 },
-  { name: "Pomaga", role: "Прехвърля данни и следи задачите", image: "/assets/employee-pomaga-v1.webp", color: "#3B82F6", soft: "#8AB8FF", top: 41 },
-  { name: "Pishe", role: "Подготвя и качва промените по сайта", image: "/assets/employee-pishe-v1.webp", color: "#8267D8", soft: "#B5A2F4", top: 63 },
+  { name: "Vdiga", role: "Проверява календара и записва часа", image: "/assets/employee-vdiga-gloria-v1.webp", color: "#F26F61", soft: "#F6A298", top: 19 },
+  { name: "Pomaga", role: "Мести данните между имейл, таблици и CRM", image: "/assets/employee-pomaga-v1.webp", color: "#3B82F6", soft: "#8AB8FF", top: 41 },
+  { name: "Pishe", role: "Качва одобрените промени в сайта", image: "/assets/employee-pishe-v1.webp", color: "#8267D8", soft: "#B5A2F4", top: 63 },
 ];
 
 const schemas = breadcrumbSchema([
@@ -40,7 +40,7 @@ const schemas = breadcrumbSchema([
 ]);
 ---
 
-<BaseLayout title="Интеграции с програмите, които ползвате | Raboti" description="Свържете Vdiga, Pomaga или Pishe с календара, имейла, CRM системата или сайта си. Ние проверяваме, настройваме и тестваме връзката." canonical="/integracii/" image="/og/home.svg" schema={schemas} bodyClass="integrations-c">
+<BaseLayout title="Raboti се свързва с програмите, които ползвате" description="Покажете ни каква работа местите на ръка между имейл, календар, CRM и сайт. Ние настройваме и тестваме връзката вместо вас." canonical="/integracii/" image="/og/home.svg" schema={schemas} bodyClass="integrations-c">
   <section class="switchboard-hero">
     <div class="switchboard" aria-hidden="true">
       <div class="switchboard__cap"><img src="/assets/logo-mark.svg" alt="" /></div>
@@ -69,33 +69,31 @@ const schemas = breadcrumbSchema([
     </div>
 
     <div class="hero-copy">
-      <h1>Една<br />връзка.<br />Готова<br />работа.</h1>
-      <p>Свързваме AI служителя с програмите, които вече ползвате. Вие разрешавате достъпа. Ние настройваме и тестваме връзката.</p>
-      <a class="connect-button" href="#kak-raboti">Вижте как става <Icon name="arrow-down" /></a>
+      <h1>Програмите<br />са ваши.<br />Свързването<br />е наша работа.</h1>
+      <p>Показвате ни какво трябва да се случи. Ние свързваме служителя, настройваме достъпа и тестваме всичко. Без Zapier, Make и настройки от ваша страна.</p>
+      <a class="connect-button" href="#kak-raboti">Вижте какво поема <Icon name="arrow-down" /></a>
     </div>
   </section>
 
   <section class="flow-section" id="kak-raboti">
     <div class="continuing-spine" aria-hidden="true"></div>
     <div class="content-column">
-      <h2>Какво пристига. Какво се свършва.</h2>
+      <h2>Една задача влиза. Свършената работа излиза.</h2>
       <div class="flow-board">
         <div class="flow-list">
           <span>Пристига</span>
-          <p><svg viewBox="0 0 24 24"><path d={siGoogle.path} /></svg> Имейл от клиент</p>
-          <p><svg viewBox="0 0 24 24"><path d={siGoogle.path} /></svg> Нов документ</p>
-          <p><svg viewBox="0 0 24 24"><path d={siHubspot.path} /></svg> Нов контакт</p>
-          <p><svg viewBox="0 0 24 24"><path d={siCalendly.path} /></svg> Нова среща</p>
-          <p><svg viewBox="0 0 24 24"><path d={siSlack.path} /></svg> Съобщение в канал</p>
+          <p><svg viewBox="0 0 24 24"><path d={siCalendly.path} /></svg> Клиент иска час</p>
+          <p><svg viewBox="0 0 24 24"><path d={siGmail.path} /></svg> По имейл идва нов контакт</p>
+          <p><svg viewBox="0 0 24 24"><path d={siWordpress.path} /></svg> Одобрявате промяна по сайта</p>
+          <p><svg viewBox="0 0 24 24"><path d={siWoocommerce.path} /></svg> В магазина влиза поръчка</p>
         </div>
         <div class="flow-hub"><img src="/assets/logo-mark.svg" alt="Raboti" /></div>
         <div class="flow-list flow-list--done">
           <span>Готово</span>
-          <p><i style="--i:#F26F61">↗</i> Vdiga отговаря на клиента</p>
-          <p><i style="--i:#8267D8">✓</i> Pishe подготвя промяната</p>
-          <p><i style="--i:#3B82F6">□</i> Pomaga записва данните</p>
-          <p><i style="--i:#57A87A">✓</i> Задачата е създадена</p>
-          <p><i style="--i:#3B82F6">□</i> Екипът получава известие</p>
+          <p><i style="--i:#F26F61">↗</i> Vdiga записва часа в календара</p>
+          <p><i style="--i:#3B82F6">□</i> Pomaga добавя контакта в CRM</p>
+          <p><i style="--i:#8267D8">✓</i> Pishe качва промяната в WordPress</p>
+          <p><i style="--i:#57A87A">✓</i> Pomaga записва поръчката и известява екипа</p>
         </div>
       </div>
     </div>
@@ -104,12 +102,12 @@ const schemas = breadcrumbSchema([
   <section class="result-section">
     <div class="continuing-spine" aria-hidden="true"></div>
     <div class="content-column">
-      <h2>Коя програма за какво служи.</h2>
+      <h2>Кой служител с какво се свързва.</h2>
       <div class="result-grid">
-        <article><h3><i style="--c:#F26F61">↗</i> Vdiga записва</h3><p>Google Calendar</p><p>Microsoft Outlook</p><p>Calendly</p><p>Cal.com</p></article>
-        <article><h3><i style="--c:#3B82F6">□</i> Pomaga подрежда</h3><p>Gmail и Outlook</p><p>Google Sheets и Excel</p><p>HubSpot и Pipedrive</p><p>Slack</p></article>
-        <article><h3><i style="--c:#8267D8">✓</i> Pishe обновява</h3><p>WordPress</p><p>WooCommerce</p><p>Google Drive</p><p>Microsoft OneDrive</p></article>
-        <article><h3><i style="--c:#57A87A">✓</i> Друга система</h3><p>Има официален API</p><p>Поддържа webhooks</p><p>Дава нужния достъп</p><p>Проверяваме преди настройка</p></article>
+        <article><h3><i style="--c:#F26F61">↗</i> Vdiga</h3><p>Google Calendar</p><p>Microsoft Outlook</p><p>Calendly</p><p>Cal.com</p></article>
+        <article><h3><i style="--c:#3B82F6">□</i> Pomaga</h3><p>Gmail и Outlook</p><p>Google Sheets и Excel</p><p>HubSpot и Pipedrive</p><p>Slack</p></article>
+        <article><h3><i style="--c:#8267D8">✓</i> Pishe</h3><p>WordPress</p><p>WooCommerce</p><p>Google Drive</p><p>Microsoft OneDrive</p></article>
+        <article><h3><i style="--c:#57A87A">✓</i> Ползвате друга?</h3><p>Изпращате ни името ѝ</p><p>Проверяваме дали има API</p><p>Казваме какво може да поеме Raboti</p><p>Настройваме връзката вместо вас</p></article>
       </div>
     </div>
   </section>
@@ -117,18 +115,18 @@ const schemas = breadcrumbSchema([
   <section class="access-section">
     <div class="continuing-spine" aria-hidden="true"></div>
     <div class="content-column">
-      <h2>Как ще се свържем<br />зависи от програмата.</h2>
+      <h2>От вас искаме само<br />нужния достъп.</h2>
       <div class="access-grid">
-        <article><span><svg viewBox="0 0 32 32"><path d="M11 4v9M21 4v9M7 13h18v3a9 9 0 0 1-7 8.8V29h-4v-4.2A9 9 0 0 1 7 16z" /></svg></span><h3>Разрешавате достъп</h3><p>Влизате в профила си и потвърждавате връзката. Ние я настройваме и тестваме.</p></article>
-        <article><span><svg viewBox="0 0 32 32"><path d="M16 3l10 4v8c0 7-4.2 11.3-10 14-5.8-2.7-10-7-10-14V7zM12 16l3 3 6-7" /></svg></span><h3>Администраторът разрешава</h3><p>Ако профилът е фирмен, администраторът дава само правата, които са нужни.</p></article>
-        <article><span><svg viewBox="0 0 32 32"><circle cx="14" cy="14" r="8"/><path d="M20 20l7 7" /></svg></span><h3>Първо проверяваме</h3><p>За друга система преглеждаме документацията и ви казваме какво може да се направи.</p></article>
+        <article><span><svg viewBox="0 0 32 32"><path d="M11 4v9M21 4v9M7 13h18v3a9 9 0 0 1-7 8.8V29h-4v-4.2A9 9 0 0 1 7 16z" /></svg></span><h3>Вие потвърждавате</h3><p>Отваряте профила си и разрешавате връзката. Не правите сценарии и не настройвате автоматизации.</p></article>
+        <article><span><svg viewBox="0 0 32 32"><path d="M16 3l10 4v8c0 7-4.2 11.3-10 14-5.8-2.7-10-7-10-14V7zM12 16l3 3 6-7" /></svg></span><h3>Ние настройваме</h3><p>Даваме на служителя само достъпа, който му трябва за уговорената работа, и тестваме връзката.</p></article>
+        <article><span><svg viewBox="0 0 32 32"><circle cx="14" cy="14" r="8"/><path d="M20 20l7 7" /></svg></span><h3>Вие запазвате контрола</h3><p>Плащане, договор или публикуване чакат вашето потвърждение, когато сте го задали като правило.</p></article>
       </div>
     </div>
   </section>
 
   <section class="closing-section">
     <div class="closing-spine" aria-hidden="true"><div><img src="/assets/logo-mark.svg" alt="" /></div></div>
-    <div class="content-column closing-copy"><h2>Кажете ни коя<br />програма ползвате.</h2><p>Ще проверим дали може да се свърже с Raboti, какъв достъп е нужен и какво ще върши служителят в нея.</p><a class="connect-button connect-button--light" href="/kontakti/">Изпратете името ѝ <Icon name="arrow-right" /></a></div>
+    <div class="content-column closing-copy"><h2>Коя работа местите<br />на ръка всеки ден?</h2><p>Опишете една задача и програмите, между които я прехвърляте. До един работен ден ще ви кажем дали Raboti може да я поеме и какво ще е нужно.</p><a class="connect-button connect-button--light" href="/kontakti/">Опишете задачата <Icon name="arrow-right" /></a></div>
   </section>
 </BaseLayout>
 
@@ -154,4 +152,7 @@ const schemas = breadcrumbSchema([
   @media(max-width:430px){.result-grid{grid-template-columns:1fr}.result-grid article,.result-grid article+article{padding:20px 0;border-right:0;border-bottom:1px solid #d7dcda}.access-grid{grid-template-columns:1fr}.access-grid article,.access-grid article+article{padding:24px 0;border-left:0;border-top:1px solid #d7dcda}.access-grid article:first-child{border-top:0}.hero-copy h1{font-size:3.55rem}}
   @media(min-width:1051px){.switchboard-hero{min-height:820px}.agent__portrait{width:145px;height:145px}.agent-lines span{border-top-width:4px;opacity:.92;filter:drop-shadow(0 0 3px color-mix(in srgb,var(--agent) 35%,transparent))}}
   @media(max-width:760px){:global(.integrations-c){--spine-x:56px}.switchboard-hero{min-height:1050px}.plug{display:flex;right:auto;left:22px}.plug__lead{width:28px;height:4px}.plug__lead::before{display:none}.plug__lead i{top:-2px;width:8px;height:8px}.plug__logo{right:auto;left:30px;width:34px;height:34px;border-radius:8px}.plug__logo svg{width:19px;height:19px}.plug__logo b{font-size:.56rem}.agents{left:136px}.agent:nth-child(1){top:17%!important}.agent:nth-child(2){top:33%!important}.agent:nth-child(3){top:49%!important}.agent__portrait{width:76px;height:76px}.agent__name small{max-width:92px}.agent-lines{left:56px;width:118px}.agent-lines span:nth-child(1){top:17%!important}.agent-lines span:nth-child(2){top:33%!important}.agent-lines span:nth-child(3){top:49%!important}.hero-copy{left:116px;right:18px;top:635px}.hero-copy>p{max-width:none;font-size:.88rem}.content-column{padding-left:96px}.closing-copy{padding-left:96px}}
+  .hero-copy{right:clamp(28px,5vw,80px)}.hero-copy h1{max-width:560px;font-size:clamp(4.2rem,5.5vw,5.4rem);line-height:.9}.hero-copy>p{max-width:500px}
+  @media(max-width:1050px){.hero-copy h1{font-size:4.2rem}}
+  @media(max-width:760px){.hero-copy{right:auto;width:calc(100vw - 134px);max-width:256px}.hero-copy h1{max-width:100%;font-size:2.2rem;letter-spacing:-.03em;line-height:.96}.hero-copy>p{max-width:100%;overflow-wrap:anywhere}.content-column{box-sizing:border-box;width:100vw;max-width:100vw;padding-right:16px}.content-column h2{max-width:260px;font-size:1.5rem;line-height:1.08;overflow-wrap:anywhere}}
 </style>
