@@ -29,9 +29,9 @@ const integrations = [
 ];
 
 const agents = [
-  { name: "Vdiga", role: "Приема и записва", image: "/assets/employee-vdiga-gloria-v1.webp", color: "#F26F61", soft: "#F6A298", top: 19 },
-  { name: "Pomaga", role: "Подрежда и следи", image: "/assets/employee-pomaga-v1.webp", color: "#3B82F6", soft: "#8AB8FF", top: 41 },
-  { name: "Pishe", role: "Подготвя и обновява", image: "/assets/employee-pishe-v1.webp", color: "#8267D8", soft: "#B5A2F4", top: 63 },
+  { name: "Vdiga", role: "Приема обаждания и записва часове", image: "/assets/employee-vdiga-gloria-v1.webp", color: "#F26F61", soft: "#F6A298", top: 19 },
+  { name: "Pomaga", role: "Прехвърля данни и следи задачите", image: "/assets/employee-pomaga-v1.webp", color: "#3B82F6", soft: "#8AB8FF", top: 41 },
+  { name: "Pishe", role: "Подготвя и качва промените по сайта", image: "/assets/employee-pishe-v1.webp", color: "#8267D8", soft: "#B5A2F4", top: 63 },
 ];
 
 const schemas = breadcrumbSchema([
@@ -40,7 +40,7 @@ const schemas = breadcrumbSchema([
 ]);
 ---
 
-<BaseLayout title="Интеграции с бизнес софтуер | Raboti" description="Свържете AI служител от Raboti с програмите, които вече използвате." canonical="/integracii/" image="/og/home.svg" schema={schemas} bodyClass="integrations-c">
+<BaseLayout title="Интеграции с програмите, които ползвате | Raboti" description="Свържете Vdiga, Pomaga или Pishe с календара, имейла, CRM системата или сайта си. Ние проверяваме, настройваме и тестваме връзката." canonical="/integracii/" image="/og/home.svg" schema={schemas} bodyClass="integrations-c">
   <section class="switchboard-hero">
     <div class="switchboard" aria-hidden="true">
       <div class="switchboard__cap"><img src="/assets/logo-mark.svg" alt="" /></div>
@@ -62,7 +62,7 @@ const schemas = breadcrumbSchema([
     <div class="agents">
       {agents.map((agent) => (
         <article class="agent" style={`--top:${agent.top}%;--agent:${agent.color};--soft:${agent.soft}`}>
-          <div class="agent__portrait"><img src={agent.image} alt={`${agent.name}, AI служител от Raboti`} width="720" height="960" /></div>
+          <div class="agent__portrait"><img src={agent.image} alt={`${agent.name}, AI служител на Raboti`} width="720" height="960" /></div>
           <div class="agent__name"><i aria-hidden="true"></i><div><strong>{agent.name}</strong><small>{agent.role}</small></div></div>
         </article>
       ))}
@@ -70,14 +70,15 @@ const schemas = breadcrumbSchema([
 
     <div class="hero-copy">
       <h1>Една<br />връзка.<br />Готова<br />работа.</h1>
-      <a class="connect-button" href="#kak-raboti">Свържете програма <Icon name="arrow-down" /></a>
+      <p>Свързваме AI служителя с програмите, които вече ползвате. Вие разрешавате достъпа. Ние настройваме и тестваме връзката.</p>
+      <a class="connect-button" href="#kak-raboti">Вижте как става <Icon name="arrow-down" /></a>
     </div>
   </section>
 
   <section class="flow-section" id="kak-raboti">
     <div class="continuing-spine" aria-hidden="true"></div>
     <div class="content-column">
-      <h2>Какво пристига. Какво се случва.</h2>
+      <h2>Какво пристига. Какво се свършва.</h2>
       <div class="flow-board">
         <div class="flow-list">
           <span>Пристига</span>
@@ -89,12 +90,12 @@ const schemas = breadcrumbSchema([
         </div>
         <div class="flow-hub"><img src="/assets/logo-mark.svg" alt="Raboti" /></div>
         <div class="flow-list flow-list--done">
-          <span>Се случва</span>
-          <p><i style="--i:#F26F61">↗</i> Vdiga отговаря</p>
-          <p><i style="--i:#8267D8">✓</i> Pishe подготвя</p>
-          <p><i style="--i:#3B82F6">□</i> Pomaga следи</p>
-          <p><i style="--i:#57A87A">✓</i> Създава се задача</p>
-          <p><i style="--i:#3B82F6">□</i> Екипът е известен</p>
+          <span>Готово</span>
+          <p><i style="--i:#F26F61">↗</i> Vdiga отговаря на клиента</p>
+          <p><i style="--i:#8267D8">✓</i> Pishe подготвя промяната</p>
+          <p><i style="--i:#3B82F6">□</i> Pomaga записва данните</p>
+          <p><i style="--i:#57A87A">✓</i> Задачата е създадена</p>
+          <p><i style="--i:#3B82F6">□</i> Екипът получава известие</p>
         </div>
       </div>
     </div>
@@ -103,12 +104,12 @@ const schemas = breadcrumbSchema([
   <section class="result-section">
     <div class="continuing-spine" aria-hidden="true"></div>
     <div class="content-column">
-      <h2>Свържете по резултат.</h2>
+      <h2>Коя програма за какво служи.</h2>
       <div class="result-grid">
-        <article><h3><i style="--c:#F26F61">↗</i> Vdiga</h3><p>Gmail</p><p>Microsoft Outlook</p><p>HubSpot</p><p>Calendly</p></article>
-        <article><h3><i style="--c:#3B82F6">□</i> Pomaga</h3><p>Google Workspace</p><p>Microsoft 365</p><p>Pipedrive</p><p>Slack</p></article>
-        <article><h3><i style="--c:#8267D8">✓</i> Pishe</h3><p>Google Drive</p><p>Microsoft 365</p><p>WordPress</p><p>WooCommerce</p></article>
-        <article><h3><i style="--c:#57A87A">✓</i> Довършва</h3><p>Pipedrive</p><p>Slack</p><p>Cal.com</p><p>API / webhooks</p></article>
+        <article><h3><i style="--c:#F26F61">↗</i> Vdiga записва</h3><p>Google Calendar</p><p>Microsoft Outlook</p><p>Calendly</p><p>Cal.com</p></article>
+        <article><h3><i style="--c:#3B82F6">□</i> Pomaga подрежда</h3><p>Gmail и Outlook</p><p>Google Sheets и Excel</p><p>HubSpot и Pipedrive</p><p>Slack</p></article>
+        <article><h3><i style="--c:#8267D8">✓</i> Pishe обновява</h3><p>WordPress</p><p>WooCommerce</p><p>Google Drive</p><p>Microsoft OneDrive</p></article>
+        <article><h3><i style="--c:#57A87A">✓</i> Друга система</h3><p>Има официален API</p><p>Поддържа webhooks</p><p>Дава нужния достъп</p><p>Проверяваме преди настройка</p></article>
       </div>
     </div>
   </section>
@@ -116,18 +117,18 @@ const schemas = breadcrumbSchema([
   <section class="access-section">
     <div class="continuing-spine" aria-hidden="true"></div>
     <div class="content-column">
-      <h2>Три начина на свързване.<br />Избирате вие.</h2>
+      <h2>Как ще се свържем<br />зависи от програмата.</h2>
       <div class="access-grid">
-        <article><span><svg viewBox="0 0 32 32"><path d="M11 4v9M21 4v9M7 13h18v3a9 9 0 0 1-7 8.8V29h-4v-4.2A9 9 0 0 1 7 16z" /></svg></span><h3>Директна връзка</h3><p>Свързваме програмата и тестваме достъпа.</p></article>
-        <article><span><svg viewBox="0 0 32 32"><path d="M16 3l10 4v8c0 7-4.2 11.3-10 14-5.8-2.7-10-7-10-14V7zM12 16l3 3 6-7" /></svg></span><h3>Одобрение от администратор</h3><p>Администраторът разрешава нужните права.</p></article>
-        <article><span><svg viewBox="0 0 32 32"><circle cx="14" cy="14" r="8"/><path d="M20 20l7 7" /></svg></span><h3>Технически преглед</h3><p>Проверяваме API документацията вместо вас.</p></article>
+        <article><span><svg viewBox="0 0 32 32"><path d="M11 4v9M21 4v9M7 13h18v3a9 9 0 0 1-7 8.8V29h-4v-4.2A9 9 0 0 1 7 16z" /></svg></span><h3>Разрешавате достъп</h3><p>Влизате в профила си и потвърждавате връзката. Ние я настройваме и тестваме.</p></article>
+        <article><span><svg viewBox="0 0 32 32"><path d="M16 3l10 4v8c0 7-4.2 11.3-10 14-5.8-2.7-10-7-10-14V7zM12 16l3 3 6-7" /></svg></span><h3>Администраторът разрешава</h3><p>Ако профилът е фирмен, администраторът дава само правата, които са нужни.</p></article>
+        <article><span><svg viewBox="0 0 32 32"><circle cx="14" cy="14" r="8"/><path d="M20 20l7 7" /></svg></span><h3>Първо проверяваме</h3><p>За друга система преглеждаме документацията и ви казваме какво може да се направи.</p></article>
       </div>
     </div>
   </section>
 
   <section class="closing-section">
     <div class="closing-spine" aria-hidden="true"><div><img src="/assets/logo-mark.svg" alt="" /></div></div>
-    <div class="content-column closing-copy"><h2>Една връзка.<br />Всички решения.</h2><p>Покажете ни програмите си. Ние ще проверим какво може да поеме Raboti.</p><a class="connect-button connect-button--light" href="/kontakti/">Свържете програма <Icon name="arrow-right" /></a></div>
+    <div class="content-column closing-copy"><h2>Кажете ни коя<br />програма ползвате.</h2><p>Ще проверим дали може да се свърже с Raboti, какъв достъп е нужен и какво ще върши служителят в нея.</p><a class="connect-button connect-button--light" href="/kontakti/">Изпратете името ѝ <Icon name="arrow-right" /></a></div>
   </section>
 </BaseLayout>
 
@@ -142,7 +143,7 @@ const schemas = breadcrumbSchema([
   .plug{position:absolute;right:35px;top:var(--y);display:flex;align-items:center}.plug__logo{position:absolute;right:72px;display:grid;width:54px;height:54px;place-items:center;border:1px solid #e5e8e5;border-radius:11px;background:#fff;box-shadow:0 6px 16px rgba(10,35,28,.1);color:var(--brand)}.plug__logo svg{width:29px;height:29px;fill:currentColor}.plug__logo b{font:700 .8rem/1 Inter,sans-serif}.plug__lead{position:relative;width:73px;height:6px;border-radius:6px;background:#17231f;box-shadow:inset 0 0 0 1px #4b5d57}.plug__lead::before{position:absolute;left:5px;top:-3px;width:18px;height:12px;border-radius:2px;background:#263732;content:""}.plug__lead i{position:absolute;right:-4px;top:-3px;width:12px;height:12px;border-radius:50%;background:var(--brand);box-shadow:0 0 8px var(--brand)}
   .agent-lines{position:absolute;z-index:2;left:var(--spine-x);top:0;bottom:0;width:29vw}.agent-lines span{position:absolute;left:32px;top:var(--top);width:100%;height:88px;border-top:3px dotted color-mix(in srgb,var(--agent) 55%,transparent);border-radius:0 55% 0 0;transform:translateY(25px);opacity:.72}.agent-lines span:nth-child(2){width:83%;transform:translateY(12px)}.agent-lines span:nth-child(3){width:90%;transform:translateY(4px)}
   .agents{position:absolute;z-index:4;left:calc(var(--spine-x) + 12.5vw);top:0;bottom:0;width:280px}.agent{position:absolute;top:var(--top);display:flex;align-items:center;gap:18px;transform:translateY(-50%)}.agent__portrait{width:128px;height:128px;overflow:hidden;border-radius:50%;background:var(--soft);box-shadow:0 8px 22px rgba(7,55,46,.12)}.agent__portrait img{width:100%;height:100%;object-fit:cover;object-position:center 10%}.agent__name{display:flex;align-items:center;gap:10px;color:var(--agent)}.agent__name i{display:grid;width:28px;height:28px;place-items:center;border:1.5px solid currentColor;border-radius:50%}.agent__name i::after{content:"↗";font-style:normal}.agent__name strong,.agent__name small{display:block}.agent__name strong{font-size:1.08rem}.agent__name small{max-width:120px;margin-top:3px;color:#60716b;font-size:.7rem;line-height:1.25}
-  .hero-copy{position:absolute;z-index:5;left:61.5%;top:112px}.hero-copy h1{max-width:440px;margin:0 0 42px;font-size:clamp(4.8rem,7.2vw,7.2rem);font-weight:700;letter-spacing:-.04em;line-height:.86}.connect-button{display:inline-flex;min-height:52px;align-items:center;gap:26px;padding:0 24px;border-radius:7px;background:#07372e;color:#fff;font-size:.84rem;font-weight:650;box-shadow:0 8px 18px rgba(7,55,46,.16)}.connect-button :global(svg){width:16px}
+  .hero-copy{position:absolute;z-index:5;left:61.5%;top:92px}.hero-copy h1{max-width:440px;margin:0 0 24px;font-size:clamp(4.8rem,7.2vw,7.2rem);font-weight:700;letter-spacing:-.04em;line-height:.86}.hero-copy>p{max-width:440px;margin:0 0 26px;color:#556760;font-size:.93rem;line-height:1.55}.connect-button{display:inline-flex;min-height:52px;align-items:center;gap:26px;padding:0 24px;border-radius:7px;background:#07372e;color:#fff;font-size:.84rem;font-weight:650;box-shadow:0 8px 18px rgba(7,55,46,.16)}.connect-button :global(svg){width:16px}
   .flow-section,.result-section,.access-section{position:relative;border-bottom:1px solid #dde2de;background:#fbfbf8}.continuing-spine,.closing-spine{position:absolute;left:var(--spine-x);top:0;bottom:0;width:70px;transform:translateX(-50%)}.content-column{width:min(900px,calc(100% - var(--spine-x) - 90px));margin-left:max(calc(var(--spine-x) + 100px),calc((100% - 700px)/2));padding:72px 0}.content-column h2{margin:0 0 46px;font-size:2rem;letter-spacing:-.03em}
   .flow-board{display:grid;grid-template-columns:1fr 118px 1fr;align-items:center}.flow-list{border:1px solid #dfe3df;border-radius:7px;background:#fff;box-shadow:0 8px 24px rgba(10,35,28,.06)}.flow-list>span{display:block;padding:0 10px 14px;border:0;background:#fbfbf8;transform:translateY(-30px);font-size:.68rem;font-weight:700;text-transform:uppercase}.flow-list p{display:flex;align-items:center;gap:12px;min-height:48px;margin:0;padding:0 18px;border-top:1px solid #e8eae8;color:#35443f;font-size:.78rem}.flow-list p:first-of-type{border-top:0}.flow-list svg{width:20px;height:20px;fill:#4285f4}.flow-list p:nth-of-type(2) svg{fill:#5e5e5e}.flow-list p:nth-of-type(3) svg{fill:#ff5c35}.flow-list p:nth-of-type(4) svg{fill:#006bff}.flow-list p:nth-of-type(5) svg{fill:#4a154b}.flow-list i{display:grid;width:25px;height:25px;place-items:center;border-radius:7px;background:var(--i);color:#fff;font-style:normal}.flow-hub{position:relative;display:grid;place-items:center}.flow-hub::before{position:absolute;z-index:-1;left:-20px;right:-20px;height:1px;background:#b8c5c0;content:""}.flow-hub img{width:58px;height:58px;padding:15px;border-radius:50%;background:#07372e;filter:brightness(0) invert(1)}
   .result-section{background:#f8f8f5}.result-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #d7dcda}.result-grid article{padding:24px 22px 8px 0;border-right:1px solid #d7dcda}.result-grid article+article{padding-left:22px}.result-grid article:last-child{border-right:0}.result-grid h3{display:flex;align-items:center;gap:8px;margin:0 0 18px;padding-bottom:14px;border-bottom:2px solid color-mix(in srgb,var(--c,#07372e) 45%,transparent);font-size:.9rem}.result-grid h3 i{display:grid;width:26px;height:26px;place-items:center;border:1px solid var(--c);border-radius:50%;color:var(--c);font-style:normal}.result-grid p{margin:0 0 12px;color:#34443e;font-size:.76rem}
@@ -152,5 +153,5 @@ const schemas = breadcrumbSchema([
   @media(max-width:760px){:global(.integrations-c){--spine-x:38px}.switchboard-hero{min-height:980px}.switchboard,.continuing-spine,.closing-spine{width:44px}.switchboard__cap{top:24px;width:42px;height:54px}.switchboard__cap img{width:24px}.plug{display:none}.agents{left:72px;width:auto}.agent{gap:10px}.agent:nth-child(1){top:16%!important}.agent:nth-child(2){top:31%!important}.agent:nth-child(3){top:46%!important}.agent__portrait{width:82px;height:82px}.agent__name small{max-width:100px}.agent-lines{left:38px;width:150px}.agent-lines span:nth-child(1){top:16%!important}.agent-lines span:nth-child(2){top:31%!important}.agent-lines span:nth-child(3){top:46%!important}.hero-copy{left:72px;top:560px}.hero-copy h1{font-size:3.9rem;line-height:.9}.content-column{width:auto;margin-left:0;padding:64px 20px 64px 78px}.content-column h2{font-size:1.75rem}.flow-board{grid-template-columns:1fr}.flow-hub{height:88px}.flow-hub::before{top:-10px;bottom:-10px;left:50%;right:auto;width:1px;height:auto}.result-grid,.access-grid{grid-template-columns:1fr 1fr}.result-grid article:nth-child(2){border-right:0}.result-grid article:nth-child(3){padding-left:0}.access-grid article{padding:0 20px 30px 0}.access-grid article+article{padding-left:20px}.access-grid article:nth-child(3){padding-top:30px;padding-left:0;border-left:0;border-top:1px solid #d7dcda}.closing-section{min-height:380px}.closing-copy{padding-top:60px}.closing-copy h2{font-size:2.2rem}}
   @media(max-width:430px){.result-grid{grid-template-columns:1fr}.result-grid article,.result-grid article+article{padding:20px 0;border-right:0;border-bottom:1px solid #d7dcda}.access-grid{grid-template-columns:1fr}.access-grid article,.access-grid article+article{padding:24px 0;border-left:0;border-top:1px solid #d7dcda}.access-grid article:first-child{border-top:0}.hero-copy h1{font-size:3.55rem}}
   @media(min-width:1051px){.switchboard-hero{min-height:820px}.agent__portrait{width:145px;height:145px}.agent-lines span{border-top-width:4px;opacity:.92;filter:drop-shadow(0 0 3px color-mix(in srgb,var(--agent) 35%,transparent))}}
-  @media(max-width:760px){:global(.integrations-c){--spine-x:56px}.switchboard-hero{min-height:1050px}.plug{display:flex;right:auto;left:22px}.plug__lead{width:28px;height:4px}.plug__lead::before{display:none}.plug__lead i{top:-2px;width:8px;height:8px}.plug__logo{right:auto;left:30px;width:34px;height:34px;border-radius:8px}.plug__logo svg{width:19px;height:19px}.plug__logo b{font-size:.56rem}.agents{left:136px}.agent:nth-child(1){top:17%!important}.agent:nth-child(2){top:33%!important}.agent:nth-child(3){top:49%!important}.agent__portrait{width:76px;height:76px}.agent__name small{max-width:92px}.agent-lines{left:56px;width:118px}.agent-lines span:nth-child(1){top:17%!important}.agent-lines span:nth-child(2){top:33%!important}.agent-lines span:nth-child(3){top:49%!important}.hero-copy{left:116px;top:635px}.content-column{padding-left:96px}.closing-copy{padding-left:96px}}
+  @media(max-width:760px){:global(.integrations-c){--spine-x:56px}.switchboard-hero{min-height:1050px}.plug{display:flex;right:auto;left:22px}.plug__lead{width:28px;height:4px}.plug__lead::before{display:none}.plug__lead i{top:-2px;width:8px;height:8px}.plug__logo{right:auto;left:30px;width:34px;height:34px;border-radius:8px}.plug__logo svg{width:19px;height:19px}.plug__logo b{font-size:.56rem}.agents{left:136px}.agent:nth-child(1){top:17%!important}.agent:nth-child(2){top:33%!important}.agent:nth-child(3){top:49%!important}.agent__portrait{width:76px;height:76px}.agent__name small{max-width:92px}.agent-lines{left:56px;width:118px}.agent-lines span:nth-child(1){top:17%!important}.agent-lines span:nth-child(2){top:33%!important}.agent-lines span:nth-child(3){top:49%!important}.hero-copy{left:116px;right:18px;top:635px}.hero-copy>p{max-width:none;font-size:.88rem}.content-column{padding-left:96px}.closing-copy{padding-left:96px}}
 </style>
