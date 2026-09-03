@@ -29,9 +29,9 @@ const integrations = [
 ];
 
 const agents = [
-  { name: "Vdiga", role: "Проверява календара и записва часа", image: "/assets/employee-vdiga-gloria-v1.webp", color: "#F26F61", soft: "#F6A298", top: 19 },
-  { name: "Pomaga", role: "Мести данните между имейл, таблици и CRM", image: "/assets/employee-pomaga-v1.webp", color: "#3B82F6", soft: "#8AB8FF", top: 41 },
-  { name: "Pishe", role: "Качва одобрените промени в сайта", image: "/assets/employee-pishe-v1.webp", color: "#8267D8", soft: "#B5A2F4", top: 63 },
+  { name: "Vdiga", role: "Проверява календара и записва часа", image: "/assets/employee-vdiga-gloria-v1.webp", color: "#0b7665", soft: "#dff5ee", top: 19 },
+  { name: "Pomaga", role: "Мести данните между имейл, таблици и CRM", image: "/assets/employee-pomaga-v1.webp", color: "#6b56c9", soft: "#ece8ff", top: 41 },
+  { name: "Pishe", role: "Качва одобрените промени в сайта", image: "/assets/employee-pishe-v1.webp", color: "#a84629", soft: "#ffebe3", top: 63 },
 ];
 
 const schemas = breadcrumbSchema([
@@ -90,10 +90,10 @@ const schemas = breadcrumbSchema([
         <div class="flow-hub"><img src="/assets/logo-mark.svg" alt="Raboti" /></div>
         <div class="flow-list flow-list--done">
           <span>Готово</span>
-          <p><i style="--i:#F26F61">↗</i> Vdiga записва часа в календара</p>
-          <p><i style="--i:#3B82F6">□</i> Pomaga добавя контакта в CRM</p>
-          <p><i style="--i:#8267D8">✓</i> Pishe качва промяната в WordPress</p>
-          <p><i style="--i:#57A87A">✓</i> Pomaga записва поръчката и известява екипа</p>
+          <p><img class="flow-agent" style="--mini:#dff5ee" src="/assets/employee-vdiga-gloria-v1.webp" alt="" /> Vdiga записва часа в календара</p>
+          <p><img class="flow-agent" style="--mini:#ece8ff" src="/assets/employee-pomaga-v1.webp" alt="" /> Pomaga добавя контакта в CRM</p>
+          <p><img class="flow-agent" style="--mini:#ffebe3" src="/assets/employee-pishe-v1.webp" alt="" /> Pishe качва промяната в WordPress</p>
+          <p><img class="flow-agent" style="--mini:#ece8ff" src="/assets/employee-pomaga-v1.webp" alt="" /> Pomaga записва поръчката</p>
         </div>
       </div>
     </div>
@@ -104,10 +104,10 @@ const schemas = breadcrumbSchema([
     <div class="content-column">
       <h2>Кой служител с какво се свързва.</h2>
       <div class="result-grid">
-        <article><h3><i style="--c:#F26F61">↗</i> Vdiga</h3><p>Google Calendar</p><p>Microsoft Outlook</p><p>Calendly</p><p>Cal.com</p></article>
-        <article><h3><i style="--c:#3B82F6">□</i> Pomaga</h3><p>Gmail и Outlook</p><p>Google Sheets и Excel</p><p>HubSpot и Pipedrive</p><p>Slack</p></article>
-        <article><h3><i style="--c:#8267D8">✓</i> Pishe</h3><p>WordPress</p><p>WooCommerce</p><p>Google Drive</p><p>Microsoft OneDrive</p></article>
-        <article><h3><i style="--c:#57A87A">✓</i> Ползвате друга?</h3><p>Изпращате ни името ѝ</p><p>Проверяваме дали има API</p><p>Казваме какво може да поеме Raboti</p><p>Настройваме връзката вместо вас</p></article>
+        <article><h3 style="--c:#0b7665"><img class="result-agent" style="--mini:#dff5ee" src="/assets/employee-vdiga-gloria-v1.webp" alt="" /> Vdiga</h3><p>Google Calendar</p><p>Microsoft Outlook</p><p>Calendly</p><p>Cal.com</p></article>
+        <article><h3 style="--c:#6b56c9"><img class="result-agent" style="--mini:#ece8ff" src="/assets/employee-pomaga-v1.webp" alt="" /> Pomaga</h3><p>Gmail и Outlook</p><p>Google Sheets и Excel</p><p>HubSpot и Pipedrive</p><p>Slack</p></article>
+        <article><h3 style="--c:#a84629"><img class="result-agent" style="--mini:#ffebe3" src="/assets/employee-pishe-v1.webp" alt="" /> Pishe</h3><p>WordPress</p><p>WooCommerce</p><p>Google Drive</p><p>Microsoft OneDrive</p></article>
+        <article><h3 style="--c:#57A87A">Ползвате друга?</h3><p>Изпращате ни името ѝ</p><p>Проверяваме дали има API</p><p>Казваме какво може да поеме Raboti</p><p>Настройваме връзката вместо вас</p></article>
       </div>
     </div>
   </section>
@@ -155,4 +155,5 @@ const schemas = breadcrumbSchema([
   .hero-copy{right:clamp(28px,5vw,80px)}.hero-copy h1{max-width:560px;font-size:clamp(4.2rem,5.5vw,5.4rem);line-height:.9}.hero-copy>p{max-width:500px}
   @media(max-width:1050px){.hero-copy h1{font-size:4.2rem}}
   @media(max-width:760px){.hero-copy{right:auto;width:calc(100vw - 134px);max-width:256px}.hero-copy h1{max-width:100%;font-size:2.2rem;letter-spacing:-.03em;line-height:.96}.hero-copy>p{max-width:100%;overflow-wrap:anywhere}.content-column{box-sizing:border-box;width:100vw;max-width:100vw;padding-right:16px}.content-column h2{max-width:260px;font-size:1.5rem;line-height:1.08;overflow-wrap:anywhere}}
+  .flow-agent,.result-agent{display:block;flex:0 0 auto;object-fit:cover;object-position:center top;background:var(--mini)}.flow-agent{width:31px;height:31px;border-radius:50%}.result-agent{width:36px;height:36px;border-radius:50%}
 </style>
