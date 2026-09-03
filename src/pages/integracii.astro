@@ -1,0 +1,107 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import AgentAvatar from "../components/AgentAvatar.astro";
+import Icon from "../components/Icon.astro";
+import { breadcrumbSchema } from "../data/schema";
+import { site } from "../data/site";
+
+const agents = [
+  { name: "Вдига", slug: "vdiga", accent: "#0b7665", soft: "#dff5ee", role: "Обаждания и записване" },
+  { name: "Помага", slug: "pomaga", accent: "#6b56c9", soft: "#ece8ff", role: "Данни и ежедневни задачи" },
+  { name: "Пише", slug: "pishe", accent: "#a84629", soft: "#ffebe3", role: "Съдържание и сайтове" },
+];
+
+const integrations = [
+  { mark: "G", name: "Google Workspace", class: "google", work: "Имейл, календар, таблици и файлове" },
+  { mark: "M", name: "Microsoft 365", class: "microsoft", work: "Outlook, календар, Excel и OneDrive" },
+  { mark: "H", name: "HubSpot", class: "hubspot", work: "Контакти, сделки и последващи задачи" },
+  { mark: "P", name: "Pipedrive", class: "pipedrive", work: "Запитвания, сделки и бележки" },
+  { mark: "W", name: "WordPress", class: "wordpress", work: "Страници, публикации и съдържание" },
+  { mark: "woo", name: "WooCommerce", class: "woo", work: "Продукти, поръчки и клиенти" },
+  { mark: "C", name: "Calendly", class: "calendly", work: "Свободни часове и срещи" },
+  { mark: "cal", name: "Cal.com", class: "cal", work: "Резервации и графици" },
+  { mark: "S", name: "Slack", class: "slack", work: "Известия и предаване към екипа" },
+  { mark: "{ }", name: "API и webhooks", class: "api", work: "Връзка по техническа документация" },
+];
+
+const schemas = breadcrumbSchema([
+  { name: "Работи", url: site.url },
+  { name: "Интеграции", url: `${site.url}/integracii/` },
+]);
+---
+
+<BaseLayout title="Интеграции с бизнес софтуер | Работи" description="Свържи AI служител от Работи с Google Workspace, Microsoft 365, CRM, сайт или календар." canonical="/integracii/" image="/og/home.svg" schema={schemas} bodyClass="integrations-page">
+  <!--
+  THESIS: Интеграцията е видима връзка между програмата, AI служителя и свършената работа, не каталог от лога.
+  OWN-WORLD: Светла хартия, мастилено зелено, цветовете на служителите и една непрекъсната кабелна релса.
+  STORY: Виждаш какво свързваме, кой поема задачата, какво излиза накрая и как се разрешава достъпът.
+  FIRST VIEWPORT: Релсата заема лявата третина, служителите се включват в нея, а голямото обещание и действието стоят вдясно.
+  FORM: Вертикален работен комутатор, пета структура, seed 3d8b1317.
+  FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
+  -->
+  <section class="wire-hero">
+    <div class="wire-rail" aria-hidden="true"><span class="wire-rail__core"></span><span class="wire-rail__socket wire-rail__socket--one"></span><span class="wire-rail__socket wire-rail__socket--two"></span><span class="wire-rail__socket wire-rail__socket--three"></span></div>
+    <div class="wire-sources" aria-label="Поддържани интеграции">
+      {integrations.map((item, index) => <div class:list={["source-plug", `source-plug--${index + 1}`]}><span class:list={["source-mark", item.class]}>{item.mark}</span><span>{item.name}</span><i aria-hidden="true"></i></div>)}
+    </div>
+    <div class="wire-agents">
+      {agents.map((agent) => <article class={`wired-agent wired-agent--${agent.slug}`} style={`--agent:${agent.accent};--agent-soft:${agent.soft}`}>
+        <AgentAvatar name={agent.name} slug={agent.slug} accent={agent.accent} accentSoft={agent.soft} size="large" />
+        <div><strong>{agent.name}</strong><span>{agent.role}</span></div>
+      </article>)}
+    </div>
+    <div class="wire-hero__copy">
+      <h1>Една връзка.<br /><span>Готова работа.</span></h1>
+      <p>Свързваме AI служителя с програмите, които бизнесът ти вече използва.</p>
+      <a class="button" href="#svurji">Свържи програма <Icon name="arrow-down" /></a>
+    </div>
+  </section>
+
+  <section class="work-receipt">
+    <div class="rail-continuation" aria-hidden="true"></div>
+    <div class="integration-shell">
+      <div class="receipt-heading"><h2>Какво пристига.<br />Какво се свършва.</h2><p>Връзката има смисъл само когато завършва с конкретен резултат.</p></div>
+      <div class="receipt-flow">
+        <div class="receipt-list"><span>Пристига</span><p><b>01</b> Имейл от клиент</p><p><b>02</b> Ново обаждане</p><p><b>03</b> Заявка за среща</p><p><b>04</b> Промяна по сайта</p></div>
+        <div class="receipt-hub"><span class="brand-dot"></span><strong>Работи</strong><small>проверява · изпълнява · записва</small></div>
+        <div class="receipt-list receipt-list--result"><span>Готово</span><p><i>✓</i> Часът е записан</p><p><i>✓</i> Контактът е в CRM</p><p><i>✓</i> Екипът е известен</p><p><i>✓</i> Промяната чака одобрение</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="connection-directory">
+    <div class="rail-continuation" aria-hidden="true"></div>
+    <div class="integration-shell">
+      <h2>Свържи по работа,<br />не по лого.</h2>
+      <div class="directory-grid">
+        <article><div class="directory-agent"><AgentAvatar name="Вдига" slug="vdiga" accent="#0b7665" accentSoft="#dff5ee" size="small" /><h3>Записва часове</h3></div><p>Google Calendar</p><p>Microsoft 365 Calendar</p><p>Calendly</p><p>Cal.com</p></article>
+        <article><div class="directory-agent"><AgentAvatar name="Помага" slug="pomaga" accent="#6b56c9" accentSoft="#ece8ff" size="small" /><h3>Подрежда данни</h3></div><p>Gmail и Outlook</p><p>Google Sheets и Excel</p><p>HubSpot и Pipedrive</p><p>Slack</p></article>
+        <article><div class="directory-agent"><AgentAvatar name="Пише" slug="pishe" accent="#a84629" accentSoft="#ffebe3" size="small" /><h3>Обновява сайта</h3></div><p>WordPress</p><p>WooCommerce</p><p>Google Drive</p><p>API и webhooks</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="access-section">
+    <div class="rail-continuation" aria-hidden="true"></div>
+    <div class="integration-shell">
+      <h2>Три начина да се свържем.</h2>
+      <div class="access-grid">
+        <article><span class="access-symbol">↯</span><h3>Директна връзка</h3><p>Даваш достъп, ние настройваме връзката и я тестваме.</p></article>
+        <article><span class="access-symbol">⌾</span><h3>Одобрение от администратор</h3><p>Фирменият администратор разрешава нужните права.</p></article>
+        <article><span class="access-symbol">{ }</span><h3>Технически преглед</h3><p>Проверяваме документацията и казваме какво може да се свърже.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="integration-close" id="svurji">
+    <div class="integration-close__rail" aria-hidden="true"><span>Р</span></div>
+    <div><h2>Покажи ни програмата.<br />Ние ще проверим връзката.</h2><p>Изпрати името на системата и задачата, която искаш да поеме AI служителят.</p><a class="button button--light" href="/kontakti/">Свържи програма <Icon name="arrow-right" /></a></div>
+  </section>
+</BaseLayout>
+
+<style>
+  :global(.integrations-page){--rail-x:clamp(116px,18vw,280px);background:#fbfcfa}.wire-hero{position:relative;min-height:980px;overflow:hidden;border-bottom:1px solid var(--line);background:radial-gradient(circle at 75% 36%,rgba(223,245,238,.82),transparent 34%),#fbfcfa}.wire-rail{position:absolute;left:var(--rail-x);top:0;bottom:-1px;width:74px;transform:translateX(-50%);background:#0d3029;box-shadow:8px 0 34px rgba(11,48,41,.14),inset 9px 0 0 rgba(255,255,255,.04),inset -9px 0 0 rgba(0,0,0,.18)}.wire-rail::before,.wire-rail::after{position:absolute;left:15px;right:15px;height:2px;background:#42615a;content:""}.wire-rail::before{top:28px}.wire-rail::after{bottom:28px}.wire-rail__core{position:absolute;left:34px;top:0;bottom:0;width:6px;background:#071f1a;box-shadow:0 0 0 1px #3a5a52}.wire-rail__socket{position:absolute;left:17px;width:40px;height:56px;border:1px solid #527168;border-radius:9px;background:#09241f;box-shadow:inset 0 0 20px rgba(118,216,182,.09)}.wire-rail__socket::after{position:absolute;left:50%;top:50%;width:9px;height:9px;transform:translate(-50%,-50%);border-radius:50%;background:#8ae4c4;box-shadow:0 0 14px #76d8b6;content:""}.wire-rail__socket--one{top:235px}.wire-rail__socket--two{top:475px}.wire-rail__socket--three{top:710px}.wire-sources{position:absolute;left:clamp(18px,4vw,62px);top:88px;z-index:3;display:grid;gap:11px}.source-plug{position:relative;display:flex;width:clamp(88px,10vw,150px);height:53px;align-items:center;gap:10px;padding:7px 11px;border-radius:12px;background:#fff;box-shadow:0 8px 25px rgba(23,33,29,.08);font-size:.73rem;font-weight:700}.source-plug i{position:absolute;right:calc(-1 * (var(--rail-x) - clamp(18px,4vw,62px) - clamp(88px,10vw,150px)));top:25px;width:calc(var(--rail-x) - clamp(18px,4vw,62px) - clamp(88px,10vw,150px));height:2px;background:#a9b6b0}.source-plug i::after{position:absolute;right:-5px;top:-4px;width:10px;height:10px;border-radius:50%;background:#76d8b6;box-shadow:0 0 0 4px rgba(118,216,182,.18);content:""}.source-mark{display:grid;width:30px;height:30px;flex:0 0 auto;place-items:center;border-radius:8px;background:#eef2ef;color:#18382f;font-size:.72rem;font-weight:800}.google{color:#4285f4}.microsoft{color:#236dc1}.hubspot{color:#ff6846}.pipedrive{color:#202124}.wordpress{color:#21759b}.woo{background:#f0e9ff;color:#7854a9}.calendly{color:#006bff}.cal{background:#141414;color:#fff}.slack{color:#36c5f0}.api{font-family:monospace}.wire-agents{position:absolute;left:calc(var(--rail-x) + 70px);top:160px;z-index:2;display:grid;gap:28px}.wired-agent{position:relative;display:flex;align-items:center;gap:18px;min-width:290px}.wired-agent::before{position:absolute;left:-70px;top:50%;width:68px;height:2px;background:var(--agent);content:""}.wired-agent::after{position:absolute;left:-76px;top:calc(50% - 5px);width:10px;height:10px;border-radius:50%;background:var(--agent);box-shadow:0 0 0 5px var(--agent-soft);content:""}.wired-agent :global(.agent-identity--large){width:150px;height:150px;padding:12px;border-radius:50%;background:var(--agent-soft)}.wired-agent strong,.wired-agent span{display:block}.wired-agent strong{color:var(--agent);font-size:1.2rem}.wired-agent span{max-width:150px;color:var(--ink-soft);font-size:.8rem}.wire-hero__copy{position:absolute;left:max(56%,700px);right:clamp(28px,6vw,96px);top:185px}.wire-hero__copy h1{margin-bottom:34px;font-size:clamp(4.6rem,8vw,8.2rem);letter-spacing:-.04em;line-height:.86}.wire-hero__copy h1 span{color:#0b4b3e}.wire-hero__copy p{max-width:520px;margin-bottom:34px;color:#54615c;font-size:1.25rem}.wire-hero__copy .button{gap:12px}.integration-shell{width:min(1020px,calc(100% - var(--rail-x) - 90px));margin-left:max(calc(var(--rail-x) + 105px),calc((100% - 820px)/2));padding:110px 0}.work-receipt,.connection-directory,.access-section{position:relative;border-bottom:1px solid var(--line);background:#fff}.rail-continuation{position:absolute;left:var(--rail-x);top:0;bottom:0;width:74px;transform:translateX(-50%);background:#0d3029;box-shadow:8px 0 34px rgba(11,48,41,.08),inset 34px 0 0 #071f1a,inset 40px 0 0 #35554d}.receipt-heading{display:flex;align-items:end;justify-content:space-between;gap:50px;margin-bottom:54px}.receipt-heading h2,.connection-directory h2,.access-section h2{margin:0;font-size:clamp(2.6rem,4vw,4.6rem);letter-spacing:-.04em}.receipt-heading p{max-width:350px;margin:0;color:var(--ink-soft)}.receipt-flow{display:grid;grid-template-columns:1fr 180px 1fr;align-items:center}.receipt-list{border-block:1px solid var(--line)}.receipt-list>span{display:block;padding:13px 0;color:var(--ink-soft);font-size:.72rem;font-weight:800;text-transform:uppercase}.receipt-list p{display:flex;gap:16px;align-items:center;margin:0;padding:17px 2px;border-top:1px solid var(--line);font-size:.92rem;font-weight:600}.receipt-list b{color:#91a099;font-size:.72rem}.receipt-list i{display:grid;width:23px;height:23px;place-items:center;border-radius:50%;background:var(--green-soft);color:var(--green);font-style:normal}.receipt-hub{position:relative;z-index:2;display:grid;justify-items:center;gap:8px;text-align:center}.receipt-hub::before{position:absolute;z-index:-1;left:-40px;right:-40px;top:28px;height:1px;background:#a7b5af;content:""}.receipt-hub .brand-dot{width:48px;height:48px;border:15px solid var(--green-soft);box-sizing:content-box}.receipt-hub small{color:var(--ink-soft);font-size:.68rem}.connection-directory{background:#f5f8f5}.directory-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:64px;border-top:1px solid var(--line-dark)}.directory-grid article{padding:32px 30px 0 0;border-right:1px solid var(--line-dark)}.directory-grid article+article{padding-left:30px}.directory-grid article:last-child{border-right:0}.directory-agent{display:flex;align-items:center;gap:12px;margin-bottom:26px}.directory-agent h3{margin:0;font-size:1.15rem}.directory-grid p{margin:0;padding:11px 0;border-top:1px solid var(--line);color:#4d5953;font-size:.9rem}.access-grid{display:grid;grid-template-columns:repeat(3,1fr);margin-top:58px;border-block:1px solid var(--line-dark)}.access-grid article{padding:38px 32px 38px 0}.access-grid article+article{padding-left:32px;border-left:1px solid var(--line-dark)}.access-symbol{display:grid;width:54px;height:54px;margin-bottom:28px;place-items:center;border-radius:50%;background:var(--green-soft);color:var(--green);font-size:1.3rem;font-weight:800}.access-grid article:nth-child(2) .access-symbol{background:var(--blue-soft);color:#3775a9}.access-grid article:nth-child(3) .access-symbol{background:var(--violet-soft);color:var(--violet);font-family:monospace}.access-grid h3{font-size:1.05rem}.access-grid p{margin:0;color:var(--ink-soft);font-size:.9rem}.integration-close{position:relative;display:grid;min-height:520px;place-items:center;padding:90px max(36px,8vw) 90px calc(var(--rail-x) + 105px);overflow:hidden;background:#073c32;color:#fff}.integration-close h2{margin-bottom:24px;color:#fff;font-size:clamp(3rem,5vw,5.4rem);letter-spacing:-.04em}.integration-close p{max-width:620px;margin-bottom:32px;color:#c3dbd3}.integration-close .button{gap:12px}.integration-close__rail{position:absolute;left:var(--rail-x);top:0;bottom:0;display:grid;width:74px;transform:translateX(-50%);place-items:center;background:#082a24;box-shadow:inset 34px 0 0 #061f1a,inset 40px 0 0 #315148}.integration-close__rail span{display:grid;width:52px;height:64px;place-items:center;border:1px solid #56776e;border-radius:10px;background:#061f1a;color:#9ce7cc;font-size:1.4rem;font-weight:800;box-shadow:0 0 24px rgba(118,216,182,.18)}
+  @media(max-width:1100px){:global(.integrations-page){--rail-x:150px}.wire-hero{min-height:900px}.wire-hero__copy{left:520px}.wire-hero__copy h1{font-size:5.4rem}.wired-agent{min-width:220px}.wired-agent :global(.agent-identity--large){width:120px;height:120px}.source-plug span:nth-child(2){display:none}.source-plug{width:54px}.source-plug i{right:calc(-1 * (var(--rail-x) - clamp(18px,4vw,62px) - 54px));width:calc(var(--rail-x) - clamp(18px,4vw,62px) - 54px)}}
+  @media(max-width:780px){:global(.integrations-page){--rail-x:54px}.wire-hero{min-height:auto;padding:72px 22px 90px 110px}.wire-rail{width:44px}.wire-rail__core{left:19px}.wire-rail__socket{left:7px;width:30px}.wire-sources{display:none}.wire-hero__copy{position:relative;left:auto;right:auto;top:auto}.wire-hero__copy h1{font-size:clamp(3.35rem,15vw,5.4rem)}.wire-hero__copy p{font-size:1rem}.wire-agents{position:relative;left:auto;top:auto;margin-top:60px;gap:22px}.wired-agent::before{left:-56px;width:54px}.wired-agent::after{left:-62px}.wired-agent :global(.agent-identity--large){width:88px;height:88px;padding:6px}.wired-agent{min-width:0}.integration-shell{width:auto;margin-left:0;padding:78px 24px 78px 110px}.rail-continuation{width:44px;box-shadow:inset 19px 0 0 #071f1a,inset 25px 0 0 #35554d}.receipt-heading{display:block}.receipt-heading p{margin-top:18px}.receipt-flow{grid-template-columns:1fr}.receipt-hub{margin:28px 0}.receipt-hub::before{left:50%;right:auto;top:-28px;bottom:-28px;width:1px;height:auto}.directory-grid,.access-grid{grid-template-columns:1fr}.directory-grid article,.directory-grid article+article,.access-grid article,.access-grid article+article{padding:28px 0;border-right:0;border-left:0;border-bottom:1px solid var(--line-dark)}.directory-grid article:last-child,.access-grid article:last-child{border-bottom:0}.integration-close{min-height:560px;padding:80px 24px 80px 110px}.integration-close__rail{width:44px;box-shadow:inset 19px 0 0 #061f1a,inset 25px 0 0 #315148}.integration-close__rail span{width:36px;height:48px}.receipt-heading h2,.connection-directory h2,.access-section h2{font-size:2.65rem}}
+  @media(prefers-reduced-motion:no-preference){.wire-rail__socket::after{animation:pulse-socket 2.4s ease-out infinite}.wire-rail__socket--two::after{animation-delay:.6s}.wire-rail__socket--three::after{animation-delay:1.2s}@keyframes pulse-socket{0%,45%,100%{box-shadow:0 0 0 4px rgba(118,216,182,.12)}15%{box-shadow:0 0 0 11px rgba(118,216,182,0)}}}
+</style>
