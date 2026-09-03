@@ -36,6 +36,7 @@ export const site = {
   ],
   nav: [
     { href: "/sluzhiteli/", label: "Служители" },
+    { href: "/integracii/", label: "Интеграции" },
     { href: "/ceni/", label: "Цени" },
     { href: "/blog/", label: "Полезно" },
   ],
