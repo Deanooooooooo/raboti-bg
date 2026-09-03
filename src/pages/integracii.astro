@@ -3,127 +3,154 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Icon from "../components/Icon.astro";
 import { breadcrumbSchema } from "../data/schema";
 import { site } from "../data/site";
-
-const agents = [
-  { name: "Vdiga", slug: "vdiga", accent: "#0b7665", soft: "#dff5ee", role: "Обаждания и записване", image: "/assets/employee-vdiga-gloria-v1.webp", alt: "Gloria, образът на AI рецепциониста Vdiga" },
-  { name: "Pomaga", slug: "pomaga", accent: "#6b56c9", soft: "#ece8ff", role: "Данни и ежедневни задачи", image: "/assets/employee-pomaga-v1.webp", alt: "Pomaga, AI оперативен асистент" },
-  { name: "Pishe", slug: "pishe", accent: "#a84629", soft: "#ffebe3", role: "Съдържание и сайтове", image: "/assets/employee-pishe-v1.webp", alt: "Pishe, AI уеб мениджър" },
-];
+import {
+  siGoogle,
+  siGmail,
+  siGooglecalendar,
+  siHubspot,
+  siWordpress,
+  siWoocommerce,
+  siCalendly,
+  siCaldotcom,
+  siSlack,
+} from "simple-icons";
 
 const integrations = [
-  { mark: "G", name: "Google Workspace", class: "google", work: "Имейл, календар, таблици и файлове" },
-  { mark: "M", name: "Microsoft 365", class: "microsoft", work: "Outlook, календар, Excel и OneDrive" },
-  { mark: "H", name: "HubSpot", class: "hubspot", work: "Контакти, сделки и последващи задачи" },
-  { mark: "P", name: "Pipedrive", class: "pipedrive", work: "Запитвания, сделки и бележки" },
-  { mark: "W", name: "WordPress", class: "wordpress", work: "Страници, публикации и съдържание" },
-  { mark: "woo", name: "WooCommerce", class: "woo", work: "Продукти, поръчки и клиенти" },
-  { mark: "C", name: "Calendly", class: "calendly", work: "Свободни часове и срещи" },
-  { mark: "cal", name: "Cal.com", class: "cal", work: "Резервации и графици" },
-  { mark: "S", name: "Slack", class: "slack", work: "Известия и предаване към екипа" },
-  { mark: "{ }", name: "API и webhooks", class: "api", work: "Връзка по техническа документация" },
+  { name: "Google Workspace", icon: siGoogle, color: "#4285F4", y: 11 },
+  { name: "Gmail", icon: siGmail, color: `#${siGmail.hex}`, y: 19 },
+  { name: "HubSpot", icon: siHubspot, color: `#${siHubspot.hex}`, y: 27 },
+  { name: "Google Calendar", icon: siGooglecalendar, color: `#${siGooglecalendar.hex}`, y: 35 },
+  { name: "WordPress", icon: siWordpress, color: `#${siWordpress.hex}`, y: 43 },
+  { name: "WooCommerce", icon: siWoocommerce, color: `#${siWoocommerce.hex}`, y: 51 },
+  { name: "Calendly", icon: siCalendly, color: `#${siCalendly.hex}`, y: 59 },
+  { name: "Cal.com", icon: siCaldotcom, color: `#${siCaldotcom.hex}`, y: 67 },
+  { name: "Slack", icon: siSlack, color: `#${siSlack.hex}`, y: 75 },
+  { name: "API / webhooks", icon: null, color: "#6B56C9", y: 83 },
+];
+
+const agents = [
+  { name: "Vdiga", role: "Приема и записва", image: "/assets/employee-vdiga-gloria-v1.webp", color: "#F26F61", soft: "#F6A298", top: 19 },
+  { name: "Pomaga", role: "Подрежда и следи", image: "/assets/employee-pomaga-v1.webp", color: "#3B82F6", soft: "#8AB8FF", top: 41 },
+  { name: "Pishe", role: "Подготвя и обновява", image: "/assets/employee-pishe-v1.webp", color: "#8267D8", soft: "#B5A2F4", top: 63 },
 ];
 
 const schemas = breadcrumbSchema([
-  { name: "Работи", url: site.url },
+  { name: "Raboti", url: site.url },
   { name: "Интеграции", url: `${site.url}/integracii/` },
 ]);
 ---
 
-<BaseLayout title="Интеграции с бизнес софтуер | Работи" description="Свържи AI служител от Работи с Google Workspace, Microsoft 365, CRM, сайт или календар." canonical="/integracii/" image="/og/home.svg" schema={schemas} bodyClass="integrations-page">
-  <!--
-  THESIS: Интеграцията е видима връзка между програмата, AI служителя и свършената работа, не каталог от лога.
-  OWN-WORLD: Светла хартия, мастилено зелено, цветовете на служителите и една непрекъсната кабелна релса.
-  STORY: Виждаш какво свързваме, кой поема задачата, какво излиза накрая и как се разрешава достъпът.
-  FIRST VIEWPORT: Релсата заема лявата третина, служителите се включват в нея, а голямото обещание и действието стоят вдясно.
-  FORM: Вертикален работен комутатор, пета структура, seed 3d8b1317.
-  FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
-  -->
-  <section class="wire-hero">
-    <div class="wire-rail" aria-hidden="true"><span class="wire-rail__core"></span><span class="wire-rail__socket wire-rail__socket--one"></span><span class="wire-rail__socket wire-rail__socket--two"></span><span class="wire-rail__socket wire-rail__socket--three"></span></div>
-    <div class="wire-sources" aria-label="Поддържани интеграции">
-      {integrations.map((item, index) => <div class:list={["source-plug", `source-plug--${index + 1}`]}><span class:list={["source-mark", item.class]}>{item.mark}</span><span>{item.name}</span><i aria-hidden="true"></i></div>)}
+<BaseLayout title="Интеграции с бизнес софтуер | Raboti" description="Свържете AI служител от Raboti с програмите, които вече използвате." canonical="/integracii/" image="/og/home.svg" schema={schemas} bodyClass="integrations-c">
+  <section class="switchboard-hero">
+    <div class="switchboard" aria-hidden="true">
+      <div class="switchboard__cap"><img src="/assets/logo-mark.svg" alt="" /></div>
+      <div class="switchboard__track"></div>
+      {integrations.map((item) => (
+        <div class="plug" style={`--y:${item.y}%;--brand:${item.color}`}>
+          <span class="plug__logo">
+            {item.icon ? <svg viewBox="0 0 24 24" role="img" aria-label={item.name}><path d={item.icon.path} /></svg> : <b>{`{ }`}</b>}
+          </span>
+          <span class="plug__lead"><i></i></span>
+        </div>
+      ))}
     </div>
-    <div class="wire-agents">
-      {agents.map((agent) => <article class={`wired-agent wired-agent--${agent.slug}`} style={`--agent:${agent.accent};--agent-soft:${agent.soft}`}>
-        <div class="wired-agent__portrait"><img src={agent.image} alt={agent.alt} width="720" height="960" loading="eager" decoding="sync" /></div>
-        <div><strong>{agent.name}</strong><span>{agent.role}</span></div>
-      </article>)}
+
+    <div class="agent-lines" aria-hidden="true">
+      {agents.map((agent) => <span style={`--top:${agent.top}%;--agent:${agent.color}`}></span>)}
     </div>
-    <div class="wire-hero__copy">
-      <h1>Една връзка.<br /><span>Готова работа.</span></h1>
-      <p>Свързваме AI служителя с програмите, които бизнесът ти вече използва.</p>
-      <a class="button" href="#svurji">Свържи програма <Icon name="arrow-down" /></a>
+
+    <div class="agents">
+      {agents.map((agent) => (
+        <article class="agent" style={`--top:${agent.top}%;--agent:${agent.color};--soft:${agent.soft}`}>
+          <div class="agent__portrait"><img src={agent.image} alt={`${agent.name}, AI служител от Raboti`} width="720" height="960" /></div>
+          <div class="agent__name"><i aria-hidden="true"></i><div><strong>{agent.name}</strong><small>{agent.role}</small></div></div>
+        </article>
+      ))}
+    </div>
+
+    <div class="hero-copy">
+      <h1>Една<br />връзка.<br />Готова<br />работа.</h1>
+      <a class="connect-button" href="#kak-raboti">Свържете програма <Icon name="arrow-down" /></a>
     </div>
   </section>
 
-  <section class="work-receipt">
-    <div class="rail-continuation" aria-hidden="true"></div>
-    <div class="integration-shell">
-      <div class="receipt-heading"><h2>Какво пристига.<br />Какво се свършва.</h2><p>Връзката има смисъл само когато завършва с конкретен резултат.</p></div>
-      <div class="receipt-flow">
-        <div class="receipt-list"><span>Пристига</span><p><b>01</b> Имейл от клиент</p><p><b>02</b> Ново обаждане</p><p><b>03</b> Заявка за среща</p><p><b>04</b> Промяна по сайта</p></div>
-        <div class="receipt-hub"><span class="brand-dot"></span><strong>Работи</strong><small>проверява · изпълнява · записва</small></div>
-        <div class="receipt-list receipt-list--result"><span>Готово</span><p><i>✓</i> Часът е записан</p><p><i>✓</i> Контактът е в CRM</p><p><i>✓</i> Екипът е известен</p><p><i>✓</i> Промяната чака одобрение</p></div>
+  <section class="flow-section" id="kak-raboti">
+    <div class="continuing-spine" aria-hidden="true"></div>
+    <div class="content-column">
+      <h2>Какво пристига. Какво се случва.</h2>
+      <div class="flow-board">
+        <div class="flow-list">
+          <span>Пристига</span>
+          <p><svg viewBox="0 0 24 24"><path d={siGoogle.path} /></svg> Имейл от клиент</p>
+          <p><svg viewBox="0 0 24 24"><path d={siGoogle.path} /></svg> Нов документ</p>
+          <p><svg viewBox="0 0 24 24"><path d={siHubspot.path} /></svg> Нов контакт</p>
+          <p><svg viewBox="0 0 24 24"><path d={siCalendly.path} /></svg> Нова среща</p>
+          <p><svg viewBox="0 0 24 24"><path d={siSlack.path} /></svg> Съобщение в канал</p>
+        </div>
+        <div class="flow-hub"><img src="/assets/logo-mark.svg" alt="Raboti" /></div>
+        <div class="flow-list flow-list--done">
+          <span>Се случва</span>
+          <p><i style="--i:#F26F61">↗</i> Vdiga отговаря</p>
+          <p><i style="--i:#8267D8">✓</i> Pishe подготвя</p>
+          <p><i style="--i:#3B82F6">□</i> Pomaga следи</p>
+          <p><i style="--i:#57A87A">✓</i> Създава се задача</p>
+          <p><i style="--i:#3B82F6">□</i> Екипът е известен</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="connection-directory">
-    <div class="rail-continuation" aria-hidden="true"></div>
-    <div class="integration-shell">
-      <h2>Свържи по работа,<br />не по лого.</h2>
-      <div class="directory-grid">
-        <article><div class="directory-agent"><span class="directory-dot directory-dot--vdiga"></span><h3>Записва часове</h3></div><p>Google Calendar</p><p>Microsoft 365 Calendar</p><p>Calendly</p><p>Cal.com</p></article>
-        <article><div class="directory-agent"><span class="directory-dot directory-dot--pomaga"></span><h3>Подрежда данни</h3></div><p>Gmail и Outlook</p><p>Google Sheets и Excel</p><p>HubSpot и Pipedrive</p><p>Slack</p></article>
-        <article><div class="directory-agent"><span class="directory-dot directory-dot--pishe"></span><h3>Обновява сайта</h3></div><p>WordPress</p><p>WooCommerce</p><p>Google Drive</p><p>API и webhooks</p></article>
+  <section class="result-section">
+    <div class="continuing-spine" aria-hidden="true"></div>
+    <div class="content-column">
+      <h2>Свържете по резултат.</h2>
+      <div class="result-grid">
+        <article><h3><i style="--c:#F26F61">↗</i> Vdiga</h3><p>Gmail</p><p>Microsoft Outlook</p><p>HubSpot</p><p>Calendly</p></article>
+        <article><h3><i style="--c:#3B82F6">□</i> Pomaga</h3><p>Google Workspace</p><p>Microsoft 365</p><p>Pipedrive</p><p>Slack</p></article>
+        <article><h3><i style="--c:#8267D8">✓</i> Pishe</h3><p>Google Drive</p><p>Microsoft 365</p><p>WordPress</p><p>WooCommerce</p></article>
+        <article><h3><i style="--c:#57A87A">✓</i> Довършва</h3><p>Pipedrive</p><p>Slack</p><p>Cal.com</p><p>API / webhooks</p></article>
       </div>
     </div>
   </section>
 
   <section class="access-section">
-    <div class="rail-continuation" aria-hidden="true"></div>
-    <div class="integration-shell">
-      <h2>Три начина да се свържем.</h2>
+    <div class="continuing-spine" aria-hidden="true"></div>
+    <div class="content-column">
+      <h2>Три начина на свързване.<br />Избирате вие.</h2>
       <div class="access-grid">
-        <article><span class="access-symbol">↯</span><h3>Директна връзка</h3><p>Даваш достъп, ние настройваме връзката и я тестваме.</p></article>
-        <article><span class="access-symbol">⌾</span><h3>Одобрение от администратор</h3><p>Фирменият администратор разрешава нужните права.</p></article>
-        <article><span class="access-symbol">{ }</span><h3>Технически преглед</h3><p>Проверяваме документацията и казваме какво може да се свърже.</p></article>
+        <article><span><svg viewBox="0 0 32 32"><path d="M11 4v9M21 4v9M7 13h18v3a9 9 0 0 1-7 8.8V29h-4v-4.2A9 9 0 0 1 7 16z" /></svg></span><h3>Директна връзка</h3><p>Свързваме програмата и тестваме достъпа.</p></article>
+        <article><span><svg viewBox="0 0 32 32"><path d="M16 3l10 4v8c0 7-4.2 11.3-10 14-5.8-2.7-10-7-10-14V7zM12 16l3 3 6-7" /></svg></span><h3>Одобрение от администратор</h3><p>Администраторът разрешава нужните права.</p></article>
+        <article><span><svg viewBox="0 0 32 32"><circle cx="14" cy="14" r="8"/><path d="M20 20l7 7" /></svg></span><h3>Технически преглед</h3><p>Проверяваме API документацията вместо вас.</p></article>
       </div>
     </div>
   </section>
 
-  <section class="integration-close" id="svurji">
-    <div class="integration-close__rail" aria-hidden="true"><span>Р</span></div>
-    <div><h2>Покажи ни програмата.<br />Ние ще проверим връзката.</h2><p>Изпрати името на системата и задачата, която искаш да поеме AI служителят.</p><a class="button button--light" href="/kontakti/">Свържи програма <Icon name="arrow-right" /></a></div>
+  <section class="closing-section">
+    <div class="closing-spine" aria-hidden="true"><div><img src="/assets/logo-mark.svg" alt="" /></div></div>
+    <div class="content-column closing-copy"><h2>Една връзка.<br />Всички решения.</h2><p>Покажете ни програмите си. Ние ще проверим какво може да поеме Raboti.</p><a class="connect-button connect-button--light" href="/kontakti/">Свържете програма <Icon name="arrow-right" /></a></div>
   </section>
 </BaseLayout>
 
 <style>
-  :global(.integrations-page){--rail-x:clamp(116px,18vw,280px);background:#fbfcfa}.wire-hero{position:relative;min-height:980px;overflow:hidden;border-bottom:1px solid var(--line);background:radial-gradient(circle at 75% 36%,rgba(223,245,238,.82),transparent 34%),#fbfcfa}.wire-rail{position:absolute;left:var(--rail-x);top:0;bottom:-1px;width:74px;transform:translateX(-50%);background:#0d3029;box-shadow:8px 0 34px rgba(11,48,41,.14),inset 9px 0 0 rgba(255,255,255,.04),inset -9px 0 0 rgba(0,0,0,.18)}.wire-rail::before,.wire-rail::after{position:absolute;left:15px;right:15px;height:2px;background:#42615a;content:""}.wire-rail::before{top:28px}.wire-rail::after{bottom:28px}.wire-rail__core{position:absolute;left:34px;top:0;bottom:0;width:6px;background:#071f1a;box-shadow:0 0 0 1px #3a5a52}.wire-rail__socket{position:absolute;left:17px;width:40px;height:56px;border:1px solid #527168;border-radius:9px;background:#09241f;box-shadow:inset 0 0 20px rgba(118,216,182,.09)}.wire-rail__socket::after{position:absolute;left:50%;top:50%;width:9px;height:9px;transform:translate(-50%,-50%);border-radius:50%;background:#8ae4c4;box-shadow:0 0 14px #76d8b6;content:""}.wire-rail__socket--one{top:235px}.wire-rail__socket--two{top:475px}.wire-rail__socket--three{top:710px}.wire-sources{position:absolute;left:clamp(18px,4vw,62px);top:88px;z-index:3;display:grid;gap:11px}.source-plug{position:relative;display:flex;width:clamp(88px,10vw,150px);height:53px;align-items:center;gap:10px;padding:7px 11px;border-radius:12px;background:#fff;box-shadow:0 8px 25px rgba(23,33,29,.08);font-size:.73rem;font-weight:700}.source-plug i{position:absolute;right:calc(-1 * (var(--rail-x) - clamp(18px,4vw,62px) - clamp(88px,10vw,150px)));top:25px;width:calc(var(--rail-x) - clamp(18px,4vw,62px) - clamp(88px,10vw,150px));height:2px;background:#a9b6b0}.source-plug i::after{position:absolute;right:-5px;top:-4px;width:10px;height:10px;border-radius:50%;background:#76d8b6;box-shadow:0 0 0 4px rgba(118,216,182,.18);content:""}.source-mark{display:grid;width:30px;height:30px;flex:0 0 auto;place-items:center;border-radius:8px;background:#eef2ef;color:#18382f;font-size:.72rem;font-weight:800}.google{color:#4285f4}.microsoft{color:#236dc1}.hubspot{color:#ff6846}.pipedrive{color:#202124}.wordpress{color:#21759b}.woo{background:#f0e9ff;color:#7854a9}.calendly{color:#006bff}.cal{background:#141414;color:#fff}.slack{color:#36c5f0}.api{font-family:monospace}.wire-agents{position:absolute;left:calc(var(--rail-x) + 70px);top:160px;z-index:2;display:grid;gap:28px}.wired-agent{position:relative;display:flex;align-items:center;gap:18px;min-width:290px}.wired-agent::before{position:absolute;left:-70px;top:50%;width:68px;height:2px;background:var(--agent);content:""}.wired-agent::after{position:absolute;left:-76px;top:calc(50% - 5px);width:10px;height:10px;border-radius:50%;background:var(--agent);box-shadow:0 0 0 5px var(--agent-soft);content:""}.wired-agent :global(.agent-identity--large){width:150px;height:150px;padding:12px;border-radius:50%;background:var(--agent-soft)}.wired-agent strong,.wired-agent span{display:block}.wired-agent strong{color:var(--agent);font-size:1.2rem}.wired-agent span{max-width:150px;color:var(--ink-soft);font-size:.8rem}.wire-hero__copy{position:absolute;left:max(56%,700px);right:clamp(28px,6vw,96px);top:185px}.wire-hero__copy h1{margin-bottom:34px;font-size:clamp(4.6rem,8vw,8.2rem);letter-spacing:-.04em;line-height:.86}.wire-hero__copy h1 span{color:#0b4b3e}.wire-hero__copy p{max-width:520px;margin-bottom:34px;color:#54615c;font-size:1.25rem}.wire-hero__copy .button{gap:12px}.integration-shell{width:min(1020px,calc(100% - var(--rail-x) - 90px));margin-left:max(calc(var(--rail-x) + 105px),calc((100% - 820px)/2));padding:110px 0}.work-receipt,.connection-directory,.access-section{position:relative;border-bottom:1px solid var(--line);background:#fff}.rail-continuation{position:absolute;left:var(--rail-x);top:0;bottom:0;width:74px;transform:translateX(-50%);background:#0d3029;box-shadow:8px 0 34px rgba(11,48,41,.08),inset 34px 0 0 #071f1a,inset 40px 0 0 #35554d}.receipt-heading{display:flex;align-items:end;justify-content:space-between;gap:50px;margin-bottom:54px}.receipt-heading h2,.connection-directory h2,.access-section h2{margin:0;font-size:clamp(2.6rem,4vw,4.6rem);letter-spacing:-.04em}.receipt-heading p{max-width:350px;margin:0;color:var(--ink-soft)}.receipt-flow{display:grid;grid-template-columns:1fr 180px 1fr;align-items:center}.receipt-list{border-block:1px solid var(--line)}.receipt-list>span{display:block;padding:13px 0;color:var(--ink-soft);font-size:.72rem;font-weight:800;text-transform:uppercase}.receipt-list p{display:flex;gap:16px;align-items:center;margin:0;padding:17px 2px;border-top:1px solid var(--line);font-size:.92rem;font-weight:600}.receipt-list b{color:#91a099;font-size:.72rem}.receipt-list i{display:grid;width:23px;height:23px;place-items:center;border-radius:50%;background:var(--green-soft);color:var(--green);font-style:normal}.receipt-hub{position:relative;z-index:2;display:grid;justify-items:center;gap:8px;text-align:center}.receipt-hub::before{position:absolute;z-index:-1;left:-40px;right:-40px;top:28px;height:1px;background:#a7b5af;content:""}.receipt-hub .brand-dot{width:48px;height:48px;border:15px solid var(--green-soft);box-sizing:content-box}.receipt-hub small{color:var(--ink-soft);font-size:.68rem}.connection-directory{background:#f5f8f5}.directory-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:64px;border-top:1px solid var(--line-dark)}.directory-grid article{padding:32px 30px 0 0;border-right:1px solid var(--line-dark)}.directory-grid article+article{padding-left:30px}.directory-grid article:last-child{border-right:0}.directory-agent{display:flex;align-items:center;gap:12px;margin-bottom:26px}.directory-agent h3{margin:0;font-size:1.15rem}.directory-grid p{margin:0;padding:11px 0;border-top:1px solid var(--line);color:#4d5953;font-size:.9rem}.access-grid{display:grid;grid-template-columns:repeat(3,1fr);margin-top:58px;border-block:1px solid var(--line-dark)}.access-grid article{padding:38px 32px 38px 0}.access-grid article+article{padding-left:32px;border-left:1px solid var(--line-dark)}.access-symbol{display:grid;width:54px;height:54px;margin-bottom:28px;place-items:center;border-radius:50%;background:var(--green-soft);color:var(--green);font-size:1.3rem;font-weight:800}.access-grid article:nth-child(2) .access-symbol{background:var(--blue-soft);color:#3775a9}.access-grid article:nth-child(3) .access-symbol{background:var(--violet-soft);color:var(--violet);font-family:monospace}.access-grid h3{font-size:1.05rem}.access-grid p{margin:0;color:var(--ink-soft);font-size:.9rem}.integration-close{position:relative;display:grid;min-height:520px;place-items:center;padding:90px max(36px,8vw) 90px calc(var(--rail-x) + 105px);overflow:hidden;background:#073c32;color:#fff}.integration-close h2{margin-bottom:24px;color:#fff;font-size:clamp(3rem,5vw,5.4rem);letter-spacing:-.04em}.integration-close p{max-width:620px;margin-bottom:32px;color:#c3dbd3}.integration-close .button{gap:12px}.integration-close__rail{position:absolute;left:var(--rail-x);top:0;bottom:0;display:grid;width:74px;transform:translateX(-50%);place-items:center;background:#082a24;box-shadow:inset 34px 0 0 #061f1a,inset 40px 0 0 #315148}.integration-close__rail span{display:grid;width:52px;height:64px;place-items:center;border:1px solid #56776e;border-radius:10px;background:#061f1a;color:#9ce7cc;font-size:1.4rem;font-weight:800;box-shadow:0 0 24px rgba(118,216,182,.18)}
-  @media(max-width:1100px){:global(.integrations-page){--rail-x:150px}.wire-hero{min-height:900px}.wire-hero__copy{left:520px}.wire-hero__copy h1{font-size:5.4rem}.wired-agent{min-width:220px}.wired-agent :global(.agent-identity--large){width:120px;height:120px}.source-plug span:nth-child(2){display:none}.source-plug{width:54px}.source-plug i{right:calc(-1 * (var(--rail-x) - clamp(18px,4vw,62px) - 54px));width:calc(var(--rail-x) - clamp(18px,4vw,62px) - 54px)}}
-  @media(max-width:780px){:global(.integrations-page){--rail-x:54px}.wire-hero{min-height:auto;padding:72px 22px 90px 110px}.wire-rail{width:44px}.wire-rail__core{left:19px}.wire-rail__socket{left:7px;width:30px}.wire-sources{display:none}.wire-hero__copy{position:relative;left:auto;right:auto;top:auto}.wire-hero__copy h1{font-size:clamp(3.35rem,15vw,5.4rem)}.wire-hero__copy p{font-size:1rem}.wire-agents{position:relative;left:auto;top:auto;margin-top:60px;gap:22px}.wired-agent::before{left:-56px;width:54px}.wired-agent::after{left:-62px}.wired-agent :global(.agent-identity--large){width:88px;height:88px;padding:6px}.wired-agent{min-width:0}.integration-shell{width:auto;margin-left:0;padding:78px 24px 78px 110px}.rail-continuation{width:44px;box-shadow:inset 19px 0 0 #071f1a,inset 25px 0 0 #35554d}.receipt-heading{display:block}.receipt-heading p{margin-top:18px}.receipt-flow{grid-template-columns:1fr}.receipt-hub{margin:28px 0}.receipt-hub::before{left:50%;right:auto;top:-28px;bottom:-28px;width:1px;height:auto}.directory-grid,.access-grid{grid-template-columns:1fr}.directory-grid article,.directory-grid article+article,.access-grid article,.access-grid article+article{padding:28px 0;border-right:0;border-left:0;border-bottom:1px solid var(--line-dark)}.directory-grid article:last-child,.access-grid article:last-child{border-bottom:0}.integration-close{min-height:560px;padding:80px 24px 80px 110px}.integration-close__rail{width:44px;box-shadow:inset 19px 0 0 #061f1a,inset 25px 0 0 #315148}.integration-close__rail span{width:36px;height:48px}.receipt-heading h2,.connection-directory h2,.access-section h2{font-size:2.65rem}}
-  @media(prefers-reduced-motion:no-preference){.wire-rail__socket::after{animation:pulse-socket 2.4s ease-out infinite}.wire-rail__socket--two::after{animation-delay:.6s}.wire-rail__socket--three::after{animation-delay:1.2s}@keyframes pulse-socket{0%,45%,100%{box-shadow:0 0 0 4px rgba(118,216,182,.12)}15%{box-shadow:0 0 0 11px rgba(118,216,182,0)}}}
-
-  /* C rebuild: the photographic employee portraits and physical rail are the hero material. */
-  :global(.integrations-page){--rail-x:clamp(126px,18vw,290px);background:#f7f6f1}
-  .wire-hero{min-height:1040px;background:radial-gradient(circle at 74% 33%,rgba(215,239,230,.78),transparent 31%),#f7f6f1}
-  .wire-rail{width:96px;border-inline:1px solid #557168;background:linear-gradient(90deg,#071d18 0 10%,#23483e 10% 18%,#0a2a22 18% 45%,#526b64 45% 48%,#061712 48% 58%,#21483e 58% 82%,#071f1a 82%);box-shadow:14px 0 46px rgba(11,48,41,.24),inset 0 0 28px rgba(0,0,0,.34)}
-  .wire-rail__core{left:44px;width:8px;background:#03110e;box-shadow:0 0 0 1px #71877f}
-  .wire-rail__socket{left:22px;width:52px;height:66px;border-color:#668078;background:linear-gradient(#143a31,#061d18);box-shadow:0 10px 24px rgba(0,0,0,.28),inset 0 1px rgba(255,255,255,.16)}
-  .wire-agents{left:calc(var(--rail-x) + 92px);top:128px;gap:8px}
-  .wired-agent{gap:22px;min-width:370px}
-  .wired-agent::before{left:-92px;width:88px;height:3px;box-shadow:0 0 13px color-mix(in srgb,var(--agent) 62%,transparent)}
-  .wired-agent::after{left:-100px}
-  .wired-agent__portrait{position:relative;width:190px;height:228px;flex:0 0 auto;overflow:hidden;border-radius:46% 46% 48% 48%/40% 40% 56% 56%;background:var(--agent-soft);box-shadow:0 24px 45px -27px color-mix(in srgb,var(--agent) 65%,transparent)}
-  .wired-agent__portrait::after{position:absolute;inset:0;border:1px solid color-mix(in srgb,var(--agent) 24%,transparent);border-radius:inherit;content:""}
-  .wired-agent__portrait img{width:100%;height:100%;object-fit:cover;object-position:center top;filter:saturate(.93) contrast(1.02)}
-  .wired-agent strong{font-size:1.4rem}.wired-agent span{max-width:170px;font-size:.86rem}
-  .wire-hero__copy{left:max(58%,760px);top:174px}.wire-hero__copy h1{font-size:clamp(5.4rem,8.6vw,9rem);line-height:.84}
-  .directory-dot{width:16px;height:16px;border-radius:50%;box-shadow:0 0 0 8px rgba(255,255,255,.6)}.directory-dot--vdiga{background:#0b7665}.directory-dot--pomaga{background:#6b56c9}.directory-dot--pishe{background:#a84629}
-  .rail-continuation{width:96px;background:linear-gradient(90deg,#071d18 0 10%,#23483e 10% 18%,#0a2a22 18% 45%,#526b64 45% 48%,#061712 48% 58%,#21483e 58% 82%,#071f1a 82%);box-shadow:14px 0 46px rgba(11,48,41,.13)}
-  .integration-close__rail{width:96px;background:linear-gradient(90deg,#061914,#24473f 18%,#071d18 48%,#21443b 82%,#061914)}
-  @media(max-width:1100px){.wired-agent__portrait{width:140px;height:168px}.wire-hero__copy{left:560px}.wired-agent{min-width:300px}.wire-agents{left:calc(var(--rail-x) + 74px)}}
-  @media(max-width:780px){.wire-rail,.rail-continuation,.integration-close__rail{width:54px}.wire-rail__core{left:23px}.wire-rail__socket{left:8px;width:38px}.wire-agents{left:auto}.wired-agent{min-width:0;gap:14px}.wired-agent__portrait{width:88px;height:108px;border-radius:44% 44% 48% 48%/38% 38% 56% 56%}.wired-agent::before{left:-56px;width:52px}.wired-agent::after{left:-63px}.wire-hero__copy h1{font-size:clamp(3.45rem,16vw,5.4rem)}}
-  @media(max-width:780px){:global(.integrations-page){--rail-x:24px}.wire-hero{padding:54px 18px 76px 68px}.wire-rail,.rail-continuation,.integration-close__rail{width:42px}.wire-rail__core{left:17px}.wire-rail__socket{left:5px;width:32px;height:52px}.wire-agents{margin-top:42px}.wired-agent__portrait{width:74px;height:90px}.wired-agent::before{left:-44px;width:41px}.wired-agent::after{left:-49px;width:8px;height:8px}.wired-agent strong{font-size:1rem}.wired-agent span{font-size:.7rem}.wire-hero__copy h1{font-size:clamp(3.25rem,15vw,4.6rem)}.integration-shell{width:auto;max-width:none;margin:0;padding:68px 20px 68px 68px}.receipt-heading h2,.connection-directory h2,.access-section h2{font-size:clamp(2.2rem,11vw,3rem)}.integration-close{padding:74px 20px 74px 68px}.integration-close h2{font-size:clamp(2.4rem,12vw,3.6rem)}.integration-close__rail span{width:32px;height:44px}.directory-grid,.access-grid{margin-top:38px}}
-  @media(max-width:780px){.wire-hero{min-height:auto}.wire-hero__copy{position:relative;left:auto;right:auto;top:auto;margin-top:110px}}
+  :global(.integrations-c){--spine-x:clamp(140px,19.2vw,308px);--ink:#07372e;background:#f7f7f4;color:var(--ink)}
+  :global(.integrations-c main){overflow:hidden}.switchboard-hero{position:relative;min-height:920px;border-bottom:1px solid #dde2de;background:#fbfbf8}
+  .switchboard{position:absolute;z-index:3;left:var(--spine-x);top:0;bottom:0;width:70px;transform:translateX(-50%)}
+  .switchboard__track,.continuing-spine,.closing-spine{background:linear-gradient(90deg,#071f1a 0 12%,#264c42 12% 24%,#0a2d25 24% 45%,#557269 45% 48%,#061b16 48% 63%,#21483e 63% 87%,#071f1a 87%);box-shadow:10px 0 24px rgba(5,35,28,.18),inset 0 0 18px rgba(0,0,0,.45)}
+  .switchboard__track{position:absolute;inset:0}.switchboard__track::after{position:absolute;left:50%;top:0;bottom:0;width:7px;transform:translateX(-50%);border-inline:1px solid #6b827b;background:#03140f;content:""}
+  .switchboard__cap{position:absolute;z-index:4;left:50%;top:42px;display:grid;width:66px;height:76px;transform:translateX(-50%);place-items:center;border:1px solid #526d65;border-radius:10px;background:#0a3027;box-shadow:0 8px 20px rgba(0,0,0,.35)}
+  .switchboard__cap img{width:33px;height:33px;filter:brightness(0) invert(1)}
+  .plug{position:absolute;right:35px;top:var(--y);display:flex;align-items:center}.plug__logo{position:absolute;right:72px;display:grid;width:54px;height:54px;place-items:center;border:1px solid #e5e8e5;border-radius:11px;background:#fff;box-shadow:0 6px 16px rgba(10,35,28,.1);color:var(--brand)}.plug__logo svg{width:29px;height:29px;fill:currentColor}.plug__logo b{font:700 .8rem/1 Inter,sans-serif}.plug__lead{position:relative;width:73px;height:6px;border-radius:6px;background:#17231f;box-shadow:inset 0 0 0 1px #4b5d57}.plug__lead::before{position:absolute;left:5px;top:-3px;width:18px;height:12px;border-radius:2px;background:#263732;content:""}.plug__lead i{position:absolute;right:-4px;top:-3px;width:12px;height:12px;border-radius:50%;background:var(--brand);box-shadow:0 0 8px var(--brand)}
+  .agent-lines{position:absolute;z-index:2;left:var(--spine-x);top:0;bottom:0;width:29vw}.agent-lines span{position:absolute;left:32px;top:var(--top);width:100%;height:88px;border-top:3px dotted color-mix(in srgb,var(--agent) 55%,transparent);border-radius:0 55% 0 0;transform:translateY(25px);opacity:.72}.agent-lines span:nth-child(2){width:83%;transform:translateY(12px)}.agent-lines span:nth-child(3){width:90%;transform:translateY(4px)}
+  .agents{position:absolute;z-index:4;left:calc(var(--spine-x) + 12.5vw);top:0;bottom:0;width:280px}.agent{position:absolute;top:var(--top);display:flex;align-items:center;gap:18px;transform:translateY(-50%)}.agent__portrait{width:128px;height:128px;overflow:hidden;border-radius:50%;background:var(--soft);box-shadow:0 8px 22px rgba(7,55,46,.12)}.agent__portrait img{width:100%;height:100%;object-fit:cover;object-position:center 10%}.agent__name{display:flex;align-items:center;gap:10px;color:var(--agent)}.agent__name i{display:grid;width:28px;height:28px;place-items:center;border:1.5px solid currentColor;border-radius:50%}.agent__name i::after{content:"↗";font-style:normal}.agent__name strong,.agent__name small{display:block}.agent__name strong{font-size:1.08rem}.agent__name small{max-width:120px;margin-top:3px;color:#60716b;font-size:.7rem;line-height:1.25}
+  .hero-copy{position:absolute;z-index:5;left:61.5%;top:112px}.hero-copy h1{max-width:440px;margin:0 0 42px;font-size:clamp(4.8rem,7.2vw,7.2rem);font-weight:700;letter-spacing:-.04em;line-height:.86}.connect-button{display:inline-flex;min-height:52px;align-items:center;gap:26px;padding:0 24px;border-radius:7px;background:#07372e;color:#fff;font-size:.84rem;font-weight:650;box-shadow:0 8px 18px rgba(7,55,46,.16)}.connect-button :global(svg){width:16px}
+  .flow-section,.result-section,.access-section{position:relative;border-bottom:1px solid #dde2de;background:#fbfbf8}.continuing-spine,.closing-spine{position:absolute;left:var(--spine-x);top:0;bottom:0;width:70px;transform:translateX(-50%)}.content-column{width:min(900px,calc(100% - var(--spine-x) - 90px));margin-left:max(calc(var(--spine-x) + 100px),calc((100% - 700px)/2));padding:72px 0}.content-column h2{margin:0 0 46px;font-size:2rem;letter-spacing:-.03em}
+  .flow-board{display:grid;grid-template-columns:1fr 118px 1fr;align-items:center}.flow-list{border:1px solid #dfe3df;border-radius:7px;background:#fff;box-shadow:0 8px 24px rgba(10,35,28,.06)}.flow-list>span{display:block;padding:0 10px 14px;border:0;background:#fbfbf8;transform:translateY(-30px);font-size:.68rem;font-weight:700;text-transform:uppercase}.flow-list p{display:flex;align-items:center;gap:12px;min-height:48px;margin:0;padding:0 18px;border-top:1px solid #e8eae8;color:#35443f;font-size:.78rem}.flow-list p:first-of-type{border-top:0}.flow-list svg{width:20px;height:20px;fill:#4285f4}.flow-list p:nth-of-type(2) svg{fill:#5e5e5e}.flow-list p:nth-of-type(3) svg{fill:#ff5c35}.flow-list p:nth-of-type(4) svg{fill:#006bff}.flow-list p:nth-of-type(5) svg{fill:#4a154b}.flow-list i{display:grid;width:25px;height:25px;place-items:center;border-radius:7px;background:var(--i);color:#fff;font-style:normal}.flow-hub{position:relative;display:grid;place-items:center}.flow-hub::before{position:absolute;z-index:-1;left:-20px;right:-20px;height:1px;background:#b8c5c0;content:""}.flow-hub img{width:58px;height:58px;padding:15px;border-radius:50%;background:#07372e;filter:brightness(0) invert(1)}
+  .result-section{background:#f8f8f5}.result-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid #d7dcda}.result-grid article{padding:24px 22px 8px 0;border-right:1px solid #d7dcda}.result-grid article+article{padding-left:22px}.result-grid article:last-child{border-right:0}.result-grid h3{display:flex;align-items:center;gap:8px;margin:0 0 18px;padding-bottom:14px;border-bottom:2px solid color-mix(in srgb,var(--c,#07372e) 45%,transparent);font-size:.9rem}.result-grid h3 i{display:grid;width:26px;height:26px;place-items:center;border:1px solid var(--c);border-radius:50%;color:var(--c);font-style:normal}.result-grid p{margin:0 0 12px;color:#34443e;font-size:.76rem}
+  .access-grid{display:grid;grid-template-columns:repeat(3,1fr)}.access-grid article{padding-right:34px}.access-grid article+article{padding-left:34px;border-left:1px solid #d7dcda}.access-grid span{display:grid;width:64px;height:64px;margin-bottom:22px;place-items:center;border-radius:50%;background:#e3f3e9}.access-grid article:nth-child(2) span{background:#e8f0ff}.access-grid article:nth-child(3) span{background:#f1eafd}.access-grid svg{width:31px;height:31px;fill:none;stroke:#07372e;stroke-width:1.5}.access-grid h3{margin:0 0 9px;font-size:.9rem}.access-grid p{max-width:220px;margin:0;color:#5d6b66;font-size:.78rem;line-height:1.5}
+  .closing-section{position:relative;min-height:310px;background:#07372e;color:#fff}.closing-spine{box-shadow:10px 0 24px rgba(0,0,0,.25)}.closing-spine>div{position:absolute;left:50%;top:50%;display:grid;width:72px;height:82px;transform:translate(-50%,-50%);place-items:center;border:1px solid #536f67;border-radius:10px;background:#082b24}.closing-spine img{width:34px;filter:brightness(0) invert(1)}.closing-copy{padding-top:58px}.closing-copy h2{margin-bottom:16px;color:#fff;font-size:2.5rem}.closing-copy p{margin:0 0 24px;color:#c8d6d2}.connect-button--light{background:#fff;color:#07372e;box-shadow:none}
+  @media(max-width:1050px){:global(.integrations-c){--spine-x:135px}.agents{left:215px}.hero-copy{left:60%;}.hero-copy h1{font-size:5.2rem}.agent__portrait{width:105px;height:105px}.agent-lines{width:27vw}.content-column{width:calc(100% - 260px);margin-left:230px}}
+  @media(max-width:760px){:global(.integrations-c){--spine-x:38px}.switchboard-hero{min-height:980px}.switchboard,.continuing-spine,.closing-spine{width:44px}.switchboard__cap{top:24px;width:42px;height:54px}.switchboard__cap img{width:24px}.plug{display:none}.agents{left:72px;width:auto}.agent{gap:10px}.agent:nth-child(1){top:16%!important}.agent:nth-child(2){top:31%!important}.agent:nth-child(3){top:46%!important}.agent__portrait{width:82px;height:82px}.agent__name small{max-width:100px}.agent-lines{left:38px;width:150px}.agent-lines span:nth-child(1){top:16%!important}.agent-lines span:nth-child(2){top:31%!important}.agent-lines span:nth-child(3){top:46%!important}.hero-copy{left:72px;top:560px}.hero-copy h1{font-size:3.9rem;line-height:.9}.content-column{width:auto;margin-left:0;padding:64px 20px 64px 78px}.content-column h2{font-size:1.75rem}.flow-board{grid-template-columns:1fr}.flow-hub{height:88px}.flow-hub::before{top:-10px;bottom:-10px;left:50%;right:auto;width:1px;height:auto}.result-grid,.access-grid{grid-template-columns:1fr 1fr}.result-grid article:nth-child(2){border-right:0}.result-grid article:nth-child(3){padding-left:0}.access-grid article{padding:0 20px 30px 0}.access-grid article+article{padding-left:20px}.access-grid article:nth-child(3){padding-top:30px;padding-left:0;border-left:0;border-top:1px solid #d7dcda}.closing-section{min-height:380px}.closing-copy{padding-top:60px}.closing-copy h2{font-size:2.2rem}}
+  @media(max-width:430px){.result-grid{grid-template-columns:1fr}.result-grid article,.result-grid article+article{padding:20px 0;border-right:0;border-bottom:1px solid #d7dcda}.access-grid{grid-template-columns:1fr}.access-grid article,.access-grid article+article{padding:24px 0;border-left:0;border-top:1px solid #d7dcda}.access-grid article:first-child{border-top:0}.hero-copy h1{font-size:3.55rem}}
+  @media(min-width:1051px){.switchboard-hero{min-height:820px}.agent__portrait{width:145px;height:145px}.agent-lines span{border-top-width:4px;opacity:.92;filter:drop-shadow(0 0 3px color-mix(in srgb,var(--agent) 35%,transparent))}}
+  @media(max-width:760px){:global(.integrations-c){--spine-x:56px}.switchboard-hero{min-height:1050px}.plug{display:flex;right:auto;left:22px}.plug__lead{width:28px;height:4px}.plug__lead::before{display:none}.plug__lead i{top:-2px;width:8px;height:8px}.plug__logo{right:auto;left:30px;width:34px;height:34px;border-radius:8px}.plug__logo svg{width:19px;height:19px}.plug__logo b{font-size:.56rem}.agents{left:136px}.agent:nth-child(1){top:17%!important}.agent:nth-child(2){top:33%!important}.agent:nth-child(3){top:49%!important}.agent__portrait{width:76px;height:76px}.agent__name small{max-width:92px}.agent-lines{left:56px;width:118px}.agent-lines span:nth-child(1){top:17%!important}.agent-lines span:nth-child(2){top:33%!important}.agent-lines span:nth-child(3){top:49%!important}.hero-copy{left:116px;top:635px}.content-column{padding-left:96px}.closing-copy{padding-left:96px}}
 </style>
