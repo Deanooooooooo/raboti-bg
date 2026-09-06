@@ -337,3 +337,6 @@
   .home-art .faq-list details[open] p { animation: faq-answer-in .2s ease-out; }
   @keyframes faq-answer-in { from { opacity: .5; transform: translateY(4px); } }
 }
+/* Keep native details summaries above their answer wrapper and clear of the fixed nav. */
+.home-art .faq-list summary { position: relative; z-index: 1; scroll-margin-top: 120px; }
+.home-art .faq-list details > p { position: relative; }
