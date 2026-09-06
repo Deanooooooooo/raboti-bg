@@ -16,6 +16,7 @@ async function walk(directory) {
 
     const html = await readFile(path, 'utf8');
     const prepared = html
+      .replace(/const (loadClarity|loadMetaPixel) = \(\) => \{/g, '$& if (!["vdiga.bg", "www.vdiga.bg"].includes(window.location.hostname)) return;')
       .replace('<head>', '<head><meta name="robots" content="noindex,nofollow,noarchive">')
       // Astro's base handles generated assets, including URLs inside CSS.
       // These rewrites cover only root-absolute links written directly in templates.

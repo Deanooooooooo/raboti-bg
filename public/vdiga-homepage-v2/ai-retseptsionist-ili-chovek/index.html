@@ -49,6 +49,7 @@
     const banner = document.querySelector("[data-cookie-consent]");
 
     const loadClarity = () => {
+      if (!["vdiga.bg", "www.vdiga.bg"].includes(window.location.hostname)) return;
       if (document.querySelector("script[data-vdiga-clarity]")) return;
       window.clarity = window.clarity || function () {
         (window.clarity.q = window.clarity.q || []).push(arguments);
@@ -65,6 +66,7 @@
     };
 
     const loadMetaPixel = () => {
+      if (!["vdiga.bg", "www.vdiga.bg"].includes(window.location.hostname)) return;
       if (document.querySelector("script[data-vdiga-meta-pixel]")) return;
       window.fbq = window.fbq || function () {
         (window.fbq.callMethod
