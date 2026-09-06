@@ -1,0 +1,57 @@
+# Canonical origin: HTTPS and non-www in one permanent redirect.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  # Permanent author-profile migration. Keep old indexed/shared URLs useful.
+  RewriteRule ^avtori/dean-dechev/?$ https://vdiga.bg/za-nas/dean-dechev/ [R=301,L,NE]
+  RewriteRule ^avtori/mariyan-dechev/?$ https://vdiga.bg/za-nas/mariyan-dechev/ [R=301,L,NE]
+
+  # Consolidate the former methodology page into the complete case study.
+  RewriteRule ^proouchvane-150-salona-metodologiya/?$ https://vdiga.bg/150-salona-sofia-ne-otgovaryat/ [R=301,L,NE]
+
+  RewriteCond %{HTTPS} !=on [OR]
+  RewriteCond %{HTTP_HOST} !^vdiga\.bg$ [NC]
+  RewriteRule ^ https://vdiga.bg%{REQUEST_URI} [R=301,L,NE]
+</IfModule>
+
+# Browser security policy. Do not preload or include subdomains until every
+# future subdomain is guaranteed to support HTTPS.
+<IfModule mod_headers.c>
+  Header always set Strict-Transport-Security "max-age=31536000"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+
+  <FilesMatch "\.(?:avif|css|gif|ico|jpe?g|js|mp3|png|svg|webp|woff2?)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType text/javascript "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType image/avif "access plus 1 year"
+  ExpiresByType image/gif "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType audio/mpeg "access plus 1 year"
+</IfModule>
+
+# BEGIN cPanel-generated php ini directives, do not edit
+# Manual editing of this file may result in unexpected behavior.
+# To make changes to this file, use the cPanel MultiPHP INI Editor (Home >> Software >> MultiPHP INI Editor)
+# For more information, read our documentation (https://go.cpanel.net/EA4ModifyINI)
+<IfModule php8_module>
+   php_value error_log "/home/vdigabg/logs/php.error.log"
+   php_flag log_errors On
+</IfModule>
+<IfModule lsapi_module>
+   php_value error_log "/home/vdigabg/logs/php.error.log"
+   php_flag log_errors On
+</IfModule>
+# END cPanel-generated php ini directives, do not edit

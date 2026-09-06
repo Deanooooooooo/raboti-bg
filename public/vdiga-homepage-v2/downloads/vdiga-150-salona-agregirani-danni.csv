@@ -1,0 +1,13 @@
+metric,value,unit,note
+sample_total,150,businesses,"150 different businesses across 8 Sofia districts"
+answered_within_12_seconds,90,calls,"Answered during the 12-second test window"
+unanswered_within_12_seconds,60,calls,"No answer during the 12-second test window"
+unanswered_share,40,percent,"60 of 150 calls"
+mall_locations,23,businesses,"Sample composition only"
+large_beauty_centres,38,businesses,"Sample composition only"
+barbershops,32,businesses,"Sample composition only"
+neighbourhood_studios,57,businesses,"Sample composition only"
+districts,8,districts,"Sofia"
+ring_duration,12,seconds,"One call per business"
+callback_observation_window,24,hours,"Aggregate callback result not yet published"
+appointments_blocked,0,appointments,"No deliberate booking was made"
