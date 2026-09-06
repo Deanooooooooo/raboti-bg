@@ -17,9 +17,9 @@ const liveAgents = agents
   .filter((agent) => agent.data.status === "live")
   .sort((a, b) => liveAgentOrder.indexOf(a.data.slug) - liveAgentOrder.indexOf(b.data.slug));
 const agentProfiles: Record<string, { name: string; image: string; imageAlt: string; cta: string; promise: string; summary: string }> = {
-  vdiga: { name: "Vdiga", image: "/assets/employee-vdiga-gloria-v1.webp", imageAlt: "Gloria, образът на AI рецепциониста Vdiga", cta: "Вижте как работи Vdiga", promise: "Вдига, когато вие не можете.", summary: "Отговаря на въпроси и записва часове, докато вие се грижите за клиентите." },
-  pishe: { name: "Pishe", image: "/assets/employee-pishe-v1.webp", imageAlt: "Визуално представяне на AI уеб мениджъра Pishe", cta: "Вижте как работи Pishe", promise: "Сайтът ви остава актуален.", summary: "Обновява страници, цени и каталог. Работи по SEO, а публикува след вашето одобрение." },
-  pomaga: { name: "Pomaga", image: "/assets/employee-pomaga-v1.webp", imageAlt: "Визуално представяне на AI оперативния асистент Pomaga", cta: "Вижте как работи Pomaga", promise: "По-малко копиране на ръка.", summary: "Прехвърля данните от имейла в CRM, задачите и справките — по правилата на вашия екип." },
+  vdiga: { name: "Vdiga", image: "/assets/employee-vdiga-gloria-v1.webp", imageAlt: "Gloria, образът на AI рецепциониста Vdiga", cta: "Вижте как работи Vdiga", promise: "Докато сте с един клиент, не изпускайте следващия.", summary: "Vdiga поема обажданията, отговаря на въпроси и записва часове. Клиентите получават внимание, без да прекъсват работата на екипа." },
+  pishe: { name: "Pishe", image: "/assets/employee-pishe-v1.webp", imageAlt: "Визуално представяне на AI уеб мениджъра Pishe", cta: "Вижте как работи Pishe", promise: "Нека следващият ви клиент ви намери онлайн.", summary: "Pishe автоматично обновява сайта по уговорените правила или изгражда нов. Развива съдържанието, за да ви откриват в Google и отговорите на AI." },
+  pomaga: { name: "Pomaga", image: "/assets/employee-pomaga-v1.webp", imageAlt: "Визуално представяне на AI оперативния асистент Pomaga", cta: "Вижте как работи Pomaga", promise: "Повече време за работа. По-малко за администрация.", summary: "Pomaga свързва имейла, клиентските данни и задачите в един процес. Екипът върши същинската работа, вместо да преписва и да предава информация на ръка." },
 };
 const schemas = [
   faqSchema(homeFaqs),
@@ -58,7 +58,7 @@ const schemas = [
 
 <BaseLayout
   title="Raboti | AI служители за задачите, които бавят бизнеса"
-  description="AI служители за пропуснати обаждания, промени по сайта и повтарящи се задачи. Вижте какво поема всяка роля, колко струва и кога пита човек."
+  description="AI служители за клиентите, сайта и администрацията. Raboti поема ежедневната работа, за да не чака всичко вас. Вижте ролите и цените."
   canonical="/"
   schema={schemas}
   bodyClass="home-art"
@@ -66,17 +66,17 @@ const schemas = [
   <section class="home-hero" data-hero>
     <div class="shell home-hero__grid">
       <div class="home-hero__copy">
-        <h1><em>Наемете AI служители</em><br />за българския бизнес.</h1>
-        <p class="home-hero__lead">Vdiga приема обажданията, Pishe поддържа сайта, а Pomaga прехвърля данните между програмите ви. Изберете служител според работата, която се трупа. Предварително ще знаете какво може да прави сам и кога трябва да ви попита.</p>
+        <h1>Бизнесът ви не трябва<br /><em>да чака да се освободите.</em></h1>
+        <p class="home-hero__lead">Клиентите очакват отговор. Бизнесът ви трябва да се вижда онлайн. А ежедневната работа трябва да върви. Наемете AI служител от Raboti, който да поеме своята част — без всичко да остава за вас и екипа ви.</p>
         <div class="home-hero__actions">
-          <a class="button button--spectrum" href="#naemi">Изпратете запитване <Icon name="arrow-down" /></a>
-          <a class="home-link" href="#ekip">Вижте AI служителите <Icon name="arrow-right" /></a>
+          <a class="button button--spectrum" href="#ekip">Вижте AI служителите <Icon name="arrow-down" /></a>
+          <a class="home-link" href="#naemi">Обсъдете с нас <Icon name="arrow-right" /></a>
         </div>
         <RoleKeys />
         <div class="home-hero__signals" aria-label="Основни характеристики">
           <span><i></i> Срок за настройка според задачата</span>
           <span><i></i> Работи на български</span>
-          <span><i></i> Вие решавате преди плащане или публикуване</span>
+          <span><i></i> Вие определяте какво прави сам</span>
         </div>
       </div>
     </div>
@@ -85,21 +85,21 @@ const schemas = [
   <section class="home-facts" aria-labelledby="home-facts-title">
     <div class="shell">
       <div class="home-facts__intro">
-        <h2 id="home-facts-title">Първо ни показвате<br /><em>как работите сега.</em></h2>
-        <p>Започваме с един обичаен случай и подготвяме служителя да го поема по същия начин всеки път.</p>
+        <h2 id="home-facts-title">Не ви трябва<br /><em>още една система за разучаване.</em></h2>
+        <p>Първо разбираме как работите и къде се натрупва забавянето. Подготвяме служителя за вашия бизнес и проверяваме работата му преди старта.</p>
       </div>
 
       <div class="home-facts__journey">
         <article class="home-fact">
-          <strong>Минаваме през една задача.</strong>
-          <p>Показвате ни едно обаждане, една промяна по сайта или една задача, която местите между програмите.</p>
+          <strong>Разбираме къде ви тежи.</strong>
+          <p>Разказвате ни какво прекъсва екипа, остава за после или кара клиентите да чакат. Разглеждаме реални примери от работата ви.</p>
         </article>
         <article class="home-fact">
-          <strong>Уточняваме какво да прави.</strong>
+          <strong>Уточняваме какво поемаме.</strong>
           <p>Записваме каква информация използва, до какво има достъп и в кои случаи трябва да ви попита.</p>
         </article>
         <article class="home-fact">
-          <strong>Тестваме го, преди да започне.</strong>
+          <strong>Настройваме и проверяваме.</strong>
           <p>Проверяваме обичайните случаи и изключенията. След това го пускаме да върши задачите, за които сте се разбрали.</p>
         </article>
       </div>
@@ -109,8 +109,8 @@ const schemas = [
   <section class="home-section roster-section" id="ekip">
     <div class="shell">
       <div class="home-heading">
-        <div><h2>Къде ви трябва<br /><em>още един служител?</em></h2></div>
-        <p>Изберете откъде да започнем. Ние ще подготвим служителя за работата така, както тя се върши при вас.</p>
+        <div><h2>Къде бизнесът ви има нужда<br /><em>от още един служител?</em></h2></div>
+        <p>На телефона, онлайн или в ежедневната организация — изберете работата, която вече не искате да остава за после.</p>
       </div>
 
       <div class="roster-grid">
@@ -147,12 +147,12 @@ const schemas = [
   <section class="home-section process-section" id="proces">
     <div class="shell process-layout">
       <div class="process-copy">
-        <h2>Повтарящата се работа върви.<br /><em>Решенията остават ваши.</em></h2>
-        <p>Служителят приема обаждането, сменя съдържанието или прехвърля данните, без да чака някой от екипа да се освободи. Преди плащане, договор или публикуване спира и ви пита.</p>
+        <h2>Работата върви.<br /><em>Решенията остават ваши.</em></h2>
+        <p>Знаете какво е възложено на служителя и какво е свършил. Предварително уточняваме кога действа сам и кога чака вашето потвърждение. Така делегирате работата, без да губите контрол.</p>
         <ul class="process-principles">
           <li><span class="principle-mark"><Icon name="arrow-right" /></span><div><strong>Поема задачата, когато пристигне</strong><small>Дори когато екипът е зает или денят е приключил.</small></div></li>
           <li><span class="principle-mark"><Icon name="check" /></span><div><strong>Върши само задачите, за които сте се разбрали</strong><small>Използва само информацията и програмите, до които сте му дали достъп.</small></div></li>
-          <li><span class="principle-mark"><WorkGlyph name="guard" /></span><div><strong>Спира, когато трябва да решите вие</strong><small>Не плаща, не подписва и не публикува без вашето потвърждение.</small></div></li>
+          <li><span class="principle-mark"><WorkGlyph name="guard" /></span><div><strong>Спира, когато трябва да решите вие</strong><small>Плащанията, договорите и промените извън даденото разрешение чакат вашето потвърждение.</small></div></li>
         </ul>
         <a class="button process-cta" href="#naemi">Опишете как работите сега <Icon name="arrow-right" /></a>
       </div>
@@ -163,8 +163,8 @@ const schemas = [
   <section class="home-section proof-section" id="kontrol">
     <div class="shell proof-grid">
       <div class="proof-copy">
-        <h2>Кое не смогвате <em>да свършите?</em></h2>
-        <p>Разкажете ни как го правите сега. До един работен ден ще ви кажем дали някой от служителите ни може да го поеме и колко ще струва.</p>
+        <h2>Кое спира бизнеса ви, <em>когато нямате време?</em></h2>
+        <p>Обаждания без отговор? Сайт, който изостава или още липсва? Администрация след работния ден? Разкажете ни къде ви тежи. Ще ви кажем какво можем да поемем и колко ще струва.</p>
         <a class="button proof-cta" href="#naemi">Изпратете запитване <Icon name="arrow-right" /></a>
         <small>Не подготвяйте задание. Напишете го както бихте го обяснили на нов колега.</small>
       </div>
@@ -194,8 +194,8 @@ const schemas = [
     <div class="home-contact__aurora" aria-hidden="true"></div>
     <div class="shell home-contact__grid">
       <div>
-        <h2>Покажете ни<br /><em>какво остава за после.</em></h2>
-        <p>Изберете служител и опишете един случай от последната седмица. До един работен ден ще ви кажем по имейл дали може да поеме тази работа, какво ще ни трябва от вас и колко ще струва.</p>
+        <h2>Не е нужно да знаете<br /><em>как се автоматизира.</em></h2>
+        <p>Достатъчно е да знаете какво ви тежи. Опишете проблема със свои думи. До един работен ден ще ви отговорим дали Raboti е подходящ за него и каква е следващата стъпка.</p>
         <div class="contact-spectrum" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
       </div>
       <ContactForm title="Изпратете запитване" enquiry={true} />
