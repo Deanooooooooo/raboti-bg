@@ -53,9 +53,10 @@ const plans = [
     <h2 id="pishe-pricing-title">Колко работа искате Pishe да поеме?</h2>
   </header>
   <p class="gloria-pricing__lead">Изберете според работата по сайта: текущи промени, нова страница всяка седмица или редовно обновяване на голям каталог.</p>
+<details class="plan-comparison"><summary>Сравнете плановете на едно място</summary><div class="plan-comparison__scroll" tabindex="0" role="region" aria-label="Сравнение на плановете"><table><caption>Основните разлики · Pishe</caption><thead><tr><th scope="col">Включено</th><th scope="col">Актуализации</th><th scope="col">Съдържание и SEO</th><th scope="col">Каталог и съдържание</th></tr></thead><tbody><tr><th scope="row">Текущи актуализации</th><td>Да</td><td>Да</td><td>Да</td></tr><tr><th scope="row">Ново съдържание</th><td>Извън този план</td><td>1 страница седмично</td><td>Повече страници по уговорка</td></tr><tr><th scope="row">SEO и GEO</th><td>Извън този план</td><td>Включени</td><td>Включени</td></tr><tr><th scope="row">Месечна цена без ДДС</th><td>€197</td><td>€297</td><td>€597</td></tr></tbody></table></div></details>
   <div class="gloria-pricing__grid">
     {plans.map((plan) => <article class:list={["gloria-plan", plan.featured && "gloria-plan--featured"]}>
-      <header><h3>{plan.name}</h3>{plan.featured && <span>най-избиран</span>}</header>
+      <header><h3>{plan.name}</h3>{plan.featured && <span>За развитие на сайта</span>}</header>
       <p class="gloria-plan__note">{plan.note}</p>
       <div class="gloria-plan__volume"><strong>{plan.scope}</strong><span>Какво поема Pishe</span></div>
       <div class="gloria-plan__price"><strong>{plan.price}</strong><span>/месец</span></div>

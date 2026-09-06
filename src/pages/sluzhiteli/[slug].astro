@@ -1,6 +1,9 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import ServiceExample from "../../components/ServiceExample.astro";
+import SearchDiscovery from "../../components/SearchDiscovery.astro";
+import "../../styles/agent-refinement.css";
 import Icon from "../../components/Icon.astro";
 import VdigaPricing from "../../components/VdigaPricing.astro";
 import VdigaLeadForm from "../../components/VdigaLeadForm.astro";
@@ -141,12 +144,9 @@ const profile = profiles[data.slug as keyof typeof profiles];
 const schemas = [
   faqSchema(profile.interview.map(([question, answer]) => ({ question, answer }))),
   breadcrumbSchema([{name:"Raboti",url:site.url},{name:"AI служители",url:`${site.url}/sluzhiteli/`},{name:data.name,url:pageUrl}]),
-  { "@context": "https://schema.org", "@type": "Product", name: `${data.name}: ${data.role}`, description: data.description, brand: { "@type": "Brand", name: site.brand }, url: pageUrl,
-    offers: data.slug === "vdiga"
-      ? { "@type": "AggregateOffer", lowPrice: "97", highPrice: "297", priceCurrency: "EUR", offerCount: "3", availability: "https://schema.org/InStock", url: `${pageUrl}#planove` }
-      : data.slug === "pishe"
-        ? { "@type": "AggregateOffer", lowPrice: "197", highPrice: "597", priceCurrency: "EUR", offerCount: "3", availability: "https://schema.org/InStock", url: `${pageUrl}#planove` }
-        : { "@type": "AggregateOffer", lowPrice: "297", highPrice: "597", priceCurrency: "EUR", offerCount: "3", availability: "https://schema.org/InStock", url: `${pageUrl}#planove` } },
+  { "@context": "https://schema.org", "@type": "Service", "@id": `${pageUrl}#service`, name: `${data.name}: ${data.role}`, description: data.description, provider: { "@id": `${site.url}/#organization` }, url: pageUrl, areaServed: { "@type": "Country", name: "България" },
+    offers: (data.slug === "pishe" ? [197,297,597] : data.slug === "vdiga" ? [97,297] : [297,597]).map(price => ({ "@type":"Offer", price:String(price), priceCurrency:"EUR", url:`${pageUrl}#planove`, description:"Месечен абонамент без ДДС. Обхватът е описан в съответния план." }))
+  },
 ];
 ---
 <BaseLayout title={data.seoTitle} description={data.seoDescription} canonical={`/sluzhiteli/${data.slug}/`} image={`/og/${data.slug}.svg`} schema={schemas} bodyClass={`candidate-page candidate-page--${data.slug}`}>
@@ -155,12 +155,12 @@ const schemas = [
     <div class="gloria-hero__inner">
       <div class="gloria-hero__copy">
         <span class="gloria-role">{data.role}</span>
-        <h1>{profile.hello}</h1>
-        <p class="gloria-hero__position">{profile.position}</p>
+        <h1>{profile.position}</h1>
+        <p class="gloria-hero__position">{profile.hello}</p>
         <p class="gloria-hero__intro">{profile.intro}</p>
         <div class="gloria-hero__actions">
-          <a class="button button--spectrum" href={data.slug === "vdiga" ? "#razgovor" : "#zayavka"}><Icon name={data.slug === "vdiga" ? "phone" : "arrow-right"} /> {data.slug === "vdiga" ? "Чуйте примерен разговор" : profile.cta}</a>
-          <a class="gloria-text-link" href="#umenia">Вижте какво мога <span aria-hidden="true">↓</span></a>
+          <a class="button button--spectrum" href="#razgovor"><Icon name={data.slug === "vdiga" ? "phone" : "arrow-right"} /> {data.slug === "vdiga" ? "Чуйте примерен разговор" : "Вижте как работи"}</a>
+          <a class="gloria-text-link" href="#planove">Вижте цените <span aria-hidden="true">↓</span></a>
         </div>
         <ul class="gloria-facts" aria-label="Основни условия">
           {profile.facts.map((fact) => <li>{fact}</li>)}
@@ -172,6 +172,38 @@ const schemas = [
       </figure>
     </div>
   </section>
+
+  <nav class="agent-nav" aria-label="На тази страница"><a href="#razgovor">Как работи</a><a href="#umenia">Обхват</a><a href="#planove">Цени</a><a href="#vuprosi">Въпроси</a><a href="#zayavka">Запитване</a></nav>
+
+  <section class="gloria-demo" id="razgovor" aria-labelledby="gloria-demo-title" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
+    <div>
+      <p>{data.slug === "vdiga" ? "Примерен разговор" : "Примерен работен процес"}</p><h2 id="gloria-demo-title">{data.slug === "vdiga" ? "Чуйте как Vdiga приема обаждане." : profile.closing}</h2>
+      {data.slug === "vdiga" ? (
+        <>
+          <span class="gloria-demo__intro">Записът показва как AI асистентът се представя, задава уточняващи въпроси и стига до записан час. Това е примерен разговор, а не обаждане на живо.</span>
+          <audio class="gloria-demo__audio" controls preload="metadata" src="/assets/vdiga-mdsolution-demo-v35.mp3">
+            Вашият браузър не може да пусне аудиозаписа.
+          </audio>
+        </>
+      ) : (
+        <><ServiceExample role={data.slug} /><a class="agent-inline-link" href="#umenia">Вижте пълния обхват <Icon name="arrow-right" /></a></>
+      )}
+    </div>
+  </section>
+
+  <section class="gloria-skills" id="umenia" aria-labelledby="gloria-skills-title" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
+    <header class="gloria-section-head"><p>Какво мога</p><h2 id="gloria-skills-title">{profile.skillsHeadline}</h2></header>
+    <div class="gloria-skills__list reveal-group">
+      {profile.capabilities.map(([title, description], index) => <article class="gloria-skill reveal-row">
+        <span>{String(index + 1).padStart(2,"0")}</span>
+        <div><h3>{title}</h3><p>{description}</p></div>
+      </article>)}
+    </div>
+  </section>
+
+  {data.slug === "pishe" && <SearchDiscovery />}
+
+  {data.slug === "vdiga" ? <VdigaPricing /> : data.slug === "pishe" ? <PishePricing /> : <PomagaPricing />}
 
   <section class="gloria-file" aria-labelledby="gloria-file-title" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
     <header class="gloria-section-head"><p>Служебно досие</p><h2 id="gloria-file-title">Условията ми за работа.</h2></header>
@@ -187,16 +219,6 @@ const schemas = [
     </div>
   </section>
 
-  <section class="gloria-skills" id="umenia" aria-labelledby="gloria-skills-title" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
-    <header class="gloria-section-head"><p>Какво мога</p><h2 id="gloria-skills-title">{profile.skillsHeadline}</h2></header>
-    <div class="gloria-skills__list reveal-group">
-      {profile.capabilities.map(([title, description], index) => <article class="gloria-skill reveal-row">
-        <span>{String(index + 1).padStart(2,"0")}</span>
-        <div><h3>{title}</h3><p>{description}</p></div>
-      </article>)}
-    </div>
-  </section>
-
   <section class="gloria-honesty" aria-labelledby="gloria-honesty-title" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
     <span aria-hidden="true"></span>
     <p>Да сме честни от началото</p>
@@ -204,36 +226,14 @@ const schemas = [
     <div>{profile.honesty.map((paragraph) => <p>{paragraph}</p>)}</div>
   </section>
 
-  <section class="gloria-chat" aria-labelledby="gloria-chat-title" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
-    <header class="gloria-section-head"><p>Интервюто</p><h2 id="gloria-chat-title">{profile.interviewHeadline}</h2></header>
-    <div class="gloria-chat__thread reveal-group">
-      {profile.interview.map(([question, answer]) => <div class="gloria-chat__exchange reveal-row">
-        <p class="gloria-chat__question">{question}</p>
-        <div class="gloria-chat__answer"><img src={profile.image} alt="" width="48" height="48" loading="lazy" /><p>{answer}</p></div>
-      </div>)}
+  <section class="gloria-chat" id="vuprosi" aria-labelledby="gloria-chat-title" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
+    <header class="gloria-section-head"><h2 id="gloria-chat-title">{profile.interviewHeadline}</h2></header>
+    <div class="agent-questions">
+      {profile.interview.map(([question, answer]) => <details><summary>{question}<span aria-hidden="true">+</span></summary><p>{answer}</p></details>)}
     </div>
   </section>
 
-  <section class="gloria-demo" id="razgovor" aria-labelledby="gloria-demo-title" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
-    <div>
-      <p>{data.slug === "vdiga" ? "Примерен разговор" : "Пробна задача"}</p><h2 id="gloria-demo-title">{data.slug === "vdiga" ? "Чуйте как Vdiga приема обаждане." : profile.closing}</h2>
-      {data.slug === "vdiga" ? (
-        <>
-          <span class="gloria-demo__intro">Записът показва как AI асистентът се представя, задава уточняващи въпроси и стига до записан час. Това е примерен разговор, а не обаждане на живо.</span>
-          <audio class="gloria-demo__audio" controls preload="metadata" src="/assets/vdiga-mdsolution-demo-v35.mp3">
-            Вашият браузър не може да пусне аудиозаписа.
-          </audio>
-        </>
-      ) : (
-        <>
-          <a class="gloria-demo__call" href="#zayavka">{profile.cta} <Icon name="arrow-right" /></a>
-          <span>{data.slug === "pishe" ? "Пратете сайта си. Ако още нямате сайт, опишете бизнеса си. До един работен ден ще кажем откъде има смисъл да започнем." : "Опишете откъде идва задачата и къде трябва да стигне. До един работен ден ще кажем дали Pomaga може да я поеме."}</span>
-        </>
-      )}
-    </div>
-  </section>
-
-  {data.slug === "vdiga" ? <><VdigaPricing /><VdigaLeadForm /></> : data.slug === "pishe" ? <><PishePricing /><PisheLeadForm /></> : <><PomagaPricing /><PomagaLeadForm /></>}
+  {data.slug === "vdiga" ? <VdigaLeadForm /> : data.slug === "pishe" ? <PisheLeadForm /> : <PomagaLeadForm />}
   <section class="gloria-team" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
     <header class="gloria-section-head"><h2>Запознайте се с моите колеги</h2></header>
     <div class="gloria-team__grid">{colleagues.map((item) => {
@@ -249,6 +249,16 @@ const schemas = [
     <a class="button button--spectrum" href={data.slug === "vdiga" ? "/kontakti/?agent=vdiga" : "#zayavka"}>Назначете {profile.person}</a>
   </section>
   <script>
+    const navLinks = [...document.querySelectorAll<HTMLAnchorElement>('.agent-nav a')];
+    navLinks.forEach(link => link.addEventListener('click', () => navLinks.forEach(item => { if(item===link)item.setAttribute('aria-current','location');else item.removeAttribute('aria-current'); })));
+    if ('IntersectionObserver' in window) {
+      const navObserver = new IntersectionObserver(entries => {
+        const current = entries.find(entry => entry.isIntersecting);
+        if (!current) return;
+        navLinks.forEach(link => { if (link.hash === `#${current.target.id}`) link.setAttribute('aria-current','location'); else link.removeAttribute('aria-current'); });
+      }, {rootMargin:'-20% 0px -60% 0px'});
+      navLinks.forEach(link => {const section = document.querySelector(link.hash);if(section)navObserver.observe(section);});
+    }
     const revealItems = document.querySelectorAll<HTMLElement>(".candidate-page .reveal-row");
     if ("IntersectionObserver" in window && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {

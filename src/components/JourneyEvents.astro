@@ -1,0 +1,13 @@
+<!-- Local, non-personal journey events. No analytics service is enabled here. -->
+<script>
+  const emit = (action: string, agent: string, plan?: string) => window.dispatchEvent(new CustomEvent('raboti:interaction', {detail:{action,agent,...(plan?{plan}: {})}}));
+  const agent = location.pathname.match(/\/sluzhiteli\/(vdiga|pishe|pomaga)\//)?.[1] || 'homepage';
+  if (agent !== 'homepage') emit('service_view', agent);
+  document.querySelectorAll<HTMLElement>('[data-vdiga-plan],[data-pishe-plan],[data-pomaga-plan]').forEach(link => link.addEventListener('click', () => emit('plan_selected', agent, link.dataset.vdigaPlan || link.dataset.pishePlan || link.dataset.pomagaPlan)));
+  const pricing = document.querySelector('#planove');
+  if (pricing && 'IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => {if(entries.some(e=>e.isIntersecting)){emit('pricing_view',agent);observer.disconnect();}}, {threshold:.1});
+    observer.observe(pricing);
+  }
+  document.querySelectorAll('audio').forEach(audio=>audio.addEventListener('play',()=>emit('demo_play',agent),{once:true}));
+</script>

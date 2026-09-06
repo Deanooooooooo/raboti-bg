@@ -16,10 +16,10 @@ const liveAgentOrder = ["vdiga", "pishe", "pomaga"];
 const liveAgents = agents
   .filter((agent) => agent.data.status === "live")
   .sort((a, b) => liveAgentOrder.indexOf(a.data.slug) - liveAgentOrder.indexOf(b.data.slug));
-const agentProfiles: Record<string, { name: string; image: string; imageAlt: string; cta: string; promise: string; summary: string }> = {
-  vdiga: { name: "Vdiga", image: "/assets/employee-vdiga-gloria-v1.webp", imageAlt: "Gloria, образът на AI рецепциониста Vdiga", cta: "Вижте как работи Vdiga", promise: "Докато сте с един клиент, не изпускайте следващия.", summary: "Vdiga поема обажданията, отговаря на въпроси и записва часове. Клиентите получават внимание, без да прекъсват работата на екипа." },
-  pishe: { name: "Pishe", image: "/assets/employee-pishe-v1.webp", imageAlt: "Визуално представяне на AI уеб мениджъра Pishe", cta: "Вижте как работи Pishe", promise: "Нека следващият ви клиент ви намери онлайн.", summary: "Pishe автоматично обновява сайта по уговорените правила или изгражда нов. Развива съдържанието, за да ви откриват в Google и отговорите на AI." },
-  pomaga: { name: "Pomaga", image: "/assets/employee-pomaga-v1.webp", imageAlt: "Визуално представяне на AI оперативния асистент Pomaga", cta: "Вижте как работи Pomaga", promise: "Повече време за работа. По-малко за администрация.", summary: "Pomaga свързва имейла, клиентските данни и задачите в един процес. Екипът върши същинската работа, вместо да преписва и да предава информация на ръка." },
+const agentProfiles: Record<string, { name: string; image: string; imageAlt: string; cta: string; promise: string; summary: string; fit: string }> = {
+  vdiga: { name: "Vdiga", fit: "За екипи, които не смогват да вдигат", image: "/assets/employee-vdiga-gloria-v1.webp", imageAlt: "Gloria, образът на AI рецепциониста Vdiga", cta: "Вижте как работи Vdiga", promise: "Докато сте с един клиент, не изпускайте следващия.", summary: "Обаждания, въпроси и записване на часове — без да прекъсвате клиента пред вас." },
+  pishe: { name: "Pishe", fit: "За бизнеси, чийто сайт има нужда от постоянна грижа", image: "/assets/employee-pishe-v1.webp", imageAlt: "Визуално представяне на AI уеб мениджъра Pishe", cta: "Вижте как работи Pishe", promise: "Нека следващият ви клиент ви намери онлайн.", summary: "Автоматични актуализации, нов сайт при нужда и съдържание за Google и AI отговорите." },
+  pomaga: { name: "Pomaga", fit: "За екипи с повтаряща се администрация", image: "/assets/employee-pomaga-v1.webp", imageAlt: "Визуално представяне на AI оперативния асистент Pomaga", cta: "Вижте как работи Pomaga", promise: "Повече време за работа. По-малко за администрация.", summary: "Свързва имейла, клиентските данни и задачите. Без едно и също преписване всеки ден." },
 };
 const schemas = [
   faqSchema(homeFaqs),
@@ -66,8 +66,13 @@ const schemas = [
   <section class="home-hero" data-hero>
     <div class="shell home-hero__grid">
       <div class="home-hero__copy">
-        <h1>Бизнесът ви не трябва<br /><em>да чака да се освободите.</em></h1>
-        <p class="home-hero__lead">Клиентите очакват отговор. Бизнесът ви трябва да се вижда онлайн. А ежедневната работа трябва да върви. Наемете AI служител от Raboti, който да поеме своята част — без всичко да остава за вас и екипа ви.</p>
+        <p class="home-category">AI служители за обаждания, сайтове и администрация</p>
+        <h1>Бизнесът ви не трябва <br /><em>да чака да се освободите.</em></h1>
+        <ul class="home-services" aria-label="Какво поема Raboti">
+          <li><a href="/sluzhiteli/vdiga/"><strong>Vdiga</strong><span>Обслужва клиентите по телефона.</span></a></li>
+          <li><a href="/sluzhiteli/pishe/"><strong>Pishe</strong><span>Обновява сайта и работи по откриването му в Google и AI отговорите.</span></a></li>
+          <li><a href="/sluzhiteli/pomaga/"><strong>Pomaga</strong><span>Поема повтарящата се администрация.</span></a></li>
+        </ul>
         <div class="home-hero__actions">
           <a class="button button--spectrum" href="#ekip">Вижте AI служителите <Icon name="arrow-down" /></a>
           <a class="home-link" href="#naemi">Обсъдете с нас <Icon name="arrow-right" /></a>
@@ -78,30 +83,6 @@ const schemas = [
           <span><i></i> Работи на български</span>
           <span><i></i> Вие определяте какво прави сам</span>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="home-facts" aria-labelledby="home-facts-title">
-    <div class="shell">
-      <div class="home-facts__intro">
-        <h2 id="home-facts-title">Не ви трябва<br /><em>още една система за разучаване.</em></h2>
-        <p>Първо разбираме как работите и къде се натрупва забавянето. Подготвяме служителя за вашия бизнес и проверяваме работата му преди старта.</p>
-      </div>
-
-      <div class="home-facts__journey">
-        <article class="home-fact">
-          <strong>Разбираме къде ви тежи.</strong>
-          <p>Разказвате ни какво прекъсва екипа, остава за после или кара клиентите да чакат. Разглеждаме реални примери от работата ви.</p>
-        </article>
-        <article class="home-fact">
-          <strong>Уточняваме какво поемаме.</strong>
-          <p>Записваме каква информация използва, до какво има достъп и в кои случаи трябва да ви попита.</p>
-        </article>
-        <article class="home-fact">
-          <strong>Настройваме и проверяваме.</strong>
-          <p>Проверяваме обичайните случаи и изключенията. След това го пускаме да върши задачите, за които сте се разбрали.</p>
-        </article>
       </div>
     </div>
   </section>
@@ -129,11 +110,12 @@ const schemas = [
                 <img src={profile.image} width="720" height="960" alt={profile.imageAlt} loading="lazy" decoding="async" />
               </div>
               <div class="roster-card__body">
+                <small class="roster-fit">{profile.fit}</small>
                 <strong class="roster-card__promise">{profile.promise}</strong>
                 <span>{profile.summary}</span>
               </div>
               <footer>
-                <strong>{data.priceLabel}</strong>
+                <strong>{data.priceLabel}</strong><small class="roster-tax">Без ДДС · обхватът се уточнява предварително</small>
                 <span class="roster-card__action"><span>{profile.cta}</span><Icon name="arrow-right" /></span>
               </footer>
             </a>
@@ -141,6 +123,30 @@ const schemas = [
         })}
       </div>
 
+    </div>
+  </section>
+
+  <section class="home-facts" aria-labelledby="home-facts-title">
+    <div class="shell">
+      <div class="home-facts__intro">
+        <h2 id="home-facts-title">Не ви трябва <br /><em>още една система за разучаване.</em></h2>
+        <p>Първо разбираме как работите и къде се натрупва забавянето. Подготвяме служителя за вашия бизнес и проверяваме работата му преди старта.</p>
+      </div>
+
+      <div class="home-facts__journey">
+        <article class="home-fact">
+          <strong>Разбираме къде ви тежи.</strong>
+          <p>Разказвате ни какво прекъсва екипа, остава за после или кара клиентите да чакат. Разглеждаме реални примери от работата ви.</p>
+        </article>
+        <article class="home-fact">
+          <strong>Уточняваме какво поемаме.</strong>
+          <p>Записваме каква информация използва, до какво има достъп и в кои случаи трябва да ви попита.</p>
+        </article>
+        <article class="home-fact">
+          <strong>Настройваме и проверяваме.</strong>
+          <p>Проверяваме обичайните случаи и изключенията. След това го пускаме да върши задачите, за които сте се разбрали.</p>
+        </article>
+      </div>
     </div>
   </section>
 

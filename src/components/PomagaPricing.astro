@@ -9,8 +9,9 @@ const plans = [
 <section class="gloria-pricing pomaga-pricing" id="planove" aria-labelledby="pomaga-pricing-title">
   <header class="gloria-section-head"><p>Планове за работа</p><h2 id="pomaga-pricing-title">Колко от повтарящата се работа да поеме Pomaga?</h2></header>
   <p class="gloria-pricing__lead">Покажете една задача от началото до края. Ще проверим през кои програми минава, кога Pomaga трябва да ви попита и кой план включва нужните стъпки.</p>
+<details class="plan-comparison"><summary>Сравнете плановете на едно място</summary><div class="plan-comparison__scroll" tabindex="0" role="region" aria-label="Сравнение на плановете"><table><caption>Основните разлики · Pomaga</caption><thead><tr><th scope="col">Включено</th><th scope="col">Една задача</th><th scope="col">Няколко стъпки</th><th scope="col">Операции</th></tr></thead><tbody><tr><th scope="row">Обхват</th><td>Един повтарящ се процес</td><td>Няколко свързани стъпки</td><td>Няколко процеса по оферта</td></tr><tr><th scope="row">Обем заявки</th><td>Уточнява се</td><td>Уточнява се</td><td>Уточнява се</td></tr><tr><th scope="row">Месечна цена без ДДС</th><td>€297</td><td>€597</td><td>По оферта</td></tr></tbody></table></div></details>
   <div class="gloria-pricing__grid">{plans.map((plan) => <article class:list={["gloria-plan",plan.featured&&"gloria-plan--featured"]}>
-    <header><h3>{plan.name}</h3>{plan.featured&&<span>най-избиран</span>}</header><p class="gloria-plan__note">{plan.note}</p>
+    <header><h3>{plan.name}</h3>{plan.featured&&<span>За свързан процес</span>}</header><p class="gloria-plan__note">{plan.note}</p>
     <div class="gloria-plan__volume"><strong>{plan.scope}</strong><span>Какво поема Pomaga</span></div>
     <div class="gloria-plan__price"><strong>{plan.price}</strong>{plan.price!=="Индивидуална оферта"&&<span>/месец</span>}</div>
     <p class="gloria-plan__terms">Без ДДС. Преди да започнем, записваме кои стъпки поема Pomaga и колко заявки ще обработва.</p>

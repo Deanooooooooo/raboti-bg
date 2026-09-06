@@ -1,5 +1,6 @@
 ---
 import Icon from './Icon.astro';
+import ServiceExample from './ServiceExample.astro';
 const roles = [
   { name: 'Vdiga', icon: 'phone' as const, key: 'vdiga', input: 'Клиент се обажда', result: 'Vdiga отговаря и записва час.' },
   { name: 'Pishe', icon: 'globe' as const, key: 'pishe', input: 'Имате нова цена', result: 'Pishe подготвя промяната за ваше одобрение.' },
@@ -10,16 +11,15 @@ const roles = [
   <div class="role-keys__scene">
     <div class="role-keys__assembly" role="group" aria-label="Изберете AI служител за примерна задача">
       {roles.map((role, index) => (
-        <button class:list={['role-key', `role-key--${role.key}`]} type="button" aria-pressed={index === 0 ? 'true' : 'false'} aria-controls="role-key-example" data-input={role.input} data-result={role.result} aria-label={`${role.name}: ${role.input.toLowerCase()}`}>
+        <button class:list={['role-key', `role-key--${role.key}`]} type="button" aria-pressed={index === 0 ? 'true' : 'false'} aria-controls="role-key-example" data-role={role.key} data-input={role.input} data-result={role.result} aria-label={`${role.name}: ${role.input.toLowerCase()}`}>
           <span class="role-key__base" aria-hidden="true"></span>
           <span class="role-key__face"><Icon name={role.icon} size={24} /><span>{role.name}</span></span>
         </button>
       ))}
     </div>
   </div>
-  <div class="role-keys__example" id="role-key-example" aria-live="polite" aria-atomic="true">
-    <span class="role-keys__label">Примерна задача</span>
-    <p><span data-example-input>{roles[0].input}</span><Icon name="arrow-right" /><strong data-example-result>{roles[0].result}</strong></p>
+  <div class="role-keys__example" id="role-key-example">
+    {roles.map((role,index) => <div data-role-panel={role.key} hidden={index !== 0}><ServiceExample role={role.key} /><a class="role-example-link" href={`/sluzhiteli/${role.key}/`}>Вижте какво включва {role.name} <Icon name="arrow-right" /></a></div>)}
   </div>
 </div>
 <style>
@@ -37,7 +37,9 @@ const roles = [
   .role-key[aria-pressed="true"] { transform: translateZ(22px); }
   .role-key[aria-pressed="true"] .role-key__face { background: linear-gradient(145deg, #fff, var(--key-light) 62%, var(--key-mid)); }
   .role-key:focus-visible { outline: 3px solid #2455d6; outline-offset: 8px; }
-  .role-keys__example { min-height: 68px; margin: 5px 0 0; }
+  .role-keys__example { min-height: 285px; margin: 5px 0 0; text-align:left; }
+  .role-example-link {display:flex;align-items:center;justify-content:space-between;min-height:48px;font-size:.875rem;color:#2455d6;text-decoration:none;padding:8px 20px;}
+  [data-role-panel][hidden] {display:none;}
   .role-keys__label { color: #687283; font-size: .6875rem; }
   .role-keys__example p { display: flex; justify-content: center; align-items: center; gap: 12px; margin: 5px 0 0; color: #596271; font-size: .8125rem; line-height: 1.6; }
   .role-keys__example strong { color: #28374d; font-weight: 500; }
@@ -51,7 +53,7 @@ const roles = [
     .role-key__face { gap: 8px; }
     .role-key__face :global(svg) { width: 30px; height: 30px; }
     .role-key__face > span { font-size: .75rem; }
-    .role-keys__example { min-height: 88px; margin: 0; }
+    .role-keys__example { min-height: 335px; margin: 0; }
     .role-keys__example p { flex-wrap: wrap; gap: 2px 8px; }
     .role-keys__example strong { flex-basis: 100%; }
   }
@@ -70,6 +72,8 @@ const roles = [
     buttons.forEach((button, index) => {
       button.addEventListener('click', () => {
         buttons.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+        root.querySelectorAll<HTMLElement>('[data-role-panel]').forEach(panel => { panel.hidden = panel.dataset.rolePanel !== button.dataset.role; });
+        window.dispatchEvent(new CustomEvent('raboti:interaction',{detail:{action:'service_example',agent:button.dataset.role}}));
         if (input) input.textContent = button.dataset.input ?? '';
         if (result) result.textContent = button.dataset.result ?? '';
       });

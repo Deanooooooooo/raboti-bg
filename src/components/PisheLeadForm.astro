@@ -24,7 +24,8 @@ import { site } from "../data/site";
       <label><span>Име на бизнеса</span><input type="text" name="businessName" autocomplete="organization" placeholder="Например Studio Forma" required /></label>
       <label><span>Телефон</span><input type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="+359 88 123 4567" required /></label>
       <label><span>Имейл</span><input type="email" name="email" autocomplete="email" placeholder="name@business.bg" required /></label>
-      <label class="gloria-lead__wide"><span>Адрес на сайта <small>ако имате</small></span><input type="url" name="currentWebsite" inputmode="url" placeholder="https://vashiyat-site.bg" /></label>
+      <fieldset class="site-choice gloria-lead__wide"><legend>Имате ли сайт?</legend><label><input type="radio" name="siteStatus" value="existing" checked /> Имам сайт</label><label><input type="radio" name="siteStatus" value="new" /> Нямам сайт</label></fieldset>
+      <label class="gloria-lead__wide" data-website-field><span>Адрес на сайта <small>ако имате</small></span><input type="url" name="currentWebsite" inputmode="url" placeholder="https://vashiyat-site.bg" /></label>
       <label class="gloria-lead__wide"><span>Какво трябва да поеме Pishe?</span><select name="primaryNeed" required><option value="" selected disabled>Изберете най-близкото</option><option>Автоматични актуализации на сайта</option><option>Съдържание и откриваемост в Google и AI</option><option>Каталог, продукти и цени</option><option>Изграждане на нов сайт</option><option>Не съм сигурен и искам преглед</option></select></label>
       <label class="gloria-lead__wide"><span>Какво все остава за после?</span><textarea name="task" rows="4" required placeholder="Например: цените са стари, липсват три услуги и няма кой да качва новите продукти всяка седмица"></textarea></label>
     </div>
@@ -39,9 +40,22 @@ import { site } from "../data/site";
   const form = document.querySelector<HTMLFormElement>("[data-pishe-lead-form]");
   const selectedPlan = form?.querySelector<HTMLInputElement>("[data-selected-plan]");
   const formTitle = form?.querySelector<HTMLElement>("[data-form-title]");
+  const siteChoices = form?.querySelectorAll<HTMLInputElement>('[name="siteStatus"]');
+  const websiteField = form?.querySelector<HTMLElement>('[data-website-field]');
+  const updateSiteChoice = () => {
+    const isNew = form?.querySelector<HTMLInputElement>('[name="siteStatus"]:checked')?.value === 'new';
+    if (websiteField) websiteField.hidden = isNew;
+    const url = form?.querySelector<HTMLInputElement>('[name="currentWebsite"]');
+    if (url) url.disabled = isNew;
+  };
+  siteChoices?.forEach(input => input.addEventListener('change', updateSiteChoice));
+  form?.addEventListener('reset', () => { requestAnimationFrame(() => { updateSiteChoice(); if(selectedPlan)selectedPlan.value='';if(formTitle)formTitle.textContent='Заявете преглед'; }); });
   document.querySelectorAll<HTMLAnchorElement>("[data-pishe-plan]").forEach((link) => link.addEventListener("click", () => {
     const plan = link.dataset.pishePlan || "";
     if (selectedPlan) selectedPlan.value = plan;
+    if (plan === 'Нов сайт') { const input = form?.querySelector<HTMLInputElement>('[name="siteStatus"][value="new"]'); if(input)input.checked=true;updateSiteChoice(); }
+    const need = form?.querySelector<HTMLSelectElement>('[name="primaryNeed"]');
+    if(need) need.value = plan === 'Нов сайт' ? 'Изграждане на нов сайт' : plan === 'Актуализации' ? 'Автоматични актуализации на сайта' : plan === 'Каталог и съдържание' ? 'Каталог, продукти и цени' : 'Съдържание и откриваемост в Google и AI';
     if (formTitle) formTitle.textContent = plan === "Нов сайт" ? "Разкажете ни за новия сайт" : `План „${plan}“`;
   }));
   form?.addEventListener("submit", async (event) => {
@@ -56,12 +70,14 @@ import { site } from "../data/site";
     payload.source = window.location.pathname;
     if (status) status.textContent = "Изпращаме…";
     if (button) button.disabled = true;
+      form.setAttribute("aria-busy", "true");
     try {
       const response = await fetch(form.dataset.endpoint || "/api/contact", { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(payload) });
       if (!response.ok) throw new Error("Request failed");
+      window.dispatchEvent(new CustomEvent('raboti:interaction',{detail:{action:'enquiry_success',agent:String(data.get('agent') || 'unsure')}}));
       form.reset();
       if (status) status.textContent = "Получихме заявката. Ще се свържем с вас до един работен ден.";
     } catch { if (status) status.textContent = `Не успяхме да изпратим. Обадете се на ${form.dataset.salesPhone || "0899 917 920"}.`; }
-    finally { if (button) button.disabled = false; }
+    finally { if (button) button.disabled = false; form.removeAttribute("aria-busy"); }
   });
 </script>

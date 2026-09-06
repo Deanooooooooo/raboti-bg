@@ -91,11 +91,16 @@ const waitlist = intent === "waitlist";
     } as const;
     choice?.addEventListener("change", () => {
       const selected = copy[choice.value as keyof typeof copy];
-      if (!selected) return;
+      if (!selected) { if(taskLabel)taskLabel.textContent="Каква работа искате да поеме?";if(taskInput)taskInput.placeholder="Опишете какво се случва сега и какво трябва да бъде свършено.";return; }
       if (taskLabel) taskLabel.textContent = selected[0];
       if (taskInput) taskInput.placeholder = selected[1];
       if (taskHint) taskHint.textContent = selected[2];
     });
+    window.addEventListener('raboti:interaction', ((event: CustomEvent) => {
+      if (event.detail?.action !== 'service_example' || !choice) return;
+      choice.value = event.detail.agent;choice.dispatchEvent(new Event('change'));
+    }) as EventListener);
+    form.addEventListener('reset', () => requestAnimationFrame(() => choice?.dispatchEvent(new Event('change'))));
     form.addEventListener("submit", async (event) => {
       event.preventDefault();
       const status = form.querySelector<HTMLElement>(".form-status");
@@ -115,6 +120,7 @@ const waitlist = intent === "waitlist";
       payload.source = window.location.pathname;
       if (status) status.textContent = "Изпращаме…";
       if (button) button.disabled = true;
+      form.setAttribute("aria-busy", "true");
       try {
         const response = await fetch(form.dataset.endpoint || "/api/contact", {
           method: "POST",
@@ -122,7 +128,8 @@ const waitlist = intent === "waitlist";
           body: JSON.stringify(payload),
         });
         if (!response.ok) throw new Error("Request failed");
-        form.reset();
+        window.dispatchEvent(new CustomEvent('raboti:interaction',{detail:{action:'enquiry_success',agent:String(data.get('agentChoice') || data.get('agent') || 'unsure')}}));
+      form.reset();
         if (status) status.textContent = data.get("intent") === "waitlist"
           ? "Готово. Ще ви пишем, когато позицията отвори."
           : form.dataset.adaptive === "true"
@@ -131,7 +138,7 @@ const waitlist = intent === "waitlist";
       } catch {
         if (status) status.textContent = "Запитването не беше изпратено. Опитайте отново или ни пишете на gunter@vdiga.bg.";
       } finally {
-        if (button) button.disabled = false;
+        if (button) button.disabled = false; form.removeAttribute("aria-busy");
       }
     });
   });

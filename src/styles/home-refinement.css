@@ -340,3 +340,13 @@
 /* Keep native details summaries above their answer wrapper and clear of the fixed nav. */
 .home-art .faq-list summary { position: relative; z-index: 1; scroll-margin-top: 120px; }
 .home-art .faq-list details > p { position: relative; }
+
+/* Decision-first refinement: explicit offer and a useful selector. */
+.home-art .home-category{font-size:.875rem;font-weight:500;margin:0 0 20px;color:#3c4b65}
+.home-art .home-services{list-style:none;padding:0;margin:0 auto 26px;display:grid;grid-template-columns:1fr 1.35fr 1fr;max-width:900px;text-align:left;gap:22px}
+.home-art .home-services a{display:block;text-decoration:none;color:#596271;font-size:.9375rem;line-height:1.6;padding:10px 0}
+.home-art .home-services strong{display:block;color:#171c26;font-weight:600;margin-bottom:4px}.home-art .home-services a:hover strong{text-decoration:underline;text-underline-offset:4px}
+.home-art .roster-fit{display:block;min-height:42px;color:#596271;font-size:.8125rem;line-height:1.5;margin-bottom:16px}.home-art .roster-tax{font-size:.6875rem;color:#596271;line-height:1.5;margin-top:6px}.home-art .roster-card__promise{min-height:54px}
+.home-art .role-keys{max-width:720px}.home-art .role-keys__scene{height:190px}
+.home-art :is(h1,h2,h3){text-wrap:balance}
+@media(max-width:700px){.home-art .home-services{display:block;margin-bottom:18px}.home-art .home-services li+li{border-top:1px solid #dce1e8}.home-art .home-services a{display:grid;grid-template-columns:65px 1fr;gap:10px;padding:9px 0;font-size:.875rem}.home-art .home-category{font-size:.75rem;line-height:1.5}.home-art .home-hero h1{font-size:clamp(2.1rem,8.7vw,2.8rem);margin-bottom:20px}.home-art .home-hero h1 br{display:none}.home-art .roster-fit,.home-art .roster-card__promise{min-height:0}.home-art .home-hero__grid{padding-top:112px}.home-art .role-keys__scene{height:160px}}

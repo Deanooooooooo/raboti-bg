@@ -55,12 +55,14 @@ import { site } from "../data/site";
     payload.source = window.location.pathname;
     if (status) status.textContent = "Изпращаме…";
     if (button) button.disabled = true;
+      form.setAttribute("aria-busy", "true");
     try {
       const response = await fetch(form.dataset.endpoint || "/api/contact", { method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(payload) });
       if (!response.ok) throw new Error("Request failed");
+      window.dispatchEvent(new CustomEvent('raboti:interaction',{detail:{action:'enquiry_success',agent:String(data.get('agent') || 'unsure')}}));
       form.reset();
       if (status) status.textContent = "Получихме заявката. Ще се свържем с вас.";
     } catch { if (status) status.textContent = `Не успяхме да изпратим. Обадете се на ${form.dataset.salesPhone || "0899 917 920"}.`; }
-    finally { if (button) button.disabled = false; }
+    finally { if (button) button.disabled = false; form.removeAttribute("aria-busy"); }
   });
 </script>
