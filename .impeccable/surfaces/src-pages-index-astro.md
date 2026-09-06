@@ -26,3 +26,7 @@ Homepage-only styling lives in src/styles/home-refinement.css. Onest (self-hoste
 Surface tokens: ink #171c26, muted #596271, line #dce1e8, action blue #2455d6, cool field #f4f6fa, dark process/footer #151c2b. Retain role portrait colours. Cards 14px, inputs 6px, CTA pills. Preserve white/light reading areas and a single dark process section.
 
 The mechanical detector reports intentional differences from the incumbent global DESIGN.md (font, type sizes, palette and radii). These are authorized homepage-local refinements, not global token migrations; other routes keep their visual system. No detector errors outside those documented system differences.
+
+## Interactive refinement — 2026-09-06
+
+Follow-up request restores the original floating navigation and authorizes rewritten agent-card copy plus lightweight 3D interaction. RoleKeys.astro adds three CSS-perspective keycaps tied to role-specific illustrative tasks. Click/tap and arrow-key selection update the example; pointer tilt is fine-pointer only, event-driven and disabled for reduced motion. No WebGL, image assets, animation dependency, autoplay, or continuous rendering loop. Cards retain prices and portraits, with shorter benefit headings and descriptions. Homepage font preloads now prioritize Onest; other routes retain Inter preloads.

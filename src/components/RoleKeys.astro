@@ -1,0 +1,98 @@
+---
+import Icon from './Icon.astro';
+const roles = [
+  { name: 'Vdiga', icon: 'phone' as const, key: 'vdiga', input: 'Клиент се обажда', result: 'Vdiga отговаря и записва час.' },
+  { name: 'Pishe', icon: 'globe' as const, key: 'pishe', input: 'Имате нова цена', result: 'Pishe подготвя промяната за ваше одобрение.' },
+  { name: 'Pomaga', icon: 'database' as const, key: 'pomaga', input: 'Получавате запитване', result: 'Pomaga прехвърля данните в CRM.' },
+];
+---
+<div class="role-keys" data-role-keys>
+  <div class="role-keys__scene">
+    <div class="role-keys__assembly" role="group" aria-label="Изберете AI служител за примерна задача">
+      {roles.map((role, index) => (
+        <button class:list={['role-key', `role-key--${role.key}`]} type="button" aria-pressed={index === 0 ? 'true' : 'false'} aria-controls="role-key-example" data-input={role.input} data-result={role.result} aria-label={`${role.name}: ${role.input.toLowerCase()}`}>
+          <span class="role-key__base" aria-hidden="true"></span>
+          <span class="role-key__face"><Icon name={role.icon} size={24} /><span>{role.name}</span></span>
+        </button>
+      ))}
+    </div>
+  </div>
+  <div class="role-keys__example" id="role-key-example" aria-live="polite" aria-atomic="true">
+    <span class="role-keys__label">Примерна задача</span>
+    <p><span data-example-input>{roles[0].input}</span><Icon name="arrow-right" /><strong data-example-result>{roles[0].result}</strong></p>
+  </div>
+</div>
+<style>
+  .role-keys { max-width: 720px; margin: 8px auto 0; text-align: center; }
+  .role-keys__scene { height: 212px; display: grid; place-items: center; perspective: 1000px; }
+  .role-keys__assembly { display: flex; gap: 24px; transform-style: preserve-3d; transform: rotateX(38deg) rotateZ(-17deg) rotateY(var(--tilt, 0deg)); transition: transform .35s cubic-bezier(.16,1,.3,1); }
+  .role-key { --key-light: #e3eefc; --key-mid: #9db9e6; --key-dark: #6486bc; --key-ink: #35527f; position: relative; width: 132px; height: 132px; padding: 0; border: 0; border-radius: 26px; background: transparent; cursor: pointer; transform-style: preserve-3d; transform: translateZ(0); transition: transform .4s cubic-bezier(.16,1,.3,1); }
+  .role-key--vdiga { --key-light: #d9f4ee; --key-mid: #86c5b9; --key-dark: #4d9789; --key-ink: #286b60; }
+  .role-key--pishe { --key-light: #fce8de; --key-mid: #ddb39f; --key-dark: #ad7d68; --key-ink: #8d503a; }
+  .role-key--pomaga { --key-light: #e9e5fb; --key-mid: #b0a6df; --key-dark: #897bbd; --key-ink: #635096; }
+  .role-key__base { position: absolute; inset: 0; border-radius: inherit; background: var(--key-dark); transform: translateZ(-10px); box-shadow: 0 14px 0 -1px var(--key-mid), 0 28px 30px -12px rgb(33 49 79 / 22%); }
+  .role-key__face { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; border-radius: inherit; background: linear-gradient(145deg, #fff 0%, var(--key-light) 45%, var(--key-mid) 145%); box-shadow: inset 0 2px 1px #fff, inset 0 -2px 2px var(--key-mid), inset 2px 0 1px rgb(255 255 255 / 75%); color: var(--key-ink); transform: translateZ(2px); }
+  .role-key__face :global(svg) { width: 42px; height: 42px; stroke-width: 1.3; }
+  .role-key__face > span { font-family: var(--body); font-size: .875rem; font-weight: 500; letter-spacing: .01em; }
+  .role-key[aria-pressed="true"] { transform: translateZ(22px); }
+  .role-key[aria-pressed="true"] .role-key__face { background: linear-gradient(145deg, #fff, var(--key-light) 62%, var(--key-mid)); }
+  .role-key:focus-visible { outline: 3px solid #2455d6; outline-offset: 8px; }
+  .role-keys__example { min-height: 68px; margin: 5px 0 0; }
+  .role-keys__label { color: #687283; font-size: .6875rem; }
+  .role-keys__example p { display: flex; justify-content: center; align-items: center; gap: 12px; margin: 5px 0 0; color: #596271; font-size: .8125rem; line-height: 1.6; }
+  .role-keys__example strong { color: #28374d; font-weight: 500; }
+  .role-keys__example :global(svg) { width: 16px; height: 16px; color: #8390a5; }
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) { .role-key:hover { transform: translateZ(30px); } }
+  @media (max-width: 700px) {
+    .role-keys { margin-top: 4px; }
+    .role-keys__scene { height: 178px; }
+    .role-keys__assembly { gap: 17px; transform: rotateX(34deg) rotateZ(-14deg); }
+    .role-key { width: 86px; height: 96px; border-radius: 20px; }
+    .role-key__face { gap: 8px; }
+    .role-key__face :global(svg) { width: 30px; height: 30px; }
+    .role-key__face > span { font-size: .75rem; }
+    .role-keys__example { min-height: 88px; margin: 0; }
+    .role-keys__example p { flex-wrap: wrap; gap: 2px 8px; }
+    .role-keys__example strong { flex-basis: 100%; }
+  }
+  @media (max-width: 370px) { .role-key { width: 76px; height: 88px; } .role-keys__assembly { gap: 12px; } }
+  @media (prefers-reduced-motion: reduce) { .role-keys__assembly,.role-key { transition: none; } }
+</style>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-role-keys]').forEach((root) => {
+    const buttons = [...root.querySelectorAll<HTMLButtonElement>('.role-key')];
+    const assembly = root.querySelector<HTMLElement>('.role-keys__assembly');
+    const scene = root.querySelector<HTMLElement>('.role-keys__scene');
+    const input = root.querySelector<HTMLElement>('[data-example-input]');
+    const result = root.querySelector<HTMLElement>('[data-example-result]');
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+    buttons.forEach((button, index) => {
+      button.addEventListener('click', () => {
+        buttons.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+        if (input) input.textContent = button.dataset.input ?? '';
+        if (result) result.textContent = button.dataset.result ?? '';
+      });
+      button.addEventListener('keydown', (event) => {
+        if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+        event.preventDefault();
+        const next = event.key === 'Home' ? 0 : event.key === 'End' ? buttons.length - 1 : (index + (event.key === 'ArrowRight' ? 1 : -1) + buttons.length) % buttons.length;
+        buttons[next].focus(); buttons[next].click();
+      });
+    });
+    let frame = 0;
+    scene?.addEventListener('pointermove', (event) => {
+      if (motion.matches || !finePointer.matches || frame) return;
+      frame = requestAnimationFrame(() => {
+        const box = scene.getBoundingClientRect();
+        const tilt = ((event.clientX - box.left) / box.width - .5) * 12;
+        assembly?.style.setProperty('--tilt', `${tilt.toFixed(2)}deg`);
+        frame = 0;
+      });
+    });
+    scene?.addEventListener('pointerleave', () => {
+      cancelAnimationFrame(frame); frame = 0;
+      assembly?.style.removeProperty('--tilt');
+    });
+  });
+</script>

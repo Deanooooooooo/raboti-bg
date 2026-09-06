@@ -5,6 +5,7 @@ import ContactForm from "../components/ContactForm.astro";
 import FAQ from "../components/FAQ.astro";
 import Icon from "../components/Icon.astro";
 import "../styles/home-refinement.css";
+import RoleKeys from "../components/RoleKeys.astro";
 import WorkflowVisual from "../components/WorkflowVisual.astro";
 import WorkGlyph from "../components/WorkGlyph.astro";
 import { breadcrumbSchema, faqSchema } from "../data/schema";
@@ -15,10 +16,10 @@ const liveAgentOrder = ["vdiga", "pishe", "pomaga"];
 const liveAgents = agents
   .filter((agent) => agent.data.status === "live")
   .sort((a, b) => liveAgentOrder.indexOf(a.data.slug) - liveAgentOrder.indexOf(b.data.slug));
-const agentProfiles: Record<string, { name: string; image: string; imageAlt: string; cta: string }> = {
-  vdiga: { name: "Vdiga", image: "/assets/employee-vdiga-gloria-v1.webp", imageAlt: "Gloria, образът на AI рецепциониста Vdiga", cta: "Как мога да съм полезна?" },
-  pishe: { name: "Pishe", image: "/assets/employee-pishe-v1.webp", imageAlt: "Визуално представяне на AI уеб мениджъра Pishe", cta: "Как мога да съм полезен?" },
-  pomaga: { name: "Pomaga", image: "/assets/employee-pomaga-v1.webp", imageAlt: "Визуално представяне на AI оперативния асистент Pomaga", cta: "Как мога да съм полезна?" },
+const agentProfiles: Record<string, { name: string; image: string; imageAlt: string; cta: string; promise: string; summary: string }> = {
+  vdiga: { name: "Vdiga", image: "/assets/employee-vdiga-gloria-v1.webp", imageAlt: "Gloria, образът на AI рецепциониста Vdiga", cta: "Вижте как работи Vdiga", promise: "Вдига, когато вие не можете.", summary: "Отговаря на въпроси и записва часове, докато вие се грижите за клиентите." },
+  pishe: { name: "Pishe", image: "/assets/employee-pishe-v1.webp", imageAlt: "Визуално представяне на AI уеб мениджъра Pishe", cta: "Вижте как работи Pishe", promise: "Сайтът ви остава актуален.", summary: "Обновява страници, цени и каталог. Работи по SEO, а публикува след вашето одобрение." },
+  pomaga: { name: "Pomaga", image: "/assets/employee-pomaga-v1.webp", imageAlt: "Визуално представяне на AI оперативния асистент Pomaga", cta: "Вижте как работи Pomaga", promise: "По-малко копиране на ръка.", summary: "Прехвърля данните от имейла в CRM, задачите и справките — по правилата на вашия екип." },
 };
 const schemas = [
   faqSchema(homeFaqs),
@@ -71,6 +72,7 @@ const schemas = [
           <a class="button button--spectrum" href="#naemi">Изпратете запитване <Icon name="arrow-down" /></a>
           <a class="home-link" href="#ekip">Вижте AI служителите <Icon name="arrow-right" /></a>
         </div>
+        <RoleKeys />
         <div class="home-hero__signals" aria-label="Основни характеристики">
           <span><i></i> Срок за настройка според задачата</span>
           <span><i></i> Работи на български</span>
@@ -127,7 +129,8 @@ const schemas = [
                 <img src={profile.image} width="720" height="960" alt={profile.imageAlt} loading="lazy" decoding="async" />
               </div>
               <div class="roster-card__body">
-                <span>{data.summary}</span>
+                <strong class="roster-card__promise">{profile.promise}</strong>
+                <span>{profile.summary}</span>
               </div>
               <footer>
                 <strong>{data.priceLabel}</strong>

@@ -30,18 +30,6 @@
 .home-art :is(h1,h2,h3) { font-weight: 500; letter-spacing: -.03em; }
 .home-art :focus-visible { outline-color: var(--ref-blue); }
 .home-art .shell { width: min(1160px, calc(100% - 64px)); }
-.home-art .site-header { padding: 0; background: rgb(249 250 253 / 96%); border-bottom: 1px solid transparent; }
-.home-art .site-header.is-scrolled { border-bottom-color: var(--ref-line); }
-.home-art .site-header .header-inner,
-.home-art .site-header.is-over-dark .header-inner {
-  width: min(1280px, calc(100% - 64px)); min-height: 84px; padding: 0;
-  transform: none; border-radius: 0; background: transparent; box-shadow: none;
-  backdrop-filter: none; -webkit-backdrop-filter: none;
-}
-.home-art .site-header .brand-logo { height: 32px; filter: none; }
-.home-art .site-nav { gap: 28px; }
-.home-art .site-nav > a:not(.button) { color: var(--ref-ink); font-size: .9375rem; font-weight: 500; letter-spacing: 0; }
-.home-art .site-header .header-cta { min-height: 44px; padding: 10px 22px; font-size: .875rem; font-weight: 500; box-shadow: none; background: var(--ref-ink); border-color: var(--ref-ink); }
 .home-art .home-hero {
   min-height: 0; margin: 0; border-radius: 0; box-shadow: none;
   background: linear-gradient(180deg, #f9fafd 60%, #f0f4fc); color: var(--ref-ink);
@@ -49,7 +37,7 @@
 }
 .home-art .home-hero::before { content: none; }
 .home-art .home-hero__grid {
-  display: block; min-height: 0; padding-top: 164px; padding-bottom: 62px;
+  display: block; min-height: 0; padding-top: 156px; padding-bottom: 40px;
 }
 .home-art .home-hero__copy { max-width: 1060px; margin-inline: auto; text-align: center; }
 .home-art .home-hero h1 {
@@ -69,7 +57,7 @@
 .home-art .home-link { color: var(--ref-ink); font-size: .9375rem; font-weight: 500; }
 .home-art .home-link .icon { color: var(--ref-ink); }
 .home-art .home-hero__signals {
-  justify-content: center; flex-wrap: wrap; margin-top: 48px; padding-top: 25px;
+  justify-content: center; flex-wrap: wrap; margin-top: 22px; padding-top: 25px;
   gap: 12px 28px; border-color: var(--ref-line); color: var(--ref-muted); font-size: .8125rem;
 }
 .home-art .home-hero__signals i { background: #688098; box-shadow: none; }
@@ -105,7 +93,7 @@
 .home-art .roster-card__portrait { height: 270px; margin: 22px -24px 24px; border-radius: 0; }
 .home-art .roster-card__portrait::after { content: none; }
 .home-art .roster-card__portrait img { object-position: center top; transition: transform .35s ease; }
-.home-art .roster-card--vdiga .roster-card__portrait img { transform: none; object-position: center top; }
+.home-art .roster-card--vdiga .roster-card__portrait img { transform: none; object-position: center 35%; }
 .home-art .roster-card__body { margin: 0 0 24px; flex: 1; }
 .home-art .roster-card__body > span:first-child { max-width: none; color: var(--ref-muted); font-size: 1rem; line-height: 1.65; letter-spacing: 0; }
 .home-art .roster-card footer { gap: 16px; padding-top: 22px; border-color: var(--ref-line); }
@@ -181,7 +169,6 @@
 }
 @media (max-width: 920px) {
   .home-art .home-hero h1 { font-size: 3.25rem; }
-  .home-art .site-nav { top: 72px; border: 1px solid var(--ref-line); border-radius: 12px; background: #fff; }
   .home-art .home-heading { gap: 40px; }
   .home-art :is(.process-layout,.proof-grid,.home-faq-grid,.home-contact__grid) { grid-template-columns: 1fr; gap: 40px; }
   .home-art .roster-grid { grid-template-columns: repeat(3,minmax(0,1fr)); }
@@ -194,10 +181,6 @@
 }
 @media (max-width: 700px) {
   .home-art .shell,.home-art .roster-section > .shell { width: calc(100% - 40px); }
-  .home-art .site-header .header-inner,.home-art .site-header.is-over-dark .header-inner { width: calc(100% - 32px); min-height: 72px; padding: 0; gap: 8px; }
-  .home-art .site-header .brand-logo { height: 27px; }
-  .home-art .site-header .header-cta { padding-inline: 15px; font-size: .8125rem; }
-  .home-art .nav-toggle { width: 44px; height: 44px; }
   .home-art .home-hero__grid { padding-top: 124px; padding-bottom: 36px; }
   .home-art .home-hero__copy { text-align: left; }
   .home-art .home-hero h1 { margin-bottom: 24px; font-size: 2.625rem; line-height: 1.14; letter-spacing: -.035em; }
@@ -223,9 +206,17 @@
 }
 @media (max-width: 370px) {
   .home-art .home-hero h1 { font-size: 2.25rem; }
-  .home-art .site-header .brand-logo { height: 24px; }
   .home-art .roster-card__portrait { height: 270px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .home-art *, .home-art *::before, .home-art *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
 }
+
+/* Original nav geometry and font, preserved from the incumbent homepage. */
+.home-art .site-header { --body: "Inter Variable", "Inter", system-ui, sans-serif; font-family: var(--body); }
+.home-art .site-header .button { font-family: var(--body); font-size: 1rem; font-weight: 600; }
+.home-art .roster-card__body .roster-card__promise { display: block; margin-bottom: 10px; color: var(--ref-ink); font-size: 1.25rem; font-weight: 500; line-height: 1.35; letter-spacing: -.02em; }
+.home-art .roster-card__body > span { display: block; color: var(--ref-muted); font-size: .9375rem; line-height: 1.65; }
+.home-art .roster-card__body { min-height: 128px; }
+@media (max-width: 920px) and (min-width: 701px) { .home-art .roster-card__body { min-height: 210px; } }
+@media (max-width: 700px) { .home-art .roster-card__body { min-height: 0; } }
