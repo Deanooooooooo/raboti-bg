@@ -30,3 +30,7 @@ The mechanical detector reports intentional differences from the incumbent globa
 ## Interactive refinement — 2026-09-06
 
 Follow-up request restores the original floating navigation and authorizes rewritten agent-card copy plus lightweight 3D interaction. RoleKeys.astro adds three CSS-perspective keycaps tied to role-specific illustrative tasks. Click/tap and arrow-key selection update the example; pointer tilt is fine-pointer only, event-driven and disabled for reduced motion. No WebGL, image assets, animation dependency, autoplay, or continuous rendering loop. Cards retain prices and portraits, with shorter benefit headings and descriptions. Homepage font preloads now prioritize Onest; other routes retain Inter preloads.
+
+## Approved compositional pass — 2026-09-06
+
+User approved the continuous three-column portrait gallery, dimensional workflow, open 2×2 enquiry explanations, full-width FAQ with desktop side-by-side answers, and unboxed contact form. All visible wording, section order, hero and original floating navigation remain unchanged. Workflow stages support keyboard focus and one bounded IntersectionObserver entrance; reduced-motion disables it. Mobile gallery stacks, workflow flattens, and FAQ answers follow their questions. No dependencies or new media assets introduced.

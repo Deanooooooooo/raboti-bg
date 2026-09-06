@@ -5,25 +5,38 @@ import WorkGlyph from "./WorkGlyph.astro";
 <div class="workflow-visual" aria-label="Примерен процес от входяща задача до завършена работа">
   <header class="workflow-head"><span>Как минава една задача</span><strong>От заявката до свършената работа</strong></header>
   <div class="workflow-steps">
-    <article style="--step:#2de2d0;--step-soft:rgba(45,226,208,.12)">
+    <article tabindex="0" style="--step:#2de2d0;--step-soft:rgba(45,226,208,.12)">
       <span class="workflow-step__icon"><WorkGlyph name="vdiga" /></span>
       <div><small>Задачата пристига</small><strong>Клиент звъни, пише или изпраща форма</strong></div>
       <span class="workflow-state">веднага</span>
     </article>
-    <article style="--step:#62a8ff;--step-soft:rgba(98,168,255,.13)">
+    <article tabindex="0" style="--step:#62a8ff;--step-soft:rgba(98,168,255,.13)">
       <span class="workflow-step__icon"><WorkGlyph name="route" /></span>
       <div><small>Служителят я поема</small><strong>Използва информацията и програмите, до които сте му дали достъп</strong></div>
       <span class="workflow-state">в работа</span>
     </article>
-    <article class="workflow-step--approval" style="--step:#ff8d72;--step-soft:rgba(255,141,114,.13)">
+    <article tabindex="0" class="workflow-step--approval" style="--step:#ff8d72;--step-soft:rgba(255,141,114,.13)">
       <span class="workflow-step__icon"><WorkGlyph name="guard" /></span>
       <div><small>При важно решение</small><strong>Плащане, договор или публикуване чакат вашето „да“</strong></div>
       <span class="workflow-state">чака вас</span>
     </article>
-    <article style="--step:#c7f36b;--step-soft:rgba(199,243,107,.12)">
+    <article tabindex="0" style="--step:#c7f36b;--step-soft:rgba(199,243,107,.12)">
       <span class="workflow-step__icon"><WorkGlyph name="result" /></span>
       <div><small>Работата приключва</small><strong>Екипът вижда какво е направено и как е завършила задачата</strong></div>
       <span class="workflow-state">готово</span>
     </article>
   </div>
 </div>
+
+<script>
+  const workflow = document.querySelector<HTMLElement>('.workflow-visual');
+  if (workflow && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const observer = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) {
+        workflow.classList.add('workflow-enter');
+        observer.disconnect();
+      }
+    }, { threshold: .2 });
+    observer.observe(workflow);
+  }
+</script>
