@@ -49,13 +49,13 @@ jobs:
         if: github.ref != 'refs/heads/main'
         working-directory: candidate
         env:
-          DEPLOY_BASE: /raboti-bg/impeccable-homepage
+          DEPLOY_BASE: /raboti-bg/homepage-refinement
       - run: node scripts/prepare-github-pages.mjs
         if: github.ref != 'refs/heads/main'
         working-directory: candidate
         env:
-          DEPLOY_BASE: /raboti-bg/impeccable-homepage
-      - run: mkdir -p current/dist/impeccable-homepage && cp -R candidate/dist/. current/dist/impeccable-homepage/
+          DEPLOY_BASE: /raboti-bg/homepage-refinement
+      - run: mkdir -p current/dist/homepage-refinement && cp -R candidate/dist/. current/dist/homepage-refinement/
         if: github.ref != 'refs/heads/main'
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
