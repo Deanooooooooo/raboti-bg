@@ -996,7 +996,7 @@
 .studio .s-approve[data-done=true]{background:#5154cc}
 .studio .s-approval-sheet:has([data-done=true]) [data-approval-state]{color:#5154cc}
 /* Brand alignment and screenshot defects: native logo ratio, readable footer, compact layout. */
-.studio{--blue:#5154cc;--muted:#697286;--line:#e1e6ef;background:#fcfdff}
+.studio{--blue:#5154cc;--green:#5154cc;--muted:#697286;--line:#e1e6ef;background:#fcfdff}
 .studio h1>span,.studio .s-contact h2 span{color:#17233d}
 .studio .brand-logo,.studio .brand--footer .brand-logo{width:118px!important;height:auto!important;aspect-ratio:600/191;object-fit:contain;max-width:100%}
 .studio .s-window-logo{width:85px;height:auto;aspect-ratio:600/191;object-fit:contain}
