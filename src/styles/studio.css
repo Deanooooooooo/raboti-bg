@@ -4,3 +4,5 @@
 @media(prefers-reduced-motion:reduce){.studio *{animation:none!important;transition:none!important;scroll-behavior:auto!important}.studio .s-work-window:hover{transform:rotate(-3deg)}}
 
 .studio .s-stage{overflow:clip;overflow-clip-margin:20px}.studio .s-steps h3{word-spacing:.02em}@media(max-width:700px){.studio .s-stage{overflow-clip-margin:0}.studio .s-steps h3 br:after{content:" "}.studio .s-steps h3 br{display:initial}}
+/* Clip the decorative orbits without clipping the rectangular work composition. */
+.studio .s-stage{border-radius:0}
