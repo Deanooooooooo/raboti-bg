@@ -1,19 +1,13 @@
-name: Private preview
-
+name: Separate Raboti studio preview
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
-
 permissions:
   contents: read
   pages: write
   id-token: write
-
 concurrency:
   group: pages
-  cancel-in-progress: true
-
+  cancel-in-progress: false
 jobs:
   deploy:
     environment:
@@ -23,40 +17,34 @@ jobs:
     steps:
       - uses: actions/checkout@v5
         with:
-          ref: main
+          ref: 76a5c17b62e5963618094741e137a05d6aedc963
           path: current
       - uses: actions/checkout@v5
-        if: github.ref != 'refs/heads/main'
         with:
-          path: candidate
+          ref: c0281ea380a89c9581be8d65dcea24ba4f7b66c1
+          path: preserved
+      - uses: actions/checkout@v5
+        with:
+          path: studio
       - uses: actions/setup-node@v5
         with:
           node-version: 22
-      - run: npm ci
-        working-directory: current
-      - run: npm run build
+      - run: npm ci && npm run build && node scripts/prepare-github-pages.mjs
         working-directory: current
         env:
           DEPLOY_BASE: /raboti-bg
-      - run: node scripts/prepare-github-pages.mjs
-        working-directory: current
-        env:
-          DEPLOY_BASE: /raboti-bg
-      - run: npm ci
-        if: github.ref != 'refs/heads/main'
-        working-directory: candidate
-      - run: npm run build
-        if: github.ref != 'refs/heads/main'
-        working-directory: candidate
+      - run: npm ci && npm run build && node scripts/prepare-github-pages.mjs
+        working-directory: preserved
         env:
           DEPLOY_BASE: /raboti-bg/homepage-refinement
-      - run: node scripts/prepare-github-pages.mjs
-        if: github.ref != 'refs/heads/main'
-        working-directory: candidate
+      - run: npm ci && npm run build && node scripts/prepare-github-pages.mjs
+        working-directory: studio
         env:
-          DEPLOY_BASE: /raboti-bg/homepage-refinement
-      - run: mkdir -p current/dist/homepage-refinement && cp -R candidate/dist/. current/dist/homepage-refinement/
-        if: github.ref != 'refs/heads/main'
+          DEPLOY_BASE: /raboti-bg/studio-20260908
+      - run: |
+          mkdir -p current/dist/homepage-refinement current/dist/studio-20260908
+          cp -R preserved/dist/. current/dist/homepage-refinement/
+          cp -R studio/dist/. current/dist/studio-20260908/
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

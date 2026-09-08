@@ -3,11 +3,7 @@ import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ContactForm from "../components/ContactForm.astro";
 import FAQ from "../components/FAQ.astro";
-import Icon from "../components/Icon.astro";
-import "../styles/home-refinement.css";
-import RoleKeys from "../components/RoleKeys.astro";
-import WorkflowVisual from "../components/WorkflowVisual.astro";
-import WorkGlyph from "../components/WorkGlyph.astro";
+import "../styles/studio.css";
 import { breadcrumbSchema, faqSchema } from "../data/schema";
 import { homeFaqs, site } from "../data/site";
 
@@ -55,156 +51,31 @@ const schemas = [
   },
 ];
 ---
-
-<BaseLayout
-  title="Raboti | AI служители за задачите, които бавят бизнеса"
-  description="AI служители за клиентите, сайта и администрацията. Raboti поема ежедневната работа, за да не чака всичко вас. Вижте ролите и цените."
-  canonical="/"
-  schema={schemas}
-  bodyClass="home-art"
->
-  <section class="home-hero" data-hero>
-    <div class="shell home-hero__grid">
-      <div class="home-hero__copy">
-        <p class="home-category">AI служители за обаждания, сайтове и администрация</p>
-        <h1>Бизнесът ви не трябва <br /><em>да чака да се освободите.</em></h1>
-        <ul class="home-services" aria-label="Какво поема Raboti">
-          <li><a href="/sluzhiteli/vdiga/"><strong>Vdiga</strong><span>Обслужва клиентите по телефона.</span></a></li>
-          <li><a href="/sluzhiteli/pishe/"><strong>Pishe</strong><span>Обновява сайта и работи по откриването му в Google и AI отговорите.</span></a></li>
-          <li><a href="/sluzhiteli/pomaga/"><strong>Pomaga</strong><span>Поема повтарящата се администрация.</span></a></li>
-        </ul>
-        <div class="home-hero__actions">
-          <a class="button button--spectrum" href="#ekip">Вижте AI служителите <Icon name="arrow-down" /></a>
-          <a class="home-link" href="#naemi">Обсъдете с нас <Icon name="arrow-right" /></a>
-        </div>
-        <RoleKeys />
-        <div class="home-hero__signals" aria-label="Основни характеристики">
-          <span><i></i> Срок за настройка според задачата</span>
-          <span><i></i> Работи на български</span>
-          <span><i></i> Вие определяте какво прави сам</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="home-section roster-section" id="ekip">
-    <div class="shell">
-      <div class="home-heading">
-        <div><h2>Къде бизнесът ви има нужда<br /><em>от още един служител?</em></h2></div>
-        <p>На телефона, онлайн или в ежедневната организация — изберете работата, която вече не искате да остава за после.</p>
-      </div>
-
-      <div class="roster-grid">
-        {liveAgents.map((agent) => {
-          const data = agent.data;
-          const profile = agentProfiles[data.slug];
-          return (
-            <a class:list={["roster-card", `roster-card--${data.slug}`, data.status === "soon" && "roster-card--soon"]} href={`/sluzhiteli/${data.slug}/`} aria-label={`${profile.name}: как може да помогне`} style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
-              <header>
-                <div class="roster-card__heading">
-                  <p>{data.role}</p>
-                  <h3>{profile.name}</h3>
-                </div>
-              </header>
-              <div class="roster-card__portrait">
-                <img src={profile.image} width="720" height="960" alt={profile.imageAlt} loading="lazy" decoding="async" />
-              </div>
-              <div class="roster-card__body">
-                <small class="roster-fit">{profile.fit}</small>
-                <strong class="roster-card__promise">{profile.promise}</strong>
-                <span>{profile.summary}</span>
-              </div>
-              <footer>
-                <strong>{data.priceLabel}</strong><small class="roster-tax">Без ДДС · обхватът се уточнява предварително</small>
-                <span class="roster-card__action"><span>{profile.cta}</span><Icon name="arrow-right" /></span>
-              </footer>
-            </a>
-          );
-        })}
-      </div>
-
-    </div>
-  </section>
-
-  <section class="home-facts" aria-labelledby="home-facts-title">
-    <div class="shell">
-      <div class="home-facts__intro">
-        <h2 id="home-facts-title">Не ви трябва <br /><em>още една система за разучаване.</em></h2>
-        <p>Първо разбираме как работите и къде се натрупва забавянето. Подготвяме служителя за вашия бизнес и проверяваме работата му преди старта.</p>
-      </div>
-
-      <div class="home-facts__journey">
-        <article class="home-fact">
-          <strong>Разбираме къде ви тежи.</strong>
-          <p>Разказвате ни какво прекъсва екипа, остава за после или кара клиентите да чакат. Разглеждаме реални примери от работата ви.</p>
-        </article>
-        <article class="home-fact">
-          <strong>Уточняваме какво поемаме.</strong>
-          <p>Записваме каква информация използва, до какво има достъп и в кои случаи трябва да ви попита.</p>
-        </article>
-        <article class="home-fact">
-          <strong>Настройваме и проверяваме.</strong>
-          <p>Проверяваме обичайните случаи и изключенията. След това го пускаме да върши задачите, за които сте се разбрали.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="home-section process-section" id="proces">
-    <div class="shell process-layout">
-      <div class="process-copy">
-        <h2>Работата върви.<br /><em>Решенията остават ваши.</em></h2>
-        <p>Знаете какво е възложено на служителя и какво е свършил. Предварително уточняваме кога действа сам и кога чака вашето потвърждение. Така делегирате работата, без да губите контрол.</p>
-        <ul class="process-principles">
-          <li><span class="principle-mark"><Icon name="arrow-right" /></span><div><strong>Поема задачата, когато пристигне</strong><small>Дори когато екипът е зает или денят е приключил.</small></div></li>
-          <li><span class="principle-mark"><Icon name="check" /></span><div><strong>Върши само задачите, за които сте се разбрали</strong><small>Използва само информацията и програмите, до които сте му дали достъп.</small></div></li>
-          <li><span class="principle-mark"><WorkGlyph name="guard" /></span><div><strong>Спира, когато трябва да решите вие</strong><small>Плащанията, договорите и промените извън даденото разрешение чакат вашето потвърждение.</small></div></li>
-        </ul>
-        <a class="button process-cta" href="#naemi">Опишете как работите сега <Icon name="arrow-right" /></a>
-      </div>
-      <WorkflowVisual />
-    </div>
-  </section>
-
-  <section class="home-section proof-section" id="kontrol">
-    <div class="shell proof-grid">
-      <div class="proof-copy">
-        <h2>Кое спира бизнеса ви, <em>когато нямате време?</em></h2>
-        <p>Обаждания без отговор? Сайт, който изостава или още липсва? Администрация след работния ден? Разкажете ни къде ви тежи. Ще ви кажем какво можем да поемем и колко ще струва.</p>
-        <a class="button proof-cta" href="#naemi">Изпратете запитване <Icon name="arrow-right" /></a>
-        <small>Не подготвяйте задание. Напишете го както бихте го обяснили на нов колега.</small>
-      </div>
-      <div class="decision-brief" aria-label="Какво ще ви кажем за задачата">
-        <header>
-          <strong>Ще ви кажем направо:</strong>
-        </header>
-        <ul>
-          <li><span><Icon name="check" /></span><div><strong>Кой може да я поеме</strong><p>Ще ви кажем дали задачата е за Vdiga, Pishe или Pomaga. Ако не е подходяща за нито един от тях, ще го кажем направо.</p></div></li>
-          <li><span><Icon name="check" /></span><div><strong>Какво ще върши</strong><p>Откъде поема задачата, докъде я довежда и какво остава за вас.</p></div></li>
-          <li><span><Icon name="check" /></span><div><strong>Какво ще ни трябва от вас</strong><p>Информация, достъпи и кога служителят трябва да изчака вашето решение.</p></div></li>
-          <li><span><Icon name="check" /></span><div><strong>Колко струва и кога тръгва</strong><p>Месечната цена, настройката и кога може да започне работа.</p></div></li>
-        </ul>
-        <footer>Ако задачата не е за нас, няма да ви разкарваме.</footer>
-      </div>
-    </div>
-  </section>
-
-  <section class="home-section home-faq-section">
-    <div class="shell home-faq-grid">
-      <div><h2>Какво поема AI служителят и как започва?</h2><p>Не ви трябва технически екип. Покажете ни работата, която остава несвършена, бави хората ви или изпуска клиенти.</p></div>
-      <FAQ items={homeFaqs} />
-    </div>
-  </section>
-
-  <section class="home-contact" id="naemi">
-    <div class="home-contact__aurora" aria-hidden="true"></div>
-    <div class="shell home-contact__grid">
-      <div>
-        <h2>Не е нужно да знаете<br /><em>как се автоматизира.</em></h2>
-        <p>Достатъчно е да знаете какво ви тежи. Опишете проблема със свои думи. До един работен ден ще ви отговорим дали Raboti е подходящ за него и каква е следващата стъпка.</p>
-        <div class="contact-spectrum" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-      </div>
-      <ContactForm title="Изпратете запитване" enquiry={true} />
-    </div>
-  </section>
+<BaseLayout title="Raboti | AI служители за вашия бизнес" description="AI служители за обаждания, автоматична грижа за сайта и администрация. Вижте Vdiga, Pishe и Pomaga — с ясни правила и човешки контрол." canonical="/" schema={schemas} bodyClass="studio">
+<section class="s-hero s-wrap">
+ <div class="s-intro"><p class="s-eyebrow"><span class="s-dot"></span> AI СЛУЖИТЕЛИ. РЕАЛНА РАБОТА.</p><h1>Бизнесът ви<br/>не трябва<br/>да <span>чака.</span></h1><p class="s-lead">Клиентите, сайтът, ежедневната работа.<br/>Вашият AI екип поема своята част,<br class="s-desktop"/> докато вие движите бизнеса.</p><div class="s-actions"><a class="s-primary" href="#ekip">Запознайте се с екипа <span>↗</span></a><a class="s-text-link" href="#naemi">Обсъдете с нас</a></div><p class="s-caption">На български. По вашите правила.</p></div>
+ <div class="s-stage" aria-label="Илюстративен пример за работа на AI служител">
+  <div class="s-stage-grid" aria-hidden="true"></div><div class="s-orbit s-orbit-one" aria-hidden="true"></div><div class="s-orbit s-orbit-two" aria-hidden="true"></div>
+  <div class="s-floating-note"><span class="s-dot"></span> Една задача по-малко за вас.</div>
+  <div class="s-work-window"><div class="s-window-bar"><span>raboti<span class="s-blue">.</span></span><small>ПРИМЕРЕН СЦЕНАРИЙ</small><i></i></div><div class="s-person"><img src="/assets/employee-vdiga-gloria-v1.webp" width="64" height="64" alt="Глория — образът на Vdiga"/><div><strong data-demo-name>Vdiga</strong><span data-demo-role>AI рецепционист</span></div><span class="s-person-icon" aria-hidden="true">↗</span></div><div class="s-wave" aria-hidden="true">{Array.from({length:31},(_,i)=><i style={`--h:${12+Math.sin(i*.7)**2*42}px;--d:${i*30}ms`}></i>)}</div><p class="s-demo-question" data-demo-question>„Може ли час за утре следобед?“</p><div class="s-result"><span class="s-result-icon" aria-hidden="true">✓</span><div><small data-demo-state>РЕЗУЛТАТ ЗА ЕКИПА</small><strong data-demo-result>Часът е записан.</strong><span data-demo-detail>Утре, 14:30 · Обобщението е готово.</span></div></div><a class="s-demo-link" data-demo-link href="/sluzhiteli/vdiga/">Как работи Vdiga <span>↗</span></a></div>
+  <div class="s-stage-tabs" aria-label="Изберете пример"><button type="button" data-role="vdiga" aria-pressed="true">Vdiga</button><button type="button" data-role="pishe" aria-pressed="false">Pishe</button><button type="button" data-role="pomaga" aria-pressed="false">Pomaga</button></div><p class="s-stage-caption">Илюстративен пример, не активност на живо.</p>
+ </div>
+</section>
+<div class="s-service-strip"><div class="s-wrap"><a href="/sluzhiteli/vdiga/"><span>01</span> Клиентите получават отговор <b>↗</b></a><a href="/sluzhiteli/pishe/"><span>02</span> Сайтът върви с бизнеса <b>↗</b></a><a href="/sluzhiteli/pomaga/"><span>03</span> Администрацията не чака <b>↗</b></a></div></div>
+<section class="s-team s-wrap" id="ekip"><div class="s-section-heading"><div><p class="s-eyebrow">ВАШАТА СЛЕДВАЩА ДОБРА СРЕЩА</p><h2>Още един служител.<br/><span>По-малко „ще го свърша“.</span></h2></div><p>Изберете къде ви трябва подкрепа.<br/>Ние подготвяме служителя<br/>за начина, по който работите.</p></div><div class="s-team-grid">{liveAgents.map(agent=>{const p=agentProfiles[agent.data.slug];return <article class={`s-agent s-agent-${agent.data.slug}`}><a class="s-portrait" href={`/sluzhiteli/${agent.data.slug}/`}><span class="s-role-label">{agent.data.role}</span><img src={p.image} width="720" height="960" alt={p.imageAlt} loading="lazy"/><span class="s-agent-name">{p.name}<span>↗</span></span></a><div class="s-agent-info"><h3>{p.promise}</h3><p>{p.summary}</p><div class="s-agent-price"><strong>{agent.data.priceLabel}</strong><a href={`/sluzhiteli/${agent.data.slug}/`} aria-label={`Научете повече за ${p.name}`}>Вижте повече ↗</a></div><small>Без ДДС · настройката се уточнява отделно</small></div></article>})}</div></section>
+<section class="s-control"><div class="s-wrap s-control-grid"><div class="s-control-art" aria-label="Пример: промяна по сайта чака одобрение"><div class="s-approval-top"><span class="s-dot"></span> PISHE / ПРОМЯНА ПО САЙТА</div><div class="s-approval-sheet"><span class="s-file-icon" aria-hidden="true">↗</span><small>ПОДГОТВЕНА ПРОМЯНА</small><h3>Новата услуга<br/>е готова за сайта.</h3><div class="s-change-line"><span>Съдържание</span><b>Подготвено ✓</b></div><div class="s-change-line"><span>Публикуване</span><b data-approval-state>Чака вашето решение</b></div><button type="button" class="s-approve" data-approve>Одобрете примера <span>↗</span></button><small class="s-approval-disclaimer">Интерактивен пример. Не променя реален сайт.</small></div><div class="s-sheet-shadow" aria-hidden="true"></div></div><div class="s-control-copy"><p class="s-eyebrow">РАБОТА БЕЗ ИЗЛИШНИ ИЗНЕНАДИ</p><h2>Повече свършено.<br/><span>Контролът е ваш.</span></h2><p>Предварително уточняваме какво служителят прави сам и кога изчаква вашето решение. Виждате какво е възложено и какво е свършено.</p><ul><li>Само задачите и достъпите, които сте разрешили.</li><li>Промените извън разрешението чакат одобрение.</li><li>Ясен резултат, който екипът може да използва.</li></ul><a href="/integracii/" class="s-text-link">Вижте как се свързва с вашата работа ↗</a></div></div></section>
+<section class="s-setup s-wrap"><div class="s-section-heading"><div><p class="s-eyebrow">ОТ ПЪРВИЯ РАЗГОВОР ДО ПЪРВАТА ЗАДАЧА</p><h2>Не още една система.<br/><span>Още свършена работа.</span></h2></div><p>AI служител, подготвен за конкретната работа.<br/>Не заместител на всяко човешко решение.</p></div><div class="s-steps"><article><span>01 / РАЗГОВОР</span><h3>Показвате ни<br/>къде ви тежи.</h3><p>Разглеждаме работата, която прекъсва екипа или постоянно остава за после.</p></article><article><span>02 / ПРАВИЛА</span><h3>Уточняваме<br/>какво поемаме.</h3><p>Задачи, информация, достъпи и одобрения. Получавате обхват, цена и срок преди старта.</p></article><article><span>03 / СТАРТ</span><h3>Проверяваме.<br/>После започваме.</h3><p>Тестваме обичайните случаи и изключенията, преди да възложите реална работа.</p></article></div></section>
+<section class="s-faq s-wrap"><div><p class="s-eyebrow">ПРЕДИ ДА ЗАПОЧНЕМ</p><h2>Добри въпроси.<br/><span>Ясни отговори.</span></h2><a href="/polezno/seo-geo/" class="s-text-link">За Google и AI откриваемостта ↗</a></div><FAQ items={homeFaqs}/></section>
+<section class="s-contact s-wrap" id="naemi"><div><p class="s-eyebrow">ДА ОСВОБОДИМ МЯСТО ЗА ВАЖНОТО</p><h2>Кое не трябва<br/>да чака <span>вас?</span></h2><p>Не ви трябва техническо задание.<br/>Разкажете ни какво ви тежи.<br/>Отговаряме до един работен ден.</p><a class="s-contact-mail" href={`mailto:${site.contactEmail}`}>{site.contactEmail} ↗</a></div><div class="s-form-wrap"><p class="s-preview-notice">Дизайн preview · формата не изпраща. За връзка използвайте имейла.</p><ContactForm title="Нека поговорим за вашия бизнес" enquiry={true}/></div></section>
+<script>
+const scenarios = {
+vdiga:{name:'Vdiga',role:'AI рецепционист',question:'„Може ли час за утре следобед?“',state:'РЕЗУЛТАТ ЗА ЕКИПА',result:'Часът е записан.',detail:'Утре, 14:30 · Обобщението е готово.',image:'employee-vdiga-gloria-v1.webp'},
+pishe:{name:'Pishe',role:'AI уеб мениджър',question:'„Нека сайтът показва новата ни услуга.“',state:'ПО ПРЕДВАРИТЕЛНО ОДОБРЕНИ ПРАВИЛА',result:'Сайтът е актуализиран.',detail:'Ясно съдържание за хората, Google и AI.',image:'employee-pishe-v1.webp'},
+pomaga:{name:'Pomaga',role:'AI оперативен асистент',question:'„Получихме ново запитване по имейл.“',state:'РЕЗУЛТАТ ЗА ЕКИПА',result:'Запитването е подредено.',detail:'Клиент в CRM · Задача към колега.',image:'employee-pomaga-v1.webp'}
+};
+document.querySelectorAll<HTMLButtonElement>('[data-role]').forEach(button=>button.addEventListener('click',()=>{const key=button.dataset.role as keyof typeof scenarios;const s=scenarios[key];document.querySelectorAll('[data-role]').forEach(el=>el.setAttribute('aria-pressed',String(el===button))); for(const field of ['name','role','question','state','result','detail'] as const){const el=document.querySelector(`[data-demo-${field}]`);if(el)el.textContent=s[field];} const a=document.querySelector<HTMLAnchorElement>('[data-demo-link]');if(a){a.href=a.href.replace(/sluzhiteli\/[^/]+\//,`sluzhiteli/${key}/`);a.textContent=`Как работи ${s.name} ↗`;} const img=document.querySelector<HTMLImageElement>('.s-person img');if(img){img.src=img.src.replace(/[^/]+$/,s.image);img.alt=`Образът на ${s.name}`;}}));
+document.querySelector<HTMLButtonElement>('[data-approve]')?.addEventListener('click',e=>{const b=e.currentTarget as HTMLButtonElement;const done=b.dataset.done==='true';b.dataset.done=String(!done);b.textContent=done?'Одобрете примера ↗':'Публикувано в примера ✓ · Отначало';document.querySelector('[data-approval-state]')!.textContent=done?'Чака вашето решение':'Одобрено от вас ✓';});
+const form=document.querySelector<HTMLFormElement>('.studio [data-contact-form]');if(form){form.addEventListener('submit',e=>{e.preventDefault();e.stopImmediatePropagation();},true);const submit=form.querySelector<HTMLButtonElement>('button[type="submit"]');if(submit){submit.disabled=true;submit.textContent='Изпращане изключено в preview';}const select=form.querySelector<HTMLSelectElement>('[data-agent-choice]');if(select)select.value='unsure';}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.querySelector('.site-nav')?.classList.remove('is-open');document.querySelector('.nav-toggle')?.setAttribute('aria-expanded','false');}});
+</script>
 </BaseLayout>
