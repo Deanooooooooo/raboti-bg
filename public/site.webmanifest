@@ -1,0 +1,23 @@
+{
+  "name": "Raboti",
+  "short_name": "Raboti",
+  "start_url": "./",
+  "scope": "./",
+  "display": "browser",
+  "background_color": "#fcfdff",
+  "theme_color": "#123bff",
+  "icons": [
+    {
+      "src": "assets/brand-test/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/brand-test/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

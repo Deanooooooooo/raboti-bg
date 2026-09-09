@@ -7,7 +7,7 @@ export const organizationSchema = {
   name: site.brand,
   legalName: site.legalName,
   url: site.url,
-  logo: `${site.url}/assets/brand-test/wordmark.svg`,
+  logo: `${site.url}/assets/brand-test/icon-512.png`,
   description: site.descriptor,
   taxID: site.companyId,
   address: {
