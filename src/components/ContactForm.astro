@@ -6,6 +6,7 @@ interface Props {
   intent?: "hire" | "waitlist";
   taskPlaceholder?: string;
   enquiry?: boolean;
+  emailDraft?: boolean;
 }
 const {
   title = "Кой AI служител ви трябва?",
@@ -13,11 +14,12 @@ const {
   intent = "hire",
   taskPlaceholder = "Например: да вдига, когато екипът е зает",
   enquiry = false,
+  emailDraft = false,
 } = Astro.props;
 const waitlist = intent === "waitlist";
 ---
 
-<form class:list={["contact-form", waitlist && "contact-form--waitlist", enquiry && "contact-form--enquiry"]} data-contact-form data-endpoint={site.formEndpoint} data-adaptive={enquiry ? "true" : undefined} novalidate>
+<form class:list={["contact-form", waitlist && "contact-form--waitlist", enquiry && "contact-form--enquiry"]} data-contact-form data-draft-email={emailDraft ? site.contactEmail : undefined} data-endpoint={site.formEndpoint} data-adaptive={enquiry ? "true" : undefined} novalidate>
   <input type="hidden" name="intent" value={intent} />
   <input type="hidden" name="agent" value={selectedAgent} />
   <label class="honeypot" aria-hidden="true" hidden>Уебсайт<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
@@ -72,9 +74,10 @@ const waitlist = intent === "waitlist";
         <input type="checkbox" name="consent" value="yes" required />
         <span>Съгласен/на съм Raboti да се свърже с мен за тази заявка. Прочетох <a href="/politika-za-poveritelnost/">политиката за поверителност</a>.</span>
       </label>
-      <button class="button" type="submit">{enquiry ? "Изпратете запитването" : "Изпрати заявката"}</button>
+      <button class="button" type="submit">{emailDraft ? "Подгответе имейл" : enquiry ? "Изпратете запитването" : "Изпрати заявката"}</button>
     </>
   )}
+  {emailDraft && <p class="draft-notice">Бутонът отваря подготвен имейл във вашето приложение. Прегледайте го и го изпратете оттам. <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a></p>}
   <p class="form-status" aria-live="polite"></p>
 </form>
 
@@ -116,6 +119,13 @@ const waitlist = intent === "waitlist";
       }
       if (phone && !(/^0\d{9}$/.test(phone) || /^359\d{9}$/.test(phone))) {
         if (status) status.textContent = "Въведи валиден български телефон.";
+        return;
+      }
+      if (form.dataset.draftEmail) {
+        const lines = ['Име: '+String(data.get('name') || ''), 'Имейл: '+String(data.get('email') || ''), 'Фирма: '+String(data.get('businessName') || ''), 'Служител: '+String(data.get('agentChoice') || ''), '', String(data.get('task') || '')];
+        const href = `mailto:${form.dataset.draftEmail}?subject=${encodeURIComponent('Запитване за AI служител — Raboti')}&body=${encodeURIComponent(lines.join('\n'))}`;
+        if (status) status.textContent = 'Имейлът е подготвен. Изпратете го от вашето приложение за поща.';
+        window.location.href = href;
         return;
       }
       const payload = Object.fromEntries(data.entries());

@@ -1,165 +1,55 @@
 ---
-import { getCollection } from "astro:content";
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import Icon from "../../components/Icon.astro";
-import { site } from "../../data/site";
-import { breadcrumbSchema } from "../../data/schema";
-
-const posts = (await getCollection("blog")).sort(
-  (a, b) => b.data.publishedAt.valueOf() - a.data.publishedAt.valueOf(),
-);
-const featuredPost = posts.find((post) => post.id === "kakvo-e-ai-sluzhitel") || posts[0];
-const otherPosts = posts.filter((post) => post.id !== featuredPost?.id);
-const fmt = (date: Date) =>
-  new Intl.DateTimeFormat("bg-BG", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  }).format(date);
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+import {site} from '../../data/site';
+import {breadcrumbSchema} from '../../data/schema';
+import '../../styles/studio.css';
+import '../../styles/studio-secondary.css';
+const posts=(await getCollection('blog')).sort((a,b)=>b.data.publishedAt.valueOf()-a.data.publishedAt.valueOf());
+const featured=posts.find(p=>p.id==='kakvo-e-ai-sluzhitel')||posts[0];
+const fmt=(d:Date)=>new Intl.DateTimeFormat('bg-BG',{day:'numeric',month:'long',year:'numeric'}).format(d);
+const category=(id:string)=>id.includes('sait')?'Сайт и съдържание':id.includes('cena')?'Цени':'AI служители';
+const categories=[...new Set(posts.map(p=>category(p.id)))];
 ---
-
-<BaseLayout
-  title="Блог | Raboti"
-  description="Статии за AI служители: коя работа могат да поемат, как се настройват, как се определя цената и кога трябва да се намеси човек."
-  canonical="/blog/"
-  image="/og/blog.svg"
-  schema={breadcrumbSchema([
-    { name: "Raboti", url: site.url },
-    { name: "Блог", url: `${site.url}/blog/` },
-  ])}
-  bodyClass="blog-index-page"
-  darkOpener={true}
->
-  <header class="blog-hero">
-    <div class="shell">
-      <p class="blog-hero__eyebrow">Блог</p>
-      <h1>Блог за AI служители и работата, която могат да поемат.</h1>
-      <p class="blog-hero__intro">
-        Как да изберете първата задача, как се определят цената и достъпът
-        и кога работата трябва да се върне при човек. За телефонните
-        рецепционисти и обажданията ще ви насочваме към подробните материали
-        на vdiga.bg, вместо да ги повтаряме тук.
-      </p>
-    </div>
-  </header>
-
-  {featuredPost && (
-    <section class="featured" aria-labelledby="featured-title">
-      <div class="shell">
-        <article class="featured__article">
-          <div class="featured__meta">
-            <span>{featuredPost.data.tags[0]}</span>
-            <time datetime={featuredPost.data.publishedAt.toISOString()}>
-              {fmt(featuredPost.data.publishedAt)}
-            </time>
-          </div>
-          <div class="featured__copy">
-            <p>Започнете оттук</p>
-            <h2 id="featured-title">
-              <a href={`/blog/${featuredPost.id}/`}>{featuredPost.data.title}</a>
-            </h2>
-            <p>{featuredPost.data.description}</p>
-            <a class="article-link" href={`/blog/${featuredPost.id}/`}>
-              Прочетете статията <Icon name="arrow-right" />
-            </a>
-          </div>
-        </article>
-      </div>
-    </section>
-  )}
-
-  {otherPosts.length > 0 && (
-    <section class="all-posts" aria-labelledby="all-posts-title">
-      <div class="shell">
-        <div class="all-posts__heading">
-          <h2 id="all-posts-title">Още от блога</h2>
-          <p>{posts.length} статии</p>
-        </div>
-        <div class="all-posts__grid">
-          {otherPosts.map((post) => (
-            <article class="post-card">
-              <div class="post-card__meta">
-                <span>{post.data.tags[0]}</span>
-                <time datetime={post.data.publishedAt.toISOString()}>
-                  {fmt(post.data.publishedAt)}
-                </time>
-              </div>
-              <h3><a href={`/blog/${post.id}/`}>{post.data.title}</a></h3>
-              <p>{post.data.description}</p>
-              <a class="article-link" href={`/blog/${post.id}/`}>
-                Прочетете статията <Icon name="arrow-right" />
-              </a>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  )}
-
-  <aside class="specialist-link">
-    <div class="shell specialist-link__inner">
-      <div>
-        <p>Търсите информация за AI рецепционист?</p>
-        <h2>Обажданията, записването на часове и примерите по отрасли са на vdiga.bg.</h2>
-      </div>
-      <a href="https://vdiga.bg/">
-        Разгледайте Vdiga <Icon name="arrow-right" />
-      </a>
-    </div>
-  </aside>
+<BaseLayout title="Блог за AI служители, автоматизация и сайтове | Raboti" description="Как да изберете AI служител, какво влиза в цената и как да възложите поддръжката на сайта. Статии и ръководства от екипа на Raboti." canonical="/blog/" image="/og/blog.svg" bodyClass="studio studio-secondary journal-page" schema={breadcrumbSchema([{name:'Raboti',url:site.url},{name:'Блог',url:`${site.url}/blog/`}])}>
+<header class="journal-head shell">
+ <h1>Преди да възложите<br/><span>работата на AI.</span></h1>
+ <p>Какво може да поеме един AI служител, как се определя цената и откъде да започнете. Статии от екипа, който изгражда Raboti.</p>
+</header>
+<section class="journal-opening shell" aria-label="Откъде да започнете">
+ {featured && <article class="journal-feature">
+  <div class="journal-meta"><span>{category(featured.id)}</span><time datetime={featured.data.publishedAt.toISOString()}>{fmt(featured.data.publishedAt)}</time></div>
+  <h2><a href={`/blog/${featured.id}/`}>{featured.data.title}</a></h2>
+  <p>{featured.data.description}</p>
+  <a class="reading-action" href={`/blog/${featured.id}/`}>Прочетете статията <Icon name="arrow-right"/></a>
+ </article>}
+ <aside class="journal-paths">
+  <h2>Какво обмисляте?</h2>
+  <a href="/blog/ai-sluzhitel-cena-i-nastroyka/"><span>Да предвидите разходите<strong>Цена и обхват</strong></span><Icon name="arrow-right"/></a>
+  <a href="/polezno/seo-geo/"><span>Да развиете сайта си<strong>Google и AI отговори</strong></span><Icon name="arrow-right"/></a>
+  <a href="/sluzhiteli/"><span>Да намерите кой да поеме работата<strong>Сравнете служителите</strong></span><Icon name="arrow-right"/></a>
+ </aside>
+</section>
+<section class="journal-library shell" aria-labelledby="library-title">
+ <div class="journal-library-head"><h2 id="library-title">Всички статии</h2><p data-result-count aria-live="polite">{posts.length} статии</p></div>
+ <div class="journal-filters" role="group" aria-label="Филтрирайте по тема"><button type="button" data-topic="Всички" aria-pressed="true">Всички</button>{categories.map(c=><button type="button" data-topic={c} aria-pressed="false">{c}</button>)}</div>
+ <div class="journal-list">
+ {posts.map(p=><article class="journal-entry" data-category={category(p.id)}>
+   <div class="journal-meta"><span>{category(p.id)}</span><time datetime={p.data.publishedAt.toISOString()}>{fmt(p.data.publishedAt)}</time></div>
+   <div><h3><a href={`/blog/${p.id}/`}>{p.data.title}</a></h3><p>{p.data.description}</p><span class="journal-author">{p.data.author}</span></div>
+   <a class="reading-arrow" href={`/blog/${p.id}/`} aria-label={`Прочетете: ${p.data.title}`}><Icon name="arrow-right"/></a>
+ </article>)}
+ </div>
+</section>
+<aside class="journal-close shell"><div><h2>Търсите AI рецепционист?</h2><p>Примерни разговори, записване на часове и приложения по отрасли — на сайта на Vdiga.</p></div><a class="button" href="https://vdiga.bg/">Разгледайте Vdiga <Icon name="arrow-right"/></a></aside>
 </BaseLayout>
-
-<style>
-  :global(.blog-index-page) { background: #f4f1ec; color: #111426; }
-  .blog-hero { padding: clamp(112px, 13vw, 188px) 0 clamp(72px, 8vw, 112px); background: #10142c; color: #fff; }
-  .blog-hero__eyebrow { margin: 0 0 28px; color: #2de2d0; font-size: .78rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
-  .blog-hero h1 { max-width: 15ch; margin: 0; color: #fff; font-size: clamp(3rem, 6vw, 6.2rem); line-height: .98; letter-spacing: -.045em; text-wrap: balance; }
-  .blog-hero__intro { max-width: 67ch; margin: 34px 0 0; color: rgba(255,255,255,.72); font-size: clamp(1.05rem, 1.5vw, 1.22rem); line-height: 1.65; }
-
-  .featured { padding: clamp(72px, 9vw, 132px) 0; }
-  .featured__article { display: grid; min-height: 560px; grid-template-columns: minmax(220px, .45fr) minmax(0, 1fr); overflow: hidden; border-radius: 18px; background: radial-gradient(circle at 12% 18%, rgba(45,226,208,.18), transparent 32%), #10142c; color: #fff; }
-  .featured__meta { display: flex; flex-direction: column; justify-content: space-between; padding: clamp(28px, 4vw, 52px); border-right: 1px solid rgba(255,255,255,.14); color: rgba(255,255,255,.62); font-size: .82rem; }
-  .featured__copy { display: flex; flex-direction: column; justify-content: flex-end; padding: clamp(34px, 6vw, 78px); }
-  .featured__copy > p:first-child { margin: 0 0 20px; color: #2de2d0; font-size: .78rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
-  .featured h2 { max-width: 15ch; margin: 0; color: #fff; font-size: clamp(2.3rem, 4.6vw, 5rem); line-height: 1.02; letter-spacing: -.04em; }
-  .featured h2 a, .post-card h3 a { color: inherit; text-decoration: none; }
-  .featured__copy > p:not(:first-child) { max-width: 58ch; margin: 26px 0 34px; color: rgba(255,255,255,.7); line-height: 1.65; }
-
-  .all-posts { padding: 0 0 clamp(84px, 11vw, 150px); }
-  .all-posts__heading { display: flex; align-items: end; justify-content: space-between; gap: 24px; padding-bottom: 26px; border-bottom: 1px solid rgba(17,20,38,.16); }
-  .all-posts__heading h2 { margin: 0; color: #111426; font-size: clamp(2.25rem, 4vw, 4rem); letter-spacing: -.04em; }
-  .all-posts__heading p { margin: 0 0 7px; color: #686773; }
-  .all-posts__grid { display: grid; grid-template-columns: repeat(2, 1fr); }
-  .post-card { display: flex; min-height: 410px; flex-direction: column; padding: clamp(30px, 4vw, 52px) 0; }
-  .post-card + .post-card { padding-left: clamp(30px, 4vw, 52px); border-left: 1px solid rgba(17,20,38,.16); }
-  .post-card:first-child { padding-right: clamp(30px, 4vw, 52px); }
-  .post-card__meta { display: flex; justify-content: space-between; gap: 20px; color: #686773; font-size: .8rem; }
-  .post-card h3 { max-width: 19ch; margin: 54px 0 20px; color: #111426; font-size: clamp(1.8rem, 3vw, 3rem); line-height: 1.08; letter-spacing: -.03em; }
-  .post-card > p { max-width: 48ch; margin: 0 0 32px; color: #686773; line-height: 1.65; }
-  .article-link { display: inline-flex; width: fit-content; align-items: center; gap: 9px; margin-top: auto; color: inherit; font-weight: 750; text-decoration: none; }
-  .article-link:hover { text-decoration: underline; text-underline-offset: 5px; }
-  .article-link :global(svg), .specialist-link a :global(svg) { width: 17px; }
-
-  .specialist-link { padding: clamp(64px, 8vw, 110px) 0; background: #2de2d0; }
-  .specialist-link__inner { display: flex; align-items: end; justify-content: space-between; gap: 48px; }
-  .specialist-link p { margin: 0 0 12px; font-weight: 750; }
-  .specialist-link h2 { max-width: 20ch; margin: 0; color: #111426; font-size: clamp(2.2rem, 4vw, 4.3rem); line-height: 1.03; letter-spacing: -.04em; }
-  .specialist-link a { display: inline-flex; flex: none; align-items: center; gap: 9px; padding: 15px 20px; border-radius: 8px; background: #111426; color: #fff; font-weight: 750; text-decoration: none; }
-
-  @media (max-width: 760px) {
-    .featured__article { min-height: 0; grid-template-columns: 1fr; }
-    .featured__meta { flex-direction: row; padding: 26px; border-right: 0; border-bottom: 1px solid rgba(255,255,255,.14); }
-    .featured__copy { padding: 50px 26px 32px; }
-    .all-posts__grid { grid-template-columns: 1fr; }
-    .post-card, .post-card:first-child, .post-card + .post-card { min-height: 0; padding: 38px 0; border-left: 0; }
-    .post-card + .post-card { border-top: 1px solid rgba(17,20,38,.16); }
-    .post-card h3 { margin-top: 38px; }
-    .specialist-link__inner { align-items: flex-start; flex-direction: column; }
-  }
-  @media (max-width: 600px) {
-    :global(.blog-index-page main .shell) { width: calc(100% - 32px); }
-    .blog-hero { padding-top: 96px; }
-    .blog-hero h1 { max-width: 100%; font-size: clamp(2.65rem, 12vw, 3.6rem); overflow-wrap: break-word; text-wrap: pretty; }
-    .all-posts__heading { align-items: flex-start; flex-direction: column; }
-  }
-</style>
+<script>
+const controls=document.querySelectorAll<HTMLButtonElement>('[data-topic]');
+controls.forEach(control=>control.addEventListener('click',()=>{
+ const selected=control.dataset.topic;let count=0;
+ controls.forEach(b=>b.setAttribute('aria-pressed',String(b===control)));
+ document.querySelectorAll<HTMLElement>('[data-category]').forEach(entry=>{entry.hidden=selected!=='Всички'&&entry.dataset.category!==selected;if(!entry.hidden)count++;});
+ const label=document.querySelector('[data-result-count]');if(label)label.textContent=`${count} ${count===1?'статия':'статии'}`;
+}));
+</script>

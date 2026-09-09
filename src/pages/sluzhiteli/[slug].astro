@@ -1,4 +1,6 @@
 ---
+import "../../styles/studio.css";
+import "../../styles/studio-secondary.css";
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ServiceExample from "../../components/ServiceExample.astro";
@@ -149,7 +151,7 @@ const schemas = [
   },
 ];
 ---
-<BaseLayout title={data.seoTitle} description={data.seoDescription} canonical={`/sluzhiteli/${data.slug}/`} image={`/og/${data.slug}.svg`} schema={schemas} bodyClass={`candidate-page candidate-page--${data.slug}`}>
+<BaseLayout title={data.seoTitle} description={data.seoDescription} canonical={`/sluzhiteli/${data.slug}/`} image={`/og/${data.slug}.svg`} schema={schemas} bodyClass={`studio studio-secondary candidate-page candidate-page--${data.slug}`}>
   <>
   <section class="gloria-hero" style={`--agent:${data.accent};--agent-soft:${data.accentSoft}`}>
     <div class="gloria-hero__inner">
