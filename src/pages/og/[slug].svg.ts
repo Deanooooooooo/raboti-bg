@@ -3,11 +3,11 @@ import { getCollection } from "astro:content";
 
 const staticCards: Record<string, { title: string; line: string }> = {
   home: { title: "Vdiga. Pomaga. Pishe. Raboti.", line: "AI служители за българския бизнес" },
-  sluzhiteli: { title: "AI служители за конкретна работа.", line: "Виж свободните позиции в Raboti" },
-  ceni: { title: "Плащаш за роля.", line: "Месечна цена за конкретни задачи" },
+  sluzhiteli: { title: "AI служители за конкретна работа.", line: "Обаждания, сайт и администрация" },
+  ceni: { title: "Цени на AI служителите.", line: "Месечна цена за конкретни задачи" },
   kontakti: { title: "Кое остава несвършено?", line: "Нека го поеме AI служител" },
-  "za-nas": { title: "Хората зад Raboti.", line: "Реален български екип и компания" },
-  blog: { title: "Без мъгла около AI.", line: "Практични ръководства за бизнеса" },
+  "za-nas": { title: "Хората зад Raboti.", line: "Екипът на „Бласт Офф“ ЕООД" },
+  blog: { title: "Ръководства за AI служители.", line: "Практични ръководства за бизнеса" },
 };
 const escape = (value: string) => value.replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&apos;" }[char] || char));
 

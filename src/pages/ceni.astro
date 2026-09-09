@@ -67,7 +67,7 @@ const employees = [
 >
   <section class="prices-hero">
     <div class="s-wrap prices-hero__inner">
-      <h1>Ясна работа.<br/><span>Ясна месечна цена.</span></h1>
+      <h1>Цени на<br/><span>AI служителите.</span></h1>
       <p>Vdiga започва от 97 €, Pishe от 197 €, а Pomaga от 297 € на месец. По-долу ще видите какво поема всеки служител и от какво зависи планът.</p>
       <p class="prices-disclosure">Без ДДС. Първоначалната настройка се изчислява отделно.</p>
       <nav class="prices-shortcuts" aria-label="Към цените на услугата">{employees.map(employee=><a href={`#price-${employee.name.toLowerCase()}`}><strong>{employee.name}</strong><span>{employee.role}</span><b>от {employee.plans[0].price}<small>/месец</small></b><Icon name="arrow-down"/></a>)}<a href="#custom"><strong>По поръчка</strong><span>За вашия процес</span><b>След уточняване</b><Icon name="arrow-down"/></a></nav>
