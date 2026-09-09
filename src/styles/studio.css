@@ -1173,3 +1173,17 @@ body.studio:not(.home-art) main{padding-top:0}
 .studio .s-start-heading h2 span,.studio .s-faq h2 span{color:#798195}
 .studio .s-profile-content>p:not(.s-fit),.studio .s-profile-content .s-fit,.studio .s-service-facts span,.studio .s-profile-content>small,.studio .s-compare-link>span,.studio .s-project-stage blockquote,.studio .s-project-facts dt,.studio .s-project-title>span,.studio .s-test-cases p,.studio .s-site-example figcaption,.studio .s-example-answer p,.studio .s-example-meta{color:#697286}
 .studio .footer-grid p,.studio .footer-grid span,.studio .footer-bottom,.studio .footer-bottom span{color:#697286}
+
+/* Custom work is a scoped enquiry, not a fourth priced subscription. */
+.studio .s-caption a{color:inherit;text-decoration:underline;text-underline-offset:3px}
+.studio .s-custom-brief{padding:40px;background:#eaf0fb;display:flex;flex-direction:column;justify-content:center}
+.studio .s-custom-brief h3{font-size:var(--type-title);line-height:1.25;color:#17233d;margin:0 0 16px}
+.studio .s-custom-brief p{font-size:var(--type-body);line-height:1.6;color:#52637f;margin:0 0 24px}
+.studio .s-custom-brief dl{margin:0}.studio .s-custom-brief dl>div{padding:16px 0;border-top:1px solid #cbd5e6}
+.studio .s-custom-brief dt{font-size:var(--type-label);color:#52637f;margin-bottom:6px}
+.studio .s-custom-brief dd{margin:0;font-size:var(--type-body);color:#17233d}
+.studio .s-custom-enquiry{font:inherit;color:#5154cc;border:1px solid #5154cc;background:transparent;border-radius:999px;padding:12px 20px;cursor:pointer;margin:0 0 16px}
+.studio .s-custom-enquiry[aria-pressed=true]{background:#5154cc;color:white}
+.studio .s-custom-enquiry:focus-visible{outline:3px solid #5154cc;outline-offset:4px}
+@media(max-width:650px){.studio .s-service-choice{display:grid;grid-template-columns:1fr 1fr;border-radius:24px}.studio .s-service-choice button>small{display:none}.studio .s-custom-brief{padding:26px 22px}.studio .s-custom-panel .s-profile-content{padding-top:28px}}
+@media(max-width:650px){.studio .s-custom-panel .s-profile-content{order:-1}.studio .s-custom-brief{padding-top:24px}.studio .s-custom-brief dl>div{padding:12px 0}}
