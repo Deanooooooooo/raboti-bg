@@ -1,0 +1,11 @@
+/* Preview application of owner-supplied logo; existing layout retained. */
+.brand-logo,.s-window-logo,.s-project-top>img{mix-blend-mode:multiply;object-fit:contain;aspect-ratio:1110/272!important;height:auto}
+.site-header .brand-logo{width:132px!important;height:auto!important;max-width:100%!important}
+.site-footer{background:#f4f6fa!important;color:#17233d!important}
+.site-footer a,.site-footer strong{color:#17233d!important}
+.site-footer .brand-logo{width:160px!important;height:auto!important;filter:none!important}
+@media(max-width:650px){.site-header .brand-logo{width:115px!important}}
+
+.site-footer p,.site-footer span{color:#526078!important}
+.sticky-call-bar a{background:#17233d!important}.sticky-call-bar span{color:#fff!important}
+body:has(.brand-review) .sticky-call-bar{display:none!important}

@@ -20,7 +20,7 @@ const {
   title,
   description,
   canonical = Astro.url.pathname,
-  image = "/og/home.svg",
+  image = "/assets/brand-test/share.png",
   type = "website",
   schema = [],
   noindex = false,
@@ -30,7 +30,8 @@ const {
   author,
 } = Astro.props;
 const canonicalUrl = new URL(canonical, site.url).toString();
-const imageUrl = new URL(image, site.url).toString();
+const previewBase = import.meta.env.BASE_URL.replace(/\/$/, "");
+const imageUrl = new URL(previewBase ? `${previewBase}${image}` : image, previewBase ? "https://deanooooooooo.github.io" : site.url).toString();
 const schemas = [organizationSchema, ...(Array.isArray(schema) ? schema : [schema])].filter(Boolean);
 ---
 
@@ -45,8 +46,8 @@ const schemas = [organizationSchema, ...(Array.isArray(schema) ? schema : [schem
 <meta property="og:url" content={canonicalUrl} />
 <meta property="og:image" content={imageUrl} />
 {imageAlt && <meta property="og:image:alt" content={imageAlt} />}
-{image.match(/\.(webp|png|jpe?g)$/i) && <meta property="og:image:width" content="1600" />}
-{image.match(/\.(webp|png|jpe?g)$/i) && <meta property="og:image:height" content="900" />}
+{image.match(/\.(webp|png|jpe?g)$/i) && <meta property="og:image:width" content={image === "/assets/brand-test/share.png" ? "1200" : "1600"} />}
+{image.match(/\.(webp|png|jpe?g)$/i) && <meta property="og:image:height" content={image === "/assets/brand-test/share.png" ? "630" : "900"} />}
 {type === "article" && publishedAt && <meta property="article:published_time" content={publishedAt.toISOString()} />}
 {type === "article" && (updatedAt || publishedAt) && <meta property="article:modified_time" content={(updatedAt || publishedAt)?.toISOString()} />}
 {type === "article" && author && <meta name="author" content={author} />}
