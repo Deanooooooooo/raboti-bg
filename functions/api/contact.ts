@@ -19,17 +19,23 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
   if (String(body.website || "").trim()) return json({ ok: true });
   const intent = String(body.intent || "");
   if (!["hire", "waitlist"].includes(intent)) return json({ error: "Invalid intent" }, 400);
+  const email = String(body.email || "").trim();
+  const phone = String(body.phone || "").replace(/\D/g, "");
+  const validContact = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) || /^(0\d{9}|359\d{9})$/.test(phone);
   const business = String(body.businessType || body.businessName || "").trim();
-  if (intent === "hire" && (!String(body.name || "").trim() || !String(body.phone || "").trim() || !business || body.consent !== "yes")) {
+  if (intent === "hire" && (!String(body.name || "").trim() || !validContact || !business || !String(body.task || "").trim() || body.consent !== "yes")) {
     return json({ error: "Missing required fields" }, 400);
   }
   if (intent === "waitlist" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(body.email || ""))) return json({ error: "Invalid email" }, 400);
   if (!env.LEADS_WEBHOOK_URL) return json({ error: "Lead destination is not configured" }, 503);
+  try {
   const upstream = await fetch(env.LEADS_WEBHOOK_URL, {
     method: "POST",
+    signal: AbortSignal.timeout(10000),
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ ...body, receivedAt: new Date().toISOString(), userAgent: request.headers.get("user-agent") }),
   });
   if (!upstream.ok) return json({ error: "Lead destination failed" }, 502);
   return json({ ok: true });
+  } catch { return json({ error: "Lead destination unavailable" }, 502); }
 };

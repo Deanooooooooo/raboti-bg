@@ -23,7 +23,12 @@ export const organizationSchema = {
     contactType: "sales",
     availableLanguage: ["bg"],
   },
-  sameAs: Object.values(site.socialProfiles),
+  parentOrganization: {
+    "@type": "Organization",
+    "@id": `${site.url}/#legal-operator`,
+    name: site.legalName,
+    taxID: site.companyId,
+  },
 };
 
 export const breadcrumbSchema = (items: Array<{ name: string; url: string }>) => ({

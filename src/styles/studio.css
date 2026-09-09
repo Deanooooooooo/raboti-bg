@@ -1189,3 +1189,10 @@ body.studio:not(.home-art) main{padding-top:0}
 @media(max-width:650px){.studio .site-header .brand-logo{height:27px!important}}
 @supports not (backdrop-filter:blur(12px)){.studio .site-header .header-inner{background:rgba(255,255,255,.98)}}
 .studio :is(#ekip,#naemi,[id^="directory-"]){scroll-margin-top:100px}
+
+/* A compact offer overview in the existing transition strip, not another hero block. */
+.studio .s-service-strip .s-strip-offer{display:grid;gap:6px;min-width:0}
+.studio .s-service-strip .s-strip-offer strong{font-size:var(--type-label)}
+.studio .s-service-strip .s-strip-offer span{color:var(--muted);line-height:1.45}
+.studio .s-service-strip .s-strip-offer small{color:var(--ink);font-size:var(--type-meta)}
+.studio .s-service-strip .s-strip-terms{display:block;margin-block:0;padding-block:0 16px;font-size:12px;line-height:1.5;color:var(--muted)}

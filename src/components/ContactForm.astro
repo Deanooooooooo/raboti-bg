@@ -27,7 +27,7 @@ const waitlist = intent === "waitlist";
   {waitlist ? (
     <>
       <label><span>Имейл за известие</span><input type="email" name="email" autocomplete="email" required placeholder="ime@business.bg" /></label>
-      <button class="button button--dark" type="submit">Извести ме</button>
+      <button class="button button--dark" type="submit" disabled data-needs-js>Извести ме</button>
     </>
   ) : (
     <>
@@ -74,15 +74,17 @@ const waitlist = intent === "waitlist";
         <input type="checkbox" name="consent" value="yes" required />
         <span>Съгласен/на съм Raboti да се свърже с мен за тази заявка. Прочетох <a href="/politika-za-poveritelnost/">политиката за поверителност</a>.</span>
       </label>
-      <button class="button" type="submit">{emailDraft ? "Подгответе имейл" : enquiry ? "Изпратете запитването" : "Изпрати заявката"}</button>
+      <button class="button" type="submit" disabled data-needs-js>{emailDraft ? "Подгответе имейл" : enquiry ? "Изпратете запитването" : "Изпрати заявката"}</button>
     </>
   )}
   {emailDraft && <p class="draft-notice">Бутонът отваря подготвен имейл във вашето приложение. Прегледайте го и го изпратете оттам. <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a></p>}
+  <noscript><p>За запитване пишете на <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a> или се обадете на <a href={`tel:${site.salesPhoneHref}`}>{site.salesPhone}</a>. Формулярът изисква JavaScript.</p></noscript>
   <p class="form-status" aria-live="polite"></p>
 </form>
 
 <script>
   document.querySelectorAll<HTMLFormElement>("[data-contact-form]").forEach((form) => {
+    form.querySelectorAll<HTMLButtonElement>("[data-needs-js]").forEach(button => button.disabled = false);
     const choice = form.querySelector<HTMLSelectElement>("[data-agent-choice]");
     const taskLabel = form.querySelector<HTMLElement>("[data-task-label]");
     const taskInput = form.querySelector<HTMLTextAreaElement>("[data-task-input]");
@@ -139,7 +141,7 @@ const waitlist = intent === "waitlist";
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
         });
-        if (!response.ok) throw new Error("Request failed");
+        if (!response.ok || (await response.json()).ok !== true) throw new Error("Request was not acknowledged");
         window.dispatchEvent(new CustomEvent('raboti:interaction',{detail:{action:'enquiry_success',agent:String(data.get('agentChoice') || data.get('agent') || 'unsure')}}));
       form.reset();
         if (status) status.textContent = data.get("intent") === "waitlist"
