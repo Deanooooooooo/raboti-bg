@@ -1180,8 +1180,8 @@ body.studio:not(.home-art) main{padding-top:0}
 
 /* Shared directory/home navigation: original dimensions and scroll motion. */
 .studio .site-header{top:0}
-.studio .site-header .header-inner{background:rgba(255,255,255,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
-.studio .site-header.is-scrolled .header-inner{background:rgba(255,255,255,.96)}
+.studio .site-header .header-inner{background:linear-gradient(180deg,rgba(255,255,255,.4) 10%,rgba(255,255,255,.8) 100%);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
+.studio .site-header.is-scrolled .header-inner{background:linear-gradient(180deg,rgba(255,255,255,.4) 10%,rgba(255,255,255,.8) 100%)}
 .studio .site-header .brand-logo{width:auto!important;height:30px!important;max-width:none;aspect-ratio:600/191}
 .studio .site-header .header-cta{background:#17233d;color:#fff}
 .studio .site-header .header-cta:hover{background:#283956}
