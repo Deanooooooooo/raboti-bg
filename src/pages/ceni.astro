@@ -1,4 +1,5 @@
 ---
+import "../styles/studio.css";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import FAQ from "../components/FAQ.astro";
 import Icon from "../components/Icon.astro";
@@ -61,19 +62,20 @@ const employees = [
   description="Vdiga от 97 €, Pishe от 197 € и Pomaga от 297 € месечно. Сравнете плановете и вижте каква работа поема всеки AI служител."
   canonical="/ceni/"
   image="/og/ceni.svg"
-  darkOpener={true}
+  bodyClass="studio studio-pricing"
   schema={[faqSchema(pricingFaqs),breadcrumbSchema([{name:"Raboti",url:site.url},{name:"Цени",url:`${site.url}/ceni/`}])]}
 >
   <section class="prices-hero">
-    <div class="shell prices-hero__inner">
-      <h1>Колко струва работата, която искате да спрете да вършите на ръка?</h1>
+    <div class="s-wrap prices-hero__inner">
+      <h1>Ясна работа.<br/><span>Ясна месечна цена.</span></h1>
       <p>Vdiga започва от 97 €, Pishe от 197 €, а Pomaga от 297 € на месец. По-долу ще видите какво поема всеки служител и от какво зависи планът.</p>
-      <a class="button button--spectrum" href="#sluzhiteli">Сравнете тримата служители <Icon name="arrow-right" /></a>
+      <p class="prices-disclosure">Без ДДС. Първоначалната настройка се изчислява отделно.</p>
+      <nav class="prices-shortcuts" aria-label="Към цените на услугата">{employees.map(employee=><a href={`#price-${employee.name.toLowerCase()}`}><strong>{employee.name}</strong><span>{employee.role}</span><b>от {employee.plans[0].price}<small>/месец</small></b><Icon name="arrow-down"/></a>)}<a href="#custom"><strong>По поръчка</strong><span>За вашия процес</span><b>След уточняване</b><Icon name="arrow-down"/></a></nav>
     </div>
   </section>
 
   <section class="prices-section" id="sluzhiteli" aria-labelledby="prices-title">
-    <div class="shell">
+    <div class="s-wrap">
       <header class="prices-head">
         <h2 id="prices-title">Започнете от работата, която се трупа.</h2>
         <p>Телефонните разговори, промените по сайта и прехвърлянето на данни се измерват по различен начин. Затова всеки служител има собствени планове.</p>
@@ -81,7 +83,7 @@ const employees = [
 
       <div class="employee-prices">
         {employees.map((employee) => (
-          <article class="employee-price" style={`--employee:${employee.accent};--employee-soft:${employee.soft}`}>
+          <article class="employee-price" id={`price-${employee.name.toLowerCase()}`} style={`--employee:${employee.accent};--employee-soft:${employee.soft}`}>
             <header class="employee-price__intro">
               <div>
                 <p class="employee-price__role">{employee.role}</p>
@@ -102,7 +104,7 @@ const employees = [
                 ))}
               </ol>
               <p class="employee-price__tax">Цените са без ДДС. Настройката се изчислява отделно.</p>
-              <a class="button button--dark" href={employee.href}>{employee.cta} <Icon name="arrow-right" /></a>
+              <div class="price-actions"><a class="s-primary" href={`/?agent=${employee.name.toLowerCase()}#naemi`}>Обсъдете {employee.name} <Icon name="arrow-right"/></a><a class="s-text-link" href={employee.href}>Пълен обхват на плановете <Icon name="arrow-right" /></a></div>
             </div>
           </article>
         ))}
@@ -111,7 +113,7 @@ const employees = [
   </section>
 
   <section class="setup-section" aria-labelledby="setup-title">
-    <div class="shell setup-grid">
+    <div class="s-wrap setup-grid">
       <div>
         <h2 id="setup-title">Преди месечната работа идва настройката.</h2>
         <p>Показаните цени са за месечната услуга. Преди да започнем, трябва да свържем служителя с телефона, сайта или програмите, които използвате, и да уговорим какво може да прави сам.</p>
@@ -125,74 +127,25 @@ const employees = [
   </section>
 
   <section class="faq-section">
-    <div class="shell faq-grid">
+    <div class="s-wrap faq-grid">
       <div><h2>Въпроси за плащането и договора</h2><p>Ако не знаете кой план покрива работата ви, опишете я във формата. Ще ви кажем какво може да се поеме и колко ще струва преди да започнем.</p></div>
       <FAQ items={pricingFaqs}/>
     </div>
   </section>
 
-  <section class="prices-cta">
-    <div class="shell prices-cta__inner">
+  <section class="prices-cta" id="custom">
+    <div class="s-wrap prices-cta__inner">
       <div><h2>Нужен ви е AI служител по поръчка?</h2><p>За работа извън готовите планове цената се определя след преглед на процеса, нужните връзки с вашите програми и обхвата. Получавате конкретна оферта преди да започнем.</p></div>
-      <a class="button button--spectrum" href="/?agent=custom#naemi">Обсъдете вашия процес <Icon name="arrow-right" /></a>
+      <a class="s-primary" href="/?agent=custom#naemi">Обсъдете вашия процес <Icon name="arrow-right" /></a>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .prices-hero { padding: clamp(5.5rem, 11vw, 9rem) 0 clamp(4.5rem, 8vw, 7rem); color: #fff; background: radial-gradient(circle at 76% 18%, rgba(45,226,208,.16), transparent 31rem), #070a18; }
-  .prices-hero__inner { display: grid; justify-items: start; }
-  .prices-hero h1 { max-width: 980px; margin: 0; color: #fff; font-size: clamp(3rem, 6.5vw, 6rem); line-height: .98; letter-spacing: -.04em; text-wrap: balance; }
-  .prices-hero p { max-width: 690px; margin: 2rem 0; color: rgba(255,255,255,.72); font-size: clamp(1.1rem, 1.8vw, 1.35rem); }
-  .prices-section { padding: clamp(5rem, 9vw, 8rem) 0; background: #f4f1ec; }
-  .prices-head { display: grid; grid-template-columns: 1.1fr .9fr; gap: 4rem; align-items: end; margin-bottom: clamp(3rem, 6vw, 5rem); }
-  .prices-head h2, .setup-grid h2, .faq-grid h2, .prices-cta h2 { margin: 0; font-size: clamp(2.5rem, 5vw, 4.75rem); line-height: 1.02; letter-spacing: -.038em; text-wrap: balance; }
-  .prices-head p, .setup-grid > div > p, .faq-grid > div > p { max-width: 60ch; margin: 0; color: #686773; font-size: 1.125rem; }
-  .employee-prices { display: grid; gap: 1.25rem; }
-  .employee-price { display: grid; grid-template-columns: minmax(0,.82fr) minmax(0,1.18fr); overflow: hidden; border: 1px solid rgba(17,20,38,.11); border-radius: 16px; background: #fff; box-shadow: 0 24px 70px -50px rgba(25,20,50,.5); }
-  .employee-price__intro { padding: clamp(1.75rem, 4vw, 3rem); background: var(--employee-soft); }
-  .employee-price__role { margin: 0 0 .35rem; color: var(--employee); font-size: .8125rem; font-weight: 700; }
-  .employee-price h3 { margin: 0 0 clamp(2.5rem, 6vw, 5rem); color: var(--employee); font-size: clamp(2.7rem, 5vw, 4.8rem); line-height: 1; letter-spacing: -.04em; }
-  .employee-price__question { max-width: 24ch; margin: 0 0 1rem; color: #111426; font-size: clamp(1.35rem, 2vw, 1.7rem); font-weight: 700; line-height: 1.15; }
-  .employee-price__intro > p:last-child { max-width: 45ch; margin: 0; color: #4f4f58; }
-  .employee-price__plans { padding: clamp(1.75rem, 4vw, 3rem); }
-  .employee-price__measure { margin: 0 0 1.5rem; font-weight: 700; }
-  .employee-price__plans ol { margin: 0; padding: 0; list-style: none; border-top: 1px solid rgba(17,20,38,.12); }
-  .employee-price__plans li { display: grid; grid-template-columns: 1fr auto; gap: 1.5rem; align-items: center; padding: 1.25rem 0; border-bottom: 1px solid rgba(17,20,38,.12); }
-  .employee-price__plans li div { display: grid; gap: .25rem; }
-  .employee-price__plans li div span { color: #686773; font-size: .9rem; }
-  .employee-price__plans li > p { display: flex; align-items: baseline; gap: .35rem; margin: 0; text-align: right; white-space: nowrap; }
-  .employee-price__plans li > p strong { font-size: 1.35rem; }
-  .employee-price__plans li > p span { color: #686773; font-size: .8rem; }
-  .employee-price__tax { margin: 1.25rem 0; color: #686773; font-size: .86rem; }
-  .setup-section { padding: clamp(5rem, 9vw, 8rem) 0; color: #fff; background: #0d1228; }
-  .setup-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(3rem, 8vw, 8rem); }
-  .setup-grid h2 { color: #fff; }
-  .setup-grid > div > p { margin-top: 1.5rem; color: rgba(255,255,255,.68); }
-  .setup-steps { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; border-top: 1px solid rgba(255,255,255,.13); }
-  .setup-steps li { display: grid; grid-template-columns: 2.5rem 1fr; gap: 1.25rem; padding: 1.5rem 0; border-bottom: 1px solid rgba(255,255,255,.13); }
-  .setup-steps li > span { display: grid; width: 2rem; height: 2rem; place-items: center; border-radius: 50%; color: #070a18; background: #2de2d0; font-size: .8rem; font-weight: 800; }
-  .setup-steps strong { font-size: 1.15rem; }
-  .setup-steps p { margin: .4rem 0 0; color: rgba(255,255,255,.68); }
-  .faq-section { padding: clamp(5rem, 9vw, 8rem) 0; background: #fff; }
-  .faq-grid { display: grid; grid-template-columns: .8fr 1.2fr; gap: clamp(3rem, 8vw, 8rem); align-items: start; }
-  .faq-grid h2 { font-size: clamp(2.5rem, 4vw, 4rem); }
-  .faq-grid > div > p { margin-top: 1.5rem; }
-  .prices-cta { padding: clamp(4rem, 8vw, 7rem) 0; color: #fff; background: #070a18; }
-  .prices-cta__inner { display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center; }
-  .prices-cta h2 { max-width: 800px; color: #fff; }
-  .prices-cta p { max-width: 650px; margin: 1.25rem 0 0; color: rgba(255,255,255,.68); }
-  @media (max-width: 900px) {
-    .prices-head, .employee-price, .setup-grid, .faq-grid, .prices-cta__inner { grid-template-columns: 1fr; }
-    .prices-head { gap: 1.5rem; }
-    .employee-price h3 { margin-bottom: 2.5rem; }
-    .prices-cta__inner { justify-items: start; }
-  }
-  @media (max-width: 560px) {
-    .prices-hero { padding-top: 4.5rem; }
-    .prices-hero h1 { font-size: clamp(2.65rem, 13vw, 4rem); }
-    .employee-price__plans li { grid-template-columns: 1fr; gap: .65rem; }
-    .employee-price__plans li > p { text-align: left; }
-    .employee-price .button { width: 100%; }
-  }
+.prices-hero{padding:140px 0 56px}.prices-hero__inner{display:grid;grid-template-columns:1fr 1fr;gap:20px 64px;align-items:center}.prices-hero h1{font-size:var(--type-display);line-height:1.08;letter-spacing:-.035em;grid-row:1/3}.prices-hero h1 span{color:#3157c8}.prices-hero p{color:var(--muted);font-size:var(--type-body);line-height:1.7}.prices-hero .prices-disclosure{font-size:var(--type-label);align-self:start}.prices-shortcuts{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin-top:24px;border-block:1px solid var(--line)}.prices-shortcuts a{display:grid;grid-template-columns:1fr auto;gap:10px;padding:26px 24px;color:var(--ink)}.prices-shortcuts a+a{border-left:1px solid var(--line)}.prices-shortcuts a:hover{background:#f0f2fa}.prices-shortcuts a:focus-visible{outline:3px solid #5154cc;outline-offset:3px}.prices-shortcuts strong{font-size:var(--type-title)}.prices-shortcuts span{grid-column:1/-1;font-size:var(--type-label);color:var(--muted)}.prices-shortcuts b{grid-column:1;font-size:1.125rem;font-weight:600}.prices-shortcuts small{font-size:var(--type-meta);font-weight:400;margin-left:4px;color:var(--muted)}.prices-shortcuts :global(svg){grid-column:2;grid-row:1;width:20px;height:20px;color:#5154cc}
+.prices-section{padding-bottom:64px}.prices-head{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:end;margin-bottom:32px}.prices-head p,.setup-grid>div>p,.faq-grid>div>p,.prices-cta p{color:var(--muted);font-size:var(--type-body);line-height:1.7}.employee-prices{display:grid;gap:28px}.employee-price{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff;scroll-margin-top:110px}.employee-price__intro{padding:36px;background:#f0f3f9}.employee-price__role{font-size:var(--type-label);color:var(--muted);margin-bottom:8px!important}.employee-price h3{font-size:var(--type-heading);line-height:1.1;margin-bottom:28px;color:var(--ink)}.employee-price__question{font-size:var(--type-title);font-weight:500;line-height:1.35;margin-bottom:16px!important}.employee-price__intro>p:last-child{color:var(--muted);font-size:var(--type-body);line-height:1.7}.employee-price__plans{padding:32px 36px}.employee-price__measure{font-size:var(--type-body);line-height:1.6;margin-bottom:20px!important;color:var(--muted)}.employee-price__plans ol{list-style:none;padding:0;margin:0;border-top:1px solid var(--line)}.employee-price__plans li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center;padding:22px 0;border-bottom:1px solid var(--line)}.employee-price__plans li>div{display:grid;gap:8px}.employee-price__plans li>div strong{font-size:var(--type-body);font-weight:600}.employee-price__plans li>div span{font-size:var(--type-label);color:var(--muted);line-height:1.5}.employee-price__plans li>p{display:grid;text-align:right;gap:4px;white-space:nowrap}.employee-price__plans li>p strong{font-size:var(--type-title);font-weight:600;letter-spacing:-.02em;font-variant-numeric:tabular-nums}.employee-price__plans li>p span{font-size:var(--type-meta);color:var(--muted)}.employee-price__tax{font-size:var(--type-label);color:var(--muted);margin:20px 0!important;line-height:1.6}.price-actions{display:flex;flex-wrap:wrap;gap:18px;align-items:center}.price-actions .s-primary{white-space:nowrap}.price-actions .s-text-link{font-size:var(--type-label)}.price-actions :global(svg),.prices-cta :global(svg){width:20px;height:20px;flex-shrink:0}.price-actions .s-text-link{display:inline-flex;gap:8px;align-items:center}
+.setup-section{background:#f0f3f9;padding-block:64px}.setup-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px}.setup-grid>div>p{margin-top:22px}.setup-steps{list-style:none;margin:0;padding:0}.setup-steps li{display:grid;grid-template-columns:36px 1fr;gap:18px;padding-block:22px;border-bottom:1px solid #d6deeb}.setup-steps li:first-child{padding-top:0}.setup-steps li>span{display:grid;place-items:center;width:32px;height:32px;border:1px solid #bbc2df;border-radius:50%;color:#5154cc;font-size:var(--type-label)}.setup-steps strong{font-size:var(--type-title);line-height:1.3;font-weight:500}.setup-steps p{font-size:var(--type-body);line-height:1.7;color:var(--muted);margin-top:12px}.faq-section{padding-block:64px}.faq-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:64px}.faq-grid>div>p{margin-top:22px}.faq-grid :global(.faq-list details){background:transparent;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:0}.faq-grid :global(.faq-list summary){color:var(--ink);font-size:var(--type-body);padding:22px 0;line-height:1.5}.faq-grid :global(.faq-list summary span){color:#5154cc;background:transparent;flex-shrink:0}.faq-grid :global(.faq-list p){font-size:var(--type-body);line-height:1.7;color:var(--muted);padding:0 36px 24px 0}.faq-grid :global(.faq-list details[open]){background:#f4f6fc}.prices-cta{padding-bottom:64px}.prices-cta__inner{display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center;border-top:1px solid var(--line);padding-top:44px}.prices-cta p{max-width:70ch;margin-top:20px}.prices-cta .s-primary{white-space:nowrap}
+@media(max-width:1000px){.prices-shortcuts a{padding:22px 14px}.prices-shortcuts b{font-size:var(--type-body)}.employee-price__intro,.employee-price__plans{padding:26px}.price-actions{align-items:start;flex-direction:column}.setup-grid,.faq-grid{gap:36px}.prices-cta__inner{grid-template-columns:1fr;gap:24px}.prices-cta .s-primary{justify-self:start}}
+@media(max-width:700px){.prices-hero{padding-block:112px 40px}.prices-hero__inner,.prices-head,.employee-price,.setup-grid,.faq-grid{grid-template-columns:1fr;gap:22px}.prices-hero h1{grid-row:auto}.prices-shortcuts{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:8px}.prices-shortcuts a{padding:20px 10px;gap:8px}.prices-shortcuts a:nth-child(3){border-left:0}.prices-shortcuts a:nth-child(n+3){border-top:1px solid var(--line)}.prices-shortcuts b{display:grid;gap:4px}.prices-shortcuts small{margin:0}.prices-shortcuts strong{font-size:1.25rem}.prices-section{padding-bottom:44px}.employee-price{gap:0}.employee-price__intro,.employee-price__plans{padding:24px}.employee-price h3{margin-bottom:20px}.employee-price__plans li{gap:16px}.employee-price__plans li>p strong{font-size:1.25rem}.employee-price__plans li>div span{font-size:var(--type-label)}.setup-section,.faq-section{padding-block:44px}.prices-cta{padding-bottom:44px}.prices-cta .s-primary{white-space:normal}}
+@media(max-width:360px){.employee-price__plans li{grid-template-columns:1fr;gap:10px}.employee-price__plans li>p{display:flex;align-items:baseline;gap:8px;text-align:left}}
 </style>

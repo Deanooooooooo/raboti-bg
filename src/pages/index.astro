@@ -109,9 +109,10 @@ if(form){
  const select=form.querySelector<HTMLSelectElement>('[data-agent-choice]');if(select){select.value='unsure';select.addEventListener('change',()=>{document.querySelectorAll<HTMLButtonElement>('[data-enquiry-role]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.enquiryRole===select.value)));const note=document.querySelector('.s-selection-note');if(note)note.textContent=select.value==='unsure'?'Изберете служител или ни разкажете какво ви трябва.':`Избрахте ${select.value==='vdiga'?'Vdiga':select.value==='pishe'?'Pishe':select.value==='custom'?'AI служител по поръчка':'Pomaga'}. Разкажете ни какво искате да поеме.`;});}
 }
 const chooseService=(role:string)=>{document.querySelectorAll<HTMLElement>('[data-service-panel]').forEach(el=>{el.hidden=el.dataset.servicePanel!==role;});document.querySelectorAll<HTMLButtonElement>('[data-service-choice]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.serviceChoice===role)));};
-const customRequest=new URLSearchParams(window.location.search).get('agent')==='custom';
-chooseService(customRequest?'custom':'vdiga');
-if(customRequest)document.querySelector<HTMLButtonElement>('[data-enquiry-role="custom"]')?.click();
+const requestedRole=new URLSearchParams(window.location.search).get('agent');
+const validRole=requestedRole&&['vdiga','pishe','pomaga','custom'].includes(requestedRole)?requestedRole:null;
+chooseService(validRole||'vdiga');
+if(validRole)document.querySelector<HTMLButtonElement>(`[data-enquiry-role="${validRole}"]`)?.click();
 document.querySelectorAll<HTMLAnchorElement>('[data-show-custom]').forEach(link=>link.addEventListener('click',()=>chooseService('custom')));
 document.querySelectorAll<HTMLButtonElement>('[data-service-choice]').forEach((button,index,buttons)=>{button.addEventListener('click',()=>chooseService(button.dataset.serviceChoice!));button.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();const next=buttons[(index+(e.key==='ArrowRight'?1:-1)+buttons.length)%buttons.length];next.focus();next.click();}});});
 document.querySelectorAll<HTMLAnchorElement>('[data-pick-service]').forEach(link=>link.addEventListener('click',()=>{document.querySelector<HTMLButtonElement>(`[data-enquiry-role="${link.dataset.pickService}"]`)?.click();}));
