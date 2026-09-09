@@ -115,6 +115,5 @@ if(customRequest)document.querySelector<HTMLButtonElement>('[data-enquiry-role="
 document.querySelectorAll<HTMLAnchorElement>('[data-show-custom]').forEach(link=>link.addEventListener('click',()=>chooseService('custom')));
 document.querySelectorAll<HTMLButtonElement>('[data-service-choice]').forEach((button,index,buttons)=>{button.addEventListener('click',()=>chooseService(button.dataset.serviceChoice!));button.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();const next=buttons[(index+(e.key==='ArrowRight'?1:-1)+buttons.length)%buttons.length];next.focus();next.click();}});});
 document.querySelectorAll<HTMLAnchorElement>('[data-pick-service]').forEach(link=>link.addEventListener('click',()=>{document.querySelector<HTMLButtonElement>(`[data-enquiry-role="${link.dataset.pickService}"]`)?.click();}));
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){document.querySelector('.site-nav')?.classList.remove('is-open');document.querySelector('.nav-toggle')?.setAttribute('aria-expanded','false');}});
 </script>
 </BaseLayout>

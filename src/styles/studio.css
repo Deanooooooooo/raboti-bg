@@ -27,18 +27,10 @@
 .studio h2 span{color:#798195}
 .studio .s-wrap{width:min(1220px,calc(100% - 96px));
   margin-inline:auto}
-.studio .site-header{top:20px}
-.studio .header-inner{background:rgba(255,255,255,.94)!important;
-  color:var(--ink);
-  border:1px solid var(--line);
-  box-shadow:0 4px 18px #18243e05;
-  min-height:66px}
-.studio .site-nav a{color:var(--ink)!important}
-.studio .header-cta{background:var(--ink);
-  color:white;
-  border:0;
-  border-radius:30px;
-  font-weight:500}
+
+
+
+
 .studio .brand-logo{width:118px}
 .studio .s-hero{display:grid;
   grid-template-columns:1.04fr 1fr;
@@ -525,10 +517,8 @@
 }
 
 @media(max-width:700px){.studio .s-wrap{width:calc(100% - 40px)}
-.studio .site-header{top:10px}
-.studio .header-inner{min-height:58px;
-  width:calc(100% - 24px);
-  padding:10px 17px}
+
+
 .studio .brand-logo{width:104px}
 .studio .nav-toggle{color:var(--ink)}
 .studio .s-hero{display:flex;
@@ -1116,8 +1106,8 @@ body.studio:not(.home-art) main{padding-top:0}
 /* Original Studio text palette, independent of retained purple actions. */
 .studio{color:var(--ink)}
 .studio h2 span{color:#798195}
-.studio .header-inner{color:var(--ink)}
-.studio .site-nav a{color:var(--ink)!important}
+
+
 .studio h1{color:var(--ink)}
 .studio h1>span{color:#315cf5}
 .studio .s-lead{color:var(--muted)}
@@ -1187,3 +1177,15 @@ body.studio:not(.home-art) main{padding-top:0}
 .studio .s-custom-enquiry:focus-visible{outline:3px solid #5154cc;outline-offset:4px}
 @media(max-width:650px){.studio .s-service-choice{display:grid;grid-template-columns:1fr 1fr;border-radius:24px}.studio .s-service-choice button>small{display:none}.studio .s-custom-brief{padding:26px 22px}.studio .s-custom-panel .s-profile-content{padding-top:28px}}
 @media(max-width:650px){.studio .s-custom-panel .s-profile-content{order:-1}.studio .s-custom-brief{padding-top:24px}.studio .s-custom-brief dl>div{padding:12px 0}}
+
+/* Shared directory/home navigation: original dimensions and scroll motion. */
+.studio .site-header{top:0}
+.studio .site-header .header-inner{background:rgba(255,255,255,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.studio .site-header.is-scrolled .header-inner{background:rgba(255,255,255,.96)}
+.studio .site-header .brand-logo{width:auto!important;height:30px!important;max-width:none;aspect-ratio:600/191}
+.studio .site-header .header-cta{background:#17233d;color:#fff}
+.studio .site-header .header-cta:hover{background:#283956}
+.studio .site-header .nav-toggle{background:transparent}
+@media(max-width:650px){.studio .site-header .brand-logo{height:27px!important}}
+@supports not (backdrop-filter:blur(12px)){.studio .site-header .header-inner{background:rgba(255,255,255,.98)}}
+.studio :is(#ekip,#naemi,[id^="directory-"]){scroll-margin-top:100px}
