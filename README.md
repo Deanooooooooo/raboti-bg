@@ -1,5 +1,15 @@
 # Raboti.bg
 
+## Authoritative version — owner decision, 9 September 2026
+
+- Continue all Raboti work from `design/raboti-studio-20260908`, not the older `main` or other design branches. This is the owner-approved baseline, including the blog and remaining-page redesign at `6ec62e5`.
+- Current preview: https://deanooooooooo.github.io/raboti-bg/studio-20260908/
+- Local worktree: `/Users/User/.openclaw/workspace/raboti-studio-20260908`.
+- Older branches/previews must remain preserved until the owner explicitly requests deletion. Do not interpret approval of this version as deletion authorization.
+- GitHub's repository default branch currently remains `main`; this note establishes the working baseline, not a branch-settings change or production deployment.
+- For production, build with `DEPLOY_BASE=/` (or unset it), using canonical origin `https://raboti.bg`. Do not run `scripts/prepare-github-pages.mjs` for production: it adds preview prefixes and noindex. Existing slugs remain, e.g. `/blog/kakvo-e-ai-sluzhitel/` and `/sluzhiteli/pishe/`.
+- Before launch, verify production URLs, assets, canonical tags, sitemap and indexability; separately confirm the final enquiry delivery flow. Studio's homepage/contact currently use explicit email drafts.
+
 Статичен Astro сайт за „Raboti“: AI служители за българския бизнес.
 
 ## Локално стартиране
