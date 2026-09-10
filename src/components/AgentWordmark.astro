@@ -44,6 +44,8 @@ const mark = marks[safeSlug][tone];
 
 <img
   class:list={["agent-wordmark", `agent-wordmark--${safeSlug}`, `agent-wordmark--${tone}`, className]}
+  data-agent-wordmark={safeSlug}
+  data-wordmark-tone={tone}
   src={mark.src}
   width={mark.width}
   height={mark.height}
