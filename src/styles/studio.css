@@ -1195,7 +1195,7 @@ body.studio:not(.home-art) main{padding-top:0}
 /* A compact offer overview in the existing transition strip, not another hero block. */
 .studio .s-service-strip .s-strip-offer{display:grid;gap:6px;min-width:0}
 .studio .s-strip-wordmark{width:96px;height:auto;max-width:100%;margin-bottom:3px;object-fit:contain;object-position:left center;opacity:1;mix-blend-mode:normal}
-.studio .s-strip-offer .agent-wordmark--pomaga.s-strip-wordmark{width:auto;height:32px}
+.studio .s-strip-offer .agent-wordmark--pomaga.s-strip-wordmark{width:auto;height:26px}
 .studio .s-service-strip .s-strip-offer span{color:var(--muted);line-height:1.45}
 .studio .s-service-strip .s-strip-offer small{color:var(--ink);font-size:var(--type-meta)}
 .studio .s-service-strip .s-strip-terms{display:block;margin-block:0;padding-block:0 16px;font-size:12px;line-height:1.5;color:var(--muted)}
