@@ -1,5 +1,5 @@
 /* Preview application of owner-supplied logo; existing layout retained. */
-.brand-logo,.s-window-logo,.s-project-top>img{mix-blend-mode:multiply;object-fit:contain;aspect-ratio:1110/272!important;height:auto}
+.brand-logo,.s-window-logo,.s-project-top>img{object-fit:contain;aspect-ratio:1280/428!important;height:auto}
 .site-header .brand-logo{width:132px!important;height:auto!important;max-width:100%!important}
 .site-footer{background:#f4f6fa!important;color:#17233d!important}
 .site-footer a,.site-footer strong{color:#17233d!important}

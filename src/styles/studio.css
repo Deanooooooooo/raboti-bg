@@ -988,8 +988,8 @@
 /* Brand alignment and screenshot defects: native logo ratio, readable footer, compact layout. */
 .studio{--blue:#123bff;--green:#123bff;--muted:#697286;--line:#e1e6ef;background:#fcfdff}
 .studio h1>span,.studio .s-contact h2 span{color:#17233d}
-.studio .brand-logo,.studio .brand--footer .brand-logo{width:118px!important;height:auto!important;aspect-ratio:1110/272;object-fit:contain;max-width:100%}
-.studio .s-window-logo{width:85px;height:auto;aspect-ratio:1110/272;object-fit:contain}
+.studio .brand-logo,.studio .brand--footer .brand-logo{width:118px!important;height:auto!important;aspect-ratio:1280/428;object-fit:contain;max-width:100%}
+.studio .s-window-logo{width:85px;height:auto;aspect-ratio:1280/428;object-fit:contain}
 .studio .s-primary,.studio button{appearance:none;-webkit-appearance:none;background-image:none}
 .studio .s-primary:hover,.studio .contact-form button:hover{background:#4143aa}
 .studio .s-hero{padding-top:135px;padding-bottom:50px;min-height:0;gap:45px}
@@ -1182,7 +1182,7 @@ body.studio:not(.home-art) main{padding-top:0}
 .studio .site-header{top:0}
 .studio .site-header .header-inner{background:linear-gradient(180deg,rgba(255,255,255,.4) 10%,rgba(255,255,255,.8) 100%);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
 .studio .site-header.is-scrolled .header-inner{background:linear-gradient(180deg,rgba(255,255,255,.4) 10%,rgba(255,255,255,.8) 100%)}
-.studio .site-header .brand-logo{width:auto!important;height:30px!important;max-width:none;aspect-ratio:1110/272}
+.studio .site-header .brand-logo{width:auto!important;height:30px!important;max-width:none;aspect-ratio:1280/428}
 .studio .site-header .header-cta{background:#17233d;color:#fff}
 .studio .site-header .header-cta:hover{background:#283956}
 .studio .site-header .nav-toggle{background:transparent}
