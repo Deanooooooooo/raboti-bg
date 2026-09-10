@@ -150,6 +150,7 @@
   color:var(--muted);
   margin-top:3px}
 .studio .s-demo-wordmark{position:static!important;width:110px!important;height:auto!important;max-width:100%!important;object-fit:contain!important;object-position:left center!important;opacity:1!important;mix-blend-mode:normal!important}
+.studio .s-person .agent-wordmark--pomaga.s-demo-wordmark{width:auto!important;height:37px!important;max-width:200px!important}
 .studio .s-person-icon{margin-left:auto;
   border:1px solid var(--line);
   border-radius:50%;
@@ -1194,10 +1195,12 @@ body.studio:not(.home-art) main{padding-top:0}
 /* A compact offer overview in the existing transition strip, not another hero block. */
 .studio .s-service-strip .s-strip-offer{display:grid;gap:6px;min-width:0}
 .studio .s-strip-wordmark{width:96px;height:auto;max-width:100%;margin-bottom:3px;object-fit:contain;object-position:left center;opacity:1;mix-blend-mode:normal}
+.studio .s-strip-offer .agent-wordmark--pomaga.s-strip-wordmark{width:auto;height:32px}
 .studio .s-service-strip .s-strip-offer span{color:var(--muted);line-height:1.45}
 .studio .s-service-strip .s-strip-offer small{color:var(--ink);font-size:var(--type-meta)}
 .studio .s-service-strip .s-strip-terms{display:block;margin-block:0;padding-block:0 16px;font-size:12px;line-height:1.5;color:var(--muted)}
 
 /* Role wordmarks identify the service once per brand-bearing region. */
 .studio .s-profile-visual .s-profile-wordmark{position:static!important;width:150px!important;height:auto!important;max-width:100%!important;object-fit:contain!important;object-position:left center!important;opacity:1!important;mix-blend-mode:normal!important}
-@media(max-width:650px){.studio .s-profile-visual .s-profile-wordmark{width:130px!important}}
+.studio .s-profile-visual .agent-wordmark--pomaga.s-profile-wordmark{width:auto!important;height:48px!important}
+@media(max-width:650px){.studio .s-profile-visual .s-profile-wordmark{width:130px!important}.studio .s-profile-visual .agent-wordmark--pomaga.s-profile-wordmark{width:auto!important;height:42px!important}}
