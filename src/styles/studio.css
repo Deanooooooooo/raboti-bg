@@ -32,6 +32,14 @@
 
 
 .studio .brand-logo{width:118px}
+.studio .s-top-stage{position:relative;
+  isolation:isolate;
+  background-color:#f8fbff;
+  background-image:linear-gradient(180deg,rgba(255,255,255,.04),rgba(244,248,255,.18) 68%,rgba(239,244,252,.4)),url('/assets/brand/backgrounds/raboti-top-stage-source.jpg');
+  background-image:linear-gradient(180deg,rgba(255,255,255,.04),rgba(244,248,255,.18) 68%,rgba(239,244,252,.4)),image-set(url('/assets/brand/backgrounds/raboti-top-stage.avif') type('image/avif'),url('/assets/brand/backgrounds/raboti-top-stage-source.jpg') type('image/jpeg'));
+  background-repeat:no-repeat;
+  background-position:center center;
+  background-size:cover}
 .studio .s-hero{display:grid;
   grid-template-columns:1.04fr 1fr;
   gap:24px;
@@ -215,7 +223,9 @@
   color:#76839b;
   margin-top:10px}
 .studio .s-service-strip{border-block:1px solid var(--line);
-  background:#f4f7fc}
+  background:rgba(240,244,251,.5);
+  backdrop-filter:blur(2px);
+  -webkit-backdrop-filter:blur(2px)}
 .studio .s-service-strip .s-wrap{display:grid;
   grid-template-columns:repeat(3,1fr)}
 .studio .s-service-strip a{display:flex;
@@ -519,6 +529,9 @@
 }
 
 @media(max-width:700px){.studio .s-wrap{width:calc(100% - 40px)}
+
+.studio .s-top-stage{background-position:58% center;
+  background-size:auto 100%}
 
 
 .studio .brand-logo{width:104px}
