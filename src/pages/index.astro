@@ -117,6 +117,8 @@ if(validRole)document.querySelector<HTMLButtonElement>(`[data-enquiry-role="${va
 document.querySelectorAll<HTMLAnchorElement>('[data-show-custom]').forEach(link=>link.addEventListener('click',()=>chooseService('custom')));
 document.querySelectorAll<HTMLButtonElement>('[data-service-choice]').forEach((button,index,buttons)=>{button.addEventListener('click',()=>chooseService(button.dataset.serviceChoice!));button.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();const next=buttons[(index+(e.key==='ArrowRight'?1:-1)+buttons.length)%buttons.length];next.focus();next.click();}});});
 document.querySelectorAll<HTMLAnchorElement>('[data-pick-service]').forEach(link=>link.addEventListener('click',()=>{document.querySelector<HTMLButtonElement>(`[data-enquiry-role="${link.dataset.pickService}"]`)?.click();}));
+const topStage=document.querySelector<HTMLElement>('.s-top-stage');
+if(topStage&&'IntersectionObserver' in window){let stageVisible=true;const syncStageMotion=()=>{topStage.dataset.motion=stageVisible&&!document.hidden?'running':'paused';};new IntersectionObserver(([entry])=>{stageVisible=entry.isIntersecting;syncStageMotion();},{rootMargin:'80px 0px'}).observe(topStage);document.addEventListener('visibilitychange',syncStageMotion);}
 </script>
 </BaseLayout>
 
