@@ -1,277 +1,241 @@
-<div class="raboti-motion" aria-hidden="true">
+<div class="raboti-dispatch" data-raboti-dispatch data-worker="vdiga" aria-hidden="true">
   <svg
-    class="raboti-motion__svg"
-    viewBox="0 0 1600 900"
-    preserveAspectRatio="xMidYMid slice"
+    class="raboti-dispatch__svg"
+    viewBox="0 0 640 620"
+    preserveAspectRatio="xMidYMid meet"
     focusable="false"
     role="presentation"
   >
     <defs>
-      <filter id="raboti-soft-glow" x="-150%" y="-150%" width="400%" height="400%">
-        <feGaussianBlur stdDeviation="7" result="blur"/>
+      <filter id="rd-soft-glow" x="-150%" y="-150%" width="400%" height="400%">
+        <feGaussianBlur stdDeviation="5" result="blur"/>
         <feMerge>
           <feMergeNode in="blur"/>
           <feMergeNode in="SourceGraphic"/>
         </feMerge>
       </filter>
 
-      <filter id="raboti-tiny-glow" x="-100%" y="-100%" width="300%" height="300%">
-        <feGaussianBlur stdDeviation="3" result="blur"/>
-        <feMerge>
-          <feMergeNode in="blur"/>
-          <feMergeNode in="SourceGraphic"/>
-        </feMerge>
+      <filter id="rd-station-shadow" x="-40%" y="-40%" width="180%" height="180%">
+        <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#4865a8" flood-opacity=".10"/>
       </filter>
 
-      <!-- shared completion icon -->
-      <g id="raboti-check-icon">
-        <rect x="-23" y="-23" width="46" height="46" rx="14" class="raboti-icon-tile"/>
-        <path d="M-10 0 L-2 8 L13 -9" class="raboti-check-path"/>
-      </g>
+      <linearGradient id="rd-route-fade" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#8da7ff" stop-opacity=".12"/>
+        <stop offset=".55" stop-color="#5278ff" stop-opacity=".36"/>
+        <stop offset="1" stop-color="#244cff" stop-opacity=".55"/>
+      </linearGradient>
 
-      <!-- source icons -->
-      <g id="raboti-icon-phone">
-        <rect x="-28" y="-28" width="56" height="56" rx="17" class="raboti-icon-tile"/>
-        <path d="M-11 -13 C-7 -16 -3 -11 -1 -7 L2 -2 C4 1 3 4 0 6 L-3 8 C1 15 6 19 13 22 L15 18 C17 15 20 15 23 17 L27 20 C31 23 30 28 27 31 C23 35 17 35 11 32 C0 27 -10 17 -16 6 C-20 -2 -18 -9 -11 -13 Z"
-              transform="scale(.58) translate(-8 -8)"
-              class="raboti-source-stroke"/>
-      </g>
+      <symbol id="rd-icon-phone" viewBox="-24 -24 48 48">
+        <path d="M-11 -14 C-7 -17 -3 -13 -1 -8 L2 -3 C4 0 3 4 0 6 L-3 8 C2 16 7 20 14 23 L16 19 C18 16 21 16 24 18 L28 21 C32 25 31 29 28 32 C24 36 18 36 12 33 C0 28 -11 17 -17 6 C-21 -3 -18 -10 -11 -14 Z"
+              transform="scale(.55) translate(-8 -8)" class="rd-icon-stroke"/>
+      </symbol>
 
-      <g id="raboti-icon-calendar">
-        <rect x="-28" y="-28" width="56" height="56" rx="17" class="raboti-icon-tile"/>
-        <rect x="-13" y="-10" width="26" height="22" rx="4" class="raboti-source-stroke"/>
-        <path d="M-8 -15 V-7 M8 -15 V-7 M-13 -3 H13 M-7 3 H-3 M2 3 H6 M-7 8 H-3 M2 8 H6"
-              class="raboti-source-stroke"/>
-      </g>
+      <symbol id="rd-icon-calendar" viewBox="-24 -24 48 48">
+        <rect x="-14" y="-11" width="28" height="24" rx="5" class="rd-icon-stroke"/>
+        <path d="M-8 -16 V-7 M8 -16 V-7 M-14 -3 H14 M-7 3 H-3 M2 3 H6 M-7 8 H-3 M2 8 H6"
+              class="rd-icon-stroke"/>
+      </symbol>
 
-      <g id="raboti-icon-document">
-        <rect x="-28" y="-28" width="56" height="56" rx="17" class="raboti-icon-tile"/>
-        <path d="M-10 -15 H6 L13 -8 V15 H-10 Z M6 -15 V-8 H13 M-5 -2 H7 M-5 4 H7 M-5 10 H4"
-              class="raboti-source-stroke"/>
-      </g>
+      <symbol id="rd-icon-document" viewBox="-24 -24 48 48">
+        <path d="M-11 -16 H5 L13 -8 V16 H-11 Z M5 -16 V-8 H13 M-6 -2 H7 M-6 4 H7 M-6 10 H4"
+              class="rd-icon-stroke"/>
+      </symbol>
 
-      <g id="raboti-icon-browser">
-        <rect x="-28" y="-28" width="56" height="56" rx="17" class="raboti-icon-tile"/>
-        <rect x="-15" y="-12" width="30" height="24" rx="5" class="raboti-source-stroke"/>
+      <symbol id="rd-icon-browser" viewBox="-24 -24 48 48">
+        <rect x="-15" y="-12" width="30" height="24" rx="5" class="rd-icon-stroke"/>
         <path d="M-15 -5 H15 M-9 -8 H-8 M-4 -8 H-3 M1 -8 H2 M-8 1 H8 M-8 6 H4"
-              class="raboti-source-stroke"/>
-      </g>
+              class="rd-icon-stroke"/>
+      </symbol>
 
-      <g id="raboti-icon-mail">
-        <rect x="-28" y="-28" width="56" height="56" rx="17" class="raboti-icon-tile"/>
-        <rect x="-15" y="-11" width="30" height="22" rx="5" class="raboti-source-stroke"/>
-        <path d="M-13 -8 L0 2 L13 -8" class="raboti-source-stroke"/>
-      </g>
+      <symbol id="rd-icon-mail" viewBox="-24 -24 48 48">
+        <rect x="-15" y="-11" width="30" height="22" rx="5" class="rd-icon-stroke"/>
+        <path d="M-13 -8 L0 2 L13 -8" class="rd-icon-stroke"/>
+      </symbol>
 
-      <g id="raboti-icon-task">
-        <rect x="-28" y="-28" width="56" height="56" rx="17" class="raboti-icon-tile"/>
+      <symbol id="rd-icon-task" viewBox="-24 -24 48 48">
         <path d="M-13 -9 L-9 -5 L-3 -12 M2 -9 H13 M-13 1 L-9 5 L-3 -2 M2 1 H13 M-13 11 L-9 15 L-3 8 M2 11 H13"
-              class="raboti-source-stroke"/>
-      </g>
+              class="rd-icon-stroke"/>
+      </symbol>
+
+      <symbol id="rd-icon-check" viewBox="-24 -24 48 48">
+        <path d="M-12 0 L-3 9 L14 -11" class="rd-check-stroke"/>
+      </symbol>
     </defs>
 
-    <!-- pale atmosphere tied to the actual process -->
-    <path class="raboti-atmosphere raboti-atmosphere--top"
-          d="M-40 40 C320 20 520 70 760 180 C980 280 1120 230 1640 110"/>
-    <path class="raboti-atmosphere raboti-atmosphere--bottom"
-          d="M-30 830 C310 850 550 770 790 660 C1050 540 1230 620 1640 760"/>
+    <!-- Quiet structural frame. The system becomes brighter only during a task. -->
+    <g class="rd-architecture">
+      <path class="rd-trunk" d="M25 310 C105 310 145 310 215 310"/>
+      <path class="rd-branch" d="M245 300 C320 255 355 205 430 155"/>
+      <path class="rd-branch" d="M250 310 C340 310 390 310 470 310"/>
+      <path class="rd-branch" d="M245 320 C320 365 355 415 430 465"/>
 
-    <!-- VDIGA -->
-    <g class="raboti-workflow is-active" data-workflow="vdiga">
-      <path id="vdiga-route-top"
-            class="raboti-route raboti-route--input"
-            d="M230 95 C455 95 650 150 780 245 C850 295 885 350 920 430"/>
-      <path id="vdiga-route-bottom"
-            class="raboti-route raboti-route--input raboti-secondary"
-            d="M330 800 C535 785 685 720 790 635 C855 580 895 515 920 430"/>
-      <path id="vdiga-route-out"
-            class="raboti-route raboti-route--output"
-            d="M1100 430 C1260 420 1380 390 1585 345"/>
+      <path class="rd-output-base" d="M518 155 C560 160 590 175 630 198"/>
+      <path class="rd-output-base" d="M545 310 C575 310 600 310 632 310"/>
+      <path class="rd-output-base" d="M518 465 C560 458 592 442 630 420"/>
+    </g>
 
-      <g class="raboti-source-icon" transform="translate(230 95)">
-        <use href="#raboti-icon-phone"/>
-      </g>
-      <g class="raboti-source-icon raboti-secondary" transform="translate(330 800)">
-        <use href="#raboti-icon-calendar"/>
-      </g>
+    <!-- Dispatch switch. The cobalt rectangle is the Raboti motion signature. -->
+    <g class="rd-router" transform="translate(235 310)">
+      <circle r="44" class="rd-router-ring rd-router-ring--outer"/>
+      <circle r="29" class="rd-router-ring rd-router-ring--inner"/>
+      <rect x="-15" y="-10" width="30" height="20" rx="5" class="rd-router-block"/>
+    </g>
 
-      <rect class="raboti-token" width="14" height="10" rx="2" x="-7" y="-5">
-        <animateMotion
-          dur="12s"
-          repeatCount="indefinite"
-          keyTimes="0;0.12;0.31;1"
-          keyPoints="0;0;1;1"
-          calcMode="linear"
-        >
-          <mpath href="#vdiga-route-top"/>
+    <!-- Permanent employee stations. -->
+    <g class="rd-station" data-station="vdiga" transform="translate(470 155)">
+      <rect x="-92" y="-54" width="184" height="108" rx="27" class="rd-station-surface"/>
+      <circle cx="-61" cy="0" r="19" class="rd-station-icon-bg"/>
+      <use href="#rd-icon-phone" x="-73" y="-12" width="24" height="24"/>
+      <image href="/assets/brand/dispatch/vdiga.webp" x="-31" y="-14" width="105" height="34" preserveAspectRatio="xMidYMid meet"/>
+    </g>
+
+    <g class="rd-station" data-station="pishe" transform="translate(500 310)">
+      <rect x="-92" y="-54" width="184" height="108" rx="27" class="rd-station-surface"/>
+      <circle cx="-61" cy="0" r="19" class="rd-station-icon-bg"/>
+      <use href="#rd-icon-document" x="-73" y="-12" width="24" height="24"/>
+      <image href="/assets/brand/dispatch/pishe.webp" x="-31" y="-14" width="105" height="34" preserveAspectRatio="xMidYMid meet"/>
+    </g>
+
+    <g class="rd-station" data-station="pomaga" transform="translate(470 465)">
+      <rect x="-92" y="-54" width="184" height="108" rx="27" class="rd-station-surface"/>
+      <circle cx="-61" cy="0" r="19" class="rd-station-icon-bg"/>
+      <use href="#rd-icon-mail" x="-73" y="-12" width="24" height="24"/>
+      <image href="/assets/brand/dispatch/pomaga.webp" x="-31" y="-12" width="105" height="24" preserveAspectRatio="xMidYMid meet"/>
+    </g>
+
+    <!-- VDIGA sequence -->
+    <g class="rd-flow is-active" data-flow="vdiga">
+      <path id="rd-vdiga-in" class="rd-live-route rd-live-route--input"
+            d="M25 310 C105 310 145 310 215 310"/>
+      <path id="rd-vdiga-route" class="rd-live-route"
+            d="M255 298 C322 255 362 205 430 155"/>
+      <path id="rd-vdiga-out" class="rd-live-route rd-live-route--output"
+            d="M518 155 C560 160 590 175 630 198"/>
+
+      <g class="rd-source-task">
+        <rect x="-27" y="-27" width="54" height="54" rx="17" class="rd-task-tile"/>
+        <use href="#rd-icon-phone" x="-15" y="-15" width="30" height="30"/>
+        <animateMotion dur="10s" repeatCount="indefinite"
+          keyTimes="0;0.12;0.28;1" keyPoints="0;0;1;1" calcMode="linear">
+          <mpath href="#rd-vdiga-in"/>
         </animateMotion>
-        <animate
-          attributeName="opacity"
-          dur="12s"
-          repeatCount="indefinite"
-          values="0;0;1;1;0;0"
-          keyTimes="0;0.11;0.14;0.30;0.32;1"
-        />
-      </rect>
-
-      <rect class="raboti-token raboti-secondary" width="14" height="10" rx="2" x="-7" y="-5">
-        <animateMotion
-          dur="12s"
-          repeatCount="indefinite"
-          keyTimes="0;0.42;0.61;1"
-          keyPoints="0;0;1;1"
-          calcMode="linear"
-        >
-          <mpath href="#vdiga-route-bottom"/>
-        </animateMotion>
-        <animate
-          attributeName="opacity"
-          dur="12s"
-          repeatCount="indefinite"
-          values="0;0;1;1;0;0"
-          keyTimes="0;0.41;0.44;0.60;0.62;1"
-        />
-      </rect>
-
-      <g class="raboti-card-pulse" transform="translate(920 430)">
-        <circle r="18"/>
-        <circle r="32"/>
+        <animate attributeName="opacity" dur="10s" repeatCount="indefinite"
+          values="0;0;1;1;0;0" keyTimes="0;0.10;0.13;0.27;0.30;1"/>
       </g>
 
-      <rect class="raboti-token raboti-token--out" width="16" height="11" rx="2.5" x="-8" y="-5.5">
-        <animateMotion
-          dur="12s"
-          repeatCount="indefinite"
-          keyTimes="0;0.68;0.87;1"
-          keyPoints="0;0;1;1"
-          calcMode="linear"
-        >
-          <mpath href="#vdiga-route-out"/>
+      <rect class="rd-work-token" width="18" height="12" rx="3" x="-9" y="-6">
+        <animateMotion dur="10s" repeatCount="indefinite"
+          keyTimes="0;0.32;0.48;1" keyPoints="0;0;1;1" calcMode="linear">
+          <mpath href="#rd-vdiga-route"/>
         </animateMotion>
-        <animate
-          attributeName="opacity"
-          dur="12s"
-          repeatCount="indefinite"
-          values="0;0;1;1;0;0"
-          keyTimes="0;0.67;0.70;0.86;0.88;1"
-        />
+        <animate attributeName="opacity" dur="10s" repeatCount="indefinite"
+          values="0;0;1;1;0;0" keyTimes="0;0.31;0.34;0.47;0.50;1"/>
       </rect>
 
-      <g class="raboti-complete" transform="translate(1550 350)">
-        <use href="#raboti-check-icon"/>
+      <g class="rd-result-task">
+        <rect x="-27" y="-27" width="54" height="54" rx="17" class="rd-result-tile"/>
+        <use href="#rd-icon-calendar" x="-15" y="-15" width="30" height="30"/>
+        <circle cx="18" cy="-18" r="9" class="rd-result-check-bg"/>
+        <use href="#rd-icon-check" x="12" y="-24" width="12" height="12"/>
+        <animateMotion dur="10s" repeatCount="indefinite"
+          keyTimes="0;0.55;0.72;1" keyPoints="0;0;1;1" calcMode="linear">
+          <mpath href="#rd-vdiga-out"/>
+        </animateMotion>
+        <animate attributeName="opacity" dur="10s" repeatCount="indefinite"
+          values="0;0;1;1;0;0" keyTimes="0;0.54;0.57;0.71;0.74;1"/>
       </g>
     </g>
 
-    <!-- PISHE -->
-    <g class="raboti-workflow" data-workflow="pishe">
-      <path id="pishe-route-top"
-            class="raboti-route raboti-route--input"
-            d="M260 90 C470 110 655 165 785 255 C855 305 895 360 920 430"/>
-      <path id="pishe-route-bottom"
-            class="raboti-route raboti-route--input raboti-secondary"
-            d="M355 805 C555 775 705 705 805 620 C865 565 900 505 920 430"/>
-      <path id="pishe-route-out"
-            class="raboti-route raboti-route--output"
-            d="M1100 430 C1250 418 1395 380 1585 320"/>
+    <!-- PISHE sequence -->
+    <g class="rd-flow" data-flow="pishe">
+      <path id="rd-pishe-in" class="rd-live-route rd-live-route--input"
+            d="M25 310 C105 310 145 310 215 310"/>
+      <path id="rd-pishe-route" class="rd-live-route"
+            d="M260 310 C340 310 390 310 470 310"/>
+      <path id="rd-pishe-out" class="rd-live-route rd-live-route--output"
+            d="M545 310 C575 310 600 310 632 310"/>
 
-      <g class="raboti-source-icon" transform="translate(260 90)">
-        <use href="#raboti-icon-document"/>
-      </g>
-      <g class="raboti-source-icon raboti-secondary" transform="translate(355 805)">
-        <use href="#raboti-icon-browser"/>
-      </g>
-
-      <rect class="raboti-token" width="14" height="10" rx="2" x="-7" y="-5">
-        <animateMotion dur="12s" repeatCount="indefinite"
-          keyTimes="0;0.12;0.31;1" keyPoints="0;0;1;1" calcMode="linear">
-          <mpath href="#pishe-route-top"/>
+      <g class="rd-source-task">
+        <rect x="-27" y="-27" width="54" height="54" rx="17" class="rd-task-tile"/>
+        <use href="#rd-icon-document" x="-15" y="-15" width="30" height="30"/>
+        <animateMotion dur="10s" repeatCount="indefinite"
+          keyTimes="0;0.12;0.28;1" keyPoints="0;0;1;1" calcMode="linear">
+          <mpath href="#rd-pishe-in"/>
         </animateMotion>
-        <animate attributeName="opacity" dur="12s" repeatCount="indefinite"
-          values="0;0;1;1;0;0" keyTimes="0;0.11;0.14;0.30;0.32;1"/>
-      </rect>
-
-      <rect class="raboti-token raboti-secondary" width="14" height="10" rx="2" x="-7" y="-5">
-        <animateMotion dur="12s" repeatCount="indefinite"
-          keyTimes="0;0.42;0.61;1" keyPoints="0;0;1;1" calcMode="linear">
-          <mpath href="#pishe-route-bottom"/>
-        </animateMotion>
-        <animate attributeName="opacity" dur="12s" repeatCount="indefinite"
-          values="0;0;1;1;0;0" keyTimes="0;0.41;0.44;0.60;0.62;1"/>
-      </rect>
-
-      <g class="raboti-card-pulse" transform="translate(920 430)">
-        <circle r="18"/>
-        <circle r="32"/>
+        <animate attributeName="opacity" dur="10s" repeatCount="indefinite"
+          values="0;0;1;1;0;0" keyTimes="0;0.10;0.13;0.27;0.30;1"/>
       </g>
 
-      <rect class="raboti-token raboti-token--out" width="16" height="11" rx="2.5" x="-8" y="-5.5">
-        <animateMotion dur="12s" repeatCount="indefinite"
-          keyTimes="0;0.68;0.87;1" keyPoints="0;0;1;1" calcMode="linear">
-          <mpath href="#pishe-route-out"/>
+      <rect class="rd-work-token" width="18" height="12" rx="3" x="-9" y="-6">
+        <animateMotion dur="10s" repeatCount="indefinite"
+          keyTimes="0;0.32;0.48;1" keyPoints="0;0;1;1" calcMode="linear">
+          <mpath href="#rd-pishe-route"/>
         </animateMotion>
-        <animate attributeName="opacity" dur="12s" repeatCount="indefinite"
-          values="0;0;1;1;0;0" keyTimes="0;0.67;0.70;0.86;0.88;1"/>
+        <animate attributeName="opacity" dur="10s" repeatCount="indefinite"
+          values="0;0;1;1;0;0" keyTimes="0;0.31;0.34;0.47;0.50;1"/>
       </rect>
 
-      <g class="raboti-complete" transform="translate(1550 325)">
-        <use href="#raboti-check-icon"/>
+      <g class="rd-result-task">
+        <rect x="-27" y="-27" width="54" height="54" rx="17" class="rd-result-tile"/>
+        <use href="#rd-icon-browser" x="-15" y="-15" width="30" height="30"/>
+        <circle cx="18" cy="-18" r="9" class="rd-result-check-bg"/>
+        <use href="#rd-icon-check" x="12" y="-24" width="12" height="12"/>
+        <animateMotion dur="10s" repeatCount="indefinite"
+          keyTimes="0;0.55;0.72;1" keyPoints="0;0;1;1" calcMode="linear">
+          <mpath href="#rd-pishe-out"/>
+        </animateMotion>
+        <animate attributeName="opacity" dur="10s" repeatCount="indefinite"
+          values="0;0;1;1;0;0" keyTimes="0;0.54;0.57;0.71;0.74;1"/>
       </g>
     </g>
 
-    <!-- POMAGA -->
-    <g class="raboti-workflow" data-workflow="pomaga">
-      <path id="pomaga-route-top"
-            class="raboti-route raboti-route--input"
-            d="M235 105 C455 105 640 155 775 250 C850 305 892 360 920 430"/>
-      <path id="pomaga-route-bottom"
-            class="raboti-route raboti-route--input raboti-secondary"
-            d="M350 795 C545 785 690 730 800 640 C865 585 900 515 920 430"/>
-      <path id="pomaga-route-out"
-            class="raboti-route raboti-route--output"
-            d="M1100 430 C1255 425 1390 400 1585 360"/>
+    <!-- POMAGA sequence -->
+    <g class="rd-flow" data-flow="pomaga">
+      <path id="rd-pomaga-in" class="rd-live-route rd-live-route--input"
+            d="M25 310 C105 310 145 310 215 310"/>
+      <path id="rd-pomaga-route" class="rd-live-route"
+            d="M255 322 C322 365 362 415 430 465"/>
+      <path id="rd-pomaga-out" class="rd-live-route rd-live-route--output"
+            d="M518 465 C560 458 592 442 630 420"/>
 
-      <g class="raboti-source-icon" transform="translate(235 105)">
-        <use href="#raboti-icon-mail"/>
-      </g>
-      <g class="raboti-source-icon raboti-secondary" transform="translate(350 795)">
-        <use href="#raboti-icon-task"/>
-      </g>
-
-      <rect class="raboti-token" width="14" height="10" rx="2" x="-7" y="-5">
-        <animateMotion dur="12s" repeatCount="indefinite"
-          keyTimes="0;0.12;0.31;1" keyPoints="0;0;1;1" calcMode="linear">
-          <mpath href="#pomaga-route-top"/>
+      <g class="rd-source-task">
+        <rect x="-27" y="-27" width="54" height="54" rx="17" class="rd-task-tile"/>
+        <use href="#rd-icon-mail" x="-15" y="-15" width="30" height="30"/>
+        <animateMotion dur="10s" repeatCount="indefinite"
+          keyTimes="0;0.12;0.28;1" keyPoints="0;0;1;1" calcMode="linear">
+          <mpath href="#rd-pomaga-in"/>
         </animateMotion>
-        <animate attributeName="opacity" dur="12s" repeatCount="indefinite"
-          values="0;0;1;1;0;0" keyTimes="0;0.11;0.14;0.30;0.32;1"/>
+        <animate attributeName="opacity" dur="10s" repeatCount="indefinite"
+          values="0;0;1;1;0;0" keyTimes="0;0.10;0.13;0.27;0.30;1"/>
+      </g>
+
+      <rect class="rd-work-token" width="18" height="12" rx="3" x="-9" y="-6">
+        <animateMotion dur="10s" repeatCount="indefinite"
+          keyTimes="0;0.32;0.48;1" keyPoints="0;0;1;1" calcMode="linear">
+          <mpath href="#rd-pomaga-route"/>
+        </animateMotion>
+        <animate attributeName="opacity" dur="10s" repeatCount="indefinite"
+          values="0;0;1;1;0;0" keyTimes="0;0.31;0.34;0.47;0.50;1"/>
       </rect>
 
-      <rect class="raboti-token raboti-secondary" width="14" height="10" rx="2" x="-7" y="-5">
-        <animateMotion dur="12s" repeatCount="indefinite"
-          keyTimes="0;0.42;0.61;1" keyPoints="0;0;1;1" calcMode="linear">
-          <mpath href="#pomaga-route-bottom"/>
+      <g class="rd-result-task">
+        <rect x="-27" y="-27" width="54" height="54" rx="17" class="rd-result-tile"/>
+        <use href="#rd-icon-task" x="-15" y="-15" width="30" height="30"/>
+        <circle cx="18" cy="-18" r="9" class="rd-result-check-bg"/>
+        <use href="#rd-icon-check" x="12" y="-24" width="12" height="12"/>
+        <animateMotion dur="10s" repeatCount="indefinite"
+          keyTimes="0;0.55;0.72;1" keyPoints="0;0;1;1" calcMode="linear">
+          <mpath href="#rd-pomaga-out"/>
         </animateMotion>
-        <animate attributeName="opacity" dur="12s" repeatCount="indefinite"
-          values="0;0;1;1;0;0" keyTimes="0;0.41;0.44;0.60;0.62;1"/>
-      </rect>
-
-      <g class="raboti-card-pulse" transform="translate(920 430)">
-        <circle r="18"/>
-        <circle r="32"/>
+        <animate attributeName="opacity" dur="10s" repeatCount="indefinite"
+          values="0;0;1;1;0;0" keyTimes="0;0.54;0.57;0.71;0.74;1"/>
       </g>
+    </g>
 
-      <rect class="raboti-token raboti-token--out" width="16" height="11" rx="2.5" x="-8" y="-5.5">
-        <animateMotion dur="12s" repeatCount="indefinite"
-          keyTimes="0;0.68;0.87;1" keyPoints="0;0;1;1" calcMode="linear">
-          <mpath href="#pomaga-route-out"/>
-        </animateMotion>
-        <animate attributeName="opacity" dur="12s" repeatCount="indefinite"
-          values="0;0;1;1;0;0" keyTimes="0;0.67;0.70;0.86;0.88;1"/>
-      </rect>
-
-      <g class="raboti-complete" transform="translate(1550 365)">
-        <use href="#raboti-check-icon"/>
-      </g>
+    <!-- A short route pulse gives the feeling of a decision, not a screensaver. -->
+    <g class="rd-scan-pulse">
+      <circle cx="235" cy="310" r="12"/>
+      <circle cx="235" cy="310" r="24"/>
     </g>
   </svg>
 </div>

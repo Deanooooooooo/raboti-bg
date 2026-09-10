@@ -1,0 +1,359 @@
+/*
+Raboti Dispatch V3
+Concept: task arrives, Raboti dispatches it, one worker handles it, result leaves.
+The component replaces the old right-side demo card.
+*/
+
+.raboti-dispatch {
+  --rd-blue: #2046ff;
+  --rd-ink: #111722;
+  --rd-line: rgba(76, 112, 230, .10);
+  --rd-line-live: rgba(52, 91, 255, .46);
+  --rd-surface: rgba(255, 255, 255, .80);
+
+  position: relative;
+  width: min(100%, 640px);
+  aspect-ratio: 640 / 620;
+  margin-inline: auto;
+  border-radius: 42px;
+  background:
+    radial-gradient(circle at 48% 49%, rgba(32, 70, 255, .055), transparent 24%),
+    radial-gradient(circle at 92% 10%, rgba(105, 140, 255, .08), transparent 30%);
+  overflow: hidden;
+  contain: layout paint;
+}
+
+.raboti-dispatch::before {
+  content: "";
+  position: absolute;
+  inset: 8% 6%;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at center, rgba(255,255,255,.76), rgba(255,255,255,0) 68%);
+  pointer-events: none;
+}
+
+.raboti-dispatch__svg {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.rd-trunk,
+.rd-branch,
+.rd-output-base {
+  fill: none;
+  stroke: var(--rd-line);
+  stroke-width: 1.1;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.rd-branch {
+  stroke-dasharray: 3 7;
+}
+
+.rd-output-base {
+  stroke: rgba(76, 112, 230, .07);
+}
+
+.rd-router-ring {
+  fill: none;
+  stroke: rgba(32, 70, 255, .13);
+  vector-effect: non-scaling-stroke;
+}
+
+.rd-router-ring--outer {
+  stroke-width: 1;
+  stroke-dasharray: 3 6;
+}
+
+.rd-router-ring--inner {
+  stroke-width: 1.2;
+}
+
+.rd-router-block {
+  fill: var(--rd-blue);
+  filter: url(#rd-soft-glow);
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 450ms cubic-bezier(.2,.8,.2,1);
+}
+
+[data-raboti-dispatch][data-worker="vdiga"] .rd-router-block {
+  transform: rotate(-8deg);
+}
+
+[data-raboti-dispatch][data-worker="pishe"] .rd-router-block {
+  transform: rotate(0deg);
+}
+
+[data-raboti-dispatch][data-worker="pomaga"] .rd-router-block {
+  transform: rotate(8deg);
+}
+
+.rd-station {
+  opacity: .56;
+  transition:
+    opacity 420ms ease,
+    transform 520ms cubic-bezier(.2,.8,.2,1);
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.rd-station-surface {
+  fill: var(--rd-surface);
+  stroke: rgba(100, 126, 190, .13);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+  filter: url(#rd-station-shadow);
+  transition:
+    stroke 420ms ease,
+    fill 420ms ease;
+}
+
+.rd-station-icon-bg {
+  fill: rgba(235, 241, 255, .90);
+  stroke: rgba(67, 101, 220, .12);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+
+.rd-icon-stroke {
+  fill: none;
+  stroke: rgba(71, 96, 165, .65);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.rd-check-stroke {
+  fill: none;
+  stroke: #ffffff;
+  stroke-width: 3.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+[data-raboti-dispatch][data-worker="vdiga"] [data-station="vdiga"],
+[data-raboti-dispatch][data-worker="pishe"] [data-station="pishe"],
+[data-raboti-dispatch][data-worker="pomaga"] [data-station="pomaga"] {
+  opacity: 1;
+}
+
+[data-raboti-dispatch][data-worker="vdiga"] [data-station="vdiga"] .rd-station-surface,
+[data-raboti-dispatch][data-worker="pishe"] [data-station="pishe"] .rd-station-surface,
+[data-raboti-dispatch][data-worker="pomaga"] [data-station="pomaga"] .rd-station-surface {
+  fill: rgba(255, 255, 255, .95);
+  stroke: rgba(32, 70, 255, .30);
+}
+
+.rd-flow {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.rd-flow.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.rd-live-route {
+  fill: none;
+  stroke: url(#rd-route-fade);
+  stroke-width: 2;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+  opacity: 0;
+  stroke-dasharray: 12 10;
+  animation: rdRouteWake 10s ease-in-out infinite;
+}
+
+.rd-live-route--input {
+  animation-delay: 0s;
+}
+
+.rd-live-route--output {
+  animation-delay: 0s;
+}
+
+.rd-task-tile,
+.rd-result-tile {
+  fill: rgba(255, 255, 255, .95);
+  stroke: rgba(65, 100, 220, .18);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+  filter: url(#rd-station-shadow);
+}
+
+.rd-source-task,
+.rd-result-task,
+.rd-work-token {
+  opacity: 0;
+}
+
+.rd-work-token {
+  fill: var(--rd-blue);
+  filter: url(#rd-soft-glow);
+}
+
+.rd-result-check-bg {
+  fill: #244cff;
+}
+
+.rd-scan-pulse circle {
+  fill: none;
+  stroke: rgba(32, 70, 255, .32);
+  vector-effect: non-scaling-stroke;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.rd-scan-pulse circle:first-child {
+  stroke-width: 1.2;
+  animation: rdRouterPulseA 10s ease-out infinite;
+}
+
+.rd-scan-pulse circle:last-child {
+  stroke-width: 1;
+  animation: rdRouterPulseB 10s ease-out infinite;
+}
+
+@keyframes rdRouteWake {
+  0%, 27% {
+    opacity: 0;
+    stroke-dashoffset: 28;
+  }
+
+  34% {
+    opacity: .64;
+  }
+
+  50% {
+    opacity: .42;
+    stroke-dashoffset: 0;
+  }
+
+  56%, 100% {
+    opacity: 0;
+    stroke-dashoffset: -24;
+  }
+}
+
+@keyframes rdRouterPulseA {
+  0%, 27%, 35%, 100% {
+    opacity: 0;
+    transform: scale(.75);
+  }
+
+  29% {
+    opacity: .42;
+  }
+
+  34% {
+    opacity: 0;
+    transform: scale(1.8);
+  }
+}
+
+@keyframes rdRouterPulseB {
+  0%, 28%, 37%, 100% {
+    opacity: 0;
+    transform: scale(.7);
+  }
+
+  30% {
+    opacity: .20;
+  }
+
+  36% {
+    opacity: 0;
+    transform: scale(2.1);
+  }
+}
+
+/*
+Existing worker tabs may stay below the stage.
+These selectors are optional and apply only when the controls use the supplied attribute.
+*/
+[data-raboti-worker] {
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+[data-raboti-worker].is-raboti-motion-active {
+  color: var(--rd-blue, #2046ff);
+}
+
+/*
+Tablet
+*/
+@media (max-width: 1100px) {
+  .raboti-dispatch {
+    width: min(100%, 560px);
+  }
+
+  .rd-station {
+    opacity: .48;
+  }
+}
+
+/*
+Mobile
+The component becomes a separate visual block after the copy.
+No motion sits behind the headline.
+*/
+@media (max-width: 767px) {
+  .raboti-dispatch {
+    width: min(100%, 520px);
+    margin-top: 26px;
+    aspect-ratio: 640 / 560;
+    border-radius: 30px;
+  }
+
+  .rd-architecture {
+    opacity: .65;
+  }
+
+  .rd-station {
+    opacity: .30;
+  }
+
+  [data-raboti-dispatch][data-worker="vdiga"] [data-station="vdiga"],
+  [data-raboti-dispatch][data-worker="pishe"] [data-station="pishe"],
+  [data-raboti-dispatch][data-worker="pomaga"] [data-station="pomaga"] {
+    opacity: 1;
+  }
+
+  .rd-live-route {
+    stroke-width: 1.5;
+  }
+}
+
+/*
+Reduced motion
+The system stays readable as a static dispatch map.
+*/
+@media (prefers-reduced-motion: reduce) {
+  .rd-flow,
+  .rd-scan-pulse {
+    display: none;
+  }
+
+  .rd-router-block,
+  .rd-station,
+  .rd-station-surface {
+    transition: none;
+  }
+
+  .rd-router-block {
+    filter: none;
+  }
+}
