@@ -1,97 +1,277 @@
-<svg
-  class="s-motion-layer s-motion-layer--desktop"
-  viewBox="0 0 1600 900"
-  preserveAspectRatio="xMidYMid slice"
-  aria-hidden="true"
-  focusable="false"
-  xmlns="http://www.w3.org/2000/svg"
->
-  <defs>
-    <linearGradient id="rb-flow-in" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#bfd0f6" stop-opacity="0" />
-      <stop offset=".34" stop-color="#afc5f4" stop-opacity=".34" />
-      <stop offset=".72" stop-color="#6f97f8" stop-opacity=".48" />
-      <stop offset="1" stop-color="#1747ff" stop-opacity=".18" />
-    </linearGradient>
-    <linearGradient id="rb-flow-out" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="#1747ff" stop-opacity=".22" />
-      <stop offset=".38" stop-color="#1747ff" stop-opacity=".52" />
-      <stop offset="1" stop-color="#8fb0ff" stop-opacity="0" />
-    </linearGradient>
-    <radialGradient id="rb-gate-glow" cx="50%" cy="50%" r="50%">
-      <stop offset="0" stop-color="#1747ff" stop-opacity=".13" />
-      <stop offset=".52" stop-color="#8eb0ff" stop-opacity=".06" />
-      <stop offset="1" stop-color="#8eb0ff" stop-opacity="0" />
-    </radialGradient>
-    <linearGradient id="rb-token" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#fff" stop-opacity=".92" />
-      <stop offset="1" stop-color="#f4f8ff" stop-opacity=".78" />
-    </linearGradient>
-    <path id="rb-lane-top" d="M-120 118 C170 82 360 126 520 220 C670 308 760 390 900 444" />
-    <path id="rb-lane-mid" d="M-120 390 C170 346 410 365 610 420 C730 453 815 457 900 450" />
-    <path id="rb-lane-low" d="M-100 760 C190 742 420 650 610 560 C735 501 814 464 900 452" />
-    <path id="rb-lane-out" d="M900 450 C1090 446 1260 428 1430 388 C1515 368 1600 350 1720 345" />
-    <g id="rb-token-shell"><rect x="-22" y="-22" width="44" height="44" rx="13" fill="url(#rb-token)" stroke="#afc5f4" stroke-opacity=".44" /></g>
-    <g id="rb-icon-mail" fill="none" stroke="#5c7fd8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="-10" y="-7" width="20" height="14" rx="3" /><path d="M-9-5 0 1.4 9-5" /></g>
-    <g id="rb-icon-phone" fill="none" stroke="#5c7fd8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M-7-10C-10-7-8 1-2 7 4 13 11 13 13 9L8 4 4 7C1 6-5 0-6-3L-3-6Z" /></g>
-    <g id="rb-icon-chat" fill="none" stroke="#5c7fd8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M-11-8H11V7H2L-4 12V7H-11Z" /><circle cx="-5" r="1" fill="#5c7fd8" stroke="none" /><circle r="1" fill="#5c7fd8" stroke="none" /><circle cx="5" r="1" fill="#5c7fd8" stroke="none" /></g>
-    <g id="rb-icon-doc" fill="none" stroke="#5c7fd8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M-8-11H4L9-6V11H-8Z" /><path d="M4-11V-6H9M-3-2H4M-3 3H5M-3 8H2" /></g>
-    <g id="rb-icon-calendar" fill="none" stroke="#5c7fd8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="-10" y="-8" width="20" height="18" rx="3" /><path d="M-6-11V-5M6-11V-5M-10-2H10" /><circle cx="-4" cy="3" r="1" fill="#5c7fd8" stroke="none" /><circle cx="1" cy="3" r="1" fill="#5c7fd8" stroke="none" /><circle cx="6" cy="3" r="1" fill="#5c7fd8" stroke="none" /></g>
-    <g id="rb-icon-check" fill="none" stroke="#1747ff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M-9 0-2 7 10-8" /></g>
-  </defs>
+<div class="raboti-motion" aria-hidden="true">
+  <svg
+    class="raboti-motion__svg"
+    viewBox="0 0 1600 900"
+    preserveAspectRatio="xMidYMid slice"
+    focusable="false"
+    role="presentation"
+  >
+    <defs>
+      <filter id="raboti-soft-glow" x="-150%" y="-150%" width="400%" height="400%">
+        <feGaussianBlur stdDeviation="7" result="blur"/>
+        <feMerge>
+          <feMergeNode in="blur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
 
-  <ellipse cx="1475" cy="40" rx="260" ry="230" fill="#dce7ff" opacity=".2" />
-  <ellipse cx="115" cy="865" rx="330" ry="230" fill="#e5edff" opacity=".24" />
-  <use href="#rb-lane-top" class="rb-flow-path rb-flow-path--in" />
-  <use href="#rb-lane-mid" class="rb-flow-path rb-flow-path--in rb-flow-path--soft" />
-  <use href="#rb-lane-low" class="rb-flow-path rb-flow-path--in" />
-  <use href="#rb-lane-out" class="rb-flow-path rb-flow-path--out" />
+      <filter id="raboti-tiny-glow" x="-100%" y="-100%" width="300%" height="300%">
+        <feGaussianBlur stdDeviation="3" result="blur"/>
+        <feMerge>
+          <feMergeNode in="blur"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
 
-  <g class="rb-gate" transform="translate(900 450)">
-    <circle r="92" fill="url(#rb-gate-glow)" />
-    <circle r="39" fill="#fff" fill-opacity=".56" stroke="#8faeff" stroke-opacity=".28" />
-    <circle class="rb-gate-ring" r="25" fill="none" stroke="#1747ff" stroke-opacity=".22" stroke-width="1.4" stroke-dasharray="8 7" />
-    <rect class="rb-gate-core" x="-7" y="-7" width="14" height="14" rx="4" fill="#1747ff" opacity=".84" />
-  </g>
+      <!-- shared completion icon -->
+      <g id="raboti-check-icon">
+        <rect x="-23" y="-23" width="46" height="46" rx="14" class="raboti-icon-tile"/>
+        <path d="M-10 0 L-2 8 L13 -9" class="raboti-check-path"/>
+      </g>
 
-  <g class="rb-moving-token rb-token-primary"><use href="#rb-token-shell" /><use href="#rb-icon-phone" /><animateMotion dur="16s" begin="-3s" repeatCount="indefinite"><mpath href="#rb-lane-top" /></animateMotion><animate attributeName="opacity" values="0;.48;.48;0" keyTimes="0;.08;.9;1" dur="16s" begin="-3s" repeatCount="indefinite" /></g>
-  <g class="rb-moving-token rb-token-secondary"><use href="#rb-token-shell" /><use href="#rb-icon-chat" /><animateMotion dur="18s" begin="-12s" repeatCount="indefinite"><mpath href="#rb-lane-top" /></animateMotion><animate attributeName="opacity" values="0;.34;.34;0" keyTimes="0;.08;.9;1" dur="18s" begin="-12s" repeatCount="indefinite" /></g>
-  <g class="rb-moving-token rb-token-primary"><use href="#rb-token-shell" /><use href="#rb-icon-mail" /><animateMotion dur="15s" begin="-7s" repeatCount="indefinite"><mpath href="#rb-lane-mid" /></animateMotion><animate attributeName="opacity" values="0;.52;.52;0" keyTimes="0;.07;.9;1" dur="15s" begin="-7s" repeatCount="indefinite" /></g>
-  <g class="rb-moving-token rb-token-primary"><use href="#rb-token-shell" /><use href="#rb-icon-doc" /><animateMotion dur="17s" begin="-1s" repeatCount="indefinite"><mpath href="#rb-lane-low" /></animateMotion><animate attributeName="opacity" values="0;.44;.44;0" keyTimes="0;.08;.9;1" dur="17s" begin="-1s" repeatCount="indefinite" /></g>
-  <g class="rb-moving-token rb-token-secondary"><use href="#rb-token-shell" /><use href="#rb-icon-calendar" /><animateMotion dur="20s" begin="-11s" repeatCount="indefinite"><mpath href="#rb-lane-low" /></animateMotion><animate attributeName="opacity" values="0;.32;.32;0" keyTimes="0;.08;.9;1" dur="20s" begin="-11s" repeatCount="indefinite" /></g>
-  <g class="rb-moving-token rb-result-token rb-token-primary"><use href="#rb-token-shell" /><use href="#rb-icon-check" /><animateMotion dur="11s" begin="-2s" repeatCount="indefinite"><mpath href="#rb-lane-out" /></animateMotion><animate attributeName="opacity" values="0;.62;.62;0" keyTimes="0;.1;.88;1" dur="11s" begin="-2s" repeatCount="indefinite" /></g>
-  <g class="rb-moving-token rb-result-token rb-token-secondary"><use href="#rb-token-shell" /><use href="#rb-icon-check" /><animateMotion dur="13s" begin="-9s" repeatCount="indefinite"><mpath href="#rb-lane-out" /></animateMotion><animate attributeName="opacity" values="0;.38;.38;0" keyTimes="0;.1;.88;1" dur="13s" begin="-9s" repeatCount="indefinite" /></g>
-  <g class="rb-packet rb-token-secondary"><circle r="4" fill="#1747ff" opacity=".5" /><animateMotion dur="9s" begin="-5s" repeatCount="indefinite"><mpath href="#rb-lane-mid" /></animateMotion></g>
-  <g class="rb-packet rb-token-secondary"><circle r="3.5" fill="#6d96ff" opacity=".42" /><animateMotion dur="10s" begin="-2s" repeatCount="indefinite"><mpath href="#rb-lane-low" /></animateMotion></g>
-  <g class="rb-packet rb-token-secondary"><circle r="4" fill="#1747ff" opacity=".56" /><animateMotion dur="7s" begin="-4s" repeatCount="indefinite"><mpath href="#rb-lane-out" /></animateMotion></g>
-</svg>
+      <!-- source icons -->
+      <g id="raboti-icon-phone">
+        <rect x="-28" y="-28" width="56" height="56" rx="17" class="raboti-icon-tile"/>
+        <path d="M-11 -13 C-7 -16 -3 -11 -1 -7 L2 -2 C4 1 3 4 0 6 L-3 8 C1 15 6 19 13 22 L15 18 C17 15 20 15 23 17 L27 20 C31 23 30 28 27 31 C23 35 17 35 11 32 C0 27 -10 17 -16 6 C-20 -2 -18 -9 -11 -13 Z"
+              transform="scale(.58) translate(-8 -8)"
+              class="raboti-source-stroke"/>
+      </g>
 
-<svg
-  class="s-motion-layer s-motion-layer--mobile"
-  viewBox="0 0 390 620"
-  preserveAspectRatio="none"
-  aria-hidden="true"
-  focusable="false"
-  xmlns="http://www.w3.org/2000/svg"
->
-  <defs>
-    <linearGradient id="rb-mobile-in" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#bfd0f6" stop-opacity="0" /><stop offset=".7" stop-color="#6f97f8" stop-opacity=".5" /><stop offset="1" stop-color="#1747ff" stop-opacity=".18" /></linearGradient>
-    <linearGradient id="rb-mobile-out" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#1747ff" stop-opacity=".52" /><stop offset="1" stop-color="#8fb0ff" stop-opacity="0" /></linearGradient>
-    <radialGradient id="rb-mobile-glow"><stop offset="0" stop-color="#1747ff" stop-opacity=".13" /><stop offset="1" stop-color="#8eb0ff" stop-opacity="0" /></radialGradient>
-    <linearGradient id="rb-mobile-token" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".94" /><stop offset="1" stop-color="#f4f8ff" stop-opacity=".82" /></linearGradient>
-    <path id="rb-mobile-top" d="M-48 112 C70 104 150 152 245 230" />
-    <path id="rb-mobile-low" d="M-48 440 C72 420 158 318 245 236" />
-    <path id="rb-mobile-result" d="M245 233 C304 230 350 205 438 160" />
-    <g id="rb-mobile-shell"><rect x="-18" y="-18" width="36" height="36" rx="11" fill="url(#rb-mobile-token)" stroke="#afc5f4" stroke-opacity=".5" /></g>
-    <g id="rb-mobile-phone" fill="none" stroke="#5c7fd8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M-6-9C-9-6-7 1-2 6 3 11 9 11 11 8L7 4 3 6C0 5-4 1-5-2L-2-5Z" /></g>
-    <g id="rb-mobile-mail" fill="none" stroke="#5c7fd8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="-9" y="-6" width="18" height="12" rx="3" /><path d="M-8-4 0 1 8-4" /></g>
-    <g id="rb-mobile-check" fill="none" stroke="#1747ff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M-8 0-2 6 9-7" /></g>
-  </defs>
-  <use href="#rb-mobile-top" class="rb-flow-path" stroke="url(#rb-mobile-in)" />
-  <use href="#rb-mobile-low" class="rb-flow-path" stroke="url(#rb-mobile-in)" />
-  <use href="#rb-mobile-result" class="rb-flow-path" stroke="url(#rb-mobile-out)" />
-  <g class="rb-gate" transform="translate(245 233)"><circle r="62" fill="url(#rb-mobile-glow)" /><circle r="28" fill="#fff" fill-opacity=".62" stroke="#8faeff" stroke-opacity=".32" /><circle class="rb-gate-ring" r="18" fill="none" stroke="#1747ff" stroke-opacity=".28" stroke-width="1.2" stroke-dasharray="7 6" /><rect class="rb-gate-core" x="-6" y="-6" width="12" height="12" rx="4" fill="#1747ff" opacity=".86" /></g>
-  <g class="rb-moving-token rb-token-primary"><use href="#rb-mobile-shell" /><use href="#rb-mobile-phone" /><animateMotion dur="10s" begin="-3s" repeatCount="indefinite"><mpath href="#rb-mobile-top" /></animateMotion><animate attributeName="opacity" values="0;.64;.64;0" keyTimes="0;.08;.9;1" dur="10s" begin="-3s" repeatCount="indefinite" /></g>
-  <g class="rb-moving-token rb-token-primary"><use href="#rb-mobile-shell" /><use href="#rb-mobile-mail" /><animateMotion dur="11s" begin="-8s" repeatCount="indefinite"><mpath href="#rb-mobile-low" /></animateMotion><animate attributeName="opacity" values="0;.58;.58;0" keyTimes="0;.08;.9;1" dur="11s" begin="-8s" repeatCount="indefinite" /></g>
-  <g class="rb-moving-token rb-result-token rb-token-primary"><use href="#rb-mobile-shell" /><use href="#rb-mobile-check" /><animateMotion dur="8s" begin="-2s" repeatCount="indefinite"><mpath href="#rb-mobile-result" /></animateMotion><animate attributeName="opacity" values="0;.72;.72;0" keyTimes="0;.1;.88;1" dur="8s" begin="-2s" repeatCount="indefinite" /></g>
-</svg>
+      <g id="raboti-icon-calendar">
+        <rect x="-28" y="-28" width="56" height="56" rx="17" class="raboti-icon-tile"/>
+        <rect x="-13" y="-10" width="26" height="22" rx="4" class="raboti-source-stroke"/>
+        <path d="M-8 -15 V-7 M8 -15 V-7 M-13 -3 H13 M-7 3 H-3 M2 3 H6 M-7 8 H-3 M2 8 H6"
+              class="raboti-source-stroke"/>
+      </g>
+
+      <g id="raboti-icon-document">
+        <rect x="-28" y="-28" width="56" height="56" rx="17" class="raboti-icon-tile"/>
+        <path d="M-10 -15 H6 L13 -8 V15 H-10 Z M6 -15 V-8 H13 M-5 -2 H7 M-5 4 H7 M-5 10 H4"
+              class="raboti-source-stroke"/>
+      </g>
+
+      <g id="raboti-icon-browser">
+        <rect x="-28" y="-28" width="56" height="56" rx="17" class="raboti-icon-tile"/>
+        <rect x="-15" y="-12" width="30" height="24" rx="5" class="raboti-source-stroke"/>
+        <path d="M-15 -5 H15 M-9 -8 H-8 M-4 -8 H-3 M1 -8 H2 M-8 1 H8 M-8 6 H4"
+              class="raboti-source-stroke"/>
+      </g>
+
+      <g id="raboti-icon-mail">
+        <rect x="-28" y="-28" width="56" height="56" rx="17" class="raboti-icon-tile"/>
+        <rect x="-15" y="-11" width="30" height="22" rx="5" class="raboti-source-stroke"/>
+        <path d="M-13 -8 L0 2 L13 -8" class="raboti-source-stroke"/>
+      </g>
+
+      <g id="raboti-icon-task">
+        <rect x="-28" y="-28" width="56" height="56" rx="17" class="raboti-icon-tile"/>
+        <path d="M-13 -9 L-9 -5 L-3 -12 M2 -9 H13 M-13 1 L-9 5 L-3 -2 M2 1 H13 M-13 11 L-9 15 L-3 8 M2 11 H13"
+              class="raboti-source-stroke"/>
+      </g>
+    </defs>
+
+    <!-- pale atmosphere tied to the actual process -->
+    <path class="raboti-atmosphere raboti-atmosphere--top"
+          d="M-40 40 C320 20 520 70 760 180 C980 280 1120 230 1640 110"/>
+    <path class="raboti-atmosphere raboti-atmosphere--bottom"
+          d="M-30 830 C310 850 550 770 790 660 C1050 540 1230 620 1640 760"/>
+
+    <!-- VDIGA -->
+    <g class="raboti-workflow is-active" data-workflow="vdiga">
+      <path id="vdiga-route-top"
+            class="raboti-route raboti-route--input"
+            d="M230 95 C455 95 650 150 780 245 C850 295 885 350 920 430"/>
+      <path id="vdiga-route-bottom"
+            class="raboti-route raboti-route--input raboti-secondary"
+            d="M330 800 C535 785 685 720 790 635 C855 580 895 515 920 430"/>
+      <path id="vdiga-route-out"
+            class="raboti-route raboti-route--output"
+            d="M1100 430 C1260 420 1380 390 1585 345"/>
+
+      <g class="raboti-source-icon" transform="translate(230 95)">
+        <use href="#raboti-icon-phone"/>
+      </g>
+      <g class="raboti-source-icon raboti-secondary" transform="translate(330 800)">
+        <use href="#raboti-icon-calendar"/>
+      </g>
+
+      <rect class="raboti-token" width="14" height="10" rx="2" x="-7" y="-5">
+        <animateMotion
+          dur="12s"
+          repeatCount="indefinite"
+          keyTimes="0;0.12;0.31;1"
+          keyPoints="0;0;1;1"
+          calcMode="linear"
+        >
+          <mpath href="#vdiga-route-top"/>
+        </animateMotion>
+        <animate
+          attributeName="opacity"
+          dur="12s"
+          repeatCount="indefinite"
+          values="0;0;1;1;0;0"
+          keyTimes="0;0.11;0.14;0.30;0.32;1"
+        />
+      </rect>
+
+      <rect class="raboti-token raboti-secondary" width="14" height="10" rx="2" x="-7" y="-5">
+        <animateMotion
+          dur="12s"
+          repeatCount="indefinite"
+          keyTimes="0;0.42;0.61;1"
+          keyPoints="0;0;1;1"
+          calcMode="linear"
+        >
+          <mpath href="#vdiga-route-bottom"/>
+        </animateMotion>
+        <animate
+          attributeName="opacity"
+          dur="12s"
+          repeatCount="indefinite"
+          values="0;0;1;1;0;0"
+          keyTimes="0;0.41;0.44;0.60;0.62;1"
+        />
+      </rect>
+
+      <g class="raboti-card-pulse" transform="translate(920 430)">
+        <circle r="18"/>
+        <circle r="32"/>
+      </g>
+
+      <rect class="raboti-token raboti-token--out" width="16" height="11" rx="2.5" x="-8" y="-5.5">
+        <animateMotion
+          dur="12s"
+          repeatCount="indefinite"
+          keyTimes="0;0.68;0.87;1"
+          keyPoints="0;0;1;1"
+          calcMode="linear"
+        >
+          <mpath href="#vdiga-route-out"/>
+        </animateMotion>
+        <animate
+          attributeName="opacity"
+          dur="12s"
+          repeatCount="indefinite"
+          values="0;0;1;1;0;0"
+          keyTimes="0;0.67;0.70;0.86;0.88;1"
+        />
+      </rect>
+
+      <g class="raboti-complete" transform="translate(1550 350)">
+        <use href="#raboti-check-icon"/>
+      </g>
+    </g>
+
+    <!-- PISHE -->
+    <g class="raboti-workflow" data-workflow="pishe">
+      <path id="pishe-route-top"
+            class="raboti-route raboti-route--input"
+            d="M260 90 C470 110 655 165 785 255 C855 305 895 360 920 430"/>
+      <path id="pishe-route-bottom"
+            class="raboti-route raboti-route--input raboti-secondary"
+            d="M355 805 C555 775 705 705 805 620 C865 565 900 505 920 430"/>
+      <path id="pishe-route-out"
+            class="raboti-route raboti-route--output"
+            d="M1100 430 C1250 418 1395 380 1585 320"/>
+
+      <g class="raboti-source-icon" transform="translate(260 90)">
+        <use href="#raboti-icon-document"/>
+      </g>
+      <g class="raboti-source-icon raboti-secondary" transform="translate(355 805)">
+        <use href="#raboti-icon-browser"/>
+      </g>
+
+      <rect class="raboti-token" width="14" height="10" rx="2" x="-7" y="-5">
+        <animateMotion dur="12s" repeatCount="indefinite"
+          keyTimes="0;0.12;0.31;1" keyPoints="0;0;1;1" calcMode="linear">
+          <mpath href="#pishe-route-top"/>
+        </animateMotion>
+        <animate attributeName="opacity" dur="12s" repeatCount="indefinite"
+          values="0;0;1;1;0;0" keyTimes="0;0.11;0.14;0.30;0.32;1"/>
+      </rect>
+
+      <rect class="raboti-token raboti-secondary" width="14" height="10" rx="2" x="-7" y="-5">
+        <animateMotion dur="12s" repeatCount="indefinite"
+          keyTimes="0;0.42;0.61;1" keyPoints="0;0;1;1" calcMode="linear">
+          <mpath href="#pishe-route-bottom"/>
+        </animateMotion>
+        <animate attributeName="opacity" dur="12s" repeatCount="indefinite"
+          values="0;0;1;1;0;0" keyTimes="0;0.41;0.44;0.60;0.62;1"/>
+      </rect>
+
+      <g class="raboti-card-pulse" transform="translate(920 430)">
+        <circle r="18"/>
+        <circle r="32"/>
+      </g>
+
+      <rect class="raboti-token raboti-token--out" width="16" height="11" rx="2.5" x="-8" y="-5.5">
+        <animateMotion dur="12s" repeatCount="indefinite"
+          keyTimes="0;0.68;0.87;1" keyPoints="0;0;1;1" calcMode="linear">
+          <mpath href="#pishe-route-out"/>
+        </animateMotion>
+        <animate attributeName="opacity" dur="12s" repeatCount="indefinite"
+          values="0;0;1;1;0;0" keyTimes="0;0.67;0.70;0.86;0.88;1"/>
+      </rect>
+
+      <g class="raboti-complete" transform="translate(1550 325)">
+        <use href="#raboti-check-icon"/>
+      </g>
+    </g>
+
+    <!-- POMAGA -->
+    <g class="raboti-workflow" data-workflow="pomaga">
+      <path id="pomaga-route-top"
+            class="raboti-route raboti-route--input"
+            d="M235 105 C455 105 640 155 775 250 C850 305 892 360 920 430"/>
+      <path id="pomaga-route-bottom"
+            class="raboti-route raboti-route--input raboti-secondary"
+            d="M350 795 C545 785 690 730 800 640 C865 585 900 515 920 430"/>
+      <path id="pomaga-route-out"
+            class="raboti-route raboti-route--output"
+            d="M1100 430 C1255 425 1390 400 1585 360"/>
+
+      <g class="raboti-source-icon" transform="translate(235 105)">
+        <use href="#raboti-icon-mail"/>
+      </g>
+      <g class="raboti-source-icon raboti-secondary" transform="translate(350 795)">
+        <use href="#raboti-icon-task"/>
+      </g>
+
+      <rect class="raboti-token" width="14" height="10" rx="2" x="-7" y="-5">
+        <animateMotion dur="12s" repeatCount="indefinite"
+          keyTimes="0;0.12;0.31;1" keyPoints="0;0;1;1" calcMode="linear">
+          <mpath href="#pomaga-route-top"/>
+        </animateMotion>
+        <animate attributeName="opacity" dur="12s" repeatCount="indefinite"
+          values="0;0;1;1;0;0" keyTimes="0;0.11;0.14;0.30;0.32;1"/>
+      </rect>
+
+      <rect class="raboti-token raboti-secondary" width="14" height="10" rx="2" x="-7" y="-5">
+        <animateMotion dur="12s" repeatCount="indefinite"
+          keyTimes="0;0.42;0.61;1" keyPoints="0;0;1;1" calcMode="linear">
+          <mpath href="#pomaga-route-bottom"/>
+        </animateMotion>
+        <animate attributeName="opacity" dur="12s" repeatCount="indefinite"
+          values="0;0;1;1;0;0" keyTimes="0;0.41;0.44;0.60;0.62;1"/>
+      </rect>
+
+      <g class="raboti-card-pulse" transform="translate(920 430)">
+        <circle r="18"/>
+        <circle r="32"/>
+      </g>
+
+      <rect class="raboti-token raboti-token--out" width="16" height="11" rx="2.5" x="-8" y="-5.5">
+        <animateMotion dur="12s" repeatCount="indefinite"
+          keyTimes="0;0.68;0.87;1" keyPoints="0;0;1;1" calcMode="linear">
+          <mpath href="#pomaga-route-out"/>
+        </animateMotion>
+        <animate attributeName="opacity" dur="12s" repeatCount="indefinite"
+          values="0;0;1;1;0;0" keyTimes="0;0.67;0.70;0.86;0.88;1"/>
+      </rect>
+
+      <g class="raboti-complete" transform="translate(1550 365)">
+        <use href="#raboti-check-icon"/>
+      </g>
+    </g>
+  </svg>
+</div>
