@@ -1,0 +1,64 @@
+---
+type AgentSlug = "vdiga" | "pishe" | "pomaga";
+type Tone = "dark" | "light";
+
+interface Props {
+  slug: string;
+  tone?: Tone;
+  alt?: string;
+  class?: string;
+  loading?: "eager" | "lazy";
+  fetchpriority?: "high" | "low" | "auto";
+}
+
+const {
+  slug,
+  tone = "dark",
+  alt,
+  class: className,
+  loading = "lazy",
+  fetchpriority = "auto",
+} = Astro.props;
+
+const marks = {
+  vdiga: {
+    name: "Vdiga",
+    dark: { src: "/assets/brand/agents/vdiga-wordmark-dark.webp", width: 1280, height: 445 },
+    light: { src: "/assets/brand/agents/vdiga-wordmark-light.webp", width: 1280, height: 450 },
+  },
+  pishe: {
+    name: "Pishe",
+    dark: { src: "/assets/brand/agents/pishe-wordmark-dark.webp", width: 2172, height: 724 },
+    light: { src: "/assets/brand/agents/pishe-wordmark-light.webp", width: 1640, height: 526 },
+  },
+  pomaga: {
+    name: "Pomaga",
+    dark: { src: "/assets/brand/agents/pomaga-wordmark-dark.webp", width: 1280, height: 249 },
+    light: { src: "/assets/brand/agents/pomaga-wordmark-light.webp", width: 1280, height: 262 },
+  },
+} as const;
+
+const safeSlug: AgentSlug = slug in marks ? slug as AgentSlug : "vdiga";
+const mark = marks[safeSlug][tone];
+---
+
+<img
+  class:list={["agent-wordmark", `agent-wordmark--${safeSlug}`, `agent-wordmark--${tone}`, className]}
+  src={mark.src}
+  width={mark.width}
+  height={mark.height}
+  alt={alt ?? marks[safeSlug].name}
+  loading={loading}
+  decoding="async"
+  fetchpriority={fetchpriority}
+/>
+
+<style>
+  .agent-wordmark {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+</style>

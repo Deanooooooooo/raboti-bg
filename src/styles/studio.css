@@ -911,7 +911,7 @@
 .studio .s-profile-visual{position:relative;isolation:isolate;min-width:0;background:#e3eaf5;overflow:hidden}
 .studio .s-agent-pishe .s-profile-visual{background:#e8e0ef}
 .studio .s-agent-pomaga .s-profile-visual{background:#e3e7f0}
-.studio .s-profile-visual img{width:100%;height:100%;position:absolute;object-fit:cover;object-position:50% 16%;mix-blend-mode:multiply}
+.studio .s-profile-visual>img{width:100%;height:100%;position:absolute;object-fit:cover;object-position:50% 16%;mix-blend-mode:multiply}
 .studio .s-profile-visual:after{content:'';position:absolute;inset:65% 0 0;background:linear-gradient(transparent,#19233dcc);z-index:1}
 .studio .s-profile-visual>div{position:absolute;bottom:32px;left:32px;z-index:2;color:#fff}
 .studio .s-profile-visual span{font-size:var(--type-label);display:block;margin-bottom:6px}
@@ -977,7 +977,7 @@
 @media(max-width:1050px){.studio .s-service-choice button{padding-inline:18px}.studio .s-service-choice button>small{display:none}.studio .s-profile-content{padding:30px}.studio .s-profile-content h3{font-size:var(--type-title)}.studio .s-search{gap:45px}.studio .s-contact{padding:35px;gap:35px}.studio .s-contact-team{gap:6px;flex-wrap:wrap}.studio .s-form-wrap{padding-left:25px}}
 @media(max-width:700px){
 .studio .s-team{padding-block:50px}.studio .s-service-choice{width:100%;gap:2px;margin-bottom:20px;padding:5px}.studio .s-service-choice button{flex:1;min-width:0;padding:12px 8px;min-height:48px}.studio .s-service-choice button>span{font-size:var(--type-label)}
-.studio .s-service-panel{grid-template-columns:1fr;min-height:0}.studio .s-profile-visual{height:260px}.studio .s-profile-visual img{object-fit:contain;object-position:75% 10%;width:100%;height:135%;top:-10px}.studio .s-profile-visual:after{inset:70% 0 0}.studio .s-profile-visual>div{left:24px;bottom:24px}.studio .s-profile-content{padding:25px 22px}.studio .s-profile-content h3{font-size:var(--type-title);max-width:none}.studio .s-profile-content .s-fit{margin-bottom:12px}.studio .s-profile-content>p:not(.s-fit){margin-top:16px}.studio .s-service-facts{gap:10px;padding-top:20px;margin-top:20px}.studio .s-profile-content .s-actions{margin-top:22px;gap:18px}.studio .s-compare-link{flex-direction:column;gap:6px;padding-block:18px}
+.studio .s-service-panel{grid-template-columns:1fr;min-height:0}.studio .s-profile-visual{height:260px}.studio .s-profile-visual>img{object-fit:contain;object-position:75% 10%;width:100%;height:135%;top:-10px}.studio .s-profile-visual:after{inset:70% 0 0}.studio .s-profile-visual>div{left:24px;bottom:24px}.studio .s-profile-content{padding:25px 22px}.studio .s-profile-content h3{font-size:var(--type-title);max-width:none}.studio .s-profile-content .s-fit{margin-bottom:12px}.studio .s-profile-content>p:not(.s-fit){margin-top:16px}.studio .s-service-facts{gap:10px;padding-top:20px;margin-top:20px}.studio .s-profile-content .s-actions{margin-top:22px;gap:18px}.studio .s-compare-link{flex-direction:column;gap:6px;padding-block:18px}
 .studio .s-control{padding-top:45px}.studio .s-control-grid{gap:28px}.studio .s-approval-sheet{padding:24px}.studio .s-control .s-setup{margin-top:35px;padding-top:30px;padding-bottom:30px}.studio .s-setup .s-section-heading{display:block}.studio .s-setup .s-section-heading>p{margin-top:14px}.studio .s-control .s-steps{gap:22px}.studio .s-control .s-steps h3{margin:12px 0 8px}
 .studio .s-search{padding-block:50px;grid-template-columns:1fr;gap:30px}.studio .s-search>div:first-child{position:static}.studio .s-search-details article{margin-bottom:22px;padding-bottom:22px}.studio .s-faq{padding-block:50px}.studio .s-faq>div:first-child{display:block;margin-bottom:22px}.studio .s-faq>div:first-child>a{display:inline-block;margin-top:18px}.studio .faq-list details{padding-inline:10px}.studio .faq-list summary{padding-block:20px}
 .studio .s-contact{padding:28px 20px;gap:25px;margin-bottom:30px}.studio .s-form-wrap{padding:25px 0 0;border-left:0;border-top:1px solid #ccd8ee}.studio .s-contact-team{flex-wrap:wrap;gap:8px}.studio .s-contact-team button{padding-right:10px}.studio .s-primary{font-size:var(--type-label)}
@@ -1182,17 +1182,23 @@ body.studio:not(.home-art) main{padding-top:0}
 .studio .site-header{top:0}
 .studio .site-header .header-inner{background:linear-gradient(180deg,rgba(255,255,255,.4) 10%,rgba(255,255,255,.8) 100%);backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px)}
 .studio .site-header.is-scrolled .header-inner{background:linear-gradient(180deg,rgba(255,255,255,.4) 10%,rgba(255,255,255,.8) 100%)}
-.studio .site-header .brand-logo{width:auto!important;height:30px!important;max-width:none;aspect-ratio:1280/428}
+.studio .site-header .brand-logo{width:122px!important;height:auto!important;max-width:none;aspect-ratio:1280/428}
 .studio .site-header .header-cta{background:#17233d;color:#fff}
 .studio .site-header .header-cta:hover{background:#283956}
 .studio .site-header .nav-toggle{background:transparent}
-@media(max-width:650px){.studio .site-header .brand-logo{height:27px!important}}
+@media(max-width:650px){.studio .site-header .brand-logo{width:110px!important;height:auto!important}}
 @supports not (backdrop-filter:blur(12px)){.studio .site-header .header-inner{background:rgba(255,255,255,.98)}}
 .studio :is(#ekip,#naemi,[id^="directory-"]){scroll-margin-top:100px}
 
 /* A compact offer overview in the existing transition strip, not another hero block. */
 .studio .s-service-strip .s-strip-offer{display:grid;gap:6px;min-width:0}
-.studio .s-service-strip .s-strip-offer strong{font-size:var(--type-label)}
+.studio .s-strip-wordmark{height:22px;width:auto;max-width:112px;margin-bottom:3px}
+.studio .s-strip-offer .agent-wordmark--pomaga{height:19px;max-width:118px}
 .studio .s-service-strip .s-strip-offer span{color:var(--muted);line-height:1.45}
 .studio .s-service-strip .s-strip-offer small{color:var(--ink);font-size:var(--type-meta)}
 .studio .s-service-strip .s-strip-terms{display:block;margin-block:0;padding-block:0 16px;font-size:12px;line-height:1.5;color:var(--muted)}
+
+/* Role wordmarks identify the service once per brand-bearing region. */
+.studio .s-profile-wordmark{height:39px;width:auto;max-width:180px}
+.studio .s-profile-visual .agent-wordmark--pomaga{height:31px;max-width:190px}
+@media(max-width:650px){.studio .s-profile-wordmark{height:34px;max-width:158px}.studio .s-profile-visual .agent-wordmark--pomaga{height:27px;max-width:166px}}

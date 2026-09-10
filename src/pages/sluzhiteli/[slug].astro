@@ -3,6 +3,7 @@ import "../../styles/studio.css";
 import "../../styles/studio-secondary.css";
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import AgentWordmark from "../../components/AgentWordmark.astro";
 import ServiceExample from "../../components/ServiceExample.astro";
 import SearchDiscovery from "../../components/SearchDiscovery.astro";
 import "../../styles/agent-refinement.css";
@@ -157,6 +158,7 @@ const schemas = [
     <div class="gloria-hero__inner">
       <div class="gloria-hero__copy">
         <span class="gloria-role">{data.role}</span>
+        <AgentWordmark slug={data.slug} tone="dark" class="gloria-agent-wordmark" loading="eager" fetchpriority="high" />
         <h1>{profile.position}</h1>
         <p class="gloria-hero__position">{profile.hello}</p>
         <p class="gloria-hero__intro">{profile.intro}</p>

@@ -4,6 +4,7 @@ import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import "../../styles/studio.css";
 import Icon from "../../components/Icon.astro";
+import AgentWordmark from "../../components/AgentWordmark.astro";
 import { breadcrumbSchema } from "../../data/schema";
 import { site } from "../../data/site";
 
@@ -25,7 +26,7 @@ const schemas = [
 <section class="s-directory-hero s-wrap"><h1>Коя работа искате<br/><span>да поемем?</span></h1><div><p>Vdiga поема телефона, Pishe се грижи за сайта, а Pomaga свързва повтарящите се стъпки между програмите ви. Сравнете услугите и изберете откъде да започнем.</p><a class="s-text-link" href="#directory-custom">Имате друг процес? Обсъдете служител по поръчка.</a></div></section>
 <nav class="s-directory-nav s-wrap" aria-label="Към услугата"><a href="#directory-vdiga">Vdiga <span>Обаждания</span></a><a href="#directory-pishe">Pishe <span>Сайт и откриваемост</span></a><a href="#directory-pomaga">Pomaga <span>Администрация</span></a><a href="#directory-custom">По поръчка</a></nav>
 <section class="s-directory-roster s-wrap" aria-label="Налични AI служители">{agents.map(agent=>{const data=agent.data;const profile=profiles[data.slug];return <article id={`directory-${data.slug}`} class={`s-service-panel s-agent-${data.slug}`}>
-<div class="s-profile-visual"><img src={profile.image} width="720" height="960" alt={profile.alt} loading="lazy"/><div><span>{data.role}</span><strong>{data.name}</strong></div></div>
+<div class="s-profile-visual"><img src={profile.image} width="720" height="960" alt={profile.alt} loading="lazy"/><div><span>{data.role}</span><AgentWordmark slug={data.slug} tone="light" alt="" class="s-profile-wordmark" loading="eager"/></div></div>
 <div class="s-profile-content"><h2>{profile.problem}</h2><p>{data.summary}</p><ul class="s-directory-scope">{profile.examples.map(example=><li><Icon name="check"/><span>{example}</span></li>)}</ul><div class="s-service-facts"><div><span>Месечна услуга</span><strong>{data.priceLabel}</strong></div><div><span>Преди старта</span><strong>Обхват, срок и цена</strong></div></div><small>Без ДДС. Настройката се заплаща отделно.</small><div class="s-actions"><a class="s-primary" href={`/sluzhiteli/${data.slug}/`}>Как работи {data.name} <Icon name="arrow-right"/></a><a class="s-text-link" href="/ceni/">Сравнете плановете</a></div></div>
 </article>})}</section>
 <section class="s-directory-custom s-wrap" id="directory-custom"><div><h2>Работата ви не се побира<br/><span>в тези три роли?</span></h2><p>Обсъдете AI служител по поръчка. Първо проверяваме дали готова роля покрива нуждата ви. Ако не, уточняваме вашия процес, възможностите за автоматизация и цената, преди да решите.</p></div><a class="s-primary" href="/?agent=custom#naemi">Обсъдете вашия процес <Icon name="arrow-right"/></a></section>

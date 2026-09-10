@@ -115,8 +115,10 @@ Actions are fully pill-shaped via `--radius-action`, including buttons and butto
 
 ## Components
 
+- **Role wordmarks:** Vdiga, Pishe and Pomaga use their owner-supplied transparent wordmarks as restrained identity anchors. Use the dark variants on white/pale fields and the light variants over portraits, dark fields or saturated color. Preserve native aspect ratios and choose optical rather than identical widths; Pomaga is naturally wider. One identifying mark per role-focused region is enough.
+
 - **Primary action:** Purple with white text; darker purple hover, no glow or lift. Desktop padding is in frontmatter; mobile uses the label size. Secondary-page button hover is locally `#4143ac`.
-- **Header:** Floating rounded shell; the exact background in both top and scrolled states is `linear-gradient(180deg,rgba(255,255,255,.4) 10%,rgba(255,255,255,.8) 100%)`, with 4px backdrop blur. Unsupported backdrop-filter falls back to 98% white. Scroll changes position, not opacity. Header CTA remains navy, hovering to `#283956`; logo keeps its native ratio (30px high, 27px at 650px).
+- **Header:** Floating rounded shell; the exact background in both top and scrolled states is `linear-gradient(180deg,rgba(255,255,255,.4) 10%,rgba(255,255,255,.8) 100%)`, with 4px backdrop blur. Unsupported backdrop-filter falls back to 98% white. Scroll changes position, not opacity. Header CTA remains navy, hovering to `#283956`; the transparent logo keeps its native ratio at 122px wide (110px at 650px), matching the former wordmark's optical presence.
 - **Fields:** White, 10px corners, 1px stroke; homepage stroke `#dbe3f1`, secondary-page stroke `#cbd3e2`. Inputs retain the shared 50px minimum height; textareas are not fixed to that height.
 - **Selectors:** Pill controls with `aria-pressed`; service selection uses navy/white, integrations uses purple/white. Do not conflate these states.
 - **Panels:** White project/work records and pale service panels; retain source-specific padding and mobile reductions. Product demonstrations are illustrative, not live customer activity.
