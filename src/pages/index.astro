@@ -4,6 +4,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import ContactForm from "../components/ContactForm.astro";
 import FAQ from "../components/FAQ.astro";
 import AgentWordmark from "../components/AgentWordmark.astro";
+import HeroMotion from "../components/HeroMotion.astro";
 import "../styles/studio.css";
 import { breadcrumbSchema, faqSchema } from "../data/schema";
 import { homeFaqs as originalFaqs, site } from "../data/site";
@@ -62,29 +63,8 @@ const schemas = [
 ---
 <BaseLayout title="AI служители за бизнеса — телефон, сайт и администрация | Raboti" description="Наемете AI служител за обаждания, автоматична поддръжка на сайт, SEO и ежедневна администрация. Готови роли или AI агент по поръчка за вашия процес. Вижте цените и как започваме." canonical="/" image="/assets/brand/social/raboti-home-social.jpg" imageAlt="Raboti — AI служители за българския бизнес. Не вършете работата сами." imageWidth={1200} imageHeight={675} schema={schemas} bodyClass="studio">
 <div class="s-top-stage">
-<div class="s-flow-world" aria-hidden="true">
- <svg class="s-flow-canvas s-flow-canvas--desktop" viewBox="0 0 1706 922" preserveAspectRatio="xMidYMid slice" focusable="false">
-  <image class="s-flow-art" href="/assets/brand/backgrounds/glassy-ai-workflow-streamlined.avif" width="1706" height="922"/>
-  <rect class="s-flow-wash" width="1706" height="922"/>
-  <g class="s-flow-nodes">
-   <circle class="s-flow-node" r="8"><animateMotion dur="11s" begin="-2s" repeatCount="indefinite" path="M -20 92 C 190 75 285 145 458 196 C 715 270 968 305 1192 438"/><animate attributeName="opacity" dur="11s" begin="-2s" repeatCount="indefinite" values="0;.82;.9;.72;0" keyTimes="0;.08;.42;.82;1"/></circle>
-   <circle class="s-flow-node s-flow-node--small" r="7"><animateMotion dur="13s" begin="-6s" repeatCount="indefinite" path="M -20 252 C 220 215 392 292 628 382 C 832 460 1014 470 1192 438"/><animate attributeName="opacity" dur="13s" begin="-6s" repeatCount="indefinite" values="0;.7;.88;.68;0" keyTimes="0;.1;.45;.84;1"/></circle>
-   <circle class="s-flow-node" r="8"><animateMotion dur="12s" begin="-9s" repeatCount="indefinite" path="M -20 706 C 248 638 421 762 646 688 C 864 616 1038 496 1192 438"/><animate attributeName="opacity" dur="12s" begin="-9s" repeatCount="indefinite" values="0;.78;.92;.72;0" keyTimes="0;.1;.44;.82;1"/></circle>
-   <circle class="s-flow-node s-flow-node--approved" r="9"><animateMotion dur="9s" begin="-3s" repeatCount="indefinite" path="M 1192 438 C 1348 430 1518 434 1740 438"/><animate attributeName="opacity" dur="9s" begin="-3s" repeatCount="indefinite" values="0;.9;.96;.82;0" keyTimes="0;.1;.5;.86;1"/></circle>
-  </g>
- </svg>
- <svg class="s-flow-canvas s-flow-canvas--mobile" viewBox="0 0 390 1633" preserveAspectRatio="none" focusable="false">
-  <image class="s-flow-art" href="/assets/brand/backgrounds/glassy-ai-workflow-streamlined.avif" x="-1800" y="0" width="3020" height="1633" preserveAspectRatio="none"/>
-  <rect class="s-flow-wash" width="390" height="1633"/>
-  <g class="s-flow-nodes">
-   <circle class="s-flow-node" r="7"><animateMotion dur="10s" begin="-2s" repeatCount="indefinite" path="M -16 420 C 82 470 176 620 300 780"/><animate attributeName="opacity" dur="10s" begin="-2s" repeatCount="indefinite" values="0;.82;.92;.74;0" keyTimes="0;.1;.45;.84;1"/></circle>
-   <circle class="s-flow-node s-flow-node--small" r="6"><animateMotion dur="12s" begin="-7s" repeatCount="indefinite" path="M -16 862 C 92 934 188 900 300 790"/><animate attributeName="opacity" dur="12s" begin="-7s" repeatCount="indefinite" values="0;.72;.88;.68;0" keyTimes="0;.1;.45;.84;1"/></circle>
-   <circle class="s-flow-node" r="7"><animateMotion dur="11s" begin="-9s" repeatCount="indefinite" path="M -16 1190 C 90 1118 182 928 300 794"/><animate attributeName="opacity" dur="11s" begin="-9s" repeatCount="indefinite" values="0;.78;.92;.72;0" keyTimes="0;.1;.45;.84;1"/></circle>
-   <circle class="s-flow-node s-flow-node--approved" r="8"><animateMotion dur="8s" begin="-4s" repeatCount="indefinite" path="M 300 790 C 334 790 370 790 420 790"/><animate attributeName="opacity" dur="8s" begin="-4s" repeatCount="indefinite" values="0;.9;.96;.82;0" keyTimes="0;.12;.5;.86;1"/></circle>
-  </g>
- </svg>
-</div>
 <section class="s-hero s-wrap">
+ <HeroMotion />
 
  <div class="s-intro"><h1>AI служители за бизнеса.<br/><span>Не вършете всичко сами.</span></h1><p class="s-lead">Raboti настройва и поддържа AI агенти за конкретна работа: входящи обаждания, актуализации по сайта и задачи между имейл и CRM. Получавате управлявана услуга с уговорен обхват и правила за човешко одобрение — не просто достъп до AI програма.</p><div class="s-actions"><a class="s-primary" href="#ekip">Вижте услугите и цените <span>↗︎</span></a><a class="s-text-link" href="#naemi">Разкажете ни как работите</a></div><p class="s-caption">Избирате една услуга или комбинирате няколко. <a href="#ekip" data-show-custom>Имате друга работа? Обсъдете AI служител по поръчка.</a></p></div>
  <div class="s-stage" aria-label="Илюстративен пример за работа на AI служител">
@@ -139,8 +119,8 @@ if(validRole)document.querySelector<HTMLButtonElement>(`[data-enquiry-role="${va
 document.querySelectorAll<HTMLAnchorElement>('[data-show-custom]').forEach(link=>link.addEventListener('click',()=>chooseService('custom')));
 document.querySelectorAll<HTMLButtonElement>('[data-service-choice]').forEach((button,index,buttons)=>{button.addEventListener('click',()=>chooseService(button.dataset.serviceChoice!));button.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();const next=buttons[(index+(e.key==='ArrowRight'?1:-1)+buttons.length)%buttons.length];next.focus();next.click();}});});
 document.querySelectorAll<HTMLAnchorElement>('[data-pick-service]').forEach(link=>link.addEventListener('click',()=>{document.querySelector<HTMLButtonElement>(`[data-enquiry-role="${link.dataset.pickService}"]`)?.click();}));
-const topStage=document.querySelector<HTMLElement>('.s-top-stage');
-if(topStage&&'IntersectionObserver' in window){let stageVisible=true;const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)');const canvases=[...topStage.querySelectorAll<SVGSVGElement>('.s-flow-canvas')];const syncStageMotion=()=>{const running=stageVisible&&!document.hidden&&!reduceMotion.matches;topStage.dataset.motion=running?'running':'paused';canvases.forEach(canvas=>running?canvas.unpauseAnimations():canvas.pauseAnimations());};new IntersectionObserver(([entry])=>{stageVisible=entry.isIntersecting;syncStageMotion();},{rootMargin:'80px 0px'}).observe(topStage);document.addEventListener('visibilitychange',syncStageMotion);reduceMotion.addEventListener?.('change',syncStageMotion);syncStageMotion();}
+const hero=document.querySelector<HTMLElement>('.s-hero');
+if(hero&&'IntersectionObserver' in window){let heroVisible=true;const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)');const canvases=[...hero.querySelectorAll<SVGSVGElement>('.s-motion-layer')];const syncHeroMotion=()=>{const running=heroVisible&&!document.hidden&&!reduceMotion.matches;hero.dataset.motion=running?'running':'paused';canvases.forEach(canvas=>running?canvas.unpauseAnimations():canvas.pauseAnimations());};new IntersectionObserver(([entry])=>{heroVisible=entry.isIntersecting;syncHeroMotion();},{rootMargin:'80px 0px'}).observe(hero);document.addEventListener('visibilitychange',syncHeroMotion);reduceMotion.addEventListener?.('change',syncHeroMotion);syncHeroMotion();}
 </script>
 </BaseLayout>
 

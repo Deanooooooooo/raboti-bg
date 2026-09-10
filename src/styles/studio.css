@@ -35,28 +35,26 @@
 .studio .s-top-stage{position:relative;
   isolation:isolate;
   overflow:hidden;
-  background-color:#f8fbff}
-.studio .s-flow-world{position:absolute;
-  inset:0;
-  overflow:hidden;
-  pointer-events:none;
-  z-index:0}
-.studio .s-flow-canvas{position:absolute;
+  background:#f8fbff url('/assets/brand/backgrounds/raboti-hero-base.avif') center top/cover no-repeat}
+.studio .s-motion-layer{position:absolute;
   inset:0;
   width:100%;
   height:100%;
-  display:block}
-.studio .s-flow-canvas--mobile{display:none}
-.studio .s-flow-art{opacity:.54}
-.studio .s-flow-wash{fill:#f8fbff;
-  opacity:.26}
-.studio .s-flow-node{fill:#1f4cff;
-  filter:drop-shadow(0 0 8px rgba(31,76,255,.38))}
-.studio .s-flow-node--approved{fill:#123bff;
-  filter:drop-shadow(0 0 11px rgba(18,59,255,.48))}
-.studio .s-top-stage>*:not(.s-flow-world){position:relative;
-  z-index:1}
+  z-index:0;
+  pointer-events:none;
+  overflow:visible}
+.studio .s-motion-layer--mobile{display:none}
+.studio .s-hero>.s-intro,.studio .s-hero>.s-stage{position:relative;z-index:2}
+.studio .rb-flow-path{fill:none;vector-effect:non-scaling-stroke;stroke-width:1.15;stroke-linecap:round}
+.studio .rb-flow-path--in{stroke:url(#rb-flow-in)}
+.studio .rb-flow-path--out{stroke:url(#rb-flow-out);stroke-width:1.35}
+.studio .rb-flow-path--soft{opacity:.72}
+.studio .rb-gate-ring{transform-box:fill-box;transform-origin:center;animation:rb-gate-orbit 24s linear infinite}
+.studio .rb-gate-core{transform-box:fill-box;transform-origin:center;animation:rb-gate-breathe 4.8s ease-in-out infinite}
+@keyframes rb-gate-orbit{to{transform:rotate(360deg)}}
+@keyframes rb-gate-breathe{0%,100%{transform:scale(.92);opacity:.68}50%{transform:scale(1.08);opacity:.96}}
 .studio .s-hero{display:grid;
+  position:relative;
   grid-template-columns:1.04fr 1fr;
   gap:24px;
   align-items:center;
@@ -545,11 +543,10 @@
 }
 
 @media(max-width:700px){.studio .s-wrap{width:calc(100% - 40px)}
-
-.studio .s-flow-canvas--desktop{display:none}
-.studio .s-flow-canvas--mobile{display:block}
-.studio .s-flow-art{opacity:.44}
-.studio .s-flow-wash{opacity:.38}
+.studio .s-motion-layer--desktop{display:none}
+.studio .s-motion-layer--mobile{display:block;width:calc(100% + 40px);height:620px;left:-20px;right:auto;opacity:.66}
+.studio .rb-token-secondary{display:none}
+.studio .rb-flow-path{stroke-width:.9}
 
 
 .studio .brand-logo{width:104px}
@@ -1133,7 +1130,7 @@ body.studio:not(.home-art) main{padding-top:0}
 @media(max-width:1000px){.studio .s-start-layout,.studio .s-discovery-composition,.studio .s-faq{gap:35px}.studio .s-project-stage{padding:25px}.studio .s-contact{gap:30px;padding:35px}.studio .s-form-wrap{padding:22px}}
 @media(max-width:700px){.studio .s-start{padding-block:45px}.studio .s-start-layout,.studio .s-discovery-composition,.studio .s-faq{grid-template-columns:1fr;gap:30px}.studio .s-start-heading>p{margin-top:20px}.studio .s-journey{margin-block:22px}.studio .s-journey button{padding-block:16px}.studio .s-project-stage{padding:22px}.studio .s-project-stage [data-project]{min-height:350px;padding-top:24px}.studio .s-project-facts>div{gap:12px}.studio .s-project-bottom{align-items:start}.studio .s-search{padding-block:45px}.studio .s-discovery-composition{margin-top:28px}.studio .s-site-example{padding:15px 15px 0}.studio .s-example-nav,.studio .s-example-answer{padding:18px}.studio .s-example-hero{padding:24px 18px}.studio .s-example-nav>span{font-size:var(--type-meta)}.studio .s-faq{padding-block:35px}.studio .s-faq>div:first-child,.studio .s-contact-intro{position:static}.studio .s-faq>div:first-child h2{margin-bottom:15px}.studio .s-contact{padding:24px 18px;gap:25px}.studio .s-team-portrait{height:170px;max-width:330px;margin-bottom:22px}.studio .s-team-portrait img{height:160px}.studio .s-team-portrait img:nth-child(2){height:180px}.studio .s-form-wrap{padding:22px 18px}.studio .s-contact-team{flex-wrap:wrap}}
 @media(prefers-reduced-motion:no-preference){.studio [data-project]:not([hidden]){animation:project-reveal .25s ease-out}@keyframes project-reveal{from{opacity:.65;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}}
-@media(prefers-reduced-motion:reduce){.studio .s-flow-nodes{display:none}}
+@media(prefers-reduced-motion:reduce){.studio .rb-moving-token,.studio .rb-packet{display:none}.studio .rb-gate-ring,.studio .rb-gate-core{animation:none}}
 
 .studio .s-journey button[aria-pressed=true]{background:#e8eafa;border-bottom-color:transparent}
 

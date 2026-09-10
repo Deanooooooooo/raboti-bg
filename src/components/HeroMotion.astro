@@ -1,0 +1,97 @@
+<svg
+  class="s-motion-layer s-motion-layer--desktop"
+  viewBox="0 0 1600 900"
+  preserveAspectRatio="xMidYMid slice"
+  aria-hidden="true"
+  focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <defs>
+    <linearGradient id="rb-flow-in" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#bfd0f6" stop-opacity="0" />
+      <stop offset=".34" stop-color="#afc5f4" stop-opacity=".34" />
+      <stop offset=".72" stop-color="#6f97f8" stop-opacity=".48" />
+      <stop offset="1" stop-color="#1747ff" stop-opacity=".18" />
+    </linearGradient>
+    <linearGradient id="rb-flow-out" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#1747ff" stop-opacity=".22" />
+      <stop offset=".38" stop-color="#1747ff" stop-opacity=".52" />
+      <stop offset="1" stop-color="#8fb0ff" stop-opacity="0" />
+    </linearGradient>
+    <radialGradient id="rb-gate-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#1747ff" stop-opacity=".13" />
+      <stop offset=".52" stop-color="#8eb0ff" stop-opacity=".06" />
+      <stop offset="1" stop-color="#8eb0ff" stop-opacity="0" />
+    </radialGradient>
+    <linearGradient id="rb-token" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fff" stop-opacity=".92" />
+      <stop offset="1" stop-color="#f4f8ff" stop-opacity=".78" />
+    </linearGradient>
+    <path id="rb-lane-top" d="M-120 118 C170 82 360 126 520 220 C670 308 760 390 900 444" />
+    <path id="rb-lane-mid" d="M-120 390 C170 346 410 365 610 420 C730 453 815 457 900 450" />
+    <path id="rb-lane-low" d="M-100 760 C190 742 420 650 610 560 C735 501 814 464 900 452" />
+    <path id="rb-lane-out" d="M900 450 C1090 446 1260 428 1430 388 C1515 368 1600 350 1720 345" />
+    <g id="rb-token-shell"><rect x="-22" y="-22" width="44" height="44" rx="13" fill="url(#rb-token)" stroke="#afc5f4" stroke-opacity=".44" /></g>
+    <g id="rb-icon-mail" fill="none" stroke="#5c7fd8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="-10" y="-7" width="20" height="14" rx="3" /><path d="M-9-5 0 1.4 9-5" /></g>
+    <g id="rb-icon-phone" fill="none" stroke="#5c7fd8" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M-7-10C-10-7-8 1-2 7 4 13 11 13 13 9L8 4 4 7C1 6-5 0-6-3L-3-6Z" /></g>
+    <g id="rb-icon-chat" fill="none" stroke="#5c7fd8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M-11-8H11V7H2L-4 12V7H-11Z" /><circle cx="-5" r="1" fill="#5c7fd8" stroke="none" /><circle r="1" fill="#5c7fd8" stroke="none" /><circle cx="5" r="1" fill="#5c7fd8" stroke="none" /></g>
+    <g id="rb-icon-doc" fill="none" stroke="#5c7fd8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M-8-11H4L9-6V11H-8Z" /><path d="M4-11V-6H9M-3-2H4M-3 3H5M-3 8H2" /></g>
+    <g id="rb-icon-calendar" fill="none" stroke="#5c7fd8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="-10" y="-8" width="20" height="18" rx="3" /><path d="M-6-11V-5M6-11V-5M-10-2H10" /><circle cx="-4" cy="3" r="1" fill="#5c7fd8" stroke="none" /><circle cx="1" cy="3" r="1" fill="#5c7fd8" stroke="none" /><circle cx="6" cy="3" r="1" fill="#5c7fd8" stroke="none" /></g>
+    <g id="rb-icon-check" fill="none" stroke="#1747ff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M-9 0-2 7 10-8" /></g>
+  </defs>
+
+  <ellipse cx="1475" cy="40" rx="260" ry="230" fill="#dce7ff" opacity=".2" />
+  <ellipse cx="115" cy="865" rx="330" ry="230" fill="#e5edff" opacity=".24" />
+  <use href="#rb-lane-top" class="rb-flow-path rb-flow-path--in" />
+  <use href="#rb-lane-mid" class="rb-flow-path rb-flow-path--in rb-flow-path--soft" />
+  <use href="#rb-lane-low" class="rb-flow-path rb-flow-path--in" />
+  <use href="#rb-lane-out" class="rb-flow-path rb-flow-path--out" />
+
+  <g class="rb-gate" transform="translate(900 450)">
+    <circle r="92" fill="url(#rb-gate-glow)" />
+    <circle r="39" fill="#fff" fill-opacity=".56" stroke="#8faeff" stroke-opacity=".28" />
+    <circle class="rb-gate-ring" r="25" fill="none" stroke="#1747ff" stroke-opacity=".22" stroke-width="1.4" stroke-dasharray="8 7" />
+    <rect class="rb-gate-core" x="-7" y="-7" width="14" height="14" rx="4" fill="#1747ff" opacity=".84" />
+  </g>
+
+  <g class="rb-moving-token rb-token-primary"><use href="#rb-token-shell" /><use href="#rb-icon-phone" /><animateMotion dur="16s" begin="-3s" repeatCount="indefinite"><mpath href="#rb-lane-top" /></animateMotion><animate attributeName="opacity" values="0;.48;.48;0" keyTimes="0;.08;.9;1" dur="16s" begin="-3s" repeatCount="indefinite" /></g>
+  <g class="rb-moving-token rb-token-secondary"><use href="#rb-token-shell" /><use href="#rb-icon-chat" /><animateMotion dur="18s" begin="-12s" repeatCount="indefinite"><mpath href="#rb-lane-top" /></animateMotion><animate attributeName="opacity" values="0;.34;.34;0" keyTimes="0;.08;.9;1" dur="18s" begin="-12s" repeatCount="indefinite" /></g>
+  <g class="rb-moving-token rb-token-primary"><use href="#rb-token-shell" /><use href="#rb-icon-mail" /><animateMotion dur="15s" begin="-7s" repeatCount="indefinite"><mpath href="#rb-lane-mid" /></animateMotion><animate attributeName="opacity" values="0;.52;.52;0" keyTimes="0;.07;.9;1" dur="15s" begin="-7s" repeatCount="indefinite" /></g>
+  <g class="rb-moving-token rb-token-primary"><use href="#rb-token-shell" /><use href="#rb-icon-doc" /><animateMotion dur="17s" begin="-1s" repeatCount="indefinite"><mpath href="#rb-lane-low" /></animateMotion><animate attributeName="opacity" values="0;.44;.44;0" keyTimes="0;.08;.9;1" dur="17s" begin="-1s" repeatCount="indefinite" /></g>
+  <g class="rb-moving-token rb-token-secondary"><use href="#rb-token-shell" /><use href="#rb-icon-calendar" /><animateMotion dur="20s" begin="-11s" repeatCount="indefinite"><mpath href="#rb-lane-low" /></animateMotion><animate attributeName="opacity" values="0;.32;.32;0" keyTimes="0;.08;.9;1" dur="20s" begin="-11s" repeatCount="indefinite" /></g>
+  <g class="rb-moving-token rb-result-token rb-token-primary"><use href="#rb-token-shell" /><use href="#rb-icon-check" /><animateMotion dur="11s" begin="-2s" repeatCount="indefinite"><mpath href="#rb-lane-out" /></animateMotion><animate attributeName="opacity" values="0;.62;.62;0" keyTimes="0;.1;.88;1" dur="11s" begin="-2s" repeatCount="indefinite" /></g>
+  <g class="rb-moving-token rb-result-token rb-token-secondary"><use href="#rb-token-shell" /><use href="#rb-icon-check" /><animateMotion dur="13s" begin="-9s" repeatCount="indefinite"><mpath href="#rb-lane-out" /></animateMotion><animate attributeName="opacity" values="0;.38;.38;0" keyTimes="0;.1;.88;1" dur="13s" begin="-9s" repeatCount="indefinite" /></g>
+  <g class="rb-packet rb-token-secondary"><circle r="4" fill="#1747ff" opacity=".5" /><animateMotion dur="9s" begin="-5s" repeatCount="indefinite"><mpath href="#rb-lane-mid" /></animateMotion></g>
+  <g class="rb-packet rb-token-secondary"><circle r="3.5" fill="#6d96ff" opacity=".42" /><animateMotion dur="10s" begin="-2s" repeatCount="indefinite"><mpath href="#rb-lane-low" /></animateMotion></g>
+  <g class="rb-packet rb-token-secondary"><circle r="4" fill="#1747ff" opacity=".56" /><animateMotion dur="7s" begin="-4s" repeatCount="indefinite"><mpath href="#rb-lane-out" /></animateMotion></g>
+</svg>
+
+<svg
+  class="s-motion-layer s-motion-layer--mobile"
+  viewBox="0 0 390 620"
+  preserveAspectRatio="none"
+  aria-hidden="true"
+  focusable="false"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <defs>
+    <linearGradient id="rb-mobile-in" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#bfd0f6" stop-opacity="0" /><stop offset=".7" stop-color="#6f97f8" stop-opacity=".5" /><stop offset="1" stop-color="#1747ff" stop-opacity=".18" /></linearGradient>
+    <linearGradient id="rb-mobile-out" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#1747ff" stop-opacity=".52" /><stop offset="1" stop-color="#8fb0ff" stop-opacity="0" /></linearGradient>
+    <radialGradient id="rb-mobile-glow"><stop offset="0" stop-color="#1747ff" stop-opacity=".13" /><stop offset="1" stop-color="#8eb0ff" stop-opacity="0" /></radialGradient>
+    <linearGradient id="rb-mobile-token" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".94" /><stop offset="1" stop-color="#f4f8ff" stop-opacity=".82" /></linearGradient>
+    <path id="rb-mobile-top" d="M-48 112 C70 104 150 152 245 230" />
+    <path id="rb-mobile-low" d="M-48 440 C72 420 158 318 245 236" />
+    <path id="rb-mobile-result" d="M245 233 C304 230 350 205 438 160" />
+    <g id="rb-mobile-shell"><rect x="-18" y="-18" width="36" height="36" rx="11" fill="url(#rb-mobile-token)" stroke="#afc5f4" stroke-opacity=".5" /></g>
+    <g id="rb-mobile-phone" fill="none" stroke="#5c7fd8" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M-6-9C-9-6-7 1-2 6 3 11 9 11 11 8L7 4 3 6C0 5-4 1-5-2L-2-5Z" /></g>
+    <g id="rb-mobile-mail" fill="none" stroke="#5c7fd8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="-9" y="-6" width="18" height="12" rx="3" /><path d="M-8-4 0 1 8-4" /></g>
+    <g id="rb-mobile-check" fill="none" stroke="#1747ff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M-8 0-2 6 9-7" /></g>
+  </defs>
+  <use href="#rb-mobile-top" class="rb-flow-path" stroke="url(#rb-mobile-in)" />
+  <use href="#rb-mobile-low" class="rb-flow-path" stroke="url(#rb-mobile-in)" />
+  <use href="#rb-mobile-result" class="rb-flow-path" stroke="url(#rb-mobile-out)" />
+  <g class="rb-gate" transform="translate(245 233)"><circle r="62" fill="url(#rb-mobile-glow)" /><circle r="28" fill="#fff" fill-opacity=".62" stroke="#8faeff" stroke-opacity=".32" /><circle class="rb-gate-ring" r="18" fill="none" stroke="#1747ff" stroke-opacity=".28" stroke-width="1.2" stroke-dasharray="7 6" /><rect class="rb-gate-core" x="-6" y="-6" width="12" height="12" rx="4" fill="#1747ff" opacity=".86" /></g>
+  <g class="rb-moving-token rb-token-primary"><use href="#rb-mobile-shell" /><use href="#rb-mobile-phone" /><animateMotion dur="10s" begin="-3s" repeatCount="indefinite"><mpath href="#rb-mobile-top" /></animateMotion><animate attributeName="opacity" values="0;.64;.64;0" keyTimes="0;.08;.9;1" dur="10s" begin="-3s" repeatCount="indefinite" /></g>
+  <g class="rb-moving-token rb-token-primary"><use href="#rb-mobile-shell" /><use href="#rb-mobile-mail" /><animateMotion dur="11s" begin="-8s" repeatCount="indefinite"><mpath href="#rb-mobile-low" /></animateMotion><animate attributeName="opacity" values="0;.58;.58;0" keyTimes="0;.08;.9;1" dur="11s" begin="-8s" repeatCount="indefinite" /></g>
+  <g class="rb-moving-token rb-result-token rb-token-primary"><use href="#rb-mobile-shell" /><use href="#rb-mobile-check" /><animateMotion dur="8s" begin="-2s" repeatCount="indefinite"><mpath href="#rb-mobile-result" /></animateMotion><animate attributeName="opacity" values="0;.72;.72;0" keyTimes="0;.1;.88;1" dur="8s" begin="-2s" repeatCount="indefinite" /></g>
+</svg>
