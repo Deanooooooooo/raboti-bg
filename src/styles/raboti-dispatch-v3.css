@@ -171,7 +171,7 @@ The component replaces the old right-side demo card.
   vector-effect: non-scaling-stroke;
   opacity: 0;
   stroke-dasharray: 12 10;
-  animation: rdRouteWake 10s ease-in-out infinite;
+  animation: rdRouteWake 7.7s ease-in-out infinite;
 }
 
 .rd-live-route--input {
@@ -216,12 +216,12 @@ The component replaces the old right-side demo card.
 
 .rd-scan-pulse circle:first-child {
   stroke-width: 1.2;
-  animation: rdRouterPulseA 10s ease-out infinite;
+  animation: rdRouterPulseA 7.7s ease-out infinite;
 }
 
 .rd-scan-pulse circle:last-child {
   stroke-width: 1;
-  animation: rdRouterPulseB 10s ease-out infinite;
+  animation: rdRouterPulseB 7.7s ease-out infinite;
 }
 
 @keyframes rdRouteWake {

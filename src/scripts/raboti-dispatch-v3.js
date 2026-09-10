@@ -8,7 +8,7 @@
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   const workers = ['vdiga', 'pishe', 'pomaga'];
-  const cycleMs = 10000;
+  const cycleMs = 7700;
 
   let currentIndex = 0;
   let cycleTimer = null;
