@@ -1,12 +1,13 @@
 (() => {
   const machine = document.querySelector("[data-raboti-work-machine]");
   if (!machine) return;
-  const svg = machine.querySelector(".rwm-svg");
+  const svgs = [...machine.querySelectorAll(".rwm-svg")];
   const flows = [...machine.querySelectorAll("[data-rwm-flow]")];
   const stations = [...machine.querySelectorAll("[data-rwm-worker]")];
   const mobile = [...machine.querySelectorAll("[data-rwm-mobile-worker]")];
   const reduced = matchMedia("(prefers-reduced-motion: reduce)");
   const hover = matchMedia("(hover: hover)");
+  const narrow = matchMedia("(max-width: 767px)");
   const workers = ["vdiga", "pishe", "pomaga"];
   const cycleMs = 7700;
   let index = 0,
@@ -17,12 +18,16 @@
   const pause = () => {
     const paused = document.hidden || !visible || reduced.matches;
     machine.classList.toggle("is-motion-paused", paused);
-    if (!svg || typeof svg.pauseAnimations !== "function") return;
-    paused ? svg.pauseAnimations() : svg.unpauseAnimations();
+    svgs.forEach((svg) => {
+      if (typeof svg.pauseAnimations !== "function") return;
+      paused ? svg.pauseAnimations() : svg.unpauseAnimations();
+    });
   };
   const restart = () => {
-    if (!svg || reduced.matches) return;
-    if (typeof svg.setCurrentTime === "function") svg.setCurrentTime(0);
+    if (reduced.matches) return;
+    svgs.forEach((svg) => {
+      if (typeof svg.setCurrentTime === "function") svg.setCurrentTime(0);
+    });
     pause();
   };
   const sync = (w) => {
@@ -50,7 +55,7 @@
   };
   const schedule = () => {
     clearTimeout(timer);
-    if (reduced.matches) return;
+    if (reduced.matches || narrow.matches) return;
     timer = setTimeout(() => {
       if (Date.now() < holdUntil) {
         schedule();
@@ -73,8 +78,7 @@
   });
   mobile.forEach((b) =>
     b.addEventListener("click", () => {
-      setWorker(b.dataset.rwmMobileWorker, { holdMs: 18000 });
-      schedule();
+      setWorker(b.dataset.rwmMobileWorker);
     }),
   );
   const io = new IntersectionObserver(
@@ -94,6 +98,11 @@
         restart();
         schedule();
       }
+    });
+  if (typeof narrow.addEventListener === "function")
+    narrow.addEventListener("change", () => {
+      clearTimeout(timer);
+      schedule();
     });
   setWorker("vdiga");
   schedule();

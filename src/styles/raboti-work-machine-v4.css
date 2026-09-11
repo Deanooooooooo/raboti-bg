@@ -43,6 +43,9 @@
   stroke-width: 1;
   vector-effect: non-scaling-stroke;
 }
+.rwm-mobile-static {
+  display: none;
+}
 .rwm-ambient {
   fill: none;
   stroke: rgba(70, 105, 220, 0.055);
@@ -323,8 +326,8 @@
 @media (max-width: 767px) {
   .raboti-work-machine {
     width: min(100%, 520px);
-    min-height: 350px;
-    margin-top: 18px;
+    min-height: 390px;
+    margin-top: 22px;
     border-radius: 30px;
     background:
       radial-gradient(
@@ -339,7 +342,7 @@
       );
   }
   .raboti-work-machine__canvas {
-    inset: 0 0 64px;
+    inset: 58px 0 0;
   }
   .rwm-svg--desktop {
     display: none;
@@ -349,21 +352,26 @@
   }
   .rwm-station {
     display: none;
-    top: 44%;
-    right: 4%;
-    width: 176px;
-    min-height: 68px;
-    padding: 12px 15px;
-    border-radius: 22px;
+    top: 61%;
+    left: 50%;
+    right: auto;
+    width: 220px;
+    min-height: 78px;
+    padding: 14px 18px;
+    border-radius: 24px;
     justify-content: center;
-    transform: translateY(-50%);
+    transform: translate(-50%, -50%);
   }
   .rwm-station__icon {
     display: none;
   }
   .rwm-station.is-active {
     display: flex;
-    transform: translateY(-50%);
+    transform: translate(-50%, -50%);
+  }
+  .rwm-station.is-active:hover,
+  .rwm-station.is-active:focus-visible {
+    transform: translate(-50%, -50%);
   }
   .rwm-station img {
     width: auto;
@@ -373,7 +381,8 @@
   .rwm-mobile-switcher {
     position: absolute;
     left: 50%;
-    bottom: 12px;
+    top: 12px;
+    bottom: auto;
     z-index: 4;
     display: flex;
     gap: 4px;
@@ -402,14 +411,17 @@
   .rwm-ambient {
     display: none;
   }
+  .rwm-svg--mobile .rwm-dispatcher-halo {
+    display: none;
+  }
 }
 @media (max-width: 420px) {
   .raboti-work-machine {
-    min-height: 330px;
+    min-height: 370px;
   }
   .rwm-station {
-    width: 168px;
-    min-height: 66px;
+    width: 210px;
+    min-height: 74px;
   }
   .rwm-station img {
     height: 24px;
@@ -421,9 +433,24 @@
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .rwm-flow,
+  .rwm-svg--desktop .rwm-flow,
   .rwm-process-pulse {
     display: none;
+  }
+  .rwm-svg--mobile .rwm-incoming,
+  .rwm-svg--mobile .rwm-result,
+  .rwm-svg--mobile .rwm-work-token {
+    display: none;
+  }
+  .rwm-svg--mobile .rwm-flow.is-active {
+    display: block;
+  }
+  .rwm-svg--mobile .rwm-route {
+    animation: none;
+    opacity: 0.18;
+  }
+  .rwm-svg--mobile .rwm-mobile-static {
+    display: block;
   }
   .rwm-dispatcher-block,
   .rwm-station {
