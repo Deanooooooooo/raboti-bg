@@ -34,6 +34,15 @@
   width: 100%;
   height: 100%;
 }
+.rwm-svg--mobile {
+  display: none;
+}
+.rwm-mobile-ambient {
+  fill: none;
+  stroke: rgba(70, 105, 220, 0.05);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
 .rwm-ambient {
   fill: none;
   stroke: rgba(70, 105, 220, 0.055);
@@ -314,9 +323,9 @@
 @media (max-width: 767px) {
   .raboti-work-machine {
     width: min(100%, 520px);
-    min-height: 470px;
-    margin-top: 22px;
-    border-radius: 34px;
+    min-height: 350px;
+    margin-top: 18px;
+    border-radius: 30px;
     background:
       radial-gradient(
         circle at 50% 46%,
@@ -330,18 +339,22 @@
       );
   }
   .raboti-work-machine__canvas {
-    inset: 28px 0 78px;
+    inset: 0 0 64px;
   }
-  .rwm-svg {
-    transform: scale(0.94);
-    transform-origin: center;
+  .rwm-svg--desktop {
+    display: none;
+  }
+  .rwm-svg--mobile {
+    display: block;
   }
   .rwm-station {
     display: none;
-    top: 50%;
-    right: 6%;
-    width: 190px;
-    min-height: 76px;
+    top: 44%;
+    right: 4%;
+    width: 176px;
+    min-height: 68px;
+    padding: 12px 15px;
+    border-radius: 22px;
     justify-content: center;
     transform: translateY(-50%);
   }
@@ -350,12 +363,17 @@
   }
   .rwm-station.is-active {
     display: flex;
-    transform: translateY(-50%) scale(1.02);
+    transform: translateY(-50%);
+  }
+  .rwm-station img {
+    width: auto;
+    height: 25.5px;
+    max-width: 139px;
   }
   .rwm-mobile-switcher {
     position: absolute;
     left: 50%;
-    bottom: 18px;
+    bottom: 12px;
     z-index: 4;
     display: flex;
     gap: 4px;
@@ -387,16 +405,15 @@
 }
 @media (max-width: 420px) {
   .raboti-work-machine {
-    min-height: 430px;
+    min-height: 330px;
   }
   .rwm-station {
-    right: 4%;
-    width: 176px;
+    width: 168px;
+    min-height: 66px;
   }
   .rwm-station img {
-    width: auto;
-    height: 25.5px;
-    max-width: 139px;
+    height: 24px;
+    max-width: 132px;
   }
   .rwm-mobile-switcher button {
     padding-inline: 11px;

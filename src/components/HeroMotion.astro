@@ -6,7 +6,7 @@
   aria-label="Работата пристига, Raboti я насочва към подходящия AI служител и връща готов резултат"
 >
   <div class="raboti-work-machine__canvas" aria-hidden="true">
-    <svg class="rwm-svg" viewBox="0 0 640 560" preserveAspectRatio="xMidYMid meet" focusable="false" role="presentation">
+    <svg class="rwm-svg rwm-svg--desktop" viewBox="0 0 640 560" preserveAspectRatio="xMidYMid meet" focusable="false" role="presentation">
       <defs>
         <filter id="rwm-glow" x="-180%" y="-180%" width="460%" height="460%">
           <feGaussianBlur stdDeviation="5" result="blur"/>
@@ -67,6 +67,46 @@
       </g>
 
       <g class="rwm-process-pulse" transform="translate(215 280)"><circle r="18"/><circle r="32"/></g>
+    </svg>
+
+    <svg class="rwm-svg rwm-svg--mobile" viewBox="0 0 360 300" preserveAspectRatio="xMidYMid meet" focusable="false" role="presentation">
+      <path class="rwm-mobile-ambient" d="M-10 64 C92 18 252 16 374 55"/>
+      <path class="rwm-mobile-ambient" d="M-18 266 C108 302 263 294 378 244"/>
+
+      <g class="rwm-dispatcher" transform="translate(88 150)">
+        <circle r="34" class="rwm-dispatcher-halo rwm-dispatcher-halo--outer"/>
+        <circle r="22" class="rwm-dispatcher-halo rwm-dispatcher-halo--inner"/>
+        <rect x="-12" y="-8" width="24" height="16" rx="4" class="rwm-dispatcher-block"/>
+      </g>
+
+      <g class="rwm-flow rwm-mobile-flow is-active" data-rwm-flow="vdiga">
+        <path id="rwm-mobile-vdiga-in" class="rwm-route rwm-route--input" d="M8 150 C30 150 50 150 67 150"/>
+        <path id="rwm-mobile-vdiga-mid" class="rwm-route rwm-route--work" d="M110 150 C128 150 143 150 160 150"/>
+        <path id="rwm-mobile-vdiga-out" class="rwm-route rwm-route--output" d="M326 150 C350 168 341 215 292 238"/>
+        <g class="rwm-incoming rwm-mobile-token"><rect x="-21" y="-21" width="42" height="42" rx="13" class="rwm-incoming-tile"/><use href="#rwm-phone" x="-12" y="-12" width="24" height="24"/><animateMotion dur="7.7s" repeatCount="indefinite" keyTimes="0;0.14;0.31;1" keyPoints="0;0;1;1" calcMode="linear"><mpath href="#rwm-mobile-vdiga-in"/></animateMotion><animate attributeName="opacity" dur="7.7s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.12;0.15;0.30;0.33;1"/></g>
+        <rect class="rwm-work-token" width="16" height="11" rx="3" x="-8" y="-5.5"><animateMotion dur="7.7s" repeatCount="indefinite" keyTimes="0;0.35;0.52;1" keyPoints="0;0;1;1" calcMode="linear"><mpath href="#rwm-mobile-vdiga-mid"/></animateMotion><animate attributeName="opacity" dur="7.7s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.34;0.37;0.51;0.54;1"/></rect>
+        <g class="rwm-result rwm-mobile-token"><rect x="-22" y="-22" width="44" height="44" rx="14" class="rwm-result-tile"/><use href="#rwm-calendar" x="-12" y="-12" width="24" height="24"/><circle cx="15" cy="-15" r="8" class="rwm-result-check-bg"/><use href="#rwm-check" x="10" y="-20" width="10" height="10"/><animateMotion dur="7.7s" repeatCount="indefinite" keyTimes="0;0.60;0.79;1" keyPoints="0;0;1;1" calcMode="linear"><mpath href="#rwm-mobile-vdiga-out"/></animateMotion><animate attributeName="opacity" dur="7.7s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.59;0.62;0.78;0.81;1"/></g>
+      </g>
+
+      <g class="rwm-flow rwm-mobile-flow" data-rwm-flow="pishe">
+        <path id="rwm-mobile-pishe-in" class="rwm-route rwm-route--input" d="M8 150 C30 150 50 150 67 150"/>
+        <path id="rwm-mobile-pishe-mid" class="rwm-route rwm-route--work" d="M110 150 C128 150 143 150 160 150"/>
+        <path id="rwm-mobile-pishe-out" class="rwm-route rwm-route--output" d="M326 150 C350 168 341 215 292 238"/>
+        <g class="rwm-incoming rwm-mobile-token"><rect x="-21" y="-21" width="42" height="42" rx="13" class="rwm-incoming-tile"/><use href="#rwm-document" x="-12" y="-12" width="24" height="24"/><animateMotion dur="7.7s" repeatCount="indefinite" keyTimes="0;0.14;0.31;1" keyPoints="0;0;1;1" calcMode="linear"><mpath href="#rwm-mobile-pishe-in"/></animateMotion><animate attributeName="opacity" dur="7.7s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.12;0.15;0.30;0.33;1"/></g>
+        <rect class="rwm-work-token" width="16" height="11" rx="3" x="-8" y="-5.5"><animateMotion dur="7.7s" repeatCount="indefinite" keyTimes="0;0.35;0.52;1" keyPoints="0;0;1;1" calcMode="linear"><mpath href="#rwm-mobile-pishe-mid"/></animateMotion><animate attributeName="opacity" dur="7.7s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.34;0.37;0.51;0.54;1"/></rect>
+        <g class="rwm-result rwm-mobile-token"><rect x="-22" y="-22" width="44" height="44" rx="14" class="rwm-result-tile"/><use href="#rwm-browser" x="-12" y="-12" width="24" height="24"/><circle cx="15" cy="-15" r="8" class="rwm-result-check-bg"/><use href="#rwm-check" x="10" y="-20" width="10" height="10"/><animateMotion dur="7.7s" repeatCount="indefinite" keyTimes="0;0.60;0.79;1" keyPoints="0;0;1;1" calcMode="linear"><mpath href="#rwm-mobile-pishe-out"/></animateMotion><animate attributeName="opacity" dur="7.7s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.59;0.62;0.78;0.81;1"/></g>
+      </g>
+
+      <g class="rwm-flow rwm-mobile-flow" data-rwm-flow="pomaga">
+        <path id="rwm-mobile-pomaga-in" class="rwm-route rwm-route--input" d="M8 150 C30 150 50 150 67 150"/>
+        <path id="rwm-mobile-pomaga-mid" class="rwm-route rwm-route--work" d="M110 150 C128 150 143 150 160 150"/>
+        <path id="rwm-mobile-pomaga-out" class="rwm-route rwm-route--output" d="M326 150 C350 168 341 215 292 238"/>
+        <g class="rwm-incoming rwm-mobile-token"><rect x="-21" y="-21" width="42" height="42" rx="13" class="rwm-incoming-tile"/><use href="#rwm-mail" x="-12" y="-12" width="24" height="24"/><animateMotion dur="7.7s" repeatCount="indefinite" keyTimes="0;0.14;0.31;1" keyPoints="0;0;1;1" calcMode="linear"><mpath href="#rwm-mobile-pomaga-in"/></animateMotion><animate attributeName="opacity" dur="7.7s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.12;0.15;0.30;0.33;1"/></g>
+        <rect class="rwm-work-token" width="16" height="11" rx="3" x="-8" y="-5.5"><animateMotion dur="7.7s" repeatCount="indefinite" keyTimes="0;0.35;0.52;1" keyPoints="0;0;1;1" calcMode="linear"><mpath href="#rwm-mobile-pomaga-mid"/></animateMotion><animate attributeName="opacity" dur="7.7s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.34;0.37;0.51;0.54;1"/></rect>
+        <g class="rwm-result rwm-mobile-token"><rect x="-22" y="-22" width="44" height="44" rx="14" class="rwm-result-tile"/><use href="#rwm-task" x="-12" y="-12" width="24" height="24"/><circle cx="15" cy="-15" r="8" class="rwm-result-check-bg"/><use href="#rwm-check" x="10" y="-20" width="10" height="10"/><animateMotion dur="7.7s" repeatCount="indefinite" keyTimes="0;0.60;0.79;1" keyPoints="0;0;1;1" calcMode="linear"><mpath href="#rwm-mobile-pomaga-out"/></animateMotion><animate attributeName="opacity" dur="7.7s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.59;0.62;0.78;0.81;1"/></g>
+      </g>
+
+      <g class="rwm-process-pulse" transform="translate(88 150)"><circle r="15"/><circle r="26"/></g>
     </svg>
   </div>
 
