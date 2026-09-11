@@ -1211,3 +1211,19 @@ body.studio:not(.home-art) main{padding-top:0}
 .studio .s-profile-visual .s-profile-wordmark{position:static!important;width:150px!important;height:auto!important;max-width:100%!important;object-fit:contain!important;object-position:left center!important;opacity:1!important;mix-blend-mode:normal!important}
 .studio .s-profile-visual .agent-wordmark--pomaga.s-profile-wordmark{width:auto!important;height:57px!important}
 @media(max-width:650px){.studio .s-profile-visual .s-profile-wordmark{width:130px!important}.studio .s-profile-visual .agent-wordmark--pomaga.s-profile-wordmark{width:auto!important;height:49px!important}}
+
+/* Mobile service controls and portrait cards: larger targets, deliberate crops, readable light branding. */
+.studio .contact-form .consent{display:grid;grid-template-columns:22px minmax(0,1fr);gap:12px;align-items:start}
+.studio .contact-form .consent input[type="checkbox"]{appearance:auto;-webkit-appearance:checkbox;width:22px;height:22px;min-height:22px;margin:2px 0 0;padding:0;border:0;border-radius:4px;box-shadow:none;accent-color:#123bff}
+@media(max-width:700px){
+  .studio .s-service-choice{gap:6px;padding:6px;border-radius:26px}
+  .studio .s-service-choice button{min-height:58px;padding:14px 10px;border-radius:999px}
+  .studio .s-service-choice button>span{font-size:var(--type-body);font-weight:600}
+  .studio .s-profile-visual{height:350px}
+  .studio .s-profile-visual>img{top:0;width:100%;height:100%;object-fit:cover;mix-blend-mode:normal}
+  .studio .s-agent-vdiga .s-profile-visual>img{object-position:50% 20%}
+  .studio .s-agent-pishe .s-profile-visual>img{object-position:50% 16%}
+  .studio .s-agent-pomaga .s-profile-visual>img{object-position:50% 18%}
+  .studio .s-profile-visual:after{inset:42% 0 0;background:linear-gradient(180deg,rgba(17,27,49,0) 0%,rgba(17,27,49,.42) 42%,rgba(17,27,49,.94) 100%)}
+  .studio .s-profile-visual>div{bottom:26px}
+}
