@@ -1,241 +1,88 @@
-<div class="raboti-dispatch" data-raboti-dispatch data-worker="vdiga" aria-hidden="true">
-  <svg
-    class="raboti-dispatch__svg"
-    viewBox="0 0 640 620"
-    preserveAspectRatio="xMidYMid meet"
-    focusable="false"
-    role="presentation"
-  >
-    <defs>
-      <filter id="rd-soft-glow" x="-150%" y="-150%" width="400%" height="400%">
-        <feGaussianBlur stdDeviation="5" result="blur"/>
-        <feMerge>
-          <feMergeNode in="blur"/>
-          <feMergeNode in="SourceGraphic"/>
-        </feMerge>
-      </filter>
+<div
+  class="raboti-work-machine"
+  data-raboti-work-machine
+  data-worker="vdiga"
+  role="group"
+  aria-label="Работата пристига, Raboti я насочва към подходящия AI служител и връща готов резултат"
+>
+  <div class="raboti-work-machine__canvas" aria-hidden="true">
+    <svg class="rwm-svg" viewBox="0 0 640 560" preserveAspectRatio="xMidYMid meet" focusable="false" role="presentation">
+      <defs>
+        <filter id="rwm-glow" x="-180%" y="-180%" width="460%" height="460%">
+          <feGaussianBlur stdDeviation="5" result="blur"/>
+          <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <filter id="rwm-soft-shadow" x="-80%" y="-80%" width="260%" height="260%">
+          <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#27407d" flood-opacity=".12"/>
+        </filter>
+        <linearGradient id="rwm-input-route" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#9eb3ff" stop-opacity=".05"/><stop offset=".68" stop-color="#6384ff" stop-opacity=".35"/><stop offset="1" stop-color="#244cff" stop-opacity=".65"/>
+        </linearGradient>
+        <linearGradient id="rwm-output-route" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#244cff" stop-opacity=".56"/><stop offset="1" stop-color="#7a9aff" stop-opacity=".06"/>
+        </linearGradient>
+        <symbol id="rwm-phone" viewBox="-24 -24 48 48"><path d="M-11 -14 C-7 -17 -3 -13 -1 -8 L2 -3 C4 0 3 4 0 6 L-3 8 C2 16 7 20 14 23 L16 19 C18 16 21 16 24 18 L28 21 C32 25 31 29 28 32 C24 36 18 36 12 33 C0 28 -11 17 -17 6 C-21 -3 -18 -10 -11 -14 Z" transform="scale(.55) translate(-8 -8)" class="rwm-icon-line"/></symbol>
+        <symbol id="rwm-calendar" viewBox="-24 -24 48 48"><rect x="-14" y="-11" width="28" height="24" rx="5" class="rwm-icon-line"/><path d="M-8 -16 V-7 M8 -16 V-7 M-14 -3 H14 M-7 3 H-3 M2 3 H6 M-7 8 H-3 M2 8 H6" class="rwm-icon-line"/></symbol>
+        <symbol id="rwm-document" viewBox="-24 -24 48 48"><path d="M-11 -16 H5 L13 -8 V16 H-11 Z M5 -16 V-8 H13 M-6 -2 H7 M-6 4 H7 M-6 10 H4" class="rwm-icon-line"/></symbol>
+        <symbol id="rwm-browser" viewBox="-24 -24 48 48"><rect x="-15" y="-12" width="30" height="24" rx="5" class="rwm-icon-line"/><path d="M-15 -5 H15 M-9 -8 H-8 M-4 -8 H-3 M1 -8 H2 M-8 1 H8 M-8 6 H4" class="rwm-icon-line"/></symbol>
+        <symbol id="rwm-mail" viewBox="-24 -24 48 48"><rect x="-15" y="-11" width="30" height="22" rx="5" class="rwm-icon-line"/><path d="M-13 -8 L0 2 L13 -8" class="rwm-icon-line"/></symbol>
+        <symbol id="rwm-task" viewBox="-24 -24 48 48"><path d="M-13 -9 L-9 -5 L-3 -12 M2 -9 H13 M-13 1 L-9 5 L-3 -2 M2 1 H13 M-13 11 L-9 15 L-3 8 M2 11 H13" class="rwm-icon-line"/></symbol>
+        <symbol id="rwm-check" viewBox="-24 -24 48 48"><path d="M-12 0 L-3 9 L14 -11" class="rwm-check-line"/></symbol>
+      </defs>
 
-      <filter id="rd-station-shadow" x="-40%" y="-40%" width="180%" height="180%">
-        <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#4865a8" flood-opacity=".10"/>
-      </filter>
+      <path class="rwm-ambient" d="M25 102 C180 40 330 38 610 80"/>
+      <path class="rwm-ambient" d="M10 470 C220 530 390 520 635 450"/>
 
-      <linearGradient id="rd-route-fade" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0" stop-color="#8da7ff" stop-opacity=".12"/>
-        <stop offset=".55" stop-color="#5278ff" stop-opacity=".36"/>
-        <stop offset="1" stop-color="#244cff" stop-opacity=".55"/>
-      </linearGradient>
-
-      <symbol id="rd-icon-phone" viewBox="-24 -24 48 48">
-        <path d="M-11 -14 C-7 -17 -3 -13 -1 -8 L2 -3 C4 0 3 4 0 6 L-3 8 C2 16 7 20 14 23 L16 19 C18 16 21 16 24 18 L28 21 C32 25 31 29 28 32 C24 36 18 36 12 33 C0 28 -11 17 -17 6 C-21 -3 -18 -10 -11 -14 Z"
-              transform="scale(.55) translate(-8 -8)" class="rd-icon-stroke"/>
-      </symbol>
-
-      <symbol id="rd-icon-calendar" viewBox="-24 -24 48 48">
-        <rect x="-14" y="-11" width="28" height="24" rx="5" class="rd-icon-stroke"/>
-        <path d="M-8 -16 V-7 M8 -16 V-7 M-14 -3 H14 M-7 3 H-3 M2 3 H6 M-7 8 H-3 M2 8 H6"
-              class="rd-icon-stroke"/>
-      </symbol>
-
-      <symbol id="rd-icon-document" viewBox="-24 -24 48 48">
-        <path d="M-11 -16 H5 L13 -8 V16 H-11 Z M5 -16 V-8 H13 M-6 -2 H7 M-6 4 H7 M-6 10 H4"
-              class="rd-icon-stroke"/>
-      </symbol>
-
-      <symbol id="rd-icon-browser" viewBox="-24 -24 48 48">
-        <rect x="-15" y="-12" width="30" height="24" rx="5" class="rd-icon-stroke"/>
-        <path d="M-15 -5 H15 M-9 -8 H-8 M-4 -8 H-3 M1 -8 H2 M-8 1 H8 M-8 6 H4"
-              class="rd-icon-stroke"/>
-      </symbol>
-
-      <symbol id="rd-icon-mail" viewBox="-24 -24 48 48">
-        <rect x="-15" y="-11" width="30" height="22" rx="5" class="rd-icon-stroke"/>
-        <path d="M-13 -8 L0 2 L13 -8" class="rd-icon-stroke"/>
-      </symbol>
-
-      <symbol id="rd-icon-task" viewBox="-24 -24 48 48">
-        <path d="M-13 -9 L-9 -5 L-3 -12 M2 -9 H13 M-13 1 L-9 5 L-3 -2 M2 1 H13 M-13 11 L-9 15 L-3 8 M2 11 H13"
-              class="rd-icon-stroke"/>
-      </symbol>
-
-      <symbol id="rd-icon-check" viewBox="-24 -24 48 48">
-        <path d="M-12 0 L-3 9 L14 -11" class="rd-check-stroke"/>
-      </symbol>
-    </defs>
-
-    <!-- Quiet structural frame. The system becomes brighter only during a task. -->
-    <g class="rd-architecture">
-      <path class="rd-trunk" d="M25 310 C105 310 145 310 215 310"/>
-      <path class="rd-branch" d="M245 300 C320 255 355 205 430 155"/>
-      <path class="rd-branch" d="M250 310 C340 310 390 310 470 310"/>
-      <path class="rd-branch" d="M245 320 C320 365 355 415 430 465"/>
-
-      <path class="rd-output-base" d="M518 155 C560 160 590 175 630 198"/>
-      <path class="rd-output-base" d="M545 310 C575 310 600 310 632 310"/>
-      <path class="rd-output-base" d="M518 465 C560 458 592 442 630 420"/>
-    </g>
-
-    <!-- Dispatch switch. The cobalt rectangle is the Raboti motion signature. -->
-    <g class="rd-router" transform="translate(235 310)">
-      <circle r="44" class="rd-router-ring rd-router-ring--outer"/>
-      <circle r="29" class="rd-router-ring rd-router-ring--inner"/>
-      <rect x="-15" y="-10" width="30" height="20" rx="5" class="rd-router-block"/>
-    </g>
-
-    <!-- Permanent employee stations. -->
-    <g class="rd-station" data-station="vdiga" transform="translate(470 155)">
-      <rect x="-92" y="-54" width="184" height="108" rx="27" class="rd-station-surface"/>
-      <circle cx="-61" cy="0" r="19" class="rd-station-icon-bg"/>
-      <use href="#rd-icon-phone" x="-73" y="-12" width="24" height="24"/>
-      <image href="/assets/brand/dispatch/vdiga.webp" x="-31" y="-14" width="105" height="34" preserveAspectRatio="xMidYMid meet"/>
-    </g>
-
-    <g class="rd-station" data-station="pishe" transform="translate(500 310)">
-      <rect x="-92" y="-54" width="184" height="108" rx="27" class="rd-station-surface"/>
-      <circle cx="-61" cy="0" r="19" class="rd-station-icon-bg"/>
-      <use href="#rd-icon-document" x="-73" y="-12" width="24" height="24"/>
-      <image href="/assets/brand/dispatch/pishe.webp" x="-31" y="-14" width="105" height="34" preserveAspectRatio="xMidYMid meet"/>
-    </g>
-
-    <g class="rd-station" data-station="pomaga" transform="translate(470 465)">
-      <rect x="-92" y="-54" width="184" height="108" rx="27" class="rd-station-surface"/>
-      <circle cx="-61" cy="0" r="19" class="rd-station-icon-bg"/>
-      <use href="#rd-icon-mail" x="-73" y="-12" width="24" height="24"/>
-      <image href="/assets/brand/dispatch/pomaga.webp" x="-31" y="-12" width="105" height="24" preserveAspectRatio="xMidYMid meet"/>
-    </g>
-
-    <!-- VDIGA sequence -->
-    <g class="rd-flow is-active" data-flow="vdiga">
-      <path id="rd-vdiga-in" class="rd-live-route rd-live-route--input"
-            d="M25 310 C105 310 145 310 215 310"/>
-      <path id="rd-vdiga-route" class="rd-live-route"
-            d="M255 298 C322 255 362 205 430 155"/>
-      <path id="rd-vdiga-out" class="rd-live-route rd-live-route--output"
-            d="M518 155 C560 160 590 175 630 198"/>
-
-      <g class="rd-source-task">
-        <rect x="-27" y="-27" width="54" height="54" rx="17" class="rd-task-tile"/>
-        <use href="#rd-icon-phone" x="-15" y="-15" width="30" height="30"/>
-        <animateMotion dur="7.7s" repeatCount="indefinite"
-          keyTimes="0;0.12;0.28;1" keyPoints="0;0;1;1" calcMode="linear">
-          <mpath href="#rd-vdiga-in"/>
-        </animateMotion>
-        <animate attributeName="opacity" dur="7.7s" repeatCount="indefinite"
-          values="0;0;1;1;0;0" keyTimes="0;0.10;0.13;0.27;0.30;1"/>
+      <g class="rwm-dispatcher" transform="translate(215 280)">
+        <circle r="46" class="rwm-dispatcher-halo rwm-dispatcher-halo--outer"/>
+        <circle r="30" class="rwm-dispatcher-halo rwm-dispatcher-halo--inner"/>
+        <rect x="-15" y="-10" width="30" height="20" rx="5" class="rwm-dispatcher-block"/>
       </g>
 
-      <rect class="rd-work-token" width="18" height="12" rx="3" x="-9" y="-6">
-        <animateMotion dur="7.7s" repeatCount="indefinite"
-          keyTimes="0;0.32;0.48;1" keyPoints="0;0;1;1" calcMode="linear">
-          <mpath href="#rd-vdiga-route"/>
-        </animateMotion>
-        <animate attributeName="opacity" dur="7.7s" repeatCount="indefinite"
-          values="0;0;1;1;0;0" keyTimes="0;0.31;0.34;0.47;0.50;1"/>
-      </rect>
-
-      <g class="rd-result-task">
-        <rect x="-27" y="-27" width="54" height="54" rx="17" class="rd-result-tile"/>
-        <use href="#rd-icon-calendar" x="-15" y="-15" width="30" height="30"/>
-        <circle cx="18" cy="-18" r="9" class="rd-result-check-bg"/>
-        <use href="#rd-icon-check" x="12" y="-24" width="12" height="12"/>
-        <animateMotion dur="7.7s" repeatCount="indefinite"
-          keyTimes="0;0.55;0.72;1" keyPoints="0;0;1;1" calcMode="linear">
-          <mpath href="#rd-vdiga-out"/>
-        </animateMotion>
-        <animate attributeName="opacity" dur="7.7s" repeatCount="indefinite"
-          values="0;0;1;1;0;0" keyTimes="0;0.54;0.57;0.71;0.74;1"/>
-      </g>
-    </g>
-
-    <!-- PISHE sequence -->
-    <g class="rd-flow" data-flow="pishe">
-      <path id="rd-pishe-in" class="rd-live-route rd-live-route--input"
-            d="M25 310 C105 310 145 310 215 310"/>
-      <path id="rd-pishe-route" class="rd-live-route"
-            d="M260 310 C340 310 390 310 470 310"/>
-      <path id="rd-pishe-out" class="rd-live-route rd-live-route--output"
-            d="M545 310 C575 310 600 310 632 310"/>
-
-      <g class="rd-source-task">
-        <rect x="-27" y="-27" width="54" height="54" rx="17" class="rd-task-tile"/>
-        <use href="#rd-icon-document" x="-15" y="-15" width="30" height="30"/>
-        <animateMotion dur="7.7s" repeatCount="indefinite"
-          keyTimes="0;0.12;0.28;1" keyPoints="0;0;1;1" calcMode="linear">
-          <mpath href="#rd-pishe-in"/>
-        </animateMotion>
-        <animate attributeName="opacity" dur="7.7s" repeatCount="indefinite"
-          values="0;0;1;1;0;0" keyTimes="0;0.10;0.13;0.27;0.30;1"/>
+      <g class="rwm-flow is-active" data-rwm-flow="vdiga">
+        <path id="rwm-vdiga-in" class="rwm-route rwm-route--input" d="M26 280 C86 280 135 280 188 280"/>
+        <path id="rwm-vdiga-mid" class="rwm-route rwm-route--work" d="M240 270 C300 220 350 176 430 142"/>
+        <path id="rwm-vdiga-out" class="rwm-route rwm-route--output" d="M510 142 C555 145 590 165 632 192"/>
+        <g class="rwm-incoming"><rect x="-27" y="-27" width="54" height="54" rx="17" class="rwm-incoming-tile"/><use href="#rwm-phone" x="-15" y="-15" width="30" height="30"/><animateMotion dur="7.7s" repeatCount="indefinite" keyTimes="0;0.14;0.31;1" keyPoints="0;0;1;1" calcMode="linear"><mpath href="#rwm-vdiga-in"/></animateMotion><animate attributeName="opacity" dur="7.7s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.12;0.15;0.30;0.33;1"/></g>
+        <rect class="rwm-work-token" width="18" height="12" rx="3" x="-9" y="-6"><animateMotion dur="7.7s" repeatCount="indefinite" keyTimes="0;0.35;0.52;1" keyPoints="0;0;1;1" calcMode="linear"><mpath href="#rwm-vdiga-mid"/></animateMotion><animate attributeName="opacity" dur="7.7s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.34;0.37;0.51;0.54;1"/></rect>
+        <g class="rwm-result"><rect x="-28" y="-28" width="56" height="56" rx="18" class="rwm-result-tile"/><use href="#rwm-calendar" x="-15" y="-15" width="30" height="30"/><circle cx="18" cy="-18" r="9" class="rwm-result-check-bg"/><use href="#rwm-check" x="12" y="-24" width="12" height="12"/><animateMotion dur="7.7s" repeatCount="indefinite" keyTimes="0;0.60;0.79;1" keyPoints="0;0;1;1" calcMode="linear"><mpath href="#rwm-vdiga-out"/></animateMotion><animate attributeName="opacity" dur="7.7s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.59;0.62;0.78;0.81;1"/></g>
       </g>
 
-      <rect class="rd-work-token" width="18" height="12" rx="3" x="-9" y="-6">
-        <animateMotion dur="7.7s" repeatCount="indefinite"
-          keyTimes="0;0.32;0.48;1" keyPoints="0;0;1;1" calcMode="linear">
-          <mpath href="#rd-pishe-route"/>
-        </animateMotion>
-        <animate attributeName="opacity" dur="7.7s" repeatCount="indefinite"
-          values="0;0;1;1;0;0" keyTimes="0;0.31;0.34;0.47;0.50;1"/>
-      </rect>
-
-      <g class="rd-result-task">
-        <rect x="-27" y="-27" width="54" height="54" rx="17" class="rd-result-tile"/>
-        <use href="#rd-icon-browser" x="-15" y="-15" width="30" height="30"/>
-        <circle cx="18" cy="-18" r="9" class="rd-result-check-bg"/>
-        <use href="#rd-icon-check" x="12" y="-24" width="12" height="12"/>
-        <animateMotion dur="7.7s" repeatCount="indefinite"
-          keyTimes="0;0.55;0.72;1" keyPoints="0;0;1;1" calcMode="linear">
-          <mpath href="#rd-pishe-out"/>
-        </animateMotion>
-        <animate attributeName="opacity" dur="7.7s" repeatCount="indefinite"
-          values="0;0;1;1;0;0" keyTimes="0;0.54;0.57;0.71;0.74;1"/>
-      </g>
-    </g>
-
-    <!-- POMAGA sequence -->
-    <g class="rd-flow" data-flow="pomaga">
-      <path id="rd-pomaga-in" class="rd-live-route rd-live-route--input"
-            d="M25 310 C105 310 145 310 215 310"/>
-      <path id="rd-pomaga-route" class="rd-live-route"
-            d="M255 322 C322 365 362 415 430 465"/>
-      <path id="rd-pomaga-out" class="rd-live-route rd-live-route--output"
-            d="M518 465 C560 458 592 442 630 420"/>
-
-      <g class="rd-source-task">
-        <rect x="-27" y="-27" width="54" height="54" rx="17" class="rd-task-tile"/>
-        <use href="#rd-icon-mail" x="-15" y="-15" width="30" height="30"/>
-        <animateMotion dur="7.7s" repeatCount="indefinite"
-          keyTimes="0;0.12;0.28;1" keyPoints="0;0;1;1" calcMode="linear">
-          <mpath href="#rd-pomaga-in"/>
-        </animateMotion>
-        <animate attributeName="opacity" dur="7.7s" repeatCount="indefinite"
-          values="0;0;1;1;0;0" keyTimes="0;0.10;0.13;0.27;0.30;1"/>
+      <g class="rwm-flow" data-rwm-flow="pishe">
+        <path id="rwm-pishe-in" class="rwm-route rwm-route--input" d="M26 280 C86 280 135 280 188 280"/>
+        <path id="rwm-pishe-mid" class="rwm-route rwm-route--work" d="M240 280 C312 280 370 280 448 280"/>
+        <path id="rwm-pishe-out" class="rwm-route rwm-route--output" d="M528 280 C566 280 600 280 634 280"/>
+        <g class="rwm-incoming"><rect x="-27" y="-27" width="54" height="54" rx="17" class="rwm-incoming-tile"/><use href="#rwm-document" x="-15" y="-15" width="30" height="30"/><animateMotion dur="7.7s" repeatCount="indefinite" keyTimes="0;0.14;0.31;1" keyPoints="0;0;1;1" calcMode="linear"><mpath href="#rwm-pishe-in"/></animateMotion><animate attributeName="opacity" dur="7.7s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.12;0.15;0.30;0.33;1"/></g>
+        <rect class="rwm-work-token" width="18" height="12" rx="3" x="-9" y="-6"><animateMotion dur="7.7s" repeatCount="indefinite" keyTimes="0;0.35;0.52;1" keyPoints="0;0;1;1" calcMode="linear"><mpath href="#rwm-pishe-mid"/></animateMotion><animate attributeName="opacity" dur="7.7s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.34;0.37;0.51;0.54;1"/></rect>
+        <g class="rwm-result"><rect x="-28" y="-28" width="56" height="56" rx="18" class="rwm-result-tile"/><use href="#rwm-browser" x="-15" y="-15" width="30" height="30"/><circle cx="18" cy="-18" r="9" class="rwm-result-check-bg"/><use href="#rwm-check" x="12" y="-24" width="12" height="12"/><animateMotion dur="7.7s" repeatCount="indefinite" keyTimes="0;0.60;0.79;1" keyPoints="0;0;1;1" calcMode="linear"><mpath href="#rwm-pishe-out"/></animateMotion><animate attributeName="opacity" dur="7.7s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.59;0.62;0.78;0.81;1"/></g>
       </g>
 
-      <rect class="rd-work-token" width="18" height="12" rx="3" x="-9" y="-6">
-        <animateMotion dur="7.7s" repeatCount="indefinite"
-          keyTimes="0;0.32;0.48;1" keyPoints="0;0;1;1" calcMode="linear">
-          <mpath href="#rd-pomaga-route"/>
-        </animateMotion>
-        <animate attributeName="opacity" dur="7.7s" repeatCount="indefinite"
-          values="0;0;1;1;0;0" keyTimes="0;0.31;0.34;0.47;0.50;1"/>
-      </rect>
-
-      <g class="rd-result-task">
-        <rect x="-27" y="-27" width="54" height="54" rx="17" class="rd-result-tile"/>
-        <use href="#rd-icon-task" x="-15" y="-15" width="30" height="30"/>
-        <circle cx="18" cy="-18" r="9" class="rd-result-check-bg"/>
-        <use href="#rd-icon-check" x="12" y="-24" width="12" height="12"/>
-        <animateMotion dur="7.7s" repeatCount="indefinite"
-          keyTimes="0;0.55;0.72;1" keyPoints="0;0;1;1" calcMode="linear">
-          <mpath href="#rd-pomaga-out"/>
-        </animateMotion>
-        <animate attributeName="opacity" dur="7.7s" repeatCount="indefinite"
-          values="0;0;1;1;0;0" keyTimes="0;0.54;0.57;0.71;0.74;1"/>
+      <g class="rwm-flow" data-rwm-flow="pomaga">
+        <path id="rwm-pomaga-in" class="rwm-route rwm-route--input" d="M26 280 C86 280 135 280 188 280"/>
+        <path id="rwm-pomaga-mid" class="rwm-route rwm-route--work" d="M240 290 C300 340 350 384 430 418"/>
+        <path id="rwm-pomaga-out" class="rwm-route rwm-route--output" d="M510 418 C555 414 590 396 632 370"/>
+        <g class="rwm-incoming"><rect x="-27" y="-27" width="54" height="54" rx="17" class="rwm-incoming-tile"/><use href="#rwm-mail" x="-15" y="-15" width="30" height="30"/><animateMotion dur="7.7s" repeatCount="indefinite" keyTimes="0;0.14;0.31;1" keyPoints="0;0;1;1" calcMode="linear"><mpath href="#rwm-pomaga-in"/></animateMotion><animate attributeName="opacity" dur="7.7s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.12;0.15;0.30;0.33;1"/></g>
+        <rect class="rwm-work-token" width="18" height="12" rx="3" x="-9" y="-6"><animateMotion dur="7.7s" repeatCount="indefinite" keyTimes="0;0.35;0.52;1" keyPoints="0;0;1;1" calcMode="linear"><mpath href="#rwm-pomaga-mid"/></animateMotion><animate attributeName="opacity" dur="7.7s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.34;0.37;0.51;0.54;1"/></rect>
+        <g class="rwm-result"><rect x="-28" y="-28" width="56" height="56" rx="18" class="rwm-result-tile"/><use href="#rwm-task" x="-15" y="-15" width="30" height="30"/><circle cx="18" cy="-18" r="9" class="rwm-result-check-bg"/><use href="#rwm-check" x="12" y="-24" width="12" height="12"/><animateMotion dur="7.7s" repeatCount="indefinite" keyTimes="0;0.60;0.79;1" keyPoints="0;0;1;1" calcMode="linear"><mpath href="#rwm-pomaga-out"/></animateMotion><animate attributeName="opacity" dur="7.7s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.59;0.62;0.78;0.81;1"/></g>
       </g>
-    </g>
 
-    <!-- A short route pulse gives the feeling of a decision, not a screensaver. -->
-    <g class="rd-scan-pulse">
-      <circle cx="235" cy="310" r="12"/>
-      <circle cx="235" cy="310" r="24"/>
-    </g>
-  </svg>
+      <g class="rwm-process-pulse" transform="translate(215 280)"><circle r="18"/><circle r="32"/></g>
+    </svg>
+  </div>
+
+  <button class="rwm-station rwm-station--vdiga is-active" type="button" data-rwm-worker="vdiga" aria-pressed="true" aria-label="Покажи Vdiga">
+    <span class="rwm-station__icon" aria-hidden="true"><svg viewBox="-24 -24 48 48"><path d="M-11 -14 C-7 -17 -3 -13 -1 -8 L2 -3 C4 0 3 4 0 6 L-3 8 C2 16 7 20 14 23 L16 19 C18 16 21 16 24 18 L28 21 C32 25 31 29 28 32 C24 36 18 36 12 33 C0 28 -11 17 -17 6 C-21 -3 -18 -10 -11 -14 Z" transform="scale(.55) translate(-8 -8)"/></svg></span><img src="/assets/brand/work-machine-v4/vdiga.webp" width="180" height="55" alt="">
+  </button>
+  <button class="rwm-station rwm-station--pishe" type="button" data-rwm-worker="pishe" aria-pressed="false" aria-label="Покажи Pishe">
+    <span class="rwm-station__icon" aria-hidden="true"><svg viewBox="-24 -24 48 48"><path d="M-11 -16 H5 L13 -8 V16 H-11 Z M5 -16 V-8 H13 M-6 -2 H7 M-6 4 H7 M-6 10 H4"/></svg></span><img src="/assets/brand/work-machine-v4/pishe.webp" width="180" height="55" alt="">
+  </button>
+  <button class="rwm-station rwm-station--pomaga" type="button" data-rwm-worker="pomaga" aria-pressed="false" aria-label="Покажи Pomaga">
+    <span class="rwm-station__icon" aria-hidden="true"><svg viewBox="-24 -24 48 48"><rect x="-15" y="-11" width="30" height="22" rx="5"/><path d="M-13 -8 L0 2 L13 -8"/></svg></span><img src="/assets/brand/work-machine-v4/pomaga.webp" width="180" height="55" alt="">
+  </button>
+
+  <div class="rwm-mobile-switcher" role="group" aria-label="AI служители">
+    <button type="button" data-rwm-mobile-worker="vdiga" class="is-active" aria-pressed="true">Vdiga</button>
+    <button type="button" data-rwm-mobile-worker="pishe" aria-pressed="false">Pishe</button>
+    <button type="button" data-rwm-mobile-worker="pomaga" aria-pressed="false">Pomaga</button>
+  </div>
 </div>

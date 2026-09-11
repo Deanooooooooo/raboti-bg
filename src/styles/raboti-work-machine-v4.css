@@ -1,0 +1,418 @@
+.raboti-work-machine {
+  --rwm-blue: #2046ff;
+  position: relative;
+  width: min(100%, 690px);
+  min-height: 590px;
+  margin-inline: auto;
+  border-radius: 56px;
+  background:
+    radial-gradient(
+      circle at 40% 48%,
+      rgba(32, 70, 255, 0.055),
+      transparent 26%
+    ),
+    radial-gradient(
+      circle at 92% 12%,
+      rgba(82, 120, 255, 0.075),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 86% 88%,
+      rgba(82, 120, 255, 0.045),
+      transparent 26%
+    );
+  overflow: hidden;
+  contain: layout paint;
+}
+.raboti-work-machine__canvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.rwm-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.rwm-ambient {
+  fill: none;
+  stroke: rgba(70, 105, 220, 0.055);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+.rwm-dispatcher-halo {
+  fill: none;
+  stroke: rgba(32, 70, 255, 0.1);
+  vector-effect: non-scaling-stroke;
+}
+.rwm-dispatcher-halo--outer {
+  stroke-dasharray: 3 7;
+}
+.rwm-dispatcher-halo--inner {
+  stroke-width: 1.2;
+}
+.rwm-dispatcher-block {
+  fill: var(--rwm-blue);
+  filter: url(#rwm-glow);
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: transform 420ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.raboti-work-machine[data-worker="vdiga"] .rwm-dispatcher-block {
+  transform: rotate(-9deg);
+}
+.raboti-work-machine[data-worker="pishe"] .rwm-dispatcher-block {
+  transform: rotate(0);
+}
+.raboti-work-machine[data-worker="pomaga"] .rwm-dispatcher-block {
+  transform: rotate(9deg);
+}
+.rwm-flow {
+  opacity: 0;
+  visibility: hidden;
+}
+.rwm-flow.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+.rwm-route {
+  fill: none;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+  opacity: 0;
+  stroke-dasharray: 10 12;
+  animation: rwm-route-wake 7.7s ease-in-out infinite;
+}
+.rwm-route--input {
+  stroke: url(#rwm-input-route);
+  stroke-width: 1.35;
+}
+.rwm-route--work {
+  stroke: rgba(32, 70, 255, 0.52);
+  stroke-width: 1.65;
+}
+.rwm-route--output {
+  stroke: url(#rwm-output-route);
+  stroke-width: 1.5;
+}
+.rwm-icon-line {
+  fill: none;
+  stroke: rgba(75, 98, 162, 0.64);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+.rwm-check-line {
+  fill: none;
+  stroke: #fff;
+  stroke-width: 3.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+.rwm-incoming-tile {
+  fill: rgba(255, 255, 255, 0.74);
+  stroke: rgba(100, 125, 195, 0.14);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+}
+.rwm-result-tile {
+  fill: rgba(255, 255, 255, 0.98);
+  stroke: rgba(32, 70, 255, 0.22);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+  filter: url(#rwm-soft-shadow);
+}
+.rwm-result-check-bg {
+  fill: var(--rwm-blue);
+}
+.rwm-work-token {
+  fill: var(--rwm-blue);
+  opacity: 0;
+  filter: url(#rwm-glow);
+}
+.rwm-incoming,
+.rwm-result {
+  opacity: 0;
+}
+.rwm-process-pulse circle {
+  fill: none;
+  stroke: rgba(32, 70, 255, 0.26);
+  vector-effect: non-scaling-stroke;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.rwm-process-pulse circle:first-child {
+  stroke-width: 1.2;
+  animation: rwm-pulse-a 7.7s ease-out infinite;
+}
+.rwm-process-pulse circle:last-child {
+  stroke-width: 1;
+  animation: rwm-pulse-b 7.7s ease-out infinite;
+}
+.rwm-station {
+  position: absolute;
+  right: 6%;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 250px;
+  min-height: 82px;
+  padding: 14px 18px;
+  border: 1px solid rgba(100, 125, 195, 0.1);
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.44);
+  box-shadow: 0 12px 34px rgba(37, 57, 104, 0.045);
+  backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
+  opacity: 0.36;
+  transform: translateY(0) scale(0.97);
+  cursor: pointer;
+  appearance: none;
+  transition:
+    opacity 220ms ease,
+    transform 280ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    background-color 220ms ease;
+}
+.rwm-station--vdiga {
+  top: 15%;
+}
+.rwm-station--pishe {
+  top: 43%;
+}
+.rwm-station--pomaga {
+  top: 71%;
+}
+.rwm-station img {
+  display: block;
+  width: auto;
+  height: 30px;
+  max-width: 164px;
+  object-fit: contain;
+}
+.rwm-station__icon {
+  display: grid;
+  place-items: center;
+  flex: 0 0 34px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(236, 242, 255, 0.9);
+  color: #6e82bc;
+}
+.rwm-station__icon svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.rwm-station:hover,
+.rwm-station:focus-visible {
+  opacity: 0.76;
+  transform: translateY(-2px) scale(0.99);
+  border-color: rgba(32, 70, 255, 0.22);
+}
+.rwm-station:focus-visible,
+.rwm-mobile-switcher button:focus-visible {
+  outline: 3px solid #6e91ff;
+  outline-offset: 5px;
+}
+.rwm-station.is-active {
+  opacity: 1;
+  transform: translateY(-4px) scale(1.035);
+  border-color: rgba(32, 70, 255, 0.3);
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow:
+    0 18px 42px rgba(37, 57, 104, 0.08),
+    0 0 0 5px rgba(32, 70, 255, 0.025);
+}
+.rwm-station.is-active .rwm-station__icon {
+  color: var(--rwm-blue);
+  background: rgba(232, 238, 255, 0.98);
+}
+.rwm-mobile-switcher {
+  display: none;
+}
+.raboti-work-machine.is-motion-paused .rwm-route,
+.raboti-work-machine.is-motion-paused .rwm-process-pulse circle {
+  animation-play-state: paused;
+}
+@keyframes rwm-route-wake {
+  0%,
+  31% {
+    opacity: 0;
+    stroke-dashoffset: 28;
+  }
+  36% {
+    opacity: 0.72;
+  }
+  53% {
+    opacity: 0.48;
+    stroke-dashoffset: 0;
+  }
+  58%,
+  100% {
+    opacity: 0;
+    stroke-dashoffset: -22;
+  }
+}
+@keyframes rwm-pulse-a {
+  0%,
+  30%,
+  39%,
+  100% {
+    opacity: 0;
+    transform: scale(0.75);
+  }
+  33% {
+    opacity: 0.34;
+  }
+  38% {
+    opacity: 0;
+    transform: scale(1.9);
+  }
+}
+@keyframes rwm-pulse-b {
+  0%,
+  31%,
+  42%,
+  100% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  34% {
+    opacity: 0.18;
+  }
+  41% {
+    opacity: 0;
+    transform: scale(2.15);
+  }
+}
+@media (max-width: 1100px) {
+  .raboti-work-machine {
+    width: min(100%, 610px);
+    min-height: 540px;
+  }
+  .rwm-station {
+    right: 3%;
+    width: 238px;
+    min-height: 76px;
+  }
+  .rwm-station img {
+    width: auto;
+    height: 28px;
+    max-width: 153px;
+  }
+}
+@media (max-width: 767px) {
+  .raboti-work-machine {
+    width: min(100%, 520px);
+    min-height: 470px;
+    margin-top: 22px;
+    border-radius: 34px;
+    background:
+      radial-gradient(
+        circle at 50% 46%,
+        rgba(32, 70, 255, 0.055),
+        transparent 30%
+      ),
+      radial-gradient(
+        circle at 92% 10%,
+        rgba(82, 120, 255, 0.055),
+        transparent 28%
+      );
+  }
+  .raboti-work-machine__canvas {
+    inset: 28px 0 78px;
+  }
+  .rwm-svg {
+    transform: scale(0.94);
+    transform-origin: center;
+  }
+  .rwm-station {
+    display: none;
+    top: 50%;
+    right: 6%;
+    width: 190px;
+    min-height: 76px;
+    justify-content: center;
+    transform: translateY(-50%);
+  }
+  .rwm-station__icon {
+    display: none;
+  }
+  .rwm-station.is-active {
+    display: flex;
+    transform: translateY(-50%) scale(1.02);
+  }
+  .rwm-mobile-switcher {
+    position: absolute;
+    left: 50%;
+    bottom: 18px;
+    z-index: 4;
+    display: flex;
+    gap: 4px;
+    padding: 5px;
+    border-radius: 999px;
+    background: rgba(235, 241, 252, 0.88);
+    transform: translateX(-50%);
+  }
+  .rwm-mobile-switcher button {
+    min-height: 44px;
+    border: 0;
+    border-radius: 999px;
+    padding: 9px 14px;
+    background: transparent;
+    color: #6c7890;
+    font: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    appearance: none;
+  }
+  .rwm-mobile-switcher button.is-active {
+    background: #fff;
+    color: var(--rwm-blue);
+    box-shadow: 0 5px 18px rgba(40, 60, 110, 0.09);
+  }
+  .rwm-ambient {
+    display: none;
+  }
+}
+@media (max-width: 420px) {
+  .raboti-work-machine {
+    min-height: 430px;
+  }
+  .rwm-station {
+    right: 4%;
+    width: 176px;
+  }
+  .rwm-station img {
+    width: auto;
+    height: 25.5px;
+    max-width: 139px;
+  }
+  .rwm-mobile-switcher button {
+    padding-inline: 11px;
+    font-size: 13px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .rwm-flow,
+  .rwm-process-pulse {
+    display: none;
+  }
+  .rwm-dispatcher-block,
+  .rwm-station {
+    transition: none;
+  }
+  .rwm-dispatcher-block {
+    filter: none;
+  }
+}
