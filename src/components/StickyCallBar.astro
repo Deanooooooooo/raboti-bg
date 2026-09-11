@@ -1,8 +1,9 @@
 ---
 import { site } from "../data/site";
+const isHomepage = Astro.url.pathname === "/" || Astro.url.pathname === import.meta.env.BASE_URL;
 ---
 <div class="sticky-call-bar" data-sticky-call>
-  <a href={`tel:${site.salesPhoneHref}`} data-track="tel">Обади се за демо <span>{site.salesPhone}</span></a>
+  <a href={`tel:${site.salesPhoneHref}`} data-track="tel">{isHomepage ? "Разговор с екипа" : "Обади се за демо"} <span>{site.salesPhone}</span></a>
 </div>
 <script>
   const hero = document.querySelector("[data-hero]");

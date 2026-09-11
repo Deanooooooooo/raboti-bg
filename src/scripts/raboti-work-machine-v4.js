@@ -1,115 +1,117 @@
 (() => {
   const machine = document.querySelector("[data-raboti-work-machine]");
   if (!machine) return;
+
   const svgs = [...machine.querySelectorAll(".rwm-svg")];
   const flows = [...machine.querySelectorAll("[data-rwm-flow]")];
   const stations = [...machine.querySelectorAll("[data-rwm-worker]")];
   const mobile = [...machine.querySelectorAll("[data-rwm-mobile-worker]")];
+  const toggle = machine.querySelector("[data-rwm-motion-toggle]");
+  const toggleLabel = machine.querySelector("[data-rwm-motion-label]");
   const reduced = matchMedia("(prefers-reduced-motion: reduce)");
-  const hover = matchMedia("(hover: hover)");
-  const narrow = matchMedia("(max-width: 767px)");
   const workers = ["vdiga", "pishe", "pomaga"];
-  const cycleMs = 7700;
-  let index = 0,
-    timer = null,
-    visible = true,
-    holdUntil = 0;
-  const valid = (w) => workers.includes(w);
-  const pause = () => {
-    const paused = document.hidden || !visible || reduced.matches;
+  const resultCopy = {
+    vdiga: {
+      request: "Клиент се обажда за час",
+      title: "Часът е в календара ви.",
+      detail: "Vdiga проверява кога има свободно място и записва клиента. Екипът получава обобщение на разговора.",
+      icon: "result-appointment.svg",
+    },
+    pishe: {
+      request: "Ново работно време за сайта",
+      title: "Сайтът показва новото работно време.",
+      detail: "Pishe публикува предварително одобрената промяна. Вие виждате какво е обновено.",
+      icon: "result-website.svg",
+    },
+    pomaga: {
+      request: "Ново запитване пристига по имейл",
+      title: "Запитването е при отговорния колега.",
+      detail: "Pomaga добавя данните в CRM и възлага задача на отговорния колега. Към задачата е приложена информацията от имейла.",
+      icon: "result-assignment.svg",
+    },
+  };
+  let visible = true;
+  let userPaused = false;
+
+  const shouldPause = () => document.hidden || !visible || reduced.matches || userPaused;
+
+  const applyPause = () => {
+    const paused = shouldPause();
     machine.classList.toggle("is-motion-paused", paused);
     svgs.forEach((svg) => {
       if (typeof svg.pauseAnimations !== "function") return;
       paused ? svg.pauseAnimations() : svg.unpauseAnimations();
     });
+    if (toggle) toggle.setAttribute("aria-pressed", String(userPaused));
+    if (toggleLabel) toggleLabel.textContent = userPaused ? "Продължаване на анимацията" : "Пауза на анимацията";
   };
+
   const restart = () => {
-    if (reduced.matches) return;
-    svgs.forEach((svg) => {
-      if (typeof svg.setCurrentTime === "function") svg.setCurrentTime(0);
-    });
-    pause();
+    if (!reduced.matches) {
+      svgs.forEach((svg) => {
+        if (typeof svg.setCurrentTime === "function") svg.setCurrentTime(0);
+      });
+    }
+    applyPause();
   };
-  const sync = (w) => {
-    stations.forEach((b) => {
-      const a = b.dataset.rwmWorker === w;
-      b.classList.toggle("is-active", a);
-      b.setAttribute("aria-pressed", a ? "true" : "false");
-    });
-    mobile.forEach((b) => {
-      const active = b.dataset.rwmMobileWorker === w;
-      b.classList.toggle("is-active", active);
-      b.setAttribute("aria-pressed", active ? "true" : "false");
+
+  const updateResult = (worker) => {
+    const result = machine.closest(".rh-demo")?.querySelector("[data-rwm-result]");
+    const data = resultCopy[worker];
+    if (!result || !data) return;
+    const request = result.querySelector("[data-rwm-result-request]");
+    const title = result.querySelector("[data-rwm-result-title]");
+    const detail = result.querySelector("[data-rwm-result-detail]");
+    const icon = result.querySelector("[data-rwm-result-icon]");
+    result.classList.add("is-changing");
+    requestAnimationFrame(() => {
+      if (request) request.textContent = data.request;
+      if (title) title.textContent = data.title;
+      if (detail) detail.textContent = data.detail;
+      if (icon) icon.src = icon.src.replace(/result-[^/]+\.svg(?:\?.*)?$/, data.icon);
+      result.classList.remove("is-changing");
     });
   };
-  const setWorker = (w, { holdMs = 0 } = {}) => {
-    if (!valid(w)) return;
-    index = workers.indexOf(w);
-    machine.dataset.worker = w;
-    flows.forEach((f) =>
-      f.classList.toggle("is-active", f.dataset.rwmFlow === w),
-    );
-    sync(w);
-    if (holdMs > 0) holdUntil = Date.now() + holdMs;
+
+  const sync = (worker) => {
+    stations.forEach((button) => {
+      const active = button.dataset.rwmWorker === worker;
+      button.classList.toggle("is-active", active);
+      button.setAttribute("aria-pressed", String(active));
+    });
+    mobile.forEach((button) => {
+      const active = button.dataset.rwmMobileWorker === worker;
+      button.classList.toggle("is-active", active);
+      button.setAttribute("aria-pressed", String(active));
+    });
+  };
+
+  const setWorker = (worker) => {
+    if (!workers.includes(worker)) return;
+    machine.dataset.worker = worker;
+    flows.forEach((flow) => flow.classList.toggle("is-active", flow.dataset.rwmFlow === worker));
+    sync(worker);
+    updateResult(worker);
     restart();
   };
-  const schedule = () => {
-    clearTimeout(timer);
-    if (reduced.matches || narrow.matches) return;
-    timer = setTimeout(() => {
-      if (Date.now() < holdUntil) {
-        schedule();
-        return;
-      }
-      index = (index + 1) % workers.length;
-      setWorker(workers[index]);
-      schedule();
-    }, cycleMs);
-  };
-  stations.forEach((b) => {
-    b.addEventListener("click", () => {
-      setWorker(b.dataset.rwmWorker, { holdMs: 18000 });
-      schedule();
-    });
-    b.addEventListener("pointerenter", () => {
-      if (!hover.matches) return;
-      setWorker(b.dataset.rwmWorker, { holdMs: 6200 });
-    });
+
+  stations.forEach((button) => button.addEventListener("click", () => setWorker(button.dataset.rwmWorker)));
+  mobile.forEach((button) => button.addEventListener("click", () => setWorker(button.dataset.rwmMobileWorker)));
+  toggle?.addEventListener("click", () => {
+    userPaused = !userPaused;
+    applyPause();
   });
-  mobile.forEach((b) =>
-    b.addEventListener("click", () => {
-      setWorker(b.dataset.rwmMobileWorker);
-    }),
-  );
-  const io = new IntersectionObserver(
-    ([e]) => {
-      visible = e.isIntersecting && e.intersectionRatio > 0.08;
-      pause();
-    },
-    { threshold: [0, 0.08, 0.25] },
-  );
-  io.observe(machine);
-  document.addEventListener("visibilitychange", pause);
-  if (typeof reduced.addEventListener === "function")
-    reduced.addEventListener("change", () => {
-      pause();
-      if (reduced.matches) clearTimeout(timer);
-      else {
-        restart();
-        schedule();
-      }
-    });
-  if (typeof narrow.addEventListener === "function")
-    narrow.addEventListener("change", () => {
-      clearTimeout(timer);
-      schedule();
-    });
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting && entry.intersectionRatio > 0.08;
+      applyPause();
+    }, { threshold: [0, 0.08, 0.25] });
+    observer.observe(machine);
+  }
+  document.addEventListener("visibilitychange", applyPause);
+  reduced.addEventListener?.("change", applyPause);
+
   setWorker("vdiga");
-  schedule();
-  window.RabotiWorkMachine = {
-    setWorker(w) {
-      setWorker(w, { holdMs: 18000 });
-      schedule();
-    },
-  };
+  window.RabotiWorkMachine = { setWorker };
 })();

@@ -1,5 +1,6 @@
 ---
 import { site } from "../data/site";
+const isHomepage = Astro.url.pathname === "/" || Astro.url.pathname === import.meta.env.BASE_URL;
 ---
 
 <header class="site-header">
@@ -11,9 +12,9 @@ import { site } from "../data/site";
       {site.nav.map((item) => <a href={item.href} aria-current={Astro.url.pathname === item.href ? "page" : undefined}>{item.label}</a>)}
     </nav>
     <div class="header-actions">
-      <a class="button button--small header-cta" href="/kontakti/">
-        <span class="header-cta__full">Наемете AI служител</span>
-        <span class="header-cta__short" aria-hidden="true">Наемете</span>
+      <a class="button button--small header-cta" href={isHomepage ? "#naemi" : "/kontakti/"}>
+        <span class="header-cta__full">{isHomepage ? "Запитване" : "Наемете AI служител"}</span>
+        <span class="header-cta__short" aria-hidden="true">{isHomepage ? "Запитване" : "Наемете"}</span>
       </a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
         <span class="sr-only">Отвори менюто</span>
