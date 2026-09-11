@@ -4,12 +4,12 @@ import { site } from "../data/site";
 
 <section class="gloria-lead pishe-lead" id="zayavka" aria-labelledby="pishe-lead-title">
   <div class="gloria-lead__copy">
-    <p>Постоянна грижа за сайта ви</p>
+    <p>Нов сайт или постоянна грижа</p>
     <h2 id="pishe-lead-title">Нека видим какво трябва да поеме Pishe.</h2>
-    <p>Разкажете какво искате да поемем: автоматични актуализации, съдържание или по-добра откриваемост онлайн. Ще прегледаме сайта и ще предложим подходящ обхват. Ако нямате сайт, ще обсъдим и изграждането му.</p>
+    <p>Изберете фирмен сайт за €197 еднократно, поддръжка на сайт за €297 месечно или поддръжка на онлайн магазин за €497 месечно.</p>
     <ol>
       <li><span>01</span><div><strong>Разглеждаме сайта и задачите</strong><small>Актуализации, съдържание, откриване в Google и AI отговорите или нов сайт.</small></div></li>
-      <li><span>02</span><div><strong>Уточняваме какво поема Pishe</strong><small>Кои промени върши всеки месец и кое се плаща като отделен проект.</small></div></li>
+      <li><span>02</span><div><strong>Уточняваме какво поема Pishe</strong><small>Кое влиза в еднократното изграждане и кое е постоянна месечна поддръжка.</small></div></li>
       <li><span>03</span><div><strong>Вие решавате</strong><small>Няма плащане или абонамент преди да одобрите предложението.</small></div></li>
     </ol>
   </div>
@@ -26,7 +26,7 @@ import { site } from "../data/site";
       <label><span>Имейл</span><input type="email" name="email" autocomplete="email" placeholder="name@business.bg" required /></label>
       <fieldset class="site-choice gloria-lead__wide"><legend>Имате ли сайт?</legend><label><input type="radio" name="siteStatus" value="existing" checked /> Имам сайт</label><label><input type="radio" name="siteStatus" value="new" /> Нямам сайт</label></fieldset>
       <label class="gloria-lead__wide" data-website-field><span>Адрес на сайта <small>ако имате</small></span><input type="url" name="currentWebsite" inputmode="url" placeholder="https://vashiyat-site.bg" /></label>
-      <label class="gloria-lead__wide"><span>Какво трябва да поеме Pishe?</span><select name="primaryNeed" required><option value="" selected disabled>Изберете най-близкото</option><option>Автоматични актуализации на сайта</option><option>Съдържание и откриваемост в Google и AI</option><option>Каталог, продукти и цени</option><option>Изграждане на нов сайт</option><option>Не съм сигурен и искам преглед</option></select></label>
+      <label class="gloria-lead__wide"><span>Какво трябва да поеме Pishe?</span><select name="primaryNeed" required><option value="" selected disabled>Изберете най-близкото</option><option>Изграждане на фирмен сайт</option><option>Поддръжка на сайт, съдържание и SEO/GEO</option><option>Поддръжка на онлайн магазин</option><option>Не съм сигурен и искам преглед</option></select></label>
       <label class="gloria-lead__wide"><span>Какво все остава за после?</span><textarea name="task" rows="4" required placeholder="Например: цените са стари, липсват три услуги и няма кой да качва новите продукти всяка седмица"></textarea></label>
     </div>
     <label class="gloria-lead__consent"><input type="checkbox" name="consent" value="yes" required /><span>Съгласен/на съм Raboti да се свърже с мен за заявката. Прочетох <a href="/politika-za-poveritelnost/">политиката за поверителност</a>.</span></label>
@@ -55,8 +55,8 @@ import { site } from "../data/site";
     if (selectedPlan) selectedPlan.value = plan;
     if (plan === 'Нов сайт') { const input = form?.querySelector<HTMLInputElement>('[name="siteStatus"][value="new"]'); if(input)input.checked=true;updateSiteChoice(); }
     const need = form?.querySelector<HTMLSelectElement>('[name="primaryNeed"]');
-    if(need) need.value = plan === 'Нов сайт' ? 'Изграждане на нов сайт' : plan === 'Актуализации' ? 'Автоматични актуализации на сайта' : plan === 'Каталог и съдържание' ? 'Каталог, продукти и цени' : 'Съдържание и откриваемост в Google и AI';
-    if (formTitle) formTitle.textContent = plan === "Нов сайт" ? "Разкажете ни за новия сайт" : `План „${plan}“`;
+    if(need) need.value = plan === 'Изграждане на уебсайт' ? 'Изграждане на фирмен сайт' : plan === 'Поддръжка на онлайн магазин' ? 'Поддръжка на онлайн магазин' : 'Поддръжка на сайт, съдържание и SEO/GEO';
+    if (formTitle) formTitle.textContent = plan === "Изграждане на уебсайт" ? "Разкажете ни за новия сайт" : `План „${plan}“`;
   }));
   form?.addEventListener("submit", async (event) => {
     event.preventDefault();

@@ -26,7 +26,7 @@ const href = data.status === "live" ? `/sluzhiteli/${data.slug}/` : "/kontakti/"
   {!compact && <p class="agent-card__summary">{data.summary}</p>}
   <div class="agent-card__footer">
     <div>
-      <span class="price-label">{data.status === "live" ? "месечна цена" : "позицията"}</span>
+      <span class="price-label">{data.status === "live" ? (data.slug === "pishe" ? "изграждане на сайт" : "месечна цена") : "позицията"}</span>
       <strong>{data.priceLabel}</strong>
     </div>
     {data.status === "live" ? (

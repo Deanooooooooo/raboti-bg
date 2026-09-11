@@ -16,9 +16,10 @@ const employees = [
     answer: "Vdiga приема входящите обаждания, отговаря с одобрената от вас информация и записва часове или заявки.",
     measure: "Цената зависи от минутите входящи разговори.",
     plans: [
-      { name: "Старт", price: "97 €", detail: "120 минути месечно" },
-      { name: "Бизнес", price: "297 €", detail: "500 минути месечно" },
-      { name: "Над 500 минути", price: "По оферта", detail: "За повече линии или обекти" },
+      { name: "Старт", price: "97 €", detail: "120 минути месечно", period: "/месец" },
+      { name: "Бизнес", price: "197 €", detail: "250 минути месечно", period: "/месец" },
+      { name: "Разширен", price: "297 €", detail: "500 минути месечно", period: "/месец" },
+      { name: "Над 500 минути", price: "По оферта", detail: "За повече линии или обекти", period: "" },
     ],
     href: "/sluzhiteli/vdiga/#planove",
     cta: "Вижте плановете на Vdiga",
@@ -28,13 +29,13 @@ const employees = [
     role: "AI уеб мениджър",
     accent: "#a84629",
     soft: "#ffebe3",
-    question: "Цените и услугите на сайта ви остават стари?",
-    answer: "Pishe обновява сайта, пише нови страници и поддържа каталога. Важните промени се публикуват след ваше одобрение.",
-    measure: "Избирате според това колко работа се трупа по сайта.",
+    question: "Трябва ви нов сайт или постоянна грижа за сегашния?",
+    answer: "Pishe изгражда фирмени сайтове и поддържа сайтове и онлайн магазини със съдържание, SEO, GEO и чатбот.",
+    measure: "Избирате еднократно изграждане или месечна поддръжка.",
     plans: [
-      { name: "Актуализации", price: "197 €", detail: "Цени, услуги, оферти и контакти" },
-      { name: "Съдържание и SEO", price: "297 €", detail: "Нова или пренаписана страница всяка седмица" },
-      { name: "Каталог и съдържание", price: "597 €", detail: "За много продукти и постоянни промени" },
+      { name: "Изграждане на уебсайт", price: "197 €", detail: "Цени, услуги, оферти и контакти", period: "еднократно" },
+      { name: "Поддръжка на уебсайт", price: "297 €", detail: "Съдържание, SEO/GEO, чатбот и Google Maps", period: "/месец" },
+      { name: "Поддръжка на онлайн магазин", price: "497 €", detail: "Каталог, SEO описания, съдържание и чатбот", period: "/месец" },
     ],
     href: "/sluzhiteli/pishe/#planove",
     cta: "Вижте плановете на Pishe",
@@ -44,13 +45,13 @@ const employees = [
     role: "AI оперативен асистент",
     accent: "#6b56c9",
     soft: "#ece8ff",
-    question: "Някой преписва едни и същи данни всеки ден?",
-    answer: "Pomaga прехвърля договорените данни между имейл, CRM, таблици и задачи. Спира за човек преди плащане или друга необратима стъпка.",
-    measure: "Цената зависи от броя стъпки и системи в работата.",
+    question: "Колко различни роли искате да свалите от екипа си?",
+    answer: "Pomaga ви дава отделни локални AI агенти за имейл, CRM, съдържание, таблици и проучване на потенциални клиенти.",
+    measure: "Цената зависи от броя агенти, процесите и програмите, с които работят.",
     plans: [
-      { name: "Една задача", price: "297 €", detail: "Един повтарящ се път от начало до край" },
-      { name: "Работен поток", price: "597 €", detail: "Няколко свързани стъпки и хора" },
-      { name: "Операции", price: "По оферта", detail: "За повече процеси, обем или нестандартни системи" },
+      { name: "1 локален AI агент", price: "297 €", detail: "Една роля за един повтарящ се процес", period: "/месец" },
+      { name: "3 локални AI агента", price: "597 €", detail: "До три роли за свързани процеси", period: "/месец" },
+      { name: "AI екип за бизнеса", price: "По оферта", detail: "Брой агенти и процеси според фирмата", period: "" },
     ],
     href: "/sluzhiteli/pomaga/#planove",
     cta: "Вижте плановете на Pomaga",
@@ -59,7 +60,7 @@ const employees = [
 ---
 <BaseLayout
   title="Цени на AI служителите | Raboti"
-  description="Vdiga от 97 €, Pishe от 197 € и Pomaga от 297 € месечно. Сравнете плановете и вижте каква работа поема всеки AI служител."
+  description="Vdiga от 97 € месечно, нов сайт от Pishe за 197 € еднократно и локален AI агент от Pomaga за 297 € месечно. Сравнете плановете."
   canonical="/ceni/"
   image="/og/ceni.svg"
   bodyClass="studio studio-pricing"
@@ -68,9 +69,9 @@ const employees = [
   <section class="prices-hero">
     <div class="s-wrap prices-hero__inner">
       <h1>Цени на<br/><span>AI служителите.</span></h1>
-      <p>Vdiga започва от 97 €, Pishe от 197 €, а Pomaga от 297 € на месец. По-долу ще видите какво поема всеки служител и от какво зависи планът.</p>
+      <p>Vdiga започва от 97 € месечно. Pishe изгражда фирмен сайт за 197 € еднократно, а месечната поддръжка започва от 297 €. Pomaga започва от 297 € месечно за един локален AI агент.</p>
       <p class="prices-disclosure">Без ДДС. Първоначалната настройка се изчислява отделно.</p>
-      <nav class="prices-shortcuts" aria-label="Към цените на услугата">{employees.map(employee=><a href={`#price-${employee.name.toLowerCase()}`}><strong>{employee.name}</strong><span>{employee.role}</span><b>от {employee.plans[0].price}<small>/месец</small></b><Icon name="arrow-down"/></a>)}<a href="#custom"><strong>По поръчка</strong><span>За вашия процес</span><b>След уточняване</b><Icon name="arrow-down"/></a></nav>
+      <nav class="prices-shortcuts" aria-label="Към цените на услугата">{employees.map(employee=><a href={`#price-${employee.name.toLowerCase()}`}><strong>{employee.name}</strong><span>{employee.role}</span><b>от {employee.plans[0].price}<small>{employee.plans[0].period}</small></b><Icon name="arrow-down"/></a>)}<a href="#custom"><strong>По поръчка</strong><span>За вашия процес</span><b>След уточняване</b><Icon name="arrow-down"/></a></nav>
     </div>
   </section>
 
@@ -78,7 +79,7 @@ const employees = [
     <div class="s-wrap">
       <header class="prices-head">
         <h2 id="prices-title">Започнете от работата, която се трупа.</h2>
-        <p>Телефонните разговори, промените по сайта и прехвърлянето на данни се измерват по различен начин. Затова всеки служител има собствени планове.</p>
+        <p>Разговорите се измерват в минути. При Pishe избирате изграждане или поддръжка. При Pomaga плащате за броя AI агенти и процесите, които поемат.</p>
       </header>
 
       <div class="employee-prices">
@@ -99,11 +100,11 @@ const employees = [
                 {employee.plans.map((plan) => (
                   <li>
                     <div><strong>{plan.name}</strong><span>{plan.detail}</span></div>
-                    <p><strong>{plan.price}</strong>{plan.price !== "По оферта" && <span>/месец</span>}</p>
+                    <p><strong>{plan.price}</strong>{plan.period && <span>{plan.period}</span>}</p>
                   </li>
                 ))}
               </ol>
-              <p class="employee-price__tax">Цените са без ДДС. Настройката се изчислява отделно.</p>
+              <p class="employee-price__tax">{employee.name === "Pishe" ? "Цените са без ДДС. Настройката за месечните планове се изчислява отделно." : "Цените са без ДДС. Настройката се изчислява отделно."}</p>
               <div class="price-actions"><a class="s-primary" href={`/?agent=${employee.name.toLowerCase()}#naemi`}>Обсъдете {employee.name} <Icon name="arrow-right"/></a><a class="s-text-link" href={employee.href}>Пълен обхват на плановете <Icon name="arrow-right" /></a></div>
             </div>
           </article>
@@ -116,7 +117,7 @@ const employees = [
     <div class="s-wrap setup-grid">
       <div>
         <h2 id="setup-title">Преди месечната работа идва настройката.</h2>
-        <p>Показаните цени са за месечната услуга. Преди да започнем, трябва да свържем служителя с телефона, сайта или програмите, които използвате, и да уговорим какво може да прави сам.</p>
+        <p>При Vdiga, месечната поддръжка на Pishe и локалните агенти на Pomaga настройката се плаща отделно. Еднократният план за изграждане на сайт от Pishe е посочен като крайна начална услуга, без платени външни услуги и допълнителна функционалност.</p>
       </div>
       <ol class="setup-steps">
         <li><span>1</span><div><strong>Показвате ни работата.</strong><p>Минаваме през един обичаен разговор, промяна по сайта или задача между програмите ви.</p></div></li>

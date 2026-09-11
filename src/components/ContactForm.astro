@@ -45,8 +45,8 @@ const waitlist = intent === "waitlist";
               <option value="" disabled selected>Изберете служител</option>
               <option value="vdiga">Vdiga приема обаждания</option>
               <option value="pishe">Pishe поема сайта</option>
-              <option value="pomaga">Pomaga движи задачи между системите</option>
-              <option value="custom">AI служител по поръчка — за друг процес</option>
+              <option value="pomaga">Pomaga изгражда локални AI агенти</option>
+              <option value="custom">AI служител по поръчка за друг процес</option>
               <option value="unsure">Не съм сигурен/на</option>
             </select>
           </label>
@@ -125,7 +125,7 @@ const waitlist = intent === "waitlist";
       }
       if (form.dataset.draftEmail) {
         const lines = ['Име: '+String(data.get('name') || ''), 'Имейл: '+String(data.get('email') || ''), 'Фирма: '+String(data.get('businessName') || ''), 'Служител: '+String(data.get('agentChoice') || ''), '', String(data.get('task') || '')];
-        const href = `mailto:${form.dataset.draftEmail}?subject=${encodeURIComponent('Запитване за AI служител — Raboti')}&body=${encodeURIComponent(lines.join('\n'))}`;
+        const href = `mailto:${form.dataset.draftEmail}?subject=${encodeURIComponent('Запитване за AI служител от Raboti')}&body=${encodeURIComponent(lines.join('\n'))}`;
         if (status) status.textContent = 'Имейлът е подготвен. Изпратете го от вашето приложение за поща.';
         window.location.href = href;
         return;

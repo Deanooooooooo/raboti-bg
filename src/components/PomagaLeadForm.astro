@@ -2,8 +2,8 @@
 import { site } from "../data/site";
 ---
 <section class="gloria-lead pomaga-lead" id="zayavka" aria-labelledby="pomaga-lead-title">
-  <div class="gloria-lead__copy"><p>Покажете как вършите задачата сега</p><h2 id="pomaga-lead-title">Да минем по стъпките от имейла до свършената работа.</h2>
-    <p>Не е нужно да описвате целия бизнес. Кажете откъде идва заявката, къде я преписвате, кой я поема и преди кое действие Pomaga трябва да ви попита.</p>
+  <div class="gloria-lead__copy"><p>Изберете ролите за вашия AI екип</p><h2 id="pomaga-lead-title">Да видим кои агенти ще свалят най-много работа от екипа ви.</h2>
+    <p>Посочете ролите, програмите и повтарящите се процеси. Може да започнете с един агент и да добавяте още според бизнеса.</p>
     <ol><li><span>01</span><div><strong>Минаваме по стъпките</strong><small>Гледаме откъде идва задачата, кои програми използвате и кога е приключила.</small></div></li><li><span>02</span><div><strong>Отбелязваме кога Pomaga трябва да спре</strong><small>Повтарящите се стъпки са за Pomaga. Необичайните случаи и плащанията остават за човек.</small></div></li><li><span>03</span><div><strong>Казваме какво ще поеме и колко ще струва</strong><small>Преди да започнем, знаете кои стъпки настройваме и как ще ги проверим.</small></div></li></ol>
   </div>
   <form class="gloria-lead__form" data-pomaga-lead-form data-endpoint={site.formEndpoint} data-sales-phone={site.salesPhone} novalidate>
@@ -13,12 +13,12 @@ import { site } from "../data/site";
     <div class="gloria-lead__grid">
       <label><span>Вашето име</span><input type="text" name="name" autocomplete="name" placeholder="Име и фамилия" required /></label><label><span>Име на бизнеса</span><input type="text" name="businessName" autocomplete="organization" placeholder="Например Studio Forma" required /></label>
       <label><span>Телефон</span><input type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="+359 88 123 4567" required /></label><label><span>Имейл</span><input type="email" name="email" autocomplete="email" placeholder="name@business.bg" required /></label>
-      <label class="gloria-lead__wide"><span>Откъде започва задачата?</span><select name="taskSource" required><option value="" selected disabled>Изберете най-близкото</option><option>Имейл или формуляр</option><option>CRM или ERP</option><option>Таблица или документ</option><option>По график</option><option>Друго</option></select></label>
+      <label class="gloria-lead__wide"><span>Коя роля искате да поеме първият агент?</span><select name="taskSource" required><option value="" selected disabled>Изберете най-близкото</option><option>Имейл и администрация</option><option>CRM или ERP</option><option>Съдържание</option><option>Таблици и справки</option><option>Проучване на потенциални клиенти</option><option>Друго</option></select></label>
       <label class="gloria-lead__wide"><span>Как я вършите сега?</span><textarea name="task" rows="4" required placeholder="Например: заявката идва по имейл, преписваме клиента в CRM, създаваме задача и пишем на търговеца"></textarea></label>
       <label class="gloria-lead__wide"><span>Къде трябва задължително да се намеси човек?</span><textarea name="approvalBoundary" rows="3" placeholder="Например: преди изпращане на оферта, промяна на сума или плащане"></textarea></label>
     </div>
     <label class="gloria-lead__consent"><input type="checkbox" name="consent" value="yes" required /><span>Съгласен/на съм Raboti да се свърже с мен за заявката. Прочетох <a href="/politika-za-poveritelnost/">политиката за поверителност</a>.</span></label>
-    <button class="button button--spectrum" type="submit">Изпратете задачата за преглед</button><p class="gloria-lead__note">Няма автоматично плащане. Първо уточняваме работата, достъпите и цената.</p><p class="form-status" aria-live="polite"></p>
+    <button class="button button--spectrum" type="submit">Изпратете ролите за преглед</button><p class="gloria-lead__note">Получавате 30 дни пълна поддръжка за работа с агентите. Няма автоматично плащане.</p><p class="form-status" aria-live="polite"></p>
   </form>
 </section>
 <script>
