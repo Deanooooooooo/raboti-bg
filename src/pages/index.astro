@@ -7,84 +7,27 @@ import AgentWordmark from "../components/AgentWordmark.astro";
 import HeroMotion from "../components/HeroMotion.astro";
 import "../styles/studio.css";
 import "../styles/raboti-work-machine-v4.css";
-import "../styles/homepage-update.css";
 import { breadcrumbSchema, faqSchema } from "../data/schema";
-import { site } from "../data/site";
+import { homeFaqs as originalFaqs, site } from "../data/site";
 
 const agents = (await getCollection("agents")).sort((a, b) => a.data.order - b.data.order);
 const liveAgentOrder = ["vdiga", "pishe", "pomaga"];
 const liveAgents = agents
   .filter((agent) => agent.data.status === "live")
   .sort((a, b) => liveAgentOrder.indexOf(a.data.slug) - liveAgentOrder.indexOf(b.data.slug));
-
-const services = [
-  {
-    slug: "vdiga",
-    name: "Vdiga",
-    image: "/assets/employee-vdiga-gloria-v1.webp",
-    imageAlt: "Gloria, образът на AI рецепциониста Vdiga",
-    problem: "Телефонът звъни. Вие сте с клиент.",
-    capabilities: [
-      "Отговори за цени, услуги и работно време",
-      "Записване на часове в календара ви",
-      "Обобщение след разговора",
-    ],
-    prices: ["от €97/месец"],
-    scope: "Какво поема Vdiga",
-  },
-  {
-    slug: "pishe",
-    name: "Pishe",
-    image: "/assets/employee-pishe-v1.webp",
-    imageAlt: "Визуално представяне на AI уеб мениджъра Pishe",
-    problem: "Всяка промяна по сайта чака вас.",
-    capabilities: [
-      "Нов фирмен сайт, ако още нямате",
-      "Актуални услуги, цени и контакти",
-      "Съдържание по въпросите на клиентите",
-    ],
-    prices: ["Нов сайт: от €197 еднократно", "Поддръжка: от €297/месец"],
-    scope: "Какво поема Pishe",
-  },
-  {
-    slug: "pomaga",
-    name: "Pomaga",
-    image: "/assets/employee-pomaga-v1.webp",
-    imageAlt: "Визуално представяне на AI оперативния асистент Pomaga",
-    problem: "Данните от имейла пак се въвеждат на ръка.",
-    capabilities: [
-      "Данни от имейла в CRM или таблица",
-      "Задачи за отговорния колега",
-      "Справка за свършеното и чакащото",
-    ],
-    prices: ["от €297/месец"],
-    scope: "Какво поема Pomaga",
-  },
-] as const;
-
+const agentProfiles: Record<string, { name: string; image: string; imageAlt: string; cta: string; promise: string; summary: string; fit: string }> = {
+  vdiga: { name: "Vdiga", fit: "За екипи, които не смогват да вдигат", image: "/assets/employee-vdiga-gloria-v1.webp", imageAlt: "Gloria, образът на AI рецепциониста Vdiga", cta: "Вижте как работи Vdiga", promise: "Докато сте с един клиент, другият получава отговор.", summary: "Vdiga приема обаждания, отговаря на въпроси и записва часове. Клиентите могат да се свържат с бизнеса, без телефонът постоянно да прекъсва работата ви." },
+  pishe: { name: "Pishe", fit: "За нов сайт или постоянна грижа за сегашния", image: "/assets/employee-pishe-v1.webp", imageAlt: "Визуално представяне на AI уеб мениджъра Pishe", cta: "Вижте как работи Pishe", promise: "Бизнесът се променя. Сайтът ви е в крак с него.", summary: "Pishe изгражда фирмен сайт за €197 еднократно или поддържа сайт и онлайн магазин със съдържание, SEO, GEO и чатбот 24/7." },
+  pomaga: { name: "Pomaga", fit: "За бизнеси, които искат собствен AI екип", image: "/assets/employee-pomaga-v1.webp", imageAlt: "Визуално представяне на AI оперативния асистент Pomaga", cta: "Вижте как работи Pomaga", promise: "От един агент до AI екип за целия бизнес.", summary: "Pomaga изгражда локални AI агенти за имейл, CRM, съдържание, таблици и проучване на клиенти. Управлявате ги през Telegram, WhatsApp или Viber." },
+};
 const homeFaqs = [
-  {
-    question: "Какво точно поема Raboti?",
-    answer: "Vdiga отговаря на обаждания и записва часове. Pishe изгражда или поддържа сайта ви. Pomaga прехвърля данни и създава задачи в програмите на екипа. Нашият екип настройва избраната услуга, поддържа я и предварително уточнява с вас какво може да прави самостоятелно.",
-  },
-  {
-    question: "Колко ще плащам и има ли такса за настройка?",
-    answer: "Vdiga започва от €97 на месец. Изграждането на фирмен сайт от Pishe започва от €197 еднократно, а поддръжката на сайт е от €297 на месец. Pomaga започва от €297 на месец за един локален агент. Цените са без ДДС. Настройката за месечните услуги се плаща отделно, а сумата се уточнява преди старта. При нов сайт допълнителните функции и платените външни услуги се договарят отделно.",
-  },
-  {
-    question: "Какво става с програмите, които вече ползваме?",
-    answer: "Първо проверяваме дали можем да свържем услугата с тях и дали имаме нужния достъп за конкретната задача. Ако някоя програма не позволява такава връзка, ще знаете това преди офертата. Проверката е наша работа.",
-  },
-  {
-    question: "Кои действия остават за одобрение от нас?",
-    answer: "Вие определяте кои повтарящи се задачи могат да се изпълняват самостоятелно. Плащанията, договорите и действията извън уговореното изискват потвърждение. Новите цени, оферти и важни обещания към клиентите също минават през вас преди публикуване.",
-  },
-  {
-    question: "А ако ми трябва помощ с друга задача?",
-    answer: "Вашият пример ни помага да преценим дали някоя от трите услуги е подходяща. Ако е нужна отделна разработка, първо уточняваме какво може да се поеме, с кои програми и на каква цена. Решението дали да започнем остава ваше.",
-  },
+ {question: "Мога ли да поръчам AI служител за друга работа?", answer: "Да. Ако работата ви не се покрива от Vdiga, Pishe или Pomaga, обсъждаме AI служител по поръчка. Покажете ни как протича процесът, кои програми използвате и какъв резултат ви трябва. Първо проверяваме дали можем да го поемем надеждно. След това получавате предложение с конкретен обхват, цена и правила за човешко одобрение. Ако съществуващ служител е подходящ, ще ви предложим него."},
+ {question: "Какво получавам, когато наема AI служител?", answer: "Услуга за конкретна работа във вашия бизнес, а не само достъп до AI програма. Уточняваме задачите, подготвяме служителя и го свързваме с необходимата информация и системи. Вие знаете какво поема и в кои случаи трябва да ви попита."},
+ {question: "Колко струва и има ли такса за настройка?", answer: "Vdiga започва от €97 месечно. Pishe изгражда фирмен сайт за €197 еднократно, а поддръжката започва от €297 месечно. Pomaga започва от €297 месечно за един локален AI агент. Цените са без ДДС. Настройката за месечните услуги се плаща отделно."},
+ {question: "Pishe може ли да обновява сегашния ми сайт автоматично?", answer: "Да, ако сайтът позволява надежден достъп за редакция и връщане на предишна версия. Pishe прилага предварително разрешените актуализации. Нови цени, оферти и важни обещания към клиентите първо се потвърждават от вас. Ако нямате сайт, може да изгради нов."},
+ {question: "Как помагате за откриването на бизнеса в Google и AI отговорите?", answer: "Pishe подобрява страниците за услугите, актуализира информацията и подготвя полезни отговори на въпросите на клиентите. Работи по техническата достъпност за търсачките и структурираното описание на бизнеса. Това подпомага SEO и откриваемостта в AI отговори, но не гарантира позиция или препоръка от Google или ChatGPT."},
+ ...originalFaqs.filter(item => ["Трябва ли да сменим програмите, които използваме?", "Може ли AI служителят да действа без човешки контрол?", "Кой стои зад Raboti?"].includes(item.question))
 ];
-
 const schemas = [
   faqSchema(homeFaqs),
   breadcrumbSchema([{ name: "Raboti", url: site.url }]),
@@ -119,161 +62,64 @@ const schemas = [
   },
 ];
 ---
+<BaseLayout title="AI служители за бизнеса: телефон, сайт и операции | Raboti" description="Vdiga приема обаждания, Pishe изгражда и поддържа сайтове, а Pomaga създава локални AI агенти за процесите във фирмата. Вижте услуги и цени." canonical="/" image="/assets/brand/social/raboti-home-social.jpg" imageAlt="Raboti, AI служители за българския бизнес. Не вършете работата сами." imageWidth={1200} imageHeight={675} schema={schemas} bodyClass="studio">
+<div class="s-top-stage">
+<section class="s-hero s-wrap">
 
-<BaseLayout
-  title="AI служители за бизнеса: телефон, сайт и операции | Raboti"
-  description="Vdiga приема обаждания, Pishe изгражда и поддържа сайтове, а Pomaga прехвърля данни и създава задачи в програмите на екипа. Вижте услуги и цени."
-  canonical="/"
-  image="/assets/brand/social/raboti-home-social.jpg"
-  imageAlt="Raboti, AI служители за българския бизнес"
-  imageWidth={1200}
-  imageHeight={675}
-  schema={schemas}
-  bodyClass="studio rh-home"
->
-  <section class="rh-hero" data-hero>
-    <div class="rh-wrap rh-hero__layout">
-      <div class="rh-hero__copy">
-        <p class="rh-eyebrow">AI служители за българския бизнес</p>
-        <h1>Всичко чака вас?</h1>
-        <div class="rh-hero__lead">
-          <p>Телефонът звъни, сайтът чака промени, а данните от имейла пак се преписват на ръка.</p>
-          <p>Vdiga поема обажданията, Pishe се грижи за сайта, а Pomaga прехвърля информацията и създава задачи в програмите ви.</p>
-        </div>
-        <div class="rh-actions">
-          <a class="rh-button" href="#ekip">Кой какво поема <span aria-hidden="true">↗</span></a>
-          <a class="rh-link" href="#naemi">Запитване за моя бизнес</a>
-        </div>
-        <p class="rh-assurance">Настройката и поддръжката са наша работа.</p>
-      </div>
+ <div class="s-intro"><h1>AI служители за бизнеса.<br/><span>Не вършете всичко сами.</span></h1><p class="s-lead">Raboti настройва и поддържа AI агенти за конкретна работа: входящи обаждания, изграждане и поддръжка на сайт и процеси между имейл, CRM и другите ви програми. Получавате управлявана услуга с уговорен обхват и правила за човешко одобрение, а не просто достъп до AI програма.</p><div class="s-actions"><a class="s-primary" href="#ekip">Вижте услугите и цените <span>↗︎</span></a><a class="s-text-link" href="#naemi">Разкажете ни как работите</a></div><p class="s-caption">Избирате една услуга или комбинирате няколко. <a href="#ekip" data-show-custom>Имате друга работа? Обсъдете AI служител по поръчка.</a></p></div>
+ <div class="s-stage">
+  <HeroMotion />
+ </div>
+</section>
+<div class="s-service-strip" aria-label="Услуги и начални цени"><svg class="s-strip-mark" viewBox="0 0 300 300" aria-hidden="true" focusable="false"><path d="M0 300V96Q0 84 10 76L85 9Q94 0 107 0H300V86H211Q130 86 130 167V300Z"/></svg><div class="s-wrap">{liveAgents.map(agent => <a href={`/sluzhiteli/${agent.data.slug}/`}><div class="s-strip-offer"><AgentWordmark slug={agent.data.slug} tone="dark" class="s-strip-wordmark"/><span>{agent.data.slug === "vdiga" ? "Приемане на обаждания" : agent.data.slug === "pishe" ? "Изграждане и грижа за сайта" : "Локални AI агенти за бизнеса"}</span><small>{agent.data.priceLabel}</small></div><b aria-hidden="true">↗︎</b></a>)}</div><p class="s-wrap s-strip-terms">Цени без ДДС. Настройката за месечните услуги се заплаща отделно и се уточнява преди старта.</p></div>
+</div>
+<section class="s-team s-wrap" id="ekip"><div class="s-section-heading"><div><h2>Коя работа искате<br/><span>да поемем?</span></h2></div><p>Изберете това, което бави бизнеса ви. Вижте какво поема служителят и от каква цена започва услугата.</p></div><div class="s-service-choice" aria-label="Разгледайте AI служителите">{liveAgents.map((agent,i)=><button type="button" data-service-choice={agent.data.slug} aria-pressed={i===0?'true':'false'} aria-controls={`service-${agent.data.slug}`}><span>{agent.data.name}</span><small>{agent.data.slug==='vdiga'?'Обаждания':agent.data.slug==='pishe'?'Сайт и откриваемост':'Локални AI агенти'}</small></button>)}<button type="button" data-service-choice="custom" aria-pressed="false" aria-controls="service-custom"><span>По поръчка</span><small>Вашият процес</small></button></div>
+<div class="s-service-panels">{liveAgents.map(agent=>{const p=agentProfiles[agent.data.slug];return <article id={`service-${agent.data.slug}`} data-service-panel={agent.data.slug} class={`s-service-panel s-agent-${agent.data.slug}`}><div class="s-profile-visual"><img src={p.image} width="720" height="960" alt={p.imageAlt} loading="lazy"/><div><span>{agent.data.role}</span><AgentWordmark slug={agent.data.slug} tone="light" alt="" class="s-profile-wordmark" loading="eager"/></div></div><div class="s-profile-content"><p class="s-fit">{p.fit}</p><h3>{p.promise}</h3><p>{p.summary}</p><div class="s-service-facts"><div><span>{agent.data.slug === "pishe" ? "Начална услуга" : "Месечна услуга"}</span><strong>{agent.data.priceLabel}</strong></div><div><span>Преди старта</span><strong>Обхват, срок и цена</strong></div></div><small>Без ДДС. Настройката за месечните услуги се заплаща отделно.</small><div class="s-actions"><a href="#naemi" class="s-primary" data-pick-service={agent.data.slug}>Обсъдете {p.name} <span aria-hidden="true">↗︎</span></a><a class="s-text-link" href={`/sluzhiteli/${agent.data.slug}/`}>Какво включва услугата</a></div></div></article>})}
+<article id="service-custom" data-service-panel="custom" class="s-service-panel s-custom-panel" aria-labelledby="custom-title">
+ <div class="s-custom-brief"><h3>AI служител за друг процес.</h3><p>Не е нужно да нагласяте работата си към готова услуга.</p><dl><div><dt>Работата</dt><dd>Какво отнема време на екипа ви?</dd></div><div><dt>Вашите програми</dt><dd>Къде е информацията и кой работи с нея?</dd></div><div><dt>Резултатът</dt><dd>Какво трябва да е свършено накрая?</dd></div></dl></div>
+ <div class="s-profile-content"><h3 id="custom-title">Работата ви не се побира в тези три роли?</h3><p>Обсъдете AI служител по поръчка. Започваме от процеса, който бави екипа ви, и проверяваме каква част можем да поемем с вашите програми, правила и нужния човешки контрол.</p><div class="s-service-facts"><div><span>Първата стъпка</span><strong>Проверка на процеса</strong></div><div><span>Цената</span><strong>Оферта според обхвата</strong></div></div><p>Ако Vdiga, Pishe или Pomaga вече върши тази работа, ще ви предложим него. Не е нужно да изграждаме нов служител, когато има подходящ.</p><div class="s-actions"><a href="#naemi" class="s-primary" data-pick-service="custom">Обсъдете вашия AI служител <span aria-hidden="true">↗︎</span></a></div></div>
+</article></div><div class="s-compare-link"><span>Все още избирате?</span><a href="/ceni/">Сравнете плановете и включената работа <span aria-hidden="true">↗︎</span></a></div></section>
+<section class="s-start"><div class="s-wrap s-start-layout"><div class="s-start-editorial"><div class="s-start-heading"><h2>Знаете какво поемаме.<br/><span>Преди да започнете да плащате.</span></h2><p>Не купувате достъп до още една програма. Уговаряме конкретна работа за вашия бизнес, настройваме AI служителя и тестваме стъпките и случаите, в които трябва да се намеси човек.</p></div><div class="s-journey" aria-label="Как започваме">
+<button type="button" data-journey="brief" aria-pressed="true" aria-controls="journey-example"><span>1</span><strong>Показвате ни работата.</strong><small>Разглеждаме как я вършите сега.</small></button>
+<button type="button" data-journey="scope" aria-pressed="false" aria-controls="journey-example"><span>2</span><strong>Получавате обхват и цена.</strong><small>Обхват, настройка и месечна цена.</small></button>
+<button type="button" data-journey="check" aria-pressed="false" aria-controls="journey-example"><span>3</span><strong>Проверяваме преди старта.</strong><small>Обичайните случаи и изключенията.</small></button></div><a class="s-text-link" href="/integracii/">Проверете връзката с вашите програми ↗︎</a></div>
+<div class="s-project-stage" id="journey-example"><div class="s-project-top"><span>Примерен проект · Vdiga</span></div>
+<div data-project="brief"><div class="s-project-title"><span>Работата днес</span><h3>Телефонът звъни.<br/>Всички са с клиенти.</h3></div><blockquote>„Искаме клиентите да получават отговор, дори когато не можем да вдигнем.“</blockquote><dl class="s-project-facts"><div><dt>Какво поемаме</dt><dd>Входящите обаждания</dd></div><div><dt>Какво получавате</dt><dd>Записан час и обобщение</dd></div><div><dt>Какво уточняваме</dt><dd>Работно време, услуги, календар</dd></div></dl></div>
+<div data-project="scope" hidden><div class="s-project-title"><span>Преди да решите</span><h3>Какво включва услугата<br/>и колко струва.</h3></div><dl class="s-project-facts"><div><dt>Включена работа</dt><dd>Разговори, въпроси и часове по уговорени правила</dd></div><div><dt>Месечна услуга</dt><dd>От €97 / месец без ДДС</dd></div><div><dt>Първоначална настройка</dt><dd>Отделна цена след уточняване на процеса</dd></div><div><dt>Решения за човек</dt><dd>Случаите извън зададените правила</dd></div></dl></div>
+<div data-project="check" hidden><div class="s-project-title"><span>Преди включването</span><h3>Проверяваме и<br/>неудобните случаи.</h3></div><ul class="s-test-cases"><li><span>01</span><div><strong>Клиентът иска свободен час.</strong><p>Проверка на календара и записване.</p></div></li><li><span>02</span><div><strong>Желаният час е зает.</strong><p>Предлагане на налична алтернатива.</p></div></li><li><span>03</span><div><strong>Въпросът е извън правилата.</strong><p>Предаване към човек от екипа.</p></div></li></ul></div>
+<div class="s-project-bottom"><span>Вие определяте границите.</span><a href="#naemi">Обсъдете вашия процес ↗︎</a></div></div></div></section>
+<section class="s-search s-wrap" aria-labelledby="search-title"><div><h2 id="search-title">Клиентите трябва да ви намират.<br/><span>И да разбират защо да изберат вас.</span></h2><p class="s-search-intro">Сайтът трябва да представя услугите ви днес, не отпреди година. Pishe го поддържа актуален и развива съдържанието му за хората, които търсят бизнеса ви в Google или питат AI асистент.</p><a class="s-text-link" href="/sluzhiteli/pishe/">Как Pishe се грижи за сайта ви ↗︎</a></div><div class="s-discovery-composition"><figure class="s-site-example"><div class="s-browser-bar"><span aria-hidden="true">● ● ●</span><span>Илюстративна страница за услуга</span></div><div class="s-example-page"><div class="s-example-nav"><strong>Вашият бизнес</strong><span>Услуги &nbsp; Контакти</span></div><div class="s-example-hero"><h3>Какво включва услугата<br/>и как да я заявите.</h3><p>За кого е, какво включва и как клиентът да се свърже с вас.</p><span class="s-example-cta">Запитване за услугата</span></div><div class="s-example-answer"><strong>Какво иска да знае клиентът?</strong><p>Цена и условия. Как протича услугата. Кога може да започнете.</p></div><div class="s-example-meta"><span>Актуални контакти</span><span>Цена и условия</span><span>Въпроси преди поръчка</span></div></div><figcaption>Страницата описва услугата, цената и начина за заявяване. Тази информация служи и на клиента, и на търсачките.</figcaption></figure><div class="s-search-details"><article><h3>Услуги, цени и контакти, които не са остарели</h3><p>Обновени услуги, цени и контакти, описан обхват и форми за запитване. Ако нямате сайт, Pishe изгражда фирмен сайт за €197 еднократно.</p></article><article><h3>Да ви откриват в Google, SEO</h3><p>Съдържание по въпросите, с които клиентите търсят вашата услуга, връзки между услугите, цените и свързаните статии и техническа достъпност за търсачките. Проверяваме дали страниците отговарят на тези въпроси и могат да бъдат обходени.</p></article><article><h3>Да ви разбират и AI асистентите, GEO</h3><p>Точна информация за бизнеса, услугите и техните условия, която може да бъде използвана като източник в AI отговори. Няма гарантирано място в Google AI Overviews или ChatGPT.</p></article><a href="/polezno/seo-geo/" class="s-text-link">Какво означават SEO и GEO за бизнеса ви ↗︎</a></div></div></section>
 
-      <div class="rh-demo">
-        <HeroMotion />
-        <p class="rh-demo__label">Пример как се върши работата</p>
-        <div class="rh-result" data-rwm-result aria-live="polite" aria-atomic="true">
-          <img src="/assets/homepage/result-appointment.svg" width="48" height="48" alt="" data-rwm-result-icon />
-          <div>
-            <p class="rh-result__request"><span>Заявка:</span> <span data-rwm-result-request>Клиент се обажда за час</span></p>
-            <h2 data-rwm-result-title>Часът е в календара ви.</h2>
-            <p data-rwm-result-detail>Vdiga проверява кога има свободно място и записва клиента. Екипът получава обобщение на разговора.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+<section class="s-faq s-wrap"><div><h2>Какво е важно<br/><span>преди да започнете?</span></h2><a href="/polezno/seo-geo/" class="s-text-link">За Google и AI откриваемостта ↗︎</a></div><FAQ items={homeFaqs}/></section>
+<section class="s-contact s-wrap" id="naemi"><div class="s-contact-intro"><div class="s-contact-team" aria-label="Изберете служител за запитването"><button type="button" data-enquiry-role="vdiga" aria-pressed="false"><img src="/assets/employee-vdiga-gloria-v1.webp" width="80" height="80" loading="lazy" alt=""/><span>Vdiga</span></button><button type="button" data-enquiry-role="pishe" aria-pressed="false"><img src="/assets/employee-pishe-v1.webp" width="80" height="80" loading="lazy" alt=""/><span>Pishe</span></button><button type="button" data-enquiry-role="pomaga" aria-pressed="false"><img src="/assets/employee-pomaga-v1.webp" width="80" height="80" loading="lazy" alt=""/><span>Pomaga</span></button></div><button type="button" class="s-custom-enquiry" data-enquiry-role="custom" aria-pressed="false">AI служител по поръчка</button><p class="s-selection-note" aria-live="polite">Изберете служител или ни разкажете какво ви трябва.</p><h2>Коя работа искате<br/><span>да свалим от вас?</span></h2><p>Опишете какво ви бави. Не е нужно техническо задание. До един работен ден ще ви кажем дали можем да го поемем и какво е нужно, за да започнем.</p><a class="s-contact-mail" href={`mailto:${site.contactEmail}`}>{site.contactEmail} ↗︎</a></div><div class="s-form-wrap"><ContactForm title="Разкажете ни за работата" enquiry={true}/></div></section>
+<script>
+import "../scripts/raboti-work-machine-v4.js";
+const setJourney=(key:string)=>{document.querySelectorAll<HTMLElement>('[data-project]').forEach(el=>el.hidden=el.dataset.project!==key);document.querySelectorAll<HTMLButtonElement>('[data-journey]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.journey===key)));};
+document.querySelectorAll<HTMLButtonElement>('[data-journey]').forEach((button,index,buttons)=>{button.addEventListener('click',()=>setJourney(button.dataset.journey!));button.addEventListener('keydown',e=>{if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();const next=buttons[(index+(e.key==='ArrowDown'?1:-1)+buttons.length)%buttons.length];next.focus();next.click();}});});
 
-  <section class="rh-team rh-wrap" id="ekip" aria-labelledby="rh-team-title">
-    <div class="rh-section-heading">
-      <h2 id="rh-team-title">Кое ви отнема най-много време?</h2>
-      <p>Началото може да е само една задача: обажданията, промените по сайта или преписването между програми.</p>
-    </div>
-    <div class="rh-services">
-      {services.map((service) => (
-        <article class={`rh-service rh-service--${service.slug}`}>
-          <div class="rh-service__head">
-            <img src={service.image} width="720" height="960" alt={service.imageAlt} loading="lazy" />
-            <AgentWordmark slug={service.slug} tone="dark" alt={service.name} class="rh-service__wordmark" loading="lazy" />
-          </div>
-          <div class="rh-service__body">
-            <h3>{service.problem}</h3>
-            <ul>{service.capabilities.map((capability) => <li>{capability}</li>)}</ul>
-            <div class="rh-service__price">
-              {service.prices.map((price) => <strong>{price}</strong>)}
-            </div>
-            <div class="rh-service__actions">
-              <a class="rh-link" href={`/sluzhiteli/${service.slug}/`}>{service.scope}</a>
-              <a class="rh-link rh-link--enquiry" href="#naemi" data-pick-service={service.slug}>Запитване за {service.name}</a>
-            </div>
-          </div>
-        </article>
-      ))}
-    </div>
-    <p class="rh-price-note">Цените са без ДДС. Настройката за месечните услуги се заплаща отделно след уточняване на обхвата.</p>
-    <div class="rh-custom">
-      <div>
-        <h3>Вашата задача е друга?</h3>
-        <p>Един пример от работния ви ден ще ни помогне да преценим какво можем да поемем с програмите, които вече ползвате.</p>
-      </div>
-      <a class="rh-button rh-button--ink" href="#naemi" data-pick-service="custom">Запитване за друга задача <span aria-hidden="true">↗</span></a>
-    </div>
-  </section>
-
-  <section class="rh-setup" aria-labelledby="rh-setup-title">
-    <div class="rh-wrap">
-      <div class="rh-section-heading rh-section-heading--setup">
-        <h2 id="rh-setup-title">Преди старта знаете какво поемаме и колко струва.</h2>
-        <p>Първо уточняваме работата и цената. След това нашият екип настройва връзките с програмите ви и проверява дали всичко работи според уговореното.</p>
-      </div>
-      <ol class="rh-steps">
-        <li><span>01</span><h3>Един пример от вашия ден</h3><p>Вашият разказ ни показва как пристига задачата, кой я поема и какво трябва да е готово накрая.</p></li>
-        <li><span>02</span><h3>Оферта за конкретната работа</h3><p>В офертата виждате какво поемаме, колко струва настройката и каква е месечната цена, ако услугата е абонаментна.</p></li>
-        <li><span>03</span><h3>Проба с вашите задачи</h3><p>Преди старта проверяваме и обичайните случаи, и изключенията: зает час, липсващи данни или въпрос, който изисква човек.</p></li>
-      </ol>
-      <div class="rh-control-note">
-        <p>Вие решавате кога служителят действа сам и кога трябва да ви попита. Плащанията, договорите и действията извън уговореното чакат вашето потвърждение.</p>
-        <a class="rh-link" href="/integracii/">Програмите, с които можем да работим</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="rh-faq rh-wrap" aria-labelledby="rh-faq-title">
-    <div class="rh-faq__intro">
-      <h2 id="rh-faq-title">Преди да започнем.</h2>
-      <p>Цени, програми и решенията, които остават при вас.</p>
-    </div>
-    <FAQ items={homeFaqs} />
-  </section>
-
-  <section class="rh-contact rh-wrap" id="naemi" aria-labelledby="rh-contact-title">
-    <div class="rh-contact__intro">
-      <div class="rh-contact__copy">
-        <h2 id="rh-contact-title">Коя задача все отлагате за утре?</h2>
-        <p>Няколко изречения са достатъчни: какво ви бави, как го вършите сега и какво искате да поемем.</p>
-        <p class="rh-contact__response">До един работен ден ще получите отговор дали можем да помогнем и какво ни е нужно за начало.</p>
-      </div>
-      <div class="rh-brand-region" aria-hidden="true">
-        <img src="/assets/homepage/raboti-r-cobalt.svg" width="300" height="300" alt="" />
-        <span>Вашата задача</span>
-      </div>
-    </div>
-    <div class="rh-contact__form">
-      <div class="rh-role-picker" aria-label="Изберете услуга за запитването">
-        <span class="rh-role-picker__label">Запитване за:</span>
-        <div>
-          {services.map((service) => <button type="button" data-enquiry-role={service.slug} aria-pressed="false">{service.name}</button>)}
-          <button type="button" data-enquiry-role="custom" aria-pressed="false">Друга задача</button>
-        </div>
-        <p class="rh-selection-note" aria-live="polite">Можете да изберете услуга или да опишете задачата направо във формата.</p>
-      </div>
-      <ContactForm title="За какво ви трябва помощ?" enquiry={true} homepageCopy={true} />
-    </div>
-  </section>
-
-  <script>
-    import "../scripts/raboti-work-machine-v4.js";
-
-    const form = document.querySelector<HTMLFormElement>(".rh-home [data-contact-form]");
-    const select = form?.querySelector<HTMLSelectElement>("[data-agent-choice]");
-    const formHeading = form?.querySelector<HTMLElement>("h2");
-    const labels: Record<string, string> = { vdiga: "Vdiga", pishe: "Pishe", pomaga: "Pomaga", custom: "друга задача", unsure: "още не сте избрали услуга" };
-
-    const syncRole = (role: string, focusForm = false) => {
-      if (!select || !labels[role]) return;
-      if (select.value !== role) {
-        select.value = role;
-        select.dispatchEvent(new Event("change", { bubbles: true }));
-      }
-      document.querySelectorAll<HTMLButtonElement>("[data-enquiry-role]").forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.enquiryRole === role)));
-      const note = document.querySelector<HTMLElement>(".rh-selection-note");
-      if (note) note.textContent = role === "unsure" ? "Можете да изберете услуга или да опишете задачата направо във формата." : `Избрахте ${labels[role]}. Можете да смените избора от бутоните или от формата.`;
-      if (focusForm) requestAnimationFrame(() => formHeading?.focus({ preventScroll: true }));
-    };
-
-    document.querySelectorAll<HTMLButtonElement>("[data-enquiry-role]").forEach((button) => button.addEventListener("click", () => syncRole(button.dataset.enquiryRole || "unsure")));
-    document.querySelectorAll<HTMLAnchorElement>("[data-pick-service]").forEach((link) => link.addEventListener("click", () => syncRole(link.dataset.pickService || "unsure", true)));
-    select?.addEventListener("change", () => syncRole(select.value));
-
-    const requestedRole = new URLSearchParams(window.location.search).get("agent");
-    if (requestedRole && ["vdiga", "pishe", "pomaga", "custom"].includes(requestedRole)) syncRole(requestedRole);
-  </script>
+document.querySelectorAll<HTMLButtonElement>('[data-enquiry-role]').forEach(button=>button.addEventListener('click',()=>{const role=button.dataset.enquiryRole!;const select=document.querySelector<HTMLSelectElement>('[data-agent-choice]');if(select){select.value=role;select.dispatchEvent(new Event('change',{bubbles:true}));}document.querySelectorAll('[data-enquiry-role]').forEach(el=>el.setAttribute('aria-pressed',String(el===button)));const note=document.querySelector('.s-selection-note');if(note)note.textContent=`Избрахте ${button.textContent?.trim()}. Разкажете ни какво искате да поеме.`;}));
+const form=document.querySelector<HTMLFormElement>('.studio [data-contact-form]');
+if(form){
+ const select=form.querySelector<HTMLSelectElement>('[data-agent-choice]');if(select){select.value='unsure';select.addEventListener('change',()=>{document.querySelectorAll<HTMLButtonElement>('[data-enquiry-role]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.enquiryRole===select.value)));const note=document.querySelector('.s-selection-note');if(note)note.textContent=select.value==='unsure'?'Изберете служител или ни разкажете какво ви трябва.':`Избрахте ${select.value==='vdiga'?'Vdiga':select.value==='pishe'?'Pishe':select.value==='custom'?'AI служител по поръчка':'Pomaga'}. Разкажете ни какво искате да поеме.`;});}
+}
+const chooseService=(role:string)=>{document.querySelectorAll<HTMLElement>('[data-service-panel]').forEach(el=>{el.hidden=el.dataset.servicePanel!==role;});document.querySelectorAll<HTMLButtonElement>('[data-service-choice]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.serviceChoice===role)));};
+const requestedRole=new URLSearchParams(window.location.search).get('agent');
+const validRole=requestedRole&&['vdiga','pishe','pomaga','custom'].includes(requestedRole)?requestedRole:null;
+chooseService(validRole||'vdiga');
+if(validRole)document.querySelector<HTMLButtonElement>(`[data-enquiry-role="${validRole}"]`)?.click();
+document.querySelectorAll<HTMLAnchorElement>('[data-show-custom]').forEach(link=>link.addEventListener('click',()=>chooseService('custom')));
+document.querySelectorAll<HTMLButtonElement>('[data-service-choice]').forEach((button,index,buttons)=>{button.addEventListener('click',()=>chooseService(button.dataset.serviceChoice!));button.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();const next=buttons[(index+(e.key==='ArrowRight'?1:-1)+buttons.length)%buttons.length];next.focus();next.click();}});});
+document.querySelectorAll<HTMLAnchorElement>('[data-pick-service]').forEach(link=>link.addEventListener('click',()=>{document.querySelector<HTMLButtonElement>(`[data-enquiry-role="${link.dataset.pickService}"]`)?.click();}));
+</script>
 </BaseLayout>
+
+<style>
+/* A single legible brand detail occupies reserved space in the service band. */
+.s-service-strip{position:relative;overflow:hidden}
+.s-service-strip>.s-wrap{padding-right:190px}
+.s-strip-mark{position:absolute;pointer-events:none;width:148px;height:148px;right:max(20px,calc((100% - 1240px)/2));top:50%;transform:translateY(-50%);fill:#adbcff}
+.s-window-bar{justify-content:space-between;min-height:39px}
+.s-project-top{justify-content:flex-start;min-height:44px}
+@media(max-width:1050px){.s-service-strip>.s-wrap{padding-right:152px}.s-strip-mark{width:128px;height:128px;right:16px}}
+@media(max-width:700px){.s-service-strip>.s-wrap{padding-right:0}.s-strip-mark{width:104px;height:104px;right:8px;top:auto;bottom:54px;transform:none}.s-service-strip>.s-wrap>a{padding-right:126px}.s-service-strip>.s-wrap>a b{width:28px;text-align:center;margin-left:auto}.s-service-strip .s-strip-terms{padding-right:0}}
+</style>

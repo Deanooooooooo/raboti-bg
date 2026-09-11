@@ -39,8 +39,8 @@ const props = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
     <meta name="theme-color" content="#f5f7f4" />
-    <link rel="preload" href={(props.bodyClass?.includes("studio") || props.bodyClass === "home-art" || props.bodyClass?.includes("candidate-page")) ? onestCyrillic : interCyrillic} as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href={(props.bodyClass?.includes("studio") || props.bodyClass === "home-art" || props.bodyClass?.includes("candidate-page")) ? onestLatin : interLatin} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={(props.bodyClass === "studio" || props.bodyClass === "home-art" || props.bodyClass?.includes("candidate-page") || props.bodyClass?.includes("studio-secondary")) ? onestCyrillic : interCyrillic} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={(props.bodyClass === "studio" || props.bodyClass === "home-art" || props.bodyClass?.includes("candidate-page") || props.bodyClass?.includes("studio-secondary")) ? onestLatin : interLatin} as="font" type="font/woff2" crossorigin />
     <link rel="apple-touch-icon" href="/assets/brand-test/touch-180.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand-test/icon-32.png" />
@@ -51,14 +51,6 @@ const props = Astro.props;
     {site.plausibleDomain && <script is:inline defer data-domain={site.plausibleDomain} src="https://plausible.io/js/script.js"></script>}
   </head>
   <body class:list={[props.bodyClass, { "has-dark-opener": props.darkOpener }]}>
-    {props.bodyClass?.includes("rh-home") && <Fragment set:html={`<!--
-THESIS: A task moves from a familiar interruption to a readable result; this refuses an abstract AI feature catalogue.
-OWN-WORLD: Light Studio fields, navy Onest type, cobalt task geometry, restrained portraits, and the existing cropped r motif.
-STORY: Recognize unfinished work, compare three scoped services and prices, understand setup and control, then describe one task.
-FIRST VIEWPORT: The concrete business problem and two actions sit left; the existing work machine and persistent result sit right.
-FORM: Approved task-to-result homepage handoff, implemented as a focused extension of Raboti Studio; seed homepage-20260911.
-FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, and DESIGN.md
--->`} />}
     {props.bodyClass === "home-art" && <Fragment set:html={`<!--
 THESIS: Three unfinished moments from one working day make the offer concrete; this refuses the category-default card catalogue and abstract AI dashboard.
 OWN-WORLD: Near-black operational surfaces, cyan/violet/coral role signals, crisp white reading fields, and authored work records.

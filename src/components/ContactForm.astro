@@ -7,7 +7,6 @@ interface Props {
   taskPlaceholder?: string;
   enquiry?: boolean;
   emailDraft?: boolean;
-  homepageCopy?: boolean;
 }
 const {
   title = "Кой AI служител ви трябва?",
@@ -16,16 +15,15 @@ const {
   taskPlaceholder = "Например: да вдига, когато екипът е зает",
   enquiry = false,
   emailDraft = false,
-  homepageCopy = false,
 } = Astro.props;
 const waitlist = intent === "waitlist";
 ---
 
-<form class:list={["contact-form", waitlist && "contact-form--waitlist", enquiry && "contact-form--enquiry"]} data-contact-form data-draft-email={emailDraft ? site.contactEmail : undefined} data-endpoint={site.formEndpoint} data-adaptive={enquiry ? "true" : undefined} data-homepage-copy={homepageCopy ? "true" : undefined} novalidate>
+<form class:list={["contact-form", waitlist && "contact-form--waitlist", enquiry && "contact-form--enquiry"]} data-contact-form data-draft-email={emailDraft ? site.contactEmail : undefined} data-endpoint={site.formEndpoint} data-adaptive={enquiry ? "true" : undefined} novalidate>
   <input type="hidden" name="intent" value={intent} />
   <input type="hidden" name="agent" value={selectedAgent} />
   <label class="honeypot" aria-hidden="true" hidden>Уебсайт<input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
-  {!waitlist && <h2 tabindex={homepageCopy ? -1 : undefined}>{title}</h2>}
+  {!waitlist && <h2>{title}</h2>}
   {waitlist ? (
     <>
       <label><span>Имейл за известие</span><input type="email" name="email" autocomplete="email" required placeholder="ime@business.bg" /></label>
@@ -35,27 +33,27 @@ const waitlist = intent === "waitlist";
     <>
       {enquiry ? (
         <>
-          {!homepageCopy && <p class="contact-form__intro">Разкажете какво ви тежи в ежедневната работа. Ако не знаете кой служител е подходящ, ще преценим заедно. Отговаряме по имейл до един работен ден.</p>}
+          <p class="contact-form__intro">Разкажете какво ви тежи в ежедневната работа. Ако не знаете кой служител е подходящ, ще преценим заедно. Отговаряме по имейл до един работен ден.</p>
           <div class="contact-form__row">
             <label><span>Вашето име</span><input type="text" name="name" autocomplete="name" required placeholder="Име и фамилия" /></label>
             <label><span>Служебен имейл</span><input type="email" name="email" autocomplete="email" required placeholder="ime@firma.bg" /></label>
           </div>
           <label><span>Фирма или сайт</span><input type="text" name="businessName" autocomplete="organization" required placeholder="Име на фирмата или адрес на сайта" /></label>
           <label>
-            <span>{homepageCopy ? "Коя работа искате да поемем?" : "Кой AI служител разглеждате?"}</span>
+            <span>Кой AI служител разглеждате?</span>
             <select name="agentChoice" required data-agent-choice>
-              <option value="" disabled selected>{homepageCopy ? "Услуга" : "Изберете служител"}</option>
-              <option value="vdiga">{homepageCopy ? "Обаждания и записване на часове, Vdiga" : "Vdiga приема обаждания"}</option>
-              <option value="pishe">{homepageCopy ? "Нов сайт или поддръжка, Pishe" : "Pishe поема сайта"}</option>
-              <option value="pomaga">{homepageCopy ? "Имейл, данни и задачи, Pomaga" : "Pomaga изгражда локални AI агенти"}</option>
-              <option value="custom">{homepageCopy ? "Друга задача" : "AI служител по поръчка за друг процес"}</option>
-              <option value="unsure">{homepageCopy ? "Още се колебая" : "Не съм сигурен/на"}</option>
+              <option value="" disabled selected>Изберете служител</option>
+              <option value="vdiga">Vdiga приема обаждания</option>
+              <option value="pishe">Pishe поема сайта</option>
+              <option value="pomaga">Pomaga изгражда локални AI агенти</option>
+              <option value="custom">AI служител по поръчка за друг процес</option>
+              <option value="unsure">Не съм сигурен/на</option>
             </select>
           </label>
           <label>
-            <span data-task-label>{homepageCopy ? "Какво ви бави в момента?" : "Каква работа искате да поеме?"}</span>
-            <textarea name="task" rows="4" required data-task-input placeholder={homepageCopy ? "Например: Запитванията идват по имейл. После въвеждаме данните в таблица и ги пращаме на колегата." : "Опишете какво се случва сега и какво трябва да бъде свършено."}></textarea>
-            <small data-task-hint>{homepageCopy ? "Един пример от работния ви ден е достатъчен. Техническо задание не е нужно." : "Не е нужно да пишете задание. Кажете как започва задачата, какво правите сега и кога я смятате за приключена."}</small>
+            <span data-task-label>Каква работа искате да поеме?</span>
+            <textarea name="task" rows="4" required data-task-input placeholder="Опишете какво се случва сега и какво трябва да бъде свършено."></textarea>
+            <small data-task-hint>Не е нужно да пишете задание. Кажете как започва задачата, какво правите сега и кога я смятате за приключена.</small>
           </label>
         </>
       ) : (
@@ -76,7 +74,7 @@ const waitlist = intent === "waitlist";
         <input type="checkbox" name="consent" value="yes" required />
         <span>Съгласен/на съм Raboti да се свърже с мен за тази заявка. Прочетох <a href="/politika-za-poveritelnost/">политиката за поверителност</a>.</span>
       </label>
-      <button class="button" type="submit" disabled data-needs-js>{emailDraft ? "Подгответе имейл" : homepageCopy ? "Запитване до екипа" : enquiry ? "Изпратете запитването" : "Изпрати заявката"}</button>
+      <button class="button" type="submit" disabled data-needs-js>{emailDraft ? "Подгответе имейл" : enquiry ? "Изпратете запитването" : "Изпрати заявката"}</button>
     </>
   )}
   {emailDraft && <p class="draft-notice">Бутонът отваря подготвен имейл във вашето приложение. Прегледайте го и го изпратете оттам. <a href={`mailto:${site.contactEmail}`}>{site.contactEmail}</a></p>}
@@ -91,13 +89,12 @@ const waitlist = intent === "waitlist";
     const taskLabel = form.querySelector<HTMLElement>("[data-task-label]");
     const taskInput = form.querySelector<HTMLTextAreaElement>("[data-task-input]");
     const taskHint = form.querySelector<HTMLElement>("[data-task-hint]");
-    const homepageCopy = form.dataset.homepageCopy === "true";
     const copy = {
-      vdiga: [homepageCopy ? "Какво ви бави в момента?" : "Какво се случва с пропуснатите обаждания?", homepageCopy ? "Например: Телефонът звъни, когато сме с клиент. Нужна ни е помощ със записването на часове." : "Например: Когато сме с клиент, никой не вдига и губим записвания.", homepageCopy ? "Един пример от работния ви ден е достатъчен. Техническо задание не е нужно." : "Кажете кога звънят хората, какво питат и какво трябва да направи Vdiga."],
-      pishe: [homepageCopy ? "Какво ви бави в момента?" : "Какво трябва да се направи по сайта?", homepageCopy ? "Например: Новите ни услуги още липсват от сайта. Всяка промяна чака някой да намери време." : "Например: Имаме нови цени и услуги, но на сайта още стои старото.", homepageCopy ? "Един пример от работния ви ден е достатъчен. Техническо задание не е нужно." : "Добавете адреса на сайта, ако имате. Опишете каква постоянна грижа искате да поемем или какво ви трябва за нов сайт."],
-      pomaga: [homepageCopy ? "Какво ви бави в момента?" : "Коя повтаряща се задача искате да спрете да вършите на ръка?", homepageCopy ? "Например: Данните от всеки имейл се въвеждат в CRM и в таблица. После колега трябва да поеме запитването." : "Например: Преписваме всяка заявка от имейла в CRM и после правим задача.", homepageCopy ? "Един пример от работния ви ден е достатъчен. Техническо задание не е нужно." : "Опишете откъде идва задачата, през кои програми минава и в кой момент трябва да ви попита."],
-      custom: [homepageCopy ? "Какво ви бави в момента?" : "Каква работа искате да поеме вашият AI служител?", homepageCopy ? "Например: Запитванията идват по имейл. После въвеждаме данните в таблица и ги пращаме на колегата." : "Опишете процеса: кой го върши сега, с кои програми и какъв резултат ви трябва.", homepageCopy ? "Един пример от работния ви ден е достатъчен. Техническо задание не е нужно." : "Дайте един обичаен пример и кажете кога е нужно решение от човек. Не е нужно техническо задание."],
-      unsure: [homepageCopy ? "Какво ви бави в момента?" : "Коя работа остава несвършена или ви бави?", homepageCopy ? "Например: Запитванията идват по имейл. После въвеждаме данните в таблица и ги пращаме на колегата." : "Например: Всяка седмица получаваме заявки по имейл, но ги обработваме чак когато някой намери време.", homepageCopy ? "Един пример от работния ви ден е достатъчен. Техническо задание не е нужно." : "Кажете откъде идва задачата, какво правите сега и как трябва да завърши."],
+      vdiga: ["Какво се случва с пропуснатите обаждания?", "Например: Когато сме с клиент, никой не вдига и губим записвания.", "Кажете кога звънят хората, какво питат и какво трябва да направи Vdiga."],
+      pishe: ["Какво трябва да се направи по сайта?", "Например: Имаме нови цени и услуги, но на сайта още стои старото.", "Добавете адреса на сайта, ако имате. Опишете каква постоянна грижа искате да поемем или какво ви трябва за нов сайт."],
+      pomaga: ["Коя повтаряща се задача искате да спрете да вършите на ръка?", "Например: Преписваме всяка заявка от имейла в CRM и после правим задача.", "Опишете откъде идва задачата, през кои програми минава и в кой момент трябва да ви попита."],
+      custom: ["Каква работа искате да поеме вашият AI служител?", "Опишете процеса: кой го върши сега, с кои програми и какъв резултат ви трябва.", "Дайте един обичаен пример и кажете кога е нужно решение от човек. Не е нужно техническо задание."],
+      unsure: ["Коя работа остава несвършена или ви бави?", "Например: Всяка седмица получаваме заявки по имейл, но ги обработваме чак когато някой намери време.", "Кажете откъде идва задачата, какво правите сега и как трябва да завърши."],
     } as const;
     choice?.addEventListener("change", () => {
       const selected = copy[choice.value as keyof typeof copy];
@@ -118,17 +115,8 @@ const waitlist = intent === "waitlist";
       const data = new FormData(form);
       const phone = String(data.get("phone") || "").replace(/\D/g, "");
       if (!form.checkValidity()) {
-        if (homepageCopy && status) {
-          const email = form.querySelector<HTMLInputElement>('input[type="email"]');
-          const firstInvalid = form.querySelector<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>(':invalid');
-          status.textContent = email?.validity.typeMismatch
-            ? "Имейл адресът изглежда непълен. Пример: ime@firma.bg"
-            : firstInvalid?.getAttribute("name") === "consent"
-              ? "Вашето съгласие за контакт е необходимо, за да изпратите запитването."
-              : "Това поле е необходимо, за да изпратите запитването.";
-        }
         form.reportValidity();
-        if (!homepageCopy && status) status.textContent = "Проверете задължителните полета.";
+        if (status) status.textContent = "Проверете задължителните полета.";
         return;
       }
       if (phone && !(/^0\d{9}$/.test(phone) || /^359\d{9}$/.test(phone))) {
@@ -144,9 +132,7 @@ const waitlist = intent === "waitlist";
       }
       const payload = Object.fromEntries(data.entries());
       payload.source = window.location.pathname;
-      const idleButtonText = button?.textContent || "";
-      if (status) status.textContent = homepageCopy ? "Изпращане…" : "Изпращаме…";
-      if (homepageCopy && button) button.textContent = "Изпращане…";
+      if (status) status.textContent = "Изпращаме…";
       if (button) button.disabled = true;
       form.setAttribute("aria-busy", "true");
       try {
@@ -161,17 +147,12 @@ const waitlist = intent === "waitlist";
         if (status) status.textContent = data.get("intent") === "waitlist"
           ? "Готово. Ще ви пишем, когато позицията отвори."
           : form.dataset.adaptive === "true"
-            ? homepageCopy
-              ? "Запитването ви е получено. До един работен ден ще ви отговорим на посочения имейл."
-              : "Запитването е изпратено. Ще получите отговор по имейл до един работен ден."
+            ? "Запитването е изпратено. Ще получите отговор по имейл до един работен ден."
             : "Получихме заявката. Ще се свържем до един работен ден.";
       } catch {
-        if (status) {
-          if (homepageCopy) status.innerHTML = 'Запитването не беше изпратено. При повторен проблем можете да ни пишете на <a href="mailto:gunter@vdiga.bg">gunter@vdiga.bg</a>.';
-          else status.textContent = "Запитването не беше изпратено. Опитайте отново или ни пишете на gunter@vdiga.bg.";
-        }
+        if (status) status.textContent = "Запитването не беше изпратено. Опитайте отново или ни пишете на gunter@vdiga.bg.";
       } finally {
-        if (button) { button.disabled = false; if (homepageCopy) button.textContent = idleButtonText; } form.removeAttribute("aria-busy");
+        if (button) button.disabled = false; form.removeAttribute("aria-busy");
       }
     });
   });
